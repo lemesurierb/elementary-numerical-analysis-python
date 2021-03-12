@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Definite Integrals, Part 4: Romberg Integration — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Definite Integrals, Part 4: Romberg Integration — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method — Preliminary Version" href="ODE-IVP-1-basics-and-Euler.html" />
-    <link rel="prev" title="1. Introduction to Preliminary Versions" href="introduction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -76,7 +74,7 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
+  <img src="../_static/college-of-charleston-cougar-logo.jpg" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
@@ -224,8 +222,13 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../python_notebooks_modules/ODE-IVP-1-basics-and-Euler.html">
+   20. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   20. Some Future Topics
+   21. Some Future Topics
   </a>
  </li>
 </ul>
@@ -308,7 +311,7 @@
   Preliminary Versions of Future Sections
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
    1. Introduction to
@@ -317,24 +320,14 @@
    </em>
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Definite Integrals, Part 4: Romberg Integration — Preliminary Version
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler.html">
-   3. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method — Preliminary Version
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-2-Runge-Kutta.html">
-   4. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods — Preliminary Version
+   2. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods — Preliminary Version
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   5. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+   3. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -558,12 +551,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   2.1. Introduction
+   Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#an-algorithm-in-pseudocode">
-   2.2. An algorithm, in pseudocode
+   An algorithm, in pseudocode
   </a>
  </li>
 </ul>
@@ -578,14 +571,14 @@
               <div>
                 
   <div class="section" id="definite-integrals-part-4-romberg-integration-preliminary-version">
-<h1><span class="section-number">2. </span>Definite Integrals, Part 4: Romberg Integration — Preliminary Version<a class="headerlink" href="#definite-integrals-part-4-romberg-integration-preliminary-version" title="Permalink to this headline">¶</a></h1>
+<h1>Definite Integrals, Part 4: Romberg Integration — Preliminary Version<a class="headerlink" href="#definite-integrals-part-4-romberg-integration-preliminary-version" title="Permalink to this headline">¶</a></h1>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 5.3 <em>Romberg Integration</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
 <li><p>Section 4.5 <em>Romberg Integration</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
 </ul>
 <div class="section" id="introduction">
-<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Romberg Integration is based on repeated Richardson extrapolalation from the composite trapezoidal rule, starting with one interval and repeatedly doubling.
 Our notation starts with</p>
 <div class="math notranslate nohighlight">
@@ -627,7 +620,7 @@ R_{i,1} = S_{2n} = \frac{4 T_{2 n} - T_{n}}{4 - 1}, \; n=2^{i-1}
 \]</div>
 </div>
 <div class="section" id="an-algorithm-in-pseudocode">
-<h2><span class="section-number">2.2. </span>An algorithm, in pseudocode<a class="headerlink" href="#an-algorithm-in-pseudocode" title="Permalink to this headline">¶</a></h2>
+<h2>An algorithm, in pseudocode<a class="headerlink" href="#an-algorithm-in-pseudocode" title="Permalink to this headline">¶</a></h2>
 <p>The above can now be arranged into a basic algorithm.
 It does a fixed number <span class="math notranslate nohighlight">\(M\)</span> of levels of extrapolation so using <span class="math notranslate nohighlight">\(2^M\)</span> intervals;
 a refinement would be to use the above error estimate <span class="math notranslate nohighlight">\(E_{i,j-1}\)</span> as the basis for a stopping condition.</p>
@@ -683,8 +676,6 @@ a refinement would be to use the above error estimate <span class="math notransl
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page"><span class="section-number">1. </span>Introduction to <em>Preliminary Versions</em></a>
-    <a class='right-next' id="next-link" href="ODE-IVP-1-basics-and-Euler.html" title="next page"><span class="section-number">3. </span>Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method — Preliminary Version</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
