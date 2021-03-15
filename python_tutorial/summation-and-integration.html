@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>14. Summation and Integration &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Introduction to Python Preview" href="../python_review/introduction.html" />
-    <link rel="prev" title="2. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods — Preliminary Version" href="ODE-IVP-2-Runge-Kutta.html" />
+    <link rel="next" title="15. Random Numbers, Histograms, and a Simulation" href="random-numbers-and-simulation.html" />
+    <link rel="prev" title="13. Package Scipy and More Tools for Linear Algebra" href="scipy-tools-for-linear-algebra.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -76,7 +76,7 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/college-of-charleston-cougar-logo.jpg" class="logo" alt="logo">
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
@@ -224,13 +224,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../python_notebooks_modules/definite-integrals-4-romberg-integration.html">
+   20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../python_notebooks_modules/ODE-IVP-1-basics-and-Euler.html">
-   20. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   21. Some Future Topics
+   22. Some Future Topics
   </a>
  </li>
 </ul>
@@ -313,9 +318,9 @@
   Preliminary Versions of Future Sections
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
+  <a class="reference internal" href="../preliminary_versions/introduction.html">
    1. Introduction to
    <em>
     Preliminary Versions
@@ -323,12 +328,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta.html">
+  <a class="reference internal" href="../python_notebooks_modules/ODE-IVP-2-Runge-Kutta.html">
    2. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods — Preliminary Version
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_notebooks_modules/simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
    3. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
@@ -338,9 +343,9 @@
   Python and Jupyter Notebook Review (with Numpy and Matplotlib)
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/introduction.html">
+  <a class="reference internal" href="introduction.html">
    1. Introduction to
    <em>
     Python Preview
@@ -348,32 +353,32 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/getting-python-software-for-scientific-computing.html">
+  <a class="reference internal" href="getting-python-software-for-scientific-computing.html">
    2. Getting Python Software for Scientific Computing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/suggestions-on-python-and-notebook-usage.html">
+  <a class="reference internal" href="suggestions-on-python-and-notebook-usage.html">
    3. Suggestions and Notes on Python and Jupyter Notebook Usage
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/python-variables-lists-tuples-numpy-arrays.html">
+  <a class="reference internal" href="python-variables-lists-tuples-numpy-arrays.html">
    4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/functions.html">
+  <a class="reference internal" href="functions.html">
    5. Defining and Using Python Functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/decisions-with-if-else-elif.html">
+  <a class="reference internal" href="decisions-with-if-else-elif.html">
    6. Decision Making With if, else, and elif
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/iteration-with-for.html">
+  <a class="reference internal" href="iteration-with-for.html">
    7. Iteration with
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -383,7 +388,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/iteration-with-while.html">
+  <a class="reference internal" href="iteration-with-while.html">
    8. Iteration with
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -393,48 +398,53 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/code-files-modules-IDEs.html">
+  <a class="reference internal" href="code-files-modules-IDEs.html">
    9. Code Files, Modules, and an Integrated Development Environment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/graphing-with-matplotlib.html">
-   10. Plotting Graphs with Matplotlib
+  <a class="reference internal" href="recursion.html">
+   10. Recursion (vs iteration)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/array-operations-and-linear-algebra.html">
-   11. Numpy Array Operations and Linear Algebra
+  <a class="reference internal" href="graphing-with-matplotlib.html">
+   11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/scipy-tools-for-linear-algebra.html">
-   12. Package Scipy and More Tools for Linear Algebra
+  <a class="reference internal" href="array-operations-and-linear-algebra.html">
+   12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/summation-and-integration.html">
-   13. Summation and Integration
+  <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
+   13. Package Scipy and More Tools for Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/random-numbers-and-simulation.html">
-   14. Random Numbers, Histograms, and a Simulation
+  <a class="reference internal" href="random-numbers-and-simulation.html">
+   15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/formatted-output-and-some-text-string-manipulation.html">
-   15. Formatted Output and Some Text String Manipulation
+  <a class="reference internal" href="formatted-output-and-some-text-string-manipulation.html">
+   16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/classes-objects-attributes-methods.html">
-   16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+  <a class="reference internal" href="classes-objects-attributes-methods.html">
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../python_review/exception-handling.html">
-   17. Exceptions and Exception Handling
+  <a class="reference internal" href="exception-handling.html">
+   18. Exceptions and Exception Handling
   </a>
  </li>
 </ul>
@@ -504,7 +514,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/preliminary_versions/simultaneous-linear-equations-5-error-bounds-condition-numbers.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python_tutorial/summation-and-integration.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -529,7 +539,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/preliminary_versions/simultaneous-linear-equations-5-error-bounds-condition-numbers.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/summation-and-integration.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -552,45 +562,86 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#residuals-backward-errors-forward-errors-and-condition-numbers">
-   3.1. Residuals, backward errors, forward errors, and condition numbers
+  <a class="reference internal nav-link" href="#introduction">
+   14.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matrix-norms-induced-by-vector-norms">
-   3.2. Matrix norms induced by vector norms
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#properties-of-induced-matrix-norms">
-   3.3. Properties of (induced) matrix norms
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#relative-error-bound-and-condition-number">
-   3.4. Relative error bound and condition number
+  <a class="reference internal nav-link" href="#exercises">
+   14.2. Exercises
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-     3.4.1. Aside: estimating
-     <span class="math notranslate nohighlight">
-      \(\|A^{-1}\|_\infty\)
-     </span>
-     and thence the condition number, and
+    <a class="reference internal nav-link" href="#exercise-a-the-midpoint-rule-using-afor-loop">
+     14.2.1. Exercise A: the Midpoint Rule, using a
      <code class="docutils literal notranslate">
       <span class="pre">
-       numpy.linalg.cond
+       for
+      </span>
+     </code>
+     loop
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-b-the-midpoint-rule-using-function-sum">
+     14.2.2. Exercise B: the Midpoint Rule, using function
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       sum
       </span>
      </code>
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-c-the-trapezoidal-rule">
+     14.2.3. Exercise C: the Trapezoidal Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-and-demonstrations-within-a-module-file">
+     14.2.4. Testing and demonstrations within a module file
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-a-using-spyder-and-ipython-command-line">
+       14.2.4.1. Option A: using Spyder and IPython command line
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-b-using-just-notebooks-and-module-files">
+       14.2.4.2. Option B: using just notebooks and module files
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#well-conditioned-and-ill-conditioned-problems-and-matrices">
-   3.5. Well-conditioned and ill-conditioned problems and matrices
+  <a class="reference internal nav-link" href="#further-exercises">
+   14.3. Further Exercises
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-d-present-your-work-so-far-with-a-notebook">
+     14.3.1. Exercise D: present your work so far with a notebook
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonus-exercise-e-a-more-accurate-result">
+     14.3.2. Bonus Exercise E: a more accurate result
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonus-exercise-f-the-romberg-method">
+     14.3.3. Bonus Exercise F: The Romberg Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-exercise-complete-the-notebook">
+     14.3.4. Final exercise: complete the notebook
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -603,107 +654,127 @@
         
               <div>
                 
-  <div class="section" id="error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version">
-<h1><span class="section-number">3. </span>Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version<a class="headerlink" href="#error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version" title="Permalink to this headline">¶</a></h1>
-<p><strong>Reference:</strong> A bit in Section 8.4 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p>
-<div class="section" id="residuals-backward-errors-forward-errors-and-condition-numbers">
-<h2><span class="section-number">3.1. </span>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
-<p>For an approximation <span class="math notranslate nohighlight">\(x_a\)</span> of the solution <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(A x = b\)</span>, the <em>residual</em> <span class="math notranslate nohighlight">\(r = A x_a - b\)</span> measures error as <em>backward error</em>, often measerd by a single number, the residual norm <span class="math notranslate nohighlight">\(\| A x_a - b \|\)</span>.
-Any norm could be used, but the maximum norm is usualt preferred, for reasons that we will see soon.</p>
-<p>The corresponding (dimensionless) measure of relative error is defined as</p>
-<div class="math notranslate nohighlight">
-\[\frac{\|r\|}{\|b\|}.\]</div>
-<p>However, these can greatly underestimate the <em>forward</em> errors in the solution: the absolute error <span class="math notranslate nohighlight">\(\|x - x_a\|\)</span> and relative error</p>
-<div class="math notranslate nohighlight">
-\[Rel(x_a) = \frac{\|x - x_a\|}{\| x \|}\]</div>
-<p>To relate these to the residual, we need the concepts of a <em>matrix norm</em> and the <em>condition number</em> of a matrix.</p>
+  <div class="section" id="summation-and-integration">
+<h1><span class="section-number">14. </span>Summation and Integration<a class="headerlink" href="#summation-and-integration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">14.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This unit starts with the methods for approximating definite integrals seen in a calculus course like the (Composite) Midpoint Rule and (Composite) Trapezoidal Rule.</p>
+<p>As bonus exercises, we will then work through some more advanced methods as seen in a numerical methods course; the algorithms will be stated below.</p>
+<p>We will also learn more about working with modules: how to run tests while developing a module, and how to incorporate demonstrations into a notebook once a module is working.</p>
 </div>
-<div class="section" id="matrix-norms-induced-by-vector-norms">
-<h2><span class="section-number">3.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
-<p>Given any vector norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> — such as the maximum (“infinity”) norm <span class="math notranslate nohighlight">\(\| \cdot \|_\infty\)</span> or the Euclidean norm (length) <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> — the correponding <em>induced matrix norm</em> is</p>
+<div class="section" id="exercises">
+<h2><span class="section-number">14.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p><a name="Exercise-A"></a></p>
+<div class="section" id="exercise-a-the-midpoint-rule-using-afor-loop">
+<h3><span class="section-number">14.2.1. </span>Exercise A: the Midpoint Rule, using a<code class="docutils literal notranslate"><span class="pre">for</span></code> loop<a class="headerlink" href="#exercise-a-the-midpoint-rule-using-afor-loop" title="Permalink to this headline">¶</a></h3>
+<p>Write a Python function to be used as</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>M_n = midpoint0(f, a, b, n)
+</pre></div>
+</div>
+<p>which returns the approximation of <span class="math notranslate nohighlight">\(I = \int_a^b f(x) \, dx\)</span> given by the [Composite] Midpoint Rule with <span class="math notranslate nohighlight">\(n\)</span> intervals of equal width.</p>
+<p>That is,
+$<span class="math notranslate nohighlight">\(
+M_n = h \left( f(a+h/2) + f(a+3h/2) + f(a+5h/2)+ \cdots + f(b-h/2)\right),
+\quad h = \frac{b-a}{n}.
+\)</span>$
+In this first version, accumulate the sum using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<p>Test this with <span class="math notranslate nohighlight">\(\displaystyle I_1 := \int_1^e \frac{dx}{x}\)</span> and several choices of <span class="math notranslate nohighlight">\(n\)</span>, such as 10 and 100.</p>
+<p>Work out the exact value, and use this to display the size of the errors in each approximation.</p>
+<p><a name="Exercise-B"></a></p>
+</div>
+<div class="section" id="exercise-b-the-midpoint-rule-using-function-sum">
+<h3><span class="section-number">14.2.2. </span>Exercise B: the Midpoint Rule, using function <code class="docutils literal notranslate"><span class="pre">sum</span></code><a class="headerlink" href="#exercise-b-the-midpoint-rule-using-function-sum" title="Permalink to this headline">¶</a></h3>
+<p>Express the above Midpoint Rule in summation notation “<span class="math notranslate nohighlight">\(\Sigma\)</span>” and reimplement as</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>M_n = midpoint1(f, a, b, n)
+</pre></div>
+</div>
+<p>using the Python function <code class="docutils literal notranslate"><span class="pre">sum</span></code> to avoid any loops.
+(Doing it this way give a code that is more concise and closer to mathematical form, so hopefully more readable; it will also probably run faster.)</p>
+<p><a name="Exercise-C"></a></p>
+</div>
+<div class="section" id="exercise-c-the-trapezoidal-rule">
+<h3><span class="section-number">14.2.3. </span>Exercise C: the Trapezoidal Rule<a class="headerlink" href="#exercise-c-the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
+<p>Write a Python function to be used as</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>T_n = trapezoidal(f, a, b, n)
+</pre></div>
+</div>
+<p>which returns the approximation of <span class="math notranslate nohighlight">\(I = \int_a^b f(x) \, dx\)</span> given by the [Composite] Trapezoidal Rule with <span class="math notranslate nohighlight">\(n\)</span> intervals of equal width.</p>
+<p>That is,
+$<span class="math notranslate nohighlight">\(
+T_n = h \left( \frac{f(a)}{2} + f(a+h) + \cdots + f(b-h) + \frac{f(b)}{2} \right),
+\quad h = \frac{b-a}{n}.
+\)</span>$</p>
+<p>Use the “<code class="docutils literal notranslate"><span class="pre">sum</span></code>” method as in <a class="reference external" href="#Exercise-B">Exercise B</a> above; no loops allowed!</p>
+<p>Again test this with <span class="math notranslate nohighlight">\(I_1 = \int_1^e \frac{dx}{x}\)</span>.</p>
+</div>
+<div class="section" id="testing-and-demonstrations-within-a-module-file">
+<h3><span class="section-number">14.2.4. </span>Testing and demonstrations within a module file<a class="headerlink" href="#testing-and-demonstrations-within-a-module-file" title="Permalink to this headline">¶</a></h3>
+<p>Create each of these three functions in a module <code class="docutils literal notranslate"><span class="pre">integration</span></code>.</p>
+<div class="section" id="option-a-using-spyder-and-ipython-command-line">
+<h4><span class="section-number">14.2.4.1. </span>Option A: using Spyder and IPython command line<a class="headerlink" href="#option-a-using-spyder-and-ipython-command-line" title="Permalink to this headline">¶</a></h4>
+<p>Place the test cases below the function definitions within one or more <code class="docutils literal notranslate"><span class="pre">if</span></code> blocks starting</p>
+<p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code></p>
+<p>(Each of those long dashes is a <em>pair</em> of underscores.)</p>
+<p>The contents of such an <code class="docutils literal notranslate"><span class="pre">if</span></code> block are executed when you run the file directly (as if it were a normal Python program file) but are ignored when the module is used with <code class="docutils literal notranslate"><span class="pre">import</span></code> from another file.
+Thus, these blocks can be used while developing the module, and later to provide a demonstration of the module’s capabilities.</p>
+</div>
+<div class="section" id="option-b-using-just-notebooks-and-module-files">
+<h4><span class="section-number">14.2.4.2. </span>Option B: using just notebooks and module files<a class="headerlink" href="#option-b-using-just-notebooks-and-module-files" title="Permalink to this headline">¶</a></h4>
+<p>As you may have seen, importing a module a second or subsequent time from another Python file or notebook does not get the updated version of the module’s contents unless you restart the Python kernel.
+(Python does this to avoid duplicated effort when the same module is mentioned in several import statements in a file.)
+Thus while revising a module, it is more convenient to treat it like a normal Python file, testing from within by this method rather than by importing elsewhere.</p>
+</div>
+</div>
+</div>
+<div class="section" id="further-exercises">
+<h2><span class="section-number">14.3. </span>Further Exercises<a class="headerlink" href="#further-exercises" title="Permalink to this headline">¶</a></h2>
+<p><a name="Exercise-D"></a></p>
+<div class="section" id="exercise-d-present-your-work-so-far-with-a-notebook">
+<h3><span class="section-number">14.3.1. </span>Exercise D: present your work so far with a notebook<a class="headerlink" href="#exercise-d-present-your-work-so-far-with-a-notebook" title="Permalink to this headline">¶</a></h3>
+<p><em>Once the module is working</em> for the above three methods, create a notebook which imports those functions and runs various examples with them.
+(That is, <strong>copy</strong> all the stuff from within the above <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> blocks to the notebook.)</p>
+<p>The notebook should also describe the mathematical background; in particular, the formulas for all the methods.</p>
+<p><a name="Exercise-E"></a></p>
+</div>
+<div class="section" id="bonus-exercise-e-a-more-accurate-result">
+<h3><span class="section-number">14.3.2. </span>Bonus Exercise E: a more accurate result<a class="headerlink" href="#bonus-exercise-e-a-more-accurate-result" title="Permalink to this headline">¶</a></h3>
+<p>Define another Python function
+which uses the above functions to compute the “weighted average”
+<span class="math notranslate nohighlight">\(\displaystyle S_n = \frac{2 M_n + T_n}{3}.\)</span></p>
+<p>Yes, this is the Composite Simpson Rule, so make it</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>S_n = simpson(f, a, b, n)
+</pre></div>
+</div>
+<p>Compare its accuracy to that of <span class="math notranslate nohighlight">\(M_n\)</span> and <span class="math notranslate nohighlight">\(T_n\)</span>.</p>
+<p>Still do testing within the module file, but also add demonstrations to the above notebook once you are sure that this function is working.</p>
+<p><a name="Exercise-F"></a></p>
+</div>
+<div class="section" id="bonus-exercise-f-the-romberg-method">
+<h3><span class="section-number">14.3.3. </span>Bonus Exercise F: The Romberg Method<a class="headerlink" href="#bonus-exercise-f-the-romberg-method" title="Permalink to this headline">¶</a></h3>
+<p>The Romberg method generates a triangular array of approximations <span class="math notranslate nohighlight">\(R_{i,j}, j \leq i\)</span> of an integral <span class="math notranslate nohighlight">\(I = \int_a^b f(x)\; dx\)</span> with the end-of-row values <span class="math notranslate nohighlight">\(R_{0,0}, R_{1,1}, \dots R_{n,n}\)</span> being the main, successively better (usually) approximations.</p>
+<p>It starts with the trapezoid rule
+<span class="math notranslate nohighlight">\(R_{0,0} := T_1 = \frac{f(a) + f(b)}{2}(b-a)\)</span>; the basic trapezoid rule.</p>
+<p>Then using <span class="math notranslate nohighlight">\(T_{2n} = \frac{T_n + M_n}{2}\)</span>, one defines</p>
 <div class="math notranslate nohighlight">
 \[
-\| A \| := \max_{x \neq 0} \frac{\| Ax \|}{\| x \|}, =  \max_{\|x\|=1} \| Ax \|
+R_{i, 0} := T_{2_i} = \frac{T_{2^{i}/2} + M_{2^{i}/2}}{2} = \frac{T_{2^{i-1}} + M_{2^{i-1}}}{2} = \frac{R_{i-1, 0} + M_{2^{i-1}}}{2}, \quad i \geq 1
 \]</div>
-<p>This maximum exists for the infinity norm, and indeed there ia an explicit formula for it:
-for any <span class="math notranslate nohighlight">\(m\times n\)</span> matrix,</p>
-<div class="math notranslate nohighlight">
-\[
-\|A\|_\infty = \max_{i=1}^m \sum_{j=1}^n |a_{ij}|
-\]</div>
-<p>(On the other hand, it is far harder to compute the Euclidean norm of a matrix: the formula requires computing eigenvalues.)</p>
-<p>Note that when the matrix is a vector considered as amatrix with a single column — so <span class="math notranslate nohighlight">\(n=1\)</span> — the sum goes away, and this agrees with the infinity vector norm.
-This allows us to consider vectors as being just matrices with a single column, which we will often do from now on.</p>
+<p>Finally, Richardson extrapolation leads to
+$<span class="math notranslate nohighlight">\(
+R_{i,1} := S_{2^i} = \frac{4 T_{2^i} - T_{2^i/2}}{4 - 1} = \frac{4 R_{i,0} - R_{i-1,0}}{4 - 1} = R_{i,0} + \frac{R_{i,0} - R_{i-1,0}}{4 - 1}, \; i \geq 1
+\)</span><span class="math notranslate nohighlight">\(
+and with further extrapolations to the more general formula
+\)</span><span class="math notranslate nohighlight">\(
+R_{i,j} := \frac{4^j R_{i,j-1} - R_{i-1,j-1}}{4^j - 1} = R_{i,j-1} + \frac{R_{i,j-1} - R_{i-1,j-1}}{4^i - 1}, \; 1 \leq j \leq i
+\)</span>$</p>
+<p>Implement this, using these three formulas plus the above function for the composite midpoint rule.</p>
+<p>One natural data structure is a 2D array with unused entries above the main diagonal.
+However, you might consider how to store this triangular collection of data as a list of lists, succesively of lengths 1, 2 and so on up to <span class="math notranslate nohighlight">\(n\)</span>.</p>
 </div>
-<div class="section" id="properties-of-induced-matrix-norms">
-<h2><span class="section-number">3.3. </span>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
-<p>These induced matrix norms have nmany properties in common with Euclidean length and other vector norms, but there can also be products, and then one has to be careful.</p>
-<ol class="simple">
-<li><p><span class="math notranslate nohighlight">\(\|A\| \geq 0\)</span> (positivity)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\| A \| = 0\)</span> if and only if <span class="math notranslate nohighlight">\(A = 0\)</span> (definiteness)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\| c A \| = |c| \, \|A\|\)</span> for any constant <span class="math notranslate nohighlight">\(c\)</span> (absolute homogeneity)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\| A + B \| \leq \| A \| + \| B \|\)</span> (sub-additivity or the triangle inequality),
-<br>
-and when the product of two matrices makes sense (including matrix-vector products),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\| A B \| \leq \| A \| \, \| B \|\)</span> (sub-multiplicativity)</p></li>
-</ol>
-<p>Note the failure to always have equality with products.
-Indeed one can have <span class="math notranslate nohighlight">\(A B = 0\)</span> with <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> both non-zero, such as when <span class="math notranslate nohighlight">\(A\)</span> is a singular matrix and <span class="math notranslate nohighlight">\(B\)</span> is a null-vector for it.</p>
-<p><strong>Aside:</strong> There are other matrix norms of use in some contexts, in particuar the
-<a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm">Frobenius norm</a>.
-Then the above properties are often then used to <em>define</em> what it is to be a matrix form, much as the the first four define what it is to be a vector norm.</p>
+<div class="section" id="final-exercise-complete-the-notebook">
+<h3><span class="section-number">14.3.4. </span>Final exercise: complete the notebook<a class="headerlink" href="#final-exercise-complete-the-notebook" title="Permalink to this headline">¶</a></h3>
+<p>Add further test cases; one interesting type of example is a periodic function.</p>
 </div>
-<div class="section" id="relative-error-bound-and-condition-number">
-<h2><span class="section-number">3.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
-<p>It can be proven that, for any choice of norm,</p>
-<div class="math notranslate nohighlight">
-\[
-Rel(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \|A\|\|A^{-1}\|\frac{\|r\|}{\|b\|},
-\]</div>
-<p>where the last factor is the relative backward error.</p>
-<p>Since we can (though often with considerable effort, due to the inverse!) compute the right-hand side when the infinity norm is used, we can compute an upper bound on the relative error.
-Form this, an upper bound on the absolute error can be computed if needed.</p>
-<p>The <em>growth factor</em> between the relative backward error measured by the residual and the relative (forward) error is called the <em>condition number</em>, <span class="math notranslate nohighlight">\(K(A)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\kappa(A) := \|A\| \|A^{-1}\|\]</div>
-<p>Actually there is one condition number for each choice of norm, so we work with</p>
-<div class="math notranslate nohighlight">
-\[\kappa_\infty(A) := \|A\|_\infty \|A^{-1}\|_\infty\]</div>
-<p>Note that for a singular matrix, this is undefined: we can intuitively say that the condition number is then infinite.
-<br>
-At the other extreme, the identity matrix <span class="math notranslate nohighlight">\(I\)</span> has norm 1 and condition number 1 (using any norm), and this is the best possible because in general <span class="math notranslate nohighlight">\(\kappa(A) \geq 1\)</span>. (This follows from sub-multiplicativity.)</p>
-<div class="section" id="aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-<h3><span class="section-number">3.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
-<p>In Python, a good approximation of the condition number <span class="math notranslate nohighlight">\(\kappa_\infty(A)\)</span> is given by <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A,</span> <span class="pre">numpy.inf)</span></code>.
-<br>
-As with <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code>, the simple form <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A)</span></code> defaults to using the 2-norm, based on the Euclidian length <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> for vectors.</p>
-<p>This is not done exactly, since computing the inverse is a lot of work for large matrices and good estimates can be got far more quickly.
-The basic idea is start with the formula</p>
-<div class="math notranslate nohighlight">
-\[\| A^{-1} \| = \max_{\|x\|=1} \| A ^{-1} x \|\]</div>
-<p>and instead compute the maximum over some finite selection of values for <span class="math notranslate nohighlight">\(x\)</span>: call them <span class="math notranslate nohighlight">\(x^{(k)}\)</span>.
-Then to evaluate <span class="math notranslate nohighlight">\(y^{(k)} =  A ^{-1} x^{(k)}\)</span>, express this through the equation <span class="math notranslate nohighlight">\(A y^{(k)} = x^{(k)}\)</span>.
-Once we have an LU factorization for <span class="math notranslate nohighlight">\(A\)</span> (which one probably would have when exploring errors in a numerical solution of <span class="math notranslate nohighlight">\(Ax = b\)</span>) each of these systems can be solved relatively fast:
-Then</p>
-<div class="math notranslate nohighlight">
-\[\| A^{-1} \| \approx \max_k \| y^{(k)} \|.\]</div>
-</div>
-</div>
-<div class="section" id="well-conditioned-and-ill-conditioned-problems-and-matrices">
-<h2><span class="section-number">3.5. </span>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
-<p>Condition numbers, giving upper limit on the ratio of forward error to backward error,
-measure the amplification of errors, and have counterparts in other contexts.
-For example, with an approximation <span class="math notranslate nohighlight">\(r_a\)</span> of a root <span class="math notranslate nohighlight">\(r\)</span> of the equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span>, the ratio of forward error to backward error is bounded by
-<span class="math notranslate nohighlight">\(\displaystyle \max 1/| f'(x) | = \frac{1}{\min | f'(x) |}\)</span>, where the maximum only need be taken over an interval known to contain both the root and the approximation.
-This condition number becomes “infinite” for a multiple root, <span class="math notranslate nohighlight">\(f'(r) = 0\)</span>, related to the problems we have seen in that case.</p>
-<p>Careful calculation of an approximate solution <span class="math notranslate nohighlight">\(x_a\)</span> of <span class="math notranslate nohighlight">\(Ax = b\)</span> can often get a <em>residual</em> that is at the level of machine rounding error, so that roughly the relative backward error is of size comparable to the machine unit, <span class="math notranslate nohighlight">\(u\)</span>.
-The condition number then guarantees that the (forward) relative error is no greater than about <span class="math notranslate nohighlight">\(u \, \kappa(A)\)</span>.</p>
-<p>In terms of significant bits, with <span class="math notranslate nohighlight">\(p\)</span> bit machine arithmetic, one can hope to get <span class="math notranslate nohighlight">\(p - \log_2(\kappa(A))\)</span> significant bits in the result, but can not rely on more, so one loses <span class="math notranslate nohighlight">\(\log_2(\kappa(A))\)</span> significant bits.
-Compare this to the observation that one can expect to lose at least <span class="math notranslate nohighlight">\(p/2\)</span> significant bits when using the approximation <span class="math notranslate nohighlight">\(Df(x) \approx D_hf(x) - (f(x+h) = f(x))/h\)</span>.</p>
-<p>A <strong>well-conditioned problem</strong> is one that is not too highly sensitive to errors in rounding or input data; for an eqution <span class="math notranslate nohighlight">\(Ax = b\)</span>, this corresponds to the condition number of <span class="math notranslate nohighlight">\(A\)</span> not being to large; the matrix <span class="math notranslate nohighlight">\(A\)</span> is then sometimes also called well-conditioned.
-This is of course vague, but might typically mean that <span class="math notranslate nohighlight">\(p - \log_2(\kappa(A))\)</span> is a sufficient number of significant bits for a particular purpose.</p>
-<p>A problem that is not deemed well-conditioned is called <strong>ill-conditioned</strong>, so that a matrix of uncomfortably large condition number is also sometimes called ill-conditioned.
-An ill-conditioned problem might still be well-posed, but just requiring careful and precise solution methods.</p>
 </div>
 </div>
 
@@ -720,7 +791,7 @@ An ill-conditioned problem might still be well-posed, but just requiring careful
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./preliminary_versions"
+            path: "./python_tutorial"
         },
         predefinedOutput: true
     }
@@ -735,8 +806,8 @@ An ill-conditioned problem might still be well-posed, but just requiring careful
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ODE-IVP-2-Runge-Kutta.html" title="previous page"><span class="section-number">2. </span>Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods — Preliminary Version</a>
-    <a class='right-next' id="next-link" href="../python_review/introduction.html" title="next page"><span class="section-number">1. </span>Introduction to <em>Python Preview</em></a>
+    <a class='left-prev' id="prev-link" href="scipy-tools-for-linear-algebra.html" title="previous page"><span class="section-number">13. </span>Package Scipy and More Tools for Linear Algebra</a>
+    <a class='right-next' id="next-link" href="random-numbers-and-simulation.html" title="next page"><span class="section-number">15. </span>Random Numbers, Histograms, and a Simulation</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>14. Random Numbers, Histograms, and a Simulation &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>15. Random Numbers, Histograms, and a Simulation &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Formatted Output and Some Text String Manipulation" href="formatted-output-and-some-text-string-manipulation.html" />
-    <link rel="prev" title="13. Summation and Integration" href="summation-and-integration.html" />
+    <link rel="next" title="16. Formatted Output and Some Text String Manipulation" href="formatted-output-and-some-text-string-manipulation.html" />
+    <link rel="prev" title="14. Summation and Integration" href="summation-and-integration.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -403,43 +403,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="graphing-with-matplotlib.html">
-   10. Plotting Graphs with Matplotlib
+   11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="array-operations-and-linear-algebra.html">
-   11. Numpy Array Operations and Linear Algebra
+   12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
-   12. Package Scipy and More Tools for Linear Algebra
+   13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="summation-and-integration.html">
-   13. Summation and Integration
+   14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   14. Random Numbers, Histograms, and a Simulation
+   15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="formatted-output-and-some-text-string-manipulation.html">
-   15. Formatted Output and Some Text String Manipulation
+   16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classes-objects-attributes-methods.html">
-   16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="exception-handling.html">
-   17. Exceptions and Exception Handling
+   18. Exceptions and Exception Handling
   </a>
  </li>
 </ul>
@@ -509,7 +514,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python_review/random-numbers-and-simulation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python_tutorial/random-numbers-and-simulation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -534,7 +539,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_review/random-numbers-and-simulation.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/random-numbers-and-simulation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -558,19 +563,19 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   14.1. Introduction
+   15.1. Introduction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#disclaimer">
-     14.1.1. Disclaimer
+     15.1.1. Disclaimer
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#module-random-within-package-numpy">
-   14.2. Module
+   15.2. Module
    <code class="docutils literal notranslate">
     <span class="pre">
      random
@@ -586,7 +591,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#uniformly-distributed-real-numbers-numpy-random-rand">
-   14.3. Uniformly distributed real numbers:
+   15.3. Uniformly distributed real numbers:
    <code class="docutils literal notranslate">
     <span class="pre">
      numpy.random.rand
@@ -596,19 +601,19 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#arrays-of-random-values">
-     14.3.1. Arrays of random values
+     15.3.1. Arrays of random values
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#multi-dimensional-arrays-of-random-values">
-     14.3.2. Multi-dimensional arrays of random values
+     15.3.2. Multi-dimensional arrays of random values
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#normally-distributed-real-numbers-numpy-random-randn">
-   14.4. Normally distributed real numbers:
+   15.4. Normally distributed real numbers:
    <code class="docutils literal notranslate">
     <span class="pre">
      numpy.random.randn
@@ -618,7 +623,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#histogram-plots-with-matplotlib-random-hist">
-   14.5. Histogram plots with
+   15.5. Histogram plots with
    <code class="docutils literal notranslate">
     <span class="pre">
      matplotlib.random.hist
@@ -628,7 +633,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#random-integers-numpy-random-randint">
-   14.6. Random integers:
+   15.6. Random integers:
    <code class="docutils literal notranslate">
     <span class="pre">
      numpy.random.randint
@@ -638,12 +643,12 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#specifying-bin-edges-for-the-histogram">
-     14.6.1. Specifying bin edges for the histogram
+     15.6.1. Specifying bin edges for the histogram
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#exercise-a-approximating-pi">
-       14.6.1.1. Exercise A: approximating
+       15.6.1.1. Exercise A: approximating
        <span class="math notranslate nohighlight">
         \(\pi\)
        </span>
@@ -651,7 +656,7 @@
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#exercise-b">
-       14.6.1.2. Exercise B
+       15.6.1.2. Exercise B
       </a>
      </li>
     </ul>
@@ -670,18 +675,18 @@
               <div>
                 
   <div class="section" id="random-numbers-histograms-and-a-simulation">
-<h1><span class="section-number">14. </span>Random Numbers, Histograms, and a Simulation<a class="headerlink" href="#random-numbers-histograms-and-a-simulation" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">15. </span>Random Numbers, Histograms, and a Simulation<a class="headerlink" href="#random-numbers-histograms-and-a-simulation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
-<h2><span class="section-number">14.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">15.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Random numbers are often useful both for simulation of physical processes and for generating a collection of test cases.
 Here we will do a mathematical simulation: approximating <span class="math notranslate nohighlight">\(\pi\)</span> on the basis that the unit circle occupies a fraction <span class="math notranslate nohighlight">\(\pi/4\)</span> of the <span class="math notranslate nohighlight">\(2 \times 2\)</span> square enclosing it.</p>
 <div class="section" id="disclaimer">
-<h3><span class="section-number">14.1.1. </span>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">15.1.1. </span>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this headline">¶</a></h3>
 <p>Actually, the best we have available is <strong>pseudo-random</strong> numbers, generated by algorithms that actually produce a very long but eventually repeating sequence of numbers.</p>
 </div>
 </div>
 <div class="section" id="module-random-within-package-numpy">
-<h2><span class="section-number">14.2. </span>Module <code class="docutils literal notranslate"><span class="pre">random</span></code> within package <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#module-random-within-package-numpy" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">15.2. </span>Module <code class="docutils literal notranslate"><span class="pre">random</span></code> within package <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#module-random-within-package-numpy" title="Permalink to this headline">¶</a></h2>
 <p>The pseudo-random number generator we use are provided by package Numpy in its module random – full name <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code>.
 This module contains numerous random number generators; here we look at just a few.</p>
 <p>We introduce the abbreviation “npr” for this, along with the standard abbreviations “np” for <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and “plt” for module <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> witit package `matplotlib</p>
@@ -697,7 +702,7 @@ This module contains numerous random number generators; here we look at just a f
 </div>
 </div>
 <div class="section" id="uniformly-distributed-real-numbers-numpy-random-rand">
-<h2><span class="section-number">14.3. </span>Uniformly distributed real numbers: <code class="docutils literal notranslate"><span class="pre">numpy.random.rand</span></code><a class="headerlink" href="#uniformly-distributed-real-numbers-numpy-random-rand" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">15.3. </span>Uniformly distributed real numbers: <code class="docutils literal notranslate"><span class="pre">numpy.random.rand</span></code><a class="headerlink" href="#uniformly-distributed-real-numbers-numpy-random-rand" title="Permalink to this headline">¶</a></h2>
 <p>First, the function <code class="docutils literal notranslate"><span class="pre">rand</span></code> (full name <code class="docutils literal notranslate"><span class="pre">numpy.random.rand</span></code>) generates uniformly-distributed real numbers in the semi-open interval <span class="math notranslate nohighlight">\([0,1)\)</span>.</p>
 <p>To generate a single value, use it with no argument:</p>
 <div class="cell docutils container">
@@ -718,7 +723,7 @@ This module contains numerous random number generators; here we look at just a f
 </div>
 </div>
 <div class="section" id="arrays-of-random-values">
-<h3><span class="section-number">14.3.1. </span>Arrays of random values<a class="headerlink" href="#arrays-of-random-values" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">15.3.1. </span>Arrays of random values<a class="headerlink" href="#arrays-of-random-values" title="Permalink to this headline">¶</a></h3>
 <p>To generate an array of values all at once, one can specify how many as the first and only input argument:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -737,7 +742,7 @@ This module contains numerous random number generators; here we look at just a f
 This can be beneficial or even essential when a very large number of random values is used; it is not unusual for a simulation to require more random values than the computer’s memory can hold.</p>
 </div>
 <div class="section" id="multi-dimensional-arrays-of-random-values">
-<h3><span class="section-number">14.3.2. </span>Multi-dimensional arrays of random values<a class="headerlink" href="#multi-dimensional-arrays-of-random-values" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">15.3.2. </span>Multi-dimensional arrays of random values<a class="headerlink" href="#multi-dimensional-arrays-of-random-values" title="Permalink to this headline">¶</a></h3>
 <p>We can also generate multi-dimensional arrays, by giving the lengths of each dimension as arguments:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -768,7 +773,7 @@ A three-dimensional array of random numbers:
 </div>
 </div>
 <div class="section" id="normally-distributed-real-numbers-numpy-random-randn">
-<h2><span class="section-number">14.4. </span>Normally distributed real numbers: <code class="docutils literal notranslate"><span class="pre">numpy.random.randn</span></code><a class="headerlink" href="#normally-distributed-real-numbers-numpy-random-randn" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">15.4. </span>Normally distributed real numbers: <code class="docutils literal notranslate"><span class="pre">numpy.random.randn</span></code><a class="headerlink" href="#normally-distributed-real-numbers-numpy-random-randn" title="Permalink to this headline">¶</a></h2>
 <p>The function <code class="docutils literal notranslate"><span class="pre">randn</span></code> has the same interface, but generates numbers with the standard normal distribution of mean zero, standard deviation one:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -808,7 +813,7 @@ and their standard deviation is 1.0002386370861691
 so the slight variations above are due to these being only a sample mean and sample standard deviation.</p>
 </div>
 <div class="section" id="histogram-plots-with-matplotlib-random-hist">
-<h2><span class="section-number">14.5. </span>Histogram plots with <code class="docutils literal notranslate"><span class="pre">matplotlib.random.hist</span></code><a class="headerlink" href="#histogram-plots-with-matplotlib-random-hist" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">15.5. </span>Histogram plots with <code class="docutils literal notranslate"><span class="pre">matplotlib.random.hist</span></code><a class="headerlink" href="#histogram-plots-with-matplotlib-random-hist" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">matplotlib.random</span></code> has a function <code class="docutils literal notranslate"><span class="pre">hist(x,</span> <span class="pre">bins,</span> <span class="pre">...)</span></code> for plotting histograms, so we can check what this normal distribution actually looks like.</p>
 <p>Input parameter <code class="docutils literal notranslate"><span class="pre">x</span></code> is the list of values, and when input parameter <code class="docutils literal notranslate"><span class="pre">bins</span></code> is given an integer value, the data is binned into that many equally wide intervals.</p>
 <p>The function <code class="docutils literal notranslate"><span class="pre">hist</span></code> also returns three values:</p>
@@ -831,7 +836,7 @@ so the slight variations above are due to these being only a sample mean and sam
 </div>
 </div>
 <div class="section" id="random-integers-numpy-random-randint">
-<h2><span class="section-number">14.6. </span>Random integers: <code class="docutils literal notranslate"><span class="pre">numpy.random.randint</span></code><a class="headerlink" href="#random-integers-numpy-random-randint" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">15.6. </span>Random integers: <code class="docutils literal notranslate"><span class="pre">numpy.random.randint</span></code><a class="headerlink" href="#random-integers-numpy-random-randint" title="Permalink to this headline">¶</a></h2>
 <p>One can generate pseudo-random integers, uniformly distributed between specified lower and upper values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -861,7 +866,7 @@ so the slight variations above are due to these being only a sample mean and sam
 </div>
 </div>
 <div class="section" id="specifying-bin-edges-for-the-histogram">
-<h3><span class="section-number">14.6.1. </span>Specifying bin edges for the histogram<a class="headerlink" href="#specifying-bin-edges-for-the-histogram" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">15.6.1. </span>Specifying bin edges for the histogram<a class="headerlink" href="#specifying-bin-edges-for-the-histogram" title="Permalink to this headline">¶</a></h3>
 <p>This time, it is best to explicitly specify a list of the edges of the bins, by making the second argument <code class="docutils literal notranslate"><span class="pre">bins</span></code> a list.</p>
 <p>With six values, seven edges are needed, and it looks nicest if they are centered on the integers.</p>
 <div class="cell docutils container">
@@ -911,7 +916,7 @@ so the slight variations above are due to these being only a sample mean and sam
 <p>The histogram is now visually boring, but mathematically more satisfying.</p>
 <p><a name="Exercise-A"></a></p>
 <div class="section" id="exercise-a-approximating-pi">
-<h4><span class="section-number">14.6.1.1. </span>Exercise A: approximating <span class="math notranslate nohighlight">\(\pi\)</span><a class="headerlink" href="#exercise-a-approximating-pi" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">15.6.1.1. </span>Exercise A: approximating <span class="math notranslate nohighlight">\(\pi\)</span><a class="headerlink" href="#exercise-a-approximating-pi" title="Permalink to this headline">¶</a></h4>
 <p>We can compute approximations of <span class="math notranslate nohighlight">\(\pi\)</span> by using the fact that the unit circle occupies a fraction <span class="math notranslate nohighlight">\(\pi/4\)</span> of the circumscribed square:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,7 +952,7 @@ by generating successive unifromly distributed random values for both the <span 
 <p><a name="Exercise-B"></a></p>
 </div>
 <div class="section" id="exercise-b">
-<h4><span class="section-number">14.6.1.2. </span>Exercise B<a class="headerlink" href="#exercise-b" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">15.6.1.2. </span>Exercise B<a class="headerlink" href="#exercise-b" title="Permalink to this headline">¶</a></h4>
 <p>It takes a lot of samples to get decent accuracy, so after part (a) is working,
 experiment with successively more samples;
 increase the number <span class="math notranslate nohighlight">\(N\)</span> of samples per trial by big steps, like factors of 100.</p>
@@ -970,7 +975,7 @@ increase the number <span class="math notranslate nohighlight">\(N\)</span> of s
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./python_review"
+            path: "./python_tutorial"
         },
         predefinedOutput: true
     }
@@ -985,8 +990,8 @@ increase the number <span class="math notranslate nohighlight">\(N\)</span> of s
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="summation-and-integration.html" title="previous page"><span class="section-number">13. </span>Summation and Integration</a>
-    <a class='right-next' id="next-link" href="formatted-output-and-some-text-string-manipulation.html" title="next page"><span class="section-number">15. </span>Formatted Output and Some Text String Manipulation</a>
+    <a class='left-prev' id="prev-link" href="summation-and-integration.html" title="previous page"><span class="section-number">14. </span>Summation and Integration</a>
+    <a class='right-next' id="next-link" href="formatted-output-and-some-text-string-manipulation.html" title="next page"><span class="section-number">16. </span>Formatted Output and Some Text String Manipulation</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

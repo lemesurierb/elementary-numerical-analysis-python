@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>10. Plotting Graphs with Matplotlib &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>11. Plotting Graphs with Matplotlib &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. Numpy Array Operations and Linear Algebra" href="array-operations-and-linear-algebra.html" />
-    <link rel="prev" title="9. Code Files, Modules, and an Integrated Development Environment" href="code-files-modules-IDEs.html" />
+    <link rel="next" title="12. Numpy Array Operations and Linear Algebra" href="array-operations-and-linear-algebra.html" />
+    <link rel="prev" title="10. Recursion (vs iteration)" href="recursion.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -402,44 +402,49 @@
    9. Code Files, Modules, and an Integrated Development Environment
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   10. Plotting Graphs with Matplotlib
+   11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="array-operations-and-linear-algebra.html">
-   11. Numpy Array Operations and Linear Algebra
+   12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
-   12. Package Scipy and More Tools for Linear Algebra
+   13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="summation-and-integration.html">
-   13. Summation and Integration
+   14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="random-numbers-and-simulation.html">
-   14. Random Numbers, Histograms, and a Simulation
+   15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="formatted-output-and-some-text-string-manipulation.html">
-   15. Formatted Output and Some Text String Manipulation
+   16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classes-objects-attributes-methods.html">
-   16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="exception-handling.html">
-   17. Exceptions and Exception Handling
+   18. Exceptions and Exception Handling
   </a>
  </li>
 </ul>
@@ -509,7 +514,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python_review/graphing-with-matplotlib.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python_tutorial/graphing-with-matplotlib.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -534,7 +539,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_review/graphing-with-matplotlib.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/graphing-with-matplotlib.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -558,22 +563,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction-matplotlib-and-pyplot">
-   10.1. Introduction: Matplotlib and Pyplot
+   11.1. Introduction: Matplotlib and Pyplot
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sources-on-matplotlib">
-   10.2. Sources on Matplotlib
+   11.2. Sources on Matplotlib
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#choosing-where-the-graphs-appear">
-   10.3. Choosing where the graphs appear
+   11.3. Choosing where the graphs appear
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#producing-arrays-of-x-values-with-the-numpy-function-linspace">
-   10.4. Producing arrays of “x” values with the numpy function
+   11.4. Producing arrays of “x” values with the numpy function
    <code class="docutils literal notranslate">
     <span class="pre">
      linspace
@@ -583,7 +588,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basic-graphs-with-plot">
-   10.5. Basic graphs with
+   11.5. Basic graphs with
    <code class="docutils literal notranslate">
     <span class="pre">
      plot
@@ -593,17 +598,17 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#smoother-graphs">
-   10.6. Smoother graphs
+   11.6. Smoother graphs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multiple-curves-on-a-single-figure">
-   10.7. Multiple curves on a single figure
+   11.7. Multiple curves on a single figure
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#two-curves-with-a-single-plot-command">
-   10.8. Two curves with a single
+   11.8. Two curves with a single
    <code class="docutils literal notranslate">
     <span class="pre">
      plot
@@ -614,49 +619,49 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multiple-curves-in-one-figure">
-   10.9. Multiple curves in one figure
+   11.9. Multiple curves in one figure
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plotting-sequences">
-   10.10. Plotting sequences
+   11.10. Plotting sequences
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plotting-curves-in-separate-figures-from-a-single-cell">
-   10.11. Plotting curves in separate figures (from a single cell)
+   11.11. Plotting curves in separate figures (from a single cell)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#decorating-the-curves">
-   10.12. Decorating the Curves
+   11.12. Decorating the Curves
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   10.13. Exercises
+   11.13. Exercises
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-a-explore-ways-to-refine-your-figures">
-     10.13.1. Exercise A: Explore ways to refine your figures
+     11.13.1. Exercise A: Explore ways to refine your figures
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-b-saving-externally-displayed-figures-to-files">
-     10.13.2. Exercise B: Saving externally displayed figures to files
+     11.13.2. Exercise B: Saving externally displayed figures to files
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#getting-help-from-the-documentation">
-   10.14. Getting help from the documentation
+   11.14. Getting help from the documentation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#p-s-a-shortcut-revealed-the-ipython-magic-command-pylab">
-   10.15. P. S. A shortcut revealed: the IPython “magic” command pylab
+   11.15. P. S. A shortcut revealed: the IPython “magic” command pylab
   </a>
  </li>
 </ul>
@@ -671,13 +676,13 @@
               <div>
                 
   <div class="section" id="plotting-graphs-with-matplotlib">
-<h1><span class="section-number">10. </span>Plotting Graphs with Matplotlib<a class="headerlink" href="#plotting-graphs-with-matplotlib" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">11. </span>Plotting Graphs with Matplotlib<a class="headerlink" href="#plotting-graphs-with-matplotlib" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction-matplotlib-and-pyplot">
-<h2><span class="section-number">10.1. </span>Introduction: Matplotlib and Pyplot<a class="headerlink" href="#introduction-matplotlib-and-pyplot" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.1. </span>Introduction: Matplotlib and Pyplot<a class="headerlink" href="#introduction-matplotlib-and-pyplot" title="Permalink to this headline">¶</a></h2>
 <p>Numerical data is often presented with graphs, and the tools we use for this come from the module <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> which is part of the Python <em>package</em> <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. (A Python <em>package</em> is essentially a module that also contains other modules.)</p>
 </div>
 <div class="section" id="sources-on-matplotlib">
-<h2><span class="section-number">10.2. </span>Sources on Matplotlib<a class="headerlink" href="#sources-on-matplotlib" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.2. </span>Sources on Matplotlib<a class="headerlink" href="#sources-on-matplotlib" title="Permalink to this headline">¶</a></h2>
 <p>Matplotlib is a huge collection of graphics tools, of which we see just a few here. For more information, the home site for Matplotlib is http://matplotlib.org
 and the section on pyplot is at http://matplotlib.org/1.3.1/api/pyplot_api.html</p>
 <p>However, another site that I find easier as an introduction is https://scipy-lectures.org/intro/matplotlib/</p>
@@ -685,7 +690,7 @@ and the section on pyplot is at http://matplotlib.org/1.3.1/api/pyplot_api.html<
 <p><strong>Note:</strong> the descriptions here are for now about working in notebooks: see the note below on <a class="reference external" href="#with-Spyder-IPython">differences when using Spyder and IPython</a></p>
 </div>
 <div class="section" id="choosing-where-the-graphs-appear">
-<h2><span class="section-number">10.3. </span>Choosing where the graphs appear<a class="headerlink" href="#choosing-where-the-graphs-appear" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.3. </span>Choosing where the graphs appear<a class="headerlink" href="#choosing-where-the-graphs-appear" title="Permalink to this headline">¶</a></h2>
 <p>In a notebook, we can choose between having the figures produced by Matplotlib appear “inline” (that is, within the notebook window) or in separate windows.
 For now we will use the inline option, which is the default, but can also be specified explicitly with the command</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%matplotlib inline
@@ -743,7 +748,7 @@ That can be chosen with the magic command</p>
 </div>
 </div>
 <div class="section" id="producing-arrays-of-x-values-with-the-numpy-function-linspace">
-<h2><span class="section-number">10.4. </span>Producing arrays of “x” values with the numpy function  <code class="docutils literal notranslate"><span class="pre">linspace</span></code><a class="headerlink" href="#producing-arrays-of-x-values-with-the-numpy-function-linspace" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.4. </span>Producing arrays of “x” values with the numpy function  <code class="docutils literal notranslate"><span class="pre">linspace</span></code><a class="headerlink" href="#producing-arrays-of-x-values-with-the-numpy-function-linspace" title="Permalink to this headline">¶</a></h2>
 <p>To plot the graph of a function, we first need a collection of values for the abscissa (horizontal axis).
 The function <code>linspace</code> gives an array containing a specified number of equally spaced values over a specified interval, so that</p>
 <div class="cell docutils container">
@@ -785,7 +790,7 @@ The function <code>linspace</code> gives an array containing a specified number 
 </div>
 </div>
 <div class="section" id="basic-graphs-with-plot">
-<h2><span class="section-number">10.5. </span>Basic graphs with <code class="docutils literal notranslate"><span class="pre">plot</span></code><a class="headerlink" href="#basic-graphs-with-plot" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.5. </span>Basic graphs with <code class="docutils literal notranslate"><span class="pre">plot</span></code><a class="headerlink" href="#basic-graphs-with-plot" title="Permalink to this headline">¶</a></h2>
 <p>We could use these 11 values to graph a function, but the result is a bit rough, because the given points are joined with straight line segments:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -839,7 +844,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="section" id="smoother-graphs">
-<h2><span class="section-number">10.6. </span>Smoother graphs<a class="headerlink" href="#smoother-graphs" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.6. </span>Smoother graphs<a class="headerlink" href="#smoother-graphs" title="Permalink to this headline">¶</a></h2>
 <p>It turns out that 50 points is often a good choice for a smooth-looking curve, so the function <code>linspace</code> has this as a <em>default input parameter</em>: you can omit that third input value, and get 50 points.</p>
 <p>Let’s use this to plot some trig. functions.</p>
 <div class="cell docutils container">
@@ -882,7 +887,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="section" id="multiple-curves-on-a-single-figure">
-<h2><span class="section-number">10.7. </span>Multiple curves on a single figure<a class="headerlink" href="#multiple-curves-on-a-single-figure" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.7. </span>Multiple curves on a single figure<a class="headerlink" href="#multiple-curves-on-a-single-figure" title="Permalink to this headline">¶</a></h2>
 <p>As we have seen when using <code class="docutils literal notranslate"><span class="pre">plot</span></code> to produce inline figures in a Jupyter notebook, <code class="docutils literal notranslate"><span class="pre">plot</span></code> commands in different cells produce separate figures.</p>
 <p>To combine curves on a single graph, one way is to use successive <code class="docutils literal notranslate"><span class="pre">plot</span></code> commands within the same cell:</p>
 <div class="cell docutils container">
@@ -900,7 +905,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 <p><em>Aside on message clean up: a Juypter cell only displays the output of the last function invoked in the cell (along with anything explicitly output with a <code class="docutils literal notranslate"><span class="pre">print</span></code> function), so I only needed to intercept the message from the last <code class="docutils literal notranslate"><span class="pre">plot</span></code> command.</em></p>
 </div>
 <div class="section" id="two-curves-with-a-single-plot-command">
-<h2><span class="section-number">10.8. </span>Two curves with a single <code class="docutils literal notranslate"><span class="pre">plot</span></code> command<a class="headerlink" href="#two-curves-with-a-single-plot-command" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.8. </span>Two curves with a single <code class="docutils literal notranslate"><span class="pre">plot</span></code> command<a class="headerlink" href="#two-curves-with-a-single-plot-command" title="Permalink to this headline">¶</a></h2>
 <p>Several curves can be specified in a single <code class="docutils literal notranslate"><span class="pre">plot</span></code> command (which also works with external figure windows of course.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -926,7 +931,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="section" id="multiple-curves-in-one-figure">
-<h2><span class="section-number">10.9. </span>Multiple curves in one figure<a class="headerlink" href="#multiple-curves-in-one-figure" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.9. </span>Multiple curves in one figure<a class="headerlink" href="#multiple-curves-in-one-figure" title="Permalink to this headline">¶</a></h2>
 <p>There can be any number of curves in a single <code class="docutils literal notranslate"><span class="pre">plot</span></code> command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -965,7 +970,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </ul>
 </div>
 <div class="section" id="plotting-sequences">
-<h2><span class="section-number">10.10. </span>Plotting sequences<a class="headerlink" href="#plotting-sequences" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.10. </span>Plotting sequences<a class="headerlink" href="#plotting-sequences" title="Permalink to this headline">¶</a></h2>
 <p>A curve can also be specified by a single array of numbers: these are taken as the values of a sequence, indexed Pythonically from zero, and plotted as the ordinates (vertical values):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -979,7 +984,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="section" id="plotting-curves-in-separate-figures-from-a-single-cell">
-<h2><span class="section-number">10.11. </span>Plotting curves in separate figures (from a single cell)<a class="headerlink" href="#plotting-curves-in-separate-figures-from-a-single-cell" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.11. </span>Plotting curves in separate figures (from a single cell)<a class="headerlink" href="#plotting-curves-in-separate-figures-from-a-single-cell" title="Permalink to this headline">¶</a></h2>
 <p>From within a single Jupyter cell, or when working with Python files or in the IPython command window (as used within Spyder), successive <code class="docutils literal notranslate"><span class="pre">plot</span></code> commands keep adding to the previous figure.
 To instead start the next <code class="docutils literal notranslate"><span class="pre">plot</span></code> in a separate figure, first create a new “empty” figure, with the function <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.figure</span></code>.</p>
 <p>With a full name as long as that, it is worth importing so that it can be used on a first name basis:</p>
@@ -1026,7 +1031,7 @@ To instead start the next <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="section" id="decorating-the-curves">
-<h2><span class="section-number">10.12. </span>Decorating the Curves<a class="headerlink" href="#decorating-the-curves" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.12. </span>Decorating the Curves<a class="headerlink" href="#decorating-the-curves" title="Permalink to this headline">¶</a></h2>
 <p>Curves can be decorated in different ways.  We have already seen some options, and there are many more.
 One can specify the color, line styles like dashed or dash-dot instead of solid, many different markers, and to have both markers and lines.
 As seen above, this can be controlled by an optional text string argument after the arrays of data for a curve:</p>
@@ -1057,10 +1062,10 @@ in the following, <code class="docutils literal notranslate"><span class="pre">p
 </div>
 </div>
 <div class="section" id="exercises">
-<h2><span class="section-number">10.13. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.13. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p><a name=Exercise-A></a></p>
 <div class="section" id="exercise-a-explore-ways-to-refine-your-figures">
-<h3><span class="section-number">10.13.1. </span>Exercise A: Explore ways to refine your figures<a class="headerlink" href="#exercise-a-explore-ways-to-refine-your-figures" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">11.13.1. </span>Exercise A: Explore ways to refine your figures<a class="headerlink" href="#exercise-a-explore-ways-to-refine-your-figures" title="Permalink to this headline">¶</a></h3>
 <p>There are many commands for refining the appearance of a figure after its initial creation with <code class="docutils literal notranslate"><span class="pre">plot</span></code>.
 Experiment yourself with the commands <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">xlabel</span></code>, <code class="docutils literal notranslate"><span class="pre">ylabel</span></code>, <code class="docutils literal notranslate"><span class="pre">grid</span></code>, and <code class="docutils literal notranslate"><span class="pre">legend</span></code>.</p>
 <p>Using the functions mentioned above, produce a refined version of the above sine and cosine graph, with:</p>
@@ -1073,7 +1078,7 @@ Experiment yourself with the commands <code class="docutils literal notranslate"
 <p><a name=Exercise-B></a></p>
 </div>
 <div class="section" id="exercise-b-saving-externally-displayed-figures-to-files">
-<h3><span class="section-number">10.13.2. </span>Exercise B: Saving externally displayed figures to files<a class="headerlink" href="#exercise-b-saving-externally-displayed-figures-to-files" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">11.13.2. </span>Exercise B: Saving externally displayed figures to files<a class="headerlink" href="#exercise-b-saving-externally-displayed-figures-to-files" title="Permalink to this headline">¶</a></h3>
 <p>Then work out how to save this figure to a file (probably in format PNG), and turn that in, along with the file used to create it.</p>
 <p>This ismost readily done with externally displayed figures; that is, with <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">tk</span></code>.
 Making that change to <code class="docutils literal notranslate"><span class="pre">tk</span></code> in a notebook requires then restarting the kernel for it to take effect; use the menu <em>Kernel</em> above and select “Restart Kernel and Run All Cells …*</p>
@@ -1081,7 +1086,7 @@ Making that change to <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="section" id="getting-help-from-the-documentation">
-<h2><span class="section-number">10.14. </span>Getting help from the documentation<a class="headerlink" href="#getting-help-from-the-documentation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.14. </span>Getting help from the documentation<a class="headerlink" href="#getting-help-from-the-documentation" title="Permalink to this headline">¶</a></h2>
 <p>For some of these, you will probably need to read up. For simple things, there is a function <code class="docutils literal notranslate"><span class="pre">help</span></code>, which is best used in the IPython interactive input window (within Spyder for example), but I will illustrate it here.</p>
 <p>The entry for <code class="docutils literal notranslate"><span class="pre">plot</span></code> is unusually long! It provides details about all the options mentioned above, like marker styles.
 So this might be a good time to learn how to clear the output in a cell, to unclutter the view: either use the above menu “Edit* or open the menu with Control-click or right-click on the code cell; then use “Clear Outputs” to remove the output of just the current cell.</p>
@@ -1096,7 +1101,7 @@ So this might be a good time to learn how to clear the output in a cell, to uncl
 <p>However, that does not cover everything; the official pyplot documentation at http://matplotlib.org/1.3.1/api/pyplot_api.html is more complete: explore its search feature.</p>
 </div>
 <div class="section" id="p-s-a-shortcut-revealed-the-ipython-magic-command-pylab">
-<h2><span class="section-number">10.15. </span>P. S. A shortcut revealed: the IPython “magic” command pylab<a class="headerlink" href="#p-s-a-shortcut-revealed-the-ipython-magic-command-pylab" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">11.15. </span>P. S. A shortcut revealed: the IPython “magic” command pylab<a class="headerlink" href="#p-s-a-shortcut-revealed-the-ipython-magic-command-pylab" title="Permalink to this headline">¶</a></h2>
 <p>So far I have encourage you to use explicit, specific import commands, because this is good practice when developing larger programs.
 However, for quick interactive work in the IPython command window and Jupyter notebooks, there is a sometimes useful shortcut: the IPython “magic” command</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%pylab
@@ -1132,7 +1137,7 @@ However, for quick interactive work in the IPython command window and Jupyter no
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./python_review"
+            path: "./python_tutorial"
         },
         predefinedOutput: true
     }
@@ -1147,8 +1152,8 @@ However, for quick interactive work in the IPython command window and Jupyter no
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="code-files-modules-IDEs.html" title="previous page"><span class="section-number">9. </span>Code Files, Modules, and an Integrated Development Environment</a>
-    <a class='right-next' id="next-link" href="array-operations-and-linear-algebra.html" title="next page"><span class="section-number">11. </span>Numpy Array Operations and Linear Algebra</a>
+    <a class='left-prev' id="prev-link" href="recursion.html" title="previous page"><span class="section-number">10. </span>Recursion (vs iteration)</a>
+    <a class='right-next' id="next-link" href="array-operations-and-linear-algebra.html" title="next page"><span class="section-number">12. </span>Numpy Array Operations and Linear Algebra</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

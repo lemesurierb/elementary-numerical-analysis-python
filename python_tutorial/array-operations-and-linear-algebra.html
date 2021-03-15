@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>11. Numpy Array Operations and Linear Algebra &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>12. Numpy Array Operations and Linear Algebra &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="12. Package Scipy and More Tools for Linear Algebra" href="scipy-tools-for-linear-algebra.html" />
-    <link rel="prev" title="10. Plotting Graphs with Matplotlib" href="graphing-with-matplotlib.html" />
+    <link rel="next" title="13. Package Scipy and More Tools for Linear Algebra" href="scipy-tools-for-linear-algebra.html" />
+    <link rel="prev" title="11. Plotting Graphs with Matplotlib" href="graphing-with-matplotlib.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -403,43 +403,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="graphing-with-matplotlib.html">
-   10. Plotting Graphs with Matplotlib
+   11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   11. Numpy Array Operations and Linear Algebra
+   12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
-   12. Package Scipy and More Tools for Linear Algebra
+   13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="summation-and-integration.html">
-   13. Summation and Integration
+   14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="random-numbers-and-simulation.html">
-   14. Random Numbers, Histograms, and a Simulation
+   15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="formatted-output-and-some-text-string-manipulation.html">
-   15. Formatted Output and Some Text String Manipulation
+   16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classes-objects-attributes-methods.html">
-   16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="exception-handling.html">
-   17. Exceptions and Exception Handling
+   18. Exceptions and Exception Handling
   </a>
  </li>
 </ul>
@@ -509,7 +514,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python_review/array-operations-and-linear-algebra.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python_tutorial/array-operations-and-linear-algebra.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -534,7 +539,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_review/array-operations-and-linear-algebra.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/array-operations-and-linear-algebra.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -558,7 +563,7 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-matrix-transpose-a-t-is-given-by-a-t">
-   11.1. The matrix transpose
+   12.1. The matrix transpose
    <span class="math notranslate nohighlight">
     \(A^T\)
    </span>
@@ -572,7 +577,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#slicing-extracting-rows-columns-and-other-rectangular-chunks-from-matrices">
-   11.2.
+   12.2.
    <em>
     Slicing
    </em>
@@ -581,27 +586,27 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#index-notation-for-slicing">
-     11.2.1. Index notation for slicing
+     12.2.1. Index notation for slicing
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#synonyms-for-array-names-with-the-equal-sign-not-copying">
-     11.2.2. Synonyms for array names with the equal sign (not copying!)
+     12.2.2. Synonyms for array names with the equal sign (not copying!)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#copying-arrays-with-method-copy">
-     11.2.3. Copying arrays with method .copy()
+     12.2.3. Copying arrays with method .copy()
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#exercise-a">
-       11.2.3.1. Exercise A
+       12.2.3.1. Exercise A
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#exercise-b">
-       11.2.3.2. Exercise B
+       12.2.3.2. Exercise B
       </a>
      </li>
     </ul>
@@ -620,7 +625,7 @@
               <div>
                 
   <div class="section" id="numpy-array-operations-and-linear-algebra">
-<h1><span class="section-number">11. </span>Numpy Array Operations and Linear Algebra<a class="headerlink" href="#numpy-array-operations-and-linear-algebra" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">12. </span>Numpy Array Operations and Linear Algebra<a class="headerlink" href="#numpy-array-operations-and-linear-algebra" title="Permalink to this headline">¶</a></h1>
 <p><strong>Note:</strong> We will see more tools for linear algebra in the section on <a class="reference internal" href="scipy-tools-for-linear-algebra.html"><span class="doc std std-doc">Scipy Tools</span></a>, which introduces the package <em>Scipy</em>.</p>
 <p>As of version 3.5, Python can handle matrix multiplication on Numpy arrays, using the at sign “&#64;”:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>C = A @ B
@@ -744,7 +749,7 @@ The matrix product B times A is:
 </div>
 </div>
 <div class="section" id="the-matrix-transpose-a-t-is-given-by-a-t">
-<h2><span class="section-number">11.1. </span>The matrix transpose <span class="math notranslate nohighlight">\(A^T\)</span> is given by <code class="docutils literal notranslate"><span class="pre">A.T</span></code><a class="headerlink" href="#the-matrix-transpose-a-t-is-given-by-a-t" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">12.1. </span>The matrix transpose <span class="math notranslate nohighlight">\(A^T\)</span> is given by <code class="docutils literal notranslate"><span class="pre">A.T</span></code><a class="headerlink" href="#the-matrix-transpose-a-t-is-given-by-a-t" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A-transpose is</span><span class="se">\n</span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -762,11 +767,11 @@ The matrix product B times A is:
 </div>
 </div>
 <div class="section" id="slicing-extracting-rows-columns-and-other-rectangular-chunks-from-matrices">
-<h2><span class="section-number">11.2. </span><em>Slicing</em>: Extracting rows, columns, and other rectangular chunks from matrices<a class="headerlink" href="#slicing-extracting-rows-columns-and-other-rectangular-chunks-from-matrices" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">12.2. </span><em>Slicing</em>: Extracting rows, columns, and other rectangular chunks from matrices<a class="headerlink" href="#slicing-extracting-rows-columns-and-other-rectangular-chunks-from-matrices" title="Permalink to this headline">¶</a></h2>
 <p>This works with Python lists and Numpy arrays, and we have seen some of it before;
 I review it here because it will help with doing the row operations of linear algebra.</p>
 <div class="section" id="index-notation-for-slicing">
-<h3><span class="section-number">11.2.1. </span>Index notation for slicing<a class="headerlink" href="#index-notation-for-slicing" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.1. </span>Index notation for slicing<a class="headerlink" href="#index-notation-for-slicing" title="Permalink to this headline">¶</a></h3>
 <p>For an index with n possible values, from 0 to n-1:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">a:b</span></code> means indices i in th usual semi-open interval <span class="math notranslate nohighlight">\(a \leq i &lt; b\)</span> or <span class="math notranslate nohighlight">\([a,b)\)</span></p></li>
@@ -806,7 +811,7 @@ The 2x2 sub-matrix in the bottom-right corner:
 </div>
 </div>
 <div class="section" id="synonyms-for-array-names-with-the-equal-sign-not-copying">
-<h3><span class="section-number">11.2.2. </span>Synonyms for array names with the equal sign (not copying!)<a class="headerlink" href="#synonyms-for-array-names-with-the-equal-sign-not-copying" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.2. </span>Synonyms for array names with the equal sign (not copying!)<a class="headerlink" href="#synonyms-for-array-names-with-the-equal-sign-not-copying" title="Permalink to this headline">¶</a></h3>
 <p>If we use the equal sign between two array names, that makes them synonyms, referring to the same values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -839,7 +844,7 @@ and so is A!:
 </div>
 </div>
 <div class="section" id="copying-arrays-with-method-copy">
-<h3><span class="section-number">11.2.3. </span>Copying arrays with method .copy()<a class="headerlink" href="#copying-arrays-with-method-copy" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.3. </span>Copying arrays with method .copy()<a class="headerlink" href="#copying-arrays-with-method-copy" title="Permalink to this headline">¶</a></h3>
 <p>Thus if we want a separate new array or list with the same elements initially, we must make a copy with the method <code class="docutils literal notranslate"><span class="pre">.copy()</span></code>, not the equal sign:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -872,7 +877,7 @@ A is still
 </div>
 <p><a name=Exercise-A></a></p>
 <div class="section" id="exercise-a">
-<h4><span class="section-number">11.2.3.1. </span>Exercise A<a class="headerlink" href="#exercise-a" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">12.2.3.1. </span>Exercise A<a class="headerlink" href="#exercise-a" title="Permalink to this headline">¶</a></h4>
 <p>Create a Numpy array (not a Numpy <em>matrix</em>; those are now mostly obsolete!) containing the matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}A = \left[ \begin{array}{ccc} 4. &amp; 2. &amp; 1. \\ 9. &amp; 3. &amp; 1. \\ 25. &amp; 5. &amp; 1. \end{array} \right]\end{split}\]</div>
@@ -882,7 +887,7 @@ A is still
 <p><a name=Exercise-B></a></p>
 </div>
 <div class="section" id="exercise-b">
-<h4><span class="section-number">11.2.3.2. </span>Exercise B<a class="headerlink" href="#exercise-b" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">12.2.3.2. </span>Exercise B<a class="headerlink" href="#exercise-b" title="Permalink to this headline">¶</a></h4>
 <p>Create arrays <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> containing respectively the last row of <span class="math notranslate nohighlight">\(A\)</span> and the middle column of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p><strong>Note:</strong> Do this by manipulating the array <code class="docutils literal notranslate"><span class="pre">A</span></code> with indexing and slicing operations, without entering any numerical values for array entries explicity.</p>
 </div>
@@ -903,7 +908,7 @@ A is still
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./python_review"
+            path: "./python_tutorial"
         },
         predefinedOutput: true
     }
@@ -918,8 +923,8 @@ A is still
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="graphing-with-matplotlib.html" title="previous page"><span class="section-number">10. </span>Plotting Graphs with Matplotlib</a>
-    <a class='right-next' id="next-link" href="scipy-tools-for-linear-algebra.html" title="next page"><span class="section-number">12. </span>Package Scipy and More Tools for Linear Algebra</a>
+    <a class='left-prev' id="prev-link" href="graphing-with-matplotlib.html" title="previous page"><span class="section-number">11. </span>Plotting Graphs with Matplotlib</a>
+    <a class='right-next' id="next-link" href="scipy-tools-for-linear-algebra.html" title="next page"><span class="section-number">13. </span>Package Scipy and More Tools for Linear Algebra</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

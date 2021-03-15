@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>15. Formatted Output and Some Text String Manipulation &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>16. Formatted Output and Some Text String Manipulation &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python" href="classes-objects-attributes-methods.html" />
-    <link rel="prev" title="14. Random Numbers, Histograms, and a Simulation" href="random-numbers-and-simulation.html" />
+    <link rel="next" title="17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python" href="classes-objects-attributes-methods.html" />
+    <link rel="prev" title="15. Random Numbers, Histograms, and a Simulation" href="random-numbers-and-simulation.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -403,43 +403,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="graphing-with-matplotlib.html">
-   10. Plotting Graphs with Matplotlib
+   11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="array-operations-and-linear-algebra.html">
-   11. Numpy Array Operations and Linear Algebra
+   12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
-   12. Package Scipy and More Tools for Linear Algebra
+   13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="summation-and-integration.html">
-   13. Summation and Integration
+   14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="random-numbers-and-simulation.html">
-   14. Random Numbers, Histograms, and a Simulation
+   15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   15. Formatted Output and Some Text String Manipulation
+   16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classes-objects-attributes-methods.html">
-   16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="exception-handling.html">
-   17. Exceptions and Exception Handling
+   18. Exceptions and Exception Handling
   </a>
  </li>
 </ul>
@@ -509,7 +514,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python_review/formatted-output-and-some-text-string-manipulation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python_tutorial/formatted-output-and-some-text-string-manipulation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -534,7 +539,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_review/formatted-output-and-some-text-string-manipulation.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/formatted-output-and-some-text-string-manipulation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -558,7 +563,7 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-function-print">
-   15.1. The function
+   16.1. The function
    <code class="docutils literal notranslate">
     <span class="pre">
      print()
@@ -568,17 +573,17 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#f-string-formatting">
-   15.2. F-string formatting
+   16.2. F-string formatting
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#formatting-numbers">
-   15.3. Formatting numbers
+   16.3. Formatting numbers
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#further-reading-and-a-p-s">
-     15.3.1. Further reading, and a P. S.:
+     16.3.1. Further reading, and a P. S.:
     </a>
    </li>
   </ul>
@@ -596,7 +601,7 @@
                 
   <p><a name=top></a></p>
 <div class="section" id="formatted-output-and-some-text-string-manipulation">
-<h1><span class="section-number">15. </span>Formatted Output and Some Text String Manipulation<a class="headerlink" href="#formatted-output-and-some-text-string-manipulation" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16. </span>Formatted Output and Some Text String Manipulation<a class="headerlink" href="#formatted-output-and-some-text-string-manipulation" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="#Function-print">The function <code class="docutils literal notranslate"><span class="pre">print()</span></code></a></p></li>
 <li><p><a class="reference external" href="#F-string-formatting">f-string formatting</a></p></li>
@@ -605,7 +610,7 @@
 </ul>
 <p><a name=Functionprint></a></p>
 <div class="section" id="the-function-print">
-<h2><span class="section-number">15.1. </span>The function <code class="docutils literal notranslate"><span class="pre">print()</span></code><a class="headerlink" href="#the-function-print" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">16.1. </span>The function <code class="docutils literal notranslate"><span class="pre">print()</span></code><a class="headerlink" href="#the-function-print" title="Permalink to this headline">¶</a></h2>
 <p>The basic tool for displaying information from Python to the screen is the function <code class="docutils literal notranslate"><span class="pre">print()</span></code>, as in</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -668,7 +673,7 @@ That is, from 7 am to 11 pm.
 </div>
 </div>
 <div class="section" id="f-string-formatting">
-<h2><span class="section-number">15.2. </span>F-string formatting<a class="headerlink" href="#f-string-formatting" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">16.2. </span>F-string formatting<a class="headerlink" href="#f-string-formatting" title="Permalink to this headline">¶</a></h2>
 <p>When assembling multiple pieces of information, the above syntax can get messy;
 also, it automatically inserts a blank space between items, so does not allow us to avoid the space before “am” and “pm”.</p>
 <p>Python has several methods for finer string manipulation; my favorite is <em>f-strings</em>, introduced in Python version 3.6, so I will describe only it.
@@ -727,7 +732,7 @@ For example, the previous <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="section" id="formatting-numbers">
-<h2><span class="section-number">15.3. </span>Formatting numbers<a class="headerlink" href="#formatting-numbers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">16.3. </span>Formatting numbers<a class="headerlink" href="#formatting-numbers" title="Permalink to this headline">¶</a></h2>
 <p>The information printed above came out alright, but there are several reasons we might want finer control over the display, especially with real numbers (type <code class="docutils literal notranslate"><span class="pre">float</span></code>)</p>
 <ul class="simple">
 <li><p>Choosing the number of significant digits or correct decimals to display for a <code class="docutils literal notranslate"><span class="pre">float</span></code> (real number).</p></li>
@@ -997,7 +1002,7 @@ Also, the width can be omitted if only precision matters, not spacing.</p>
 So they went over, rather than getting truncated — the width specification is just a minimum.</p>
 <p><a name=Further-reading></a></p>
 <div class="section" id="further-reading-and-a-p-s">
-<h3><span class="section-number">15.3.1. </span>Further reading, and a P. S.:<a class="headerlink" href="#further-reading-and-a-p-s" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.3.1. </span>Further reading, and a P. S.:<a class="headerlink" href="#further-reading-and-a-p-s" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>https://realpython.com/python-f-strings/</p></li>
 <li><p>As always, consider the function <code class="docutils literal notranslate"><span class="pre">help()</span></code>, as below</p></li>
@@ -1119,7 +1124,7 @@ print(...)
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./python_review"
+            path: "./python_tutorial"
         },
         predefinedOutput: true
     }
@@ -1134,8 +1139,8 @@ print(...)
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="random-numbers-and-simulation.html" title="previous page"><span class="section-number">14. </span>Random Numbers, Histograms, and a Simulation</a>
-    <a class='right-next' id="next-link" href="classes-objects-attributes-methods.html" title="next page"><span class="section-number">16. </span>Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python</a>
+    <a class='left-prev' id="prev-link" href="random-numbers-and-simulation.html" title="previous page"><span class="section-number">15. </span>Random Numbers, Histograms, and a Simulation</a>
+    <a class='right-next' id="next-link" href="classes-objects-attributes-methods.html" title="next page"><span class="section-number">17. </span>Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Exceptions and Exception Handling" href="exception-handling.html" />
-    <link rel="prev" title="15. Formatted Output and Some Text String Manipulation" href="formatted-output-and-some-text-string-manipulation.html" />
+    <link rel="next" title="18. Exceptions and Exception Handling" href="exception-handling.html" />
+    <link rel="prev" title="16. Formatted Output and Some Text String Manipulation" href="formatted-output-and-some-text-string-manipulation.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -403,43 +403,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="graphing-with-matplotlib.html">
-   10. Plotting Graphs with Matplotlib
+   11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="array-operations-and-linear-algebra.html">
-   11. Numpy Array Operations and Linear Algebra
+   12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
-   12. Package Scipy and More Tools for Linear Algebra
+   13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="summation-and-integration.html">
-   13. Summation and Integration
+   14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="random-numbers-and-simulation.html">
-   14. Random Numbers, Histograms, and a Simulation
+   15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="formatted-output-and-some-text-string-manipulation.html">
-   15. Formatted Output and Some Text String Manipulation
+   16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   16. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="exception-handling.html">
-   17. Exceptions and Exception Handling
+   18. Exceptions and Exception Handling
   </a>
  </li>
 </ul>
@@ -509,7 +514,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python_review/classes-objects-attributes-methods.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python_tutorial/classes-objects-attributes-methods.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -534,7 +539,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_review/classes-objects-attributes-methods.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/classes-objects-attributes-methods.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -558,7 +563,7 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-a-class-verybasic3vector">
-   16.1. Example A: Class
+   17.1. Example A: Class
    <code class="docutils literal notranslate">
     <span class="pre">
      VeryBasic3Vector
@@ -568,7 +573,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-b-class-basicnvector">
-   16.2. Example B: Class
+   17.2. Example B: Class
    <code class="docutils literal notranslate">
     <span class="pre">
      BasicNVector
@@ -578,7 +583,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inheritence-new-classes-that-build-on-old-ones">
-   16.3. Inheritence: new classes that build on old ones
+   17.3. Inheritence: new classes that build on old ones
   </a>
  </li>
 </ul>
@@ -593,13 +598,13 @@
               <div>
                 
   <div class="section" id="classes-objects-attributes-methods-very-basic-object-oriented-programming-in-python">
-<h1><span class="section-number">16. </span>Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python<a class="headerlink" href="#classes-objects-attributes-methods-very-basic-object-oriented-programming-in-python" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">17. </span>Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python<a class="headerlink" href="#classes-objects-attributes-methods-very-basic-object-oriented-programming-in-python" title="Permalink to this headline">¶</a></h1>
 <p>This is a very basic introduction to object-oriented prgramming in Python: defining <em>classes</em> and using them to create <em>objects</em> with <em>methods</em> (a cousin of functions) that act on those objects.</p>
 <p>These are illustrated with objects that are vectors, and in particular 3-component vectors that have a cross product.</p>
 <p>The first class will be for vectors wih three components, labeld ‘x’, ‘y’ and ‘z’.</p>
 <p>On its own, this would be rather redundant, since numpy arrays could be used, but it serves to introduce some basic ideas, and then prepare for the real goal: 3-vectors with cross product.</p>
 <div class="section" id="example-a-class-verybasic3vector">
-<h2><span class="section-number">16.1. </span>Example A: Class <code class="docutils literal notranslate"><span class="pre">VeryBasic3Vector</span></code><a class="headerlink" href="#example-a-class-verybasic3vector" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">17.1. </span>Example A: Class <code class="docutils literal notranslate"><span class="pre">VeryBasic3Vector</span></code><a class="headerlink" href="#example-a-class-verybasic3vector" title="Permalink to this headline">¶</a></h2>
 <p>This first class <code class="docutils literal notranslate"><span class="pre">VeryBasic3Vector</span></code> illustrates some basic features of creating and using classes;
 however, it will be superceded soon!</p>
 <p>Almost every class has a method with special name <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, which is use to create objects of this class.
@@ -658,7 +663,7 @@ and any parenthesized variables being the arguments to the method definition.</p
 </div>
 </div>
 <div class="section" id="example-b-class-basicnvector">
-<h2><span class="section-number">16.2. </span>Example B: Class <code class="docutils literal notranslate"><span class="pre">BasicNVector</span></code><a class="headerlink" href="#example-b-class-basicnvector" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">17.2. </span>Example B: Class <code class="docutils literal notranslate"><span class="pre">BasicNVector</span></code><a class="headerlink" href="#example-b-class-basicnvector" title="Permalink to this headline">¶</a></h2>
 <p>A second class <code class="docutils literal notranslate"><span class="pre">BasicNVector</span></code> with some improvements over the above class <code class="docutils literal notranslate"><span class="pre">VeryBasic3Vector</span></code>:</p>
 <ul class="simple">
 <li><p>Allowinv vecors of any length, “N”</p></li>
@@ -793,7 +798,7 @@ and any parenthesized variables being the arguments to the method definition.</p
 </div>
 </div>
 <div class="section" id="inheritence-new-classes-that-build-on-old-ones">
-<h2><span class="section-number">16.3. </span>Inheritence: new classes that build on old ones<a class="headerlink" href="#inheritence-new-classes-that-build-on-old-ones" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">17.3. </span>Inheritence: new classes that build on old ones<a class="headerlink" href="#inheritence-new-classes-that-build-on-old-ones" title="Permalink to this headline">¶</a></h2>
 <p>A new class can be defined by refining an existing one, by adding methods and such, to avoid defining everything from scratch.
 The basic syntax for creating class <code class="docutils literal notranslate"><span class="pre">ChildClass</span></code> based on an existing <em>parent class</em> named <code class="docutils literal notranslate"><span class="pre">ParentClass</span></code> is</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class ChildClass(ParentClass):
@@ -901,7 +906,7 @@ The vector cross product of &lt;4, 5, 10&gt; with &lt;1, 2, 3&gt; is &lt;-5, -2,
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./python_review"
+            path: "./python_tutorial"
         },
         predefinedOutput: true
     }
@@ -916,8 +921,8 @@ The vector cross product of &lt;4, 5, 10&gt; with &lt;1, 2, 3&gt; is &lt;-5, -2,
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="formatted-output-and-some-text-string-manipulation.html" title="previous page"><span class="section-number">15. </span>Formatted Output and Some Text String Manipulation</a>
-    <a class='right-next' id="next-link" href="exception-handling.html" title="next page"><span class="section-number">17. </span>Exceptions and Exception Handling</a>
+    <a class='left-prev' id="prev-link" href="formatted-output-and-some-text-string-manipulation.html" title="previous page"><span class="section-number">16. </span>Formatted Output and Some Text String Manipulation</a>
+    <a class='right-next' id="next-link" href="exception-handling.html" title="next page"><span class="section-number">18. </span>Exceptions and Exception Handling</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
