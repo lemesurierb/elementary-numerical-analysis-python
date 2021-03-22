@@ -744,13 +744,19 @@ then the input <em>parameters</em> <span class="math notranslate nohighlight">\(
 <h3><span class="section-number">21.2.1. </span>Example 1: Integration<a class="headerlink" href="#example-1-integration" title="Permalink to this headline">¶</a></h3>
 <p>If the derivative depends only on the independent variable <span class="math notranslate nohighlight">\(t\)</span>, so that</p>
 <div class="math notranslate nohighlight">
-\[ \frac{du}{dt} = f(t), a \leq t \leq b \]</div>
+\[
+\frac{du}{dt} = f(t), a \leq t \leq b
+\]</div>
 <p>the solution is given by integration:</p>
 <div class="math notranslate nohighlight">
-\[ u(t) = u_0 + \int_a^t f(s)\, ds. \]</div>
+\[
+u(t) = u_0 + \int_a^t f(s)\, ds.
+\]</div>
 <p>In particular, with <span class="math notranslate nohighlight">\(u_0 = 0\)</span> the value at <span class="math notranslate nohighlight">\(b\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[ u(t) = \int_a^b f(t)\, dt, \]</div>
+\[
+u(t) = \int_a^b f(t)\, dt,
+\]</div>
 <p>and this gives us a back-door way to use numerical methods for solving ODEs to evaluate definite integrals.</p>
 </div>
 <div class="section" id="example-2-the-simplest-real-ode">
@@ -1053,7 +1059,10 @@ The recursion relation is now</p>
 <div class="math notranslate nohighlight">
 \[U_i = u_0 (1 + hk)^i.\]</div>
 <p>For comparison, the exact solution of this ODE IVP is</p>
-<p>$<span class="math notranslate nohighlight">\(u(t_i) = u_0 e^{k(t_i - a)} = u_0 e^{k ih} = u_0 (e^{kh})^i\)</span>$.</p>
+<div class="math notranslate nohighlight">
+\[
+u(t_i) = u_0 e^{k(t_i - a)} = u_0 e^{k ih} = u_0 (e^{kh})^i
+\]</div>
 <p>So each is a geometric series: the difference is that the <em>growth factor</em> is <span class="math notranslate nohighlight">\((1 + hk)\)</span> for Euler’s method, and <span class="math notranslate nohighlight">\(e^{kh} = 1 + hk + (hk)^2/2 + \cdots = 1 + hk + O(h^2)\)</span> for the ODE.</p>
 <p>Ths deviation at each time step is <span class="math notranslate nohighlight">\(O(h^2)\)</span>, suggesting that by the end <span class="math notranslate nohighlight">\(t=b\)</span>, at step <span class="math notranslate nohighlight">\(n\)</span>, the error will be <span class="math notranslate nohighlight">\(O(n h^2) = O\left(\displaystyle\frac{b-a}{h} h^2\right) = O(h)\)</span>.</p>
 <p>This is in fact what happens, but to verify that, we must deal with the challenge that once an error enters at one step, it is potentially amplified at each subsequent step, so the errors introduced at each step do not simply get summed like they did with definite integrals.</p>
