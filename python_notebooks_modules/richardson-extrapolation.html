@@ -626,6 +626,11 @@
                 
   <div class="section" id="richardson-extrapolation">
 <h1><span class="section-number">16. </span>Richardson Extrapolation<a class="headerlink" href="#richardson-extrapolation" title="Permalink to this headline">¶</a></h1>
+<p><strong>Revised March 17, 2021:</strong></p>
+<ul class="simple">
+<li><p>changed notation from <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(\phi(h)\)</span> to <span class="math notranslate nohighlight">\(Q_0\)</span> and <span class="math notranslate nohighlight">\(Q(h)\)</span></p></li>
+<li><p>added an alternative formulation that gives an error estimate; somewhat analogous to how Newton’s Method works.</p></li>
+</ul>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 5.1.3 <em>Extrapolation</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -647,29 +652,29 @@ one is that rounding error become problematic.</p>
 </div>
 <div class="section" id="procedure">
 <h2><span class="section-number">16.2. </span>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
-<p>The general framework for this is an exact quantity <span class="math notranslate nohighlight">\(Q\)</span> for which we have an approximation formula <span class="math notranslate nohighlight">\(\phi(h)\)</span> with</p>
+<p>The general framework for this is an exact quantity <span class="math notranslate nohighlight">\(Q_0\)</span> for which we have an approximation formula <span class="math notranslate nohighlight">\(Q(h)\)</span> with</p>
 <div class="math notranslate nohighlight">
-\[\phi(h) = Q + c_ph^p + O(h^q), = Q + O(h^p), \quad q &gt; p\]</div>
+\[Q(h) = Q_0 + c_p h^p + O(h^q), = Q_0 + O(h^p), \quad q &gt; p\]</div>
 <p>and we wish to achieve adequate accuracy while keeping <span class="math notranslate nohighlight">\(h\)</span> as large as possible.</p>
 <p>The kernel of the idea is to initially ignore the smaller part of the error, <span class="math notranslate nohighlight">\(O(h^q)\)</span> and just consider</p>
 <div class="math notranslate nohighlight">
-\[\phi(h) \approx Q + c_p h^p,\]</div>
-<p>and evaluate for two values of <span class="math notranslate nohighlight">\(h\)</span>; most often <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(2h\)</span>.</p>
+\[Q(h) \approx Q_0 + c_p h^p,\]</div>
+<p>and evaluate for two values of <span class="math notranslate nohighlight">\(h\)</span>; most often either <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(2h\)</span> (or <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h/2\)</span>, which ismore or less equivalent.)</p>
 <p>That gives</p>
 <div class="math notranslate nohighlight">
-\[\phi(2h) \approx Q + c_p (2h)^p = Q + c_p 2^p h^p,\]</div>
-<p>and with only <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(c_p\)</span> unknown, this is two (approximate) linear equations in two unknowns, so we can solve for the desired quantity <span class="math notranslate nohighlight">\(Q\)</span> by basic Gaussian elimination.
+\[Q(2h) \approx Q_0 + c_p (2h)^p = Q_0 + c_p 2^p h^p,\]</div>
+<p>and with only <span class="math notranslate nohighlight">\(Q_0\)</span> and <span class="math notranslate nohighlight">\(c_p\)</span> unknown, this is two (approximate) linear equations in two unknowns, so we can solve for the desired quantity <span class="math notranslate nohighlight">\(Q_0\)</span> by basic Gaussian elimination.
 This gives</p>
 <div class="math notranslate nohighlight">
-\[Q \approx \frac{2^p \phi(h) - \phi(2h)}{2^p - 1} =: \phi_q(h).\]</div>
+\[Q_0 \approx \frac{2^p Q(h) - Q(2h)}{2^p - 1} =: Q_q(h).\]</div>
 <p>But is this new approximation any better than the original?
-Using the more complete error formula above for <span class="math notranslate nohighlight">\(\phi(h)\)</span> and its version with <span class="math notranslate nohighlight">\(h\)</span> replaced by <span class="math notranslate nohighlight">\(2h\)</span>,</p>
+Using the more complete error formula above for <span class="math notranslate nohighlight">\(Q(h)\)</span> and its version with <span class="math notranslate nohighlight">\(h\)</span> replaced by <span class="math notranslate nohighlight">\(2h\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[\phi(2h) = Q + c_p(2h)^p + O((2h)^q), = Q + 2^p c_p h^p + O(h^q),\]</div>
+\[Q(2h) = Q_0 + c_p(2h)^p + O((2h)^q), = Q_0 + 2^p c_p h^p + O(h^q),\]</div>
 <p>one gets</p>
 <div class="math notranslate nohighlight">
-\[\phi_q(h) = \frac{2^p \phi(h) - \phi(2h)}{2^p - 1} = Q + O(h^q),\]</div>
-<p>so indeed an improvement.</p>
+\[Q_q(h) = \frac{2^p \phi(h) - \phi(2h)}{2^p - 1} = Q_0 + O(h^q),\]</div>
+<p>so indeed an improvement, since <span class="math notranslate nohighlight">\(q&gt;p\)</span>.</p>
 <div class="section" id="example">
 <h3><span class="section-number">16.2.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>For the basic forward difference approximation above, this process give a three-point method of second order accuracy (<span class="math notranslate nohighlight">\(q=2\)</span>):</p>
@@ -681,7 +686,8 @@ Using the more complete error formula above for <span class="math notranslate no
 </div>
 <div class="section" id="exercise-1-a">
 <h3><span class="section-number">16.2.2. </span>Exercise 1(a)<a class="headerlink" href="#exercise-1-a" title="Permalink to this headline">¶</a></h3>
-<p>Apply Richardson extrapolation to the standard three-point, second order accurate approximation <span class="math notranslate nohighlight">\(\delta_h^2 f(x)\)</span> of the second derivative <span class="math notranslate nohighlight">\(D^2f(x)\)</span> as given above, and verify that it gives a fourth-order accurate five-point approximation formula.</p>
+<p>Apply Richardson extrapolation to the standard three-point, second order accurate approximation
+<span class="math notranslate nohighlight">\(Q(h) := \delta_h^2 f(x)\)</span> of the second derivative <span class="math notranslate nohighlight">\(Q_0 := D^2f(x)\)</span> as given above, and verify that it gives a fourth-order accurate five-point approximation formula.</p>
 </div>
 <div class="section" id="exercise-1-b">
 <h3><span class="section-number">16.2.3. </span>Exercise 1(b)<a class="headerlink" href="#exercise-1-b" title="Permalink to this headline">¶</a></h3>
@@ -697,17 +703,22 @@ Using the more complete error formula above for <span class="math notranslate no
 </div>
 <div class="section" id="a-variant-more-useful-for-integration-and-ode-boundary-value-problems-parameter-n">
 <h2><span class="section-number">16.3. </span>A variant, more useful for integration and ODE boundary value problems: parameter <span class="math notranslate nohighlight">\(n\)</span><a class="headerlink" href="#a-variant-more-useful-for-integration-and-ode-boundary-value-problems-parameter-n" title="Permalink to this headline">¶</a></h2>
-<p>A slight variant of the above is approximation with an integer parameter <span class="math notranslate nohighlight">\(n\)</span>, such as approximations of integrals by the (composite) trapezoid rule with <span class="math notranslate nohighlight">\(n\)</span> intervals, <span class="math notranslate nohighlight">\(T_n\)</span>, or the approximate solution of an ordinary differential equation at the above-described collection of <span class="math notranslate nohighlight">\(n+1\)</span> equally spaced values in domain <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
-<p>Then errors of the form <span class="math notranslate nohighlight">\(c_p h^p + O(h^q)\)</span> become</p>
+<p>A slight variant of the above is approximation with an integer parameter <span class="math notranslate nohighlight">\(n\)</span>, such as approximations of integrals by the (composite) trapezoid rule with <span class="math notranslate nohighlight">\(n\)</span> intervals, <span class="math notranslate nohighlight">\(T_n\)</span>, or the approximate solution of an ordinary differential equation at the above-described collection of <span class="math notranslate nohighlight">\(n+1\)</span> equally spaced values in domain <span class="math notranslate nohighlight">\([a,b]\)</span>.
+Then a more natural ntito of teh approxatio formula is <span class="math notranslate nohighlight">\(Q_n\)</span> instead of <span class="math notranslate nohighlight">\(Q(h)\)</span>.</p>
+<p>The errors of the form <span class="math notranslate nohighlight">\(c_p h^p + O(h^q)\)</span> become</p>
 <div class="math notranslate nohighlight">
-\[\phi_n = Q + O\left(\frac{1}{n^p}\right) = Q + \frac{c_p}{n^p} + O\left(\frac{1}{n^q}\right).\]</div>
+\[Q_n = Q_0 + O\left(\frac{1}{n^p}\right) = Q_0 + \frac{c_p}{n^p} + O\left(\frac{1}{n^q}\right).\]</div>
 <p>The main difference is that to work with integer values of <span class="math notranslate nohighlight">\(n\)</span>, it must be the quantity that is doubled, whereas doubling of <span class="math notranslate nohighlight">\(h\)</span> would correspond to halving of <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p>The extrapolation formula becomes</p>
 <div class="math notranslate nohighlight">
-\[Q = \frac{2^p \phi_{2n} - \phi_n}{2^p - 1} + O\left(\frac{1}{n^q}\right).\]</div>
+\[
+Q_0 = \frac{2^p Q_{2n} - Q_n}{2^p - 1} + O\left(\frac{1}{n^q}\right).
+\]</div>
 <p><strong>Aside:</strong> For the slightly more general case of increasing from <span class="math notranslate nohighlight">\(n\)</span> to <span class="math notranslate nohighlight">\(k n\)</span>, one gets</p>
 <div class="math notranslate nohighlight">
-\[Q = \frac{k^p \phi_{k n} - \phi_n}{k^p - 1} + O\left(\frac{1}{n^q}\right).\]</div>
+\[
+Q_0 = \frac{k^p Q_{k n} - Q_n}{k^p - 1} + O\left(\frac{1}{n^q}\right).
+\]</div>
 <div class="section" id="a-common-verbal-description-for-both-forms">
 <h3><span class="section-number">16.3.1. </span>A common verbal description for both forms<a class="headerlink" href="#a-common-verbal-description-for-both-forms" title="Permalink to this headline">¶</a></h3>
 <p>This can be summarized with the same verbal form as the original formula:</p>
@@ -716,8 +727,24 @@ Using the more complete error formula above for <span class="math notranslate no
 <li><p>minus the less accurate approximation,</p></li>
 <li><p>all divided by <span class="math notranslate nohighlight">\((2^p - 1)\)</span>”</p></li>
 </ul>
-<p>and</p>
-<p>“The error in the more accurate approximation is approximated by the difference between the two approximations, divided by <span class="math notranslate nohighlight">\((2^p - 1)\)</span>”.</p>
+<p>Also</p>
+<p>“The error in the more accurate approximation is approximated by the difference between the two approximations, divided by <span class="math notranslate nohighlight">\((2^p - 1)\)</span>”;</p>
+<p>the extrapolation can be broken into two steps</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+E_{2n} &amp;:= Q_0 = \frac{Q_{2n} - Q_n}{2^p - 1},
+\\
+Q_0 &amp;= Q_{2n} + E_n + O\left(\frac{1}{n^q}\right).
+\end{split}
+\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(E_{2n}\)</span> estimate the error in E_{2n}, and the improved approxmation is expressed as <span class="math notranslate nohighlight">\(Q_{2n} + E_{2n}\)</span>.</p>
+<p>Note the analogy to Newton’s method for solving <span class="math notranslate nohighlight">\(f(x)=0\)</span>, which can be broken into the two steps</p>
+<ul class="simple">
+<li><p>estimate the error in approximate root <span class="math notranslate nohighlight">\(x_n\)</span> as <span class="math notranslate nohighlight">\(E_n := -f(x_n)/f'(x_n)\)</span></p></li>
+<li><p>update the approximation to <span class="math notranslate nohighlight">\(x_{n+1} = x_n + E_n\)</span>.</p></li>
+</ul>
+<p>This strategy of using error estimates to iteratively improve approximations will be use often!</p>
 <p>Finally, note that this is always <em>extrapolation</em>, in the sense of “going beyond”: the new approximation is on the opposite side of the better of the original approximations from the less accurate of them.</p>
 </div>
 </div>

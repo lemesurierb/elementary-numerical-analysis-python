@@ -676,8 +676,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#python-note-5-operations-on-a-sequence-of-array-indices-with-slicing">
-     8.7.1. Python Note 5. Operations on a sequence of array indices, with “slicing”
+    <a class="reference internal nav-link" href="#python-note-5-operations-on-a-sequence-of-array-indices-with-slicing-vectorization">
+     8.7.1. Python Note 5. Operations on a sequence of array indices, with “slicing”: vectorization
     </a>
    </li>
   </ul>
@@ -782,6 +782,10 @@
                 
   <div class="section" id="solving-simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination">
 <h1><span class="section-number">8. </span>Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination<a class="headerlink" href="#solving-simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last Revised on March 18, 2021,</strong>
+adding further uses of Python slicing and “vectorization” in function <code class="docutils literal notranslate"><span class="pre">rowReduction</span></code>,
+eliminating function <code class="docutils literal notranslate"><span class="pre">zeros_below_diagonal</span></code> in favor of always doing this in function <code class="docutils literal notranslate"><span class="pre">row_reduce</span></code>.
+and fixing a few typos.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 2.1.1 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -797,7 +801,7 @@ with matrix-vector form <span class="math notranslate nohighlight">\(A x = b\)</
 Also, good robust software for this general case is readily available, for example in the Python packages NumPy and SciPy, or in Matlab.</p>
 <p>Nevertheless, this basic algorithm can be very slow when <span class="math notranslate nohighlight">\(n\)</span> is large – as it often is when dealing with differential equations (even more so with <em>partial</em> differential equations).
 We will see that it requires about <span class="math notranslate nohighlight">\(n^3/3\)</span> arithmetic operations.</p>
-<p>Thus I will summarise the basic method of row reduction or Gaussian elimination, and then build on it with methods for doing things more robustly, and on methods for doing it faster in some important special cases:</p>
+<p>Thus I will summarise the basic method of row reduction or Gaussian elimination, and then build on it with methods for doing things more robustly, and then with methods for doing it faster in some important special cases:</p>
 <ol class="simple">
 <li><p>When one has to solve many systems <span class="math notranslate nohighlight">\(A x^{(m)} = b^{(m)}\)</span> with the same matrix <span class="math notranslate nohighlight">\(A\)</span> but different right-hand side vectors <span class="math notranslate nohighlight">\(b^{(m)}.\)</span></p></li>
 <li><p>When <span class="math notranslate nohighlight">\(A\)</span> is <em>banded</em>: most elements are zero, and all the non-zero elements <span class="math notranslate nohighlight">\(a_{i,j}\)</span> are near the main diagonal: <span class="math notranslate nohighlight">\(|i - j|\)</span> is far less than <span class="math notranslate nohighlight">\(n\)</span>. (<em>Aside on notation:</em> “far less than” is sometimes denoted <span class="math notranslate nohighlight">\(\ll\)</span>, as in <span class="math notranslate nohighlight">\(|i-j| \ll n\)</span>.)</p></li>
@@ -816,7 +820,8 @@ but there are important situations where this property is automatically guarante
 <p>Just as package <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is used so often that there is a conventional nickname <code class="docutils literal notranslate"><span class="pre">np</span></code>, so <code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code> is usually nicknamed <code class="docutils literal notranslate"><span class="pre">la</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
 
 <span class="c1"># As in recent sections, we import some items from modules individually, so they can be used by &quot;first name only&quot;.</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">zeros_like</span><span class="p">,</span> <span class="n">empty</span>
@@ -844,7 +849,7 @@ The pattern we will see here, and often later, is:</p>
 <ol class="simple">
 <li><p>Identify cases that can lead to failure due to division by zero and such, and revise to avoid them.</p></li>
 <li><p>Avoid inaccuracy due to problems like severe rounding error. One rule of thumb is that anywhere that a zero value is a fatal flaw (in particular, division by zero), a very small value is also a hazard when rounding error is present.
-So <strong>avoid very small denominators</strong>. (We will soon examine this through the phenomenon of <strong>loss of significance</strong> and it extreme case <strong>catastrophic cancellation</strong>.)</p></li>
+So <strong>avoid very small denominators</strong>. (We will soon examine this through the phenomenon of <strong>loss of significance</strong>, and its extreme case <strong>catastrophic cancellation</strong>.)</p></li>
 </ol>
 </div>
 <div class="section" id="step-3-refine-to-get-a-more-efficient-algorithm">
@@ -888,7 +893,7 @@ The simplest “naive” choice, which works in most but not all cases, is to el
 </div>
 <div class="section" id="python-note-2-using-numpy-for-matrices-vectors-and-their-products-in-python-3-5-and-beyond">
 <h3><span class="section-number">8.3.2. </span>Python Note 2. Using Numpy for matrices, vectors and their products in Python 3.5 and beyond<a class="headerlink" href="#python-note-2-using-numpy-for-matrices-vectors-and-their-products-in-python-3-5-and-beyond" title="Permalink to this headline">¶</a></h3>
-<p>As of Python 3.5, vectors, matrices, and their products can be handled very elegantly using Numpy arrays, with the one quirk that the product is denoted by the at-sign <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>.
+<p>As of version 3.5 of Python, vectors, matrices, and their products can be handled very elegantly using Numpy arrays, with the one quirk that the product is denoted by the at-sign <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>.
 That is, for a matrix <span class="math notranslate nohighlight">\(A\)</span> and compatible matrix or vector <span class="math notranslate nohighlight">\(b\)</span> both stored in Numpy arrays, their product is given by <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">b</span></code>.</p>
 <p>This means that, along with my encouragement to totally ignore <em>Python</em> arrays in favor of <em>Numpy</em> arrays, and to usually avoid Python <em>lists</em> when working with numerical data, I also recommend that you ignore the now obsolescent Numpy <code class="docutils literal notranslate"><span class="pre">matrix</span></code> data type, if you happen to come across it in older material on Numpy.</p>
 <p><strong>Aside:</strong> Why not <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">b</span></code>? Because that is the more general “point-wise” array product:
@@ -927,9 +932,9 @@ b = [2. 3. 4.]
 <div class="section" id="python-note-3">
 <h3><span class="section-number">8.4.1. </span>Python Note 3.<a class="headerlink" href="#python-note-3" title="Permalink to this headline">¶</a></h3>
 <p>It is important to specify that the entries are real numbers (type “float”);
-otherwise Numpy does integer arithmetic.
-One way to do this is as above: putting a decmmal pont in the numbers.
-Another is to tell the function <code class="docutils literal notranslate"><span class="pre">array</span></code> that th type is float:</p>
+otherwise Numpy does integer arithmetic.</p>
+<p>One way to do this is as above: putting a decimal point in the numbers (or to be lazy, in at least one of them!)</p>
+<p>Another is to tell the function <code class="docutils literal notranslate"><span class="pre">array</span></code> that the type is float:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -944,9 +949,9 @@ Another is to tell the function <code class="docutils literal notranslate"><span
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;numpy.linalg.solve says that the solution of Ax = b is&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="c1"># Check the backward error, also known as the residual</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">As a check, the residual (or backward error) is&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    r = Ax - b = </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    r = b-Ax = </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;and its infinity (or &#39;maximum&#39;) norm is ||r|| = </span><span class="si">{</span><span class="n">la</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Aside: another way to compute this is with max(abs(r)):&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;||r|| = </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -959,7 +964,7 @@ Another is to tell the function <code class="docutils literal notranslate"><span
 x = [ 1.81168831 -1.03246753 -0.45454545]
 
 As a check, the residual (or backward error) is
-    r = Ax - b = [ 0.0000000e+00  4.4408921e-16 -8.8817842e-16],
+    r = b-Ax = [ 0.0000000e+00 -4.4408921e-16  8.8817842e-16],
 and its infinity (or &#39;maximum&#39;) norm is ||r|| = 8.881784197001252e-16
 
 Aside: another way to compute this is with max(abs(r)):
@@ -974,7 +979,8 @@ and its 1-norm is ||r|| = 1.3322676295501878e-15
 <div class="section" id="the-naive-gaussian-elimination-algorithm-in-pseudo-code">
 <h2><span class="section-number">8.5. </span>The naive Gaussian elimination algorithm, in pseudo-code<a class="headerlink" href="#the-naive-gaussian-elimination-algorithm-in-pseudo-code" title="Permalink to this headline">¶</a></h2>
 <p>Here the elements of the transformed matrix and vector after step <span class="math notranslate nohighlight">\(k\)</span> are named <span class="math notranslate nohighlight">\(a_{i,j}^{(k)}\)</span> and <span class="math notranslate nohighlight">\(b_{k}^{(k)}\)</span>, so that the original values are <span class="math notranslate nohighlight">\(a_{i,j}^{(0)} = a_{i,j}\)</span> and <span class="math notranslate nohighlight">\(b_{i}^{(0)} = b_{i}\)</span>.</p>
-<p>The name <span class="math notranslate nohighlight">\(l_{i,k}\)</span> is given to the multiple of row <span class="math notranslate nohighlight">\(k\)</span> that is subtracted from row <span class="math notranslate nohighlight">\(i\)</span> at step <span class="math notranslate nohighlight">\(k\)</span>. This naming might seem redundant, but it becomes very useful later.</p>
+<p>The name <span class="math notranslate nohighlight">\(l_{i,k}\)</span> is given to the multiple of row <span class="math notranslate nohighlight">\(k\)</span> that is subtracted from row <span class="math notranslate nohighlight">\(i\)</span> at step <span class="math notranslate nohighlight">\(k\)</span>. This naming might seem redundant, but it becomes very useful later,
+in the section on <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization.html"><span class="doc std std-doc">LU factorization</span></a>.</p>
 <p>for k from 1 to n-1: <span class="math notranslate nohighlight">\(\qquad\)</span> <em>Step k: get zeros in column k below row k:</em>
 <br>
 <span class="math notranslate nohighlight">\(\quad\)</span> for i from k+1 to n:
@@ -1026,7 +1032,7 @@ Thus from now on we use only the latter: except when, for demonstration purposes
 <br><span class="math notranslate nohighlight">\(\quad\)</span> end for</p>
 <div class="section" id="python-note-4-syntax-for-for-loops-and-0-based-array-indexing">
 <h3><span class="section-number">8.5.1. </span>Python Note 4. Syntax for <code class="docutils literal notranslate"><span class="pre">for</span></code> loops and 0-based array indexing<a class="headerlink" href="#python-note-4-syntax-for-for-loops-and-0-based-array-indexing" title="Permalink to this headline">¶</a></h3>
-<p>Since array indices in Python (and in Java, C and C++, Swift, etc.) start from zero, not from one, it will be convenient to express linear algebra algorithms in a form compatible with this.</p>
+<p>Since array indices in Python (and in Java, C, C++, C#, Swift, etc.) start from zero, not from one, it will be convenient to express linear algebra algorithms in a form compatible with this.</p>
 <ul class="simple">
 <li><p>Every index is one less than in the above!
 Thus in an array with <span class="math notranslate nohighlight">\(n\)</span> elements, the index values <span class="math notranslate nohighlight">\(i\)</span> are <span class="math notranslate nohighlight">\(0 \leq i &lt; n\)</span>, <strong>excluding n</strong>, which is the half-open interval of integers <span class="math notranslate nohighlight">\([0, n)\)</span>.</p></li>
@@ -1104,8 +1110,6 @@ we overwite each in the same array.</p></li>
 <span class="sd">    they are copied to new arrays, with the method .copy()</span>
 <span class="sd">    Warning: it does not work to say &quot;U = A&quot; and &quot;c = b&quot;;</span>
 <span class="sd">    this makes these names synonyms, referring to the same stored data.</span>
-<span class="sd">    This code leaves &quot;garbage values&quot; below the main diagonal;</span>
-<span class="sd">    if needed, clean up with the function zeros_below_diagonal.</span>
 <span class="sd">    &quot;&quot;&quot;</span>    
     <span class="n">U</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1119,6 +1123,12 @@ we overwite each in the same array.</p></li>
             <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># Beware the case where U[k,k] is 0</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
                 <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+
+            <span class="c1"># Put in the zeros below the main diagonal in column k of U;</span>
+            <span class="c1"># this is not important for calculations, since those elements of U are not used in backward substitution,</span>
+            <span class="c1"># but it helps for displaying results and for checking the results via residuals.</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+
             <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 </pre></div>
@@ -1143,7 +1153,7 @@ we overwite each in the same array.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">rowReduce</span>
-<span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">zeros_below_diagonal</span>
+<span class="c1">#from numerical_methods_module import zeros_below_diagonal</span>
 </pre></div>
 </div>
 </div>
@@ -1151,7 +1161,7 @@ we overwite each in the same array.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U =</span><span class="se">\n</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c = </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1160,8 +1170,8 @@ we overwite each in the same array.</p></li>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U =
 [[  4.     2.     7.  ]
- [  0.     3.5  -11.25]
- [  0.     0.   -11.  ]]
+ [  3.     3.5  -11.25]
+ [  1.    -3.5  -11.  ]]
 c = [2.  1.5 5. ]
 </pre></div>
 </div>
@@ -1171,24 +1181,25 @@ c = [2.  1.5 5. ]
 of <span class="math notranslate nohighlight">\(Ax=b\)</span>; this should also solve <span class="math notranslate nohighlight">\(Ux=c\)</span>, so chej the backward error, a.k.a. the <em>residual</em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">c</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The residual (backward error) Ux - c is </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, with maximum norm </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="n">U</span><span class="nd">@x</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The residual (backward error) c-Ux is </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, with maximum norm </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The residual (backward error) Ux - c is [0. 0. 0.], with maximum norm 0.0.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The residual (backward error) c-Ux is [ 0.         -5.43506494 -5.42532468], with maximum norm 5.4350649350649345.
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="python-note-5-operations-on-a-sequence-of-array-indices-with-slicing">
-<h3><span class="section-number">8.7.1. </span>Python Note 5. Operations on a sequence of array indices, with “slicing”<a class="headerlink" href="#python-note-5-operations-on-a-sequence-of-array-indices-with-slicing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="python-note-5-operations-on-a-sequence-of-array-indices-with-slicing-vectorization">
+<h3><span class="section-number">8.7.1. </span>Python Note 5. Operations on a sequence of array indices, with “slicing”: vectorization<a class="headerlink" href="#python-note-5-operations-on-a-sequence-of-array-indices-with-slicing-vectorization" title="Permalink to this headline">¶</a></h3>
 <p>Python code can specify vector operations on a range of indices <span class="math notranslate nohighlight">\([c,d)\)</span>, referred to withthe slice notaiton <code class="docutils literal notranslate"><span class="pre">c:d</span></code>.
 For example, the <em>slice</em> notation <code class="docutils literal notranslate"><span class="pre">A[c:d,j]</span></code> refers to the array containing the <span class="math notranslate nohighlight">\(d-c\)</span> elements <code class="docutils literal notranslate"><span class="pre">A[i,j]</span></code> for <span class="math notranslate nohighlight">\(i\)</span> in the semi-open interval <span class="math notranslate nohighlight">\([c,d)\)</span>.</p>
-<p>Thus, each of the three arithmetic calculations above can be specified over a range of index values in a single command, eliminating all the inner-most <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.
-Only <code class="docutils literal notranslate"><span class="pre">for</span></code> loops that contains other <code class="docutils literal notranslate"><span class="pre">for</span></code> loops remain.
-Apart from mathematical elegance, this usually allows far faster execution.</p>
+<p>Thus, each of the three arithmetic calculations above can be specified over a range of index values in a single command, eliminating all the inner-most <code class="docutils literal notranslate"><span class="pre">for</span></code> loops;
+this is somtimes called <em>vectorization</em>.
+Only <code class="docutils literal notranslate"><span class="pre">for</span></code> loops that contains other <code class="docutils literal notranslate"><span class="pre">for</span></code> loops remain.</p>
+<p>Apart from mathematical elegance, this usually allows far faster execution.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for k in range(n-1):
     L[k+1:n,k] = U[k+1:n,k] / U[k,k]  # compute all the L values for column k
     for i in range(k+1, n):
@@ -1204,8 +1215,6 @@ Apart from mathematical elegance, this usually allows far faster execution.</p>
 <span class="sd">    they are copied to new arrays, with the method .copy()</span>
 <span class="sd">    Warning: it does not work to say &quot;U = A&quot; and &quot;c = b&quot;;</span>
 <span class="sd">    this makes these names synonyms, referring to the same stored data.</span>
-<span class="sd">    This code leaves &quot;garbage values&quot; below the main diagonal;</span>
-<span class="sd">    if needed, clean up with the function zeros_below_diagonal.</span>
 <span class="sd">    &quot;&quot;&quot;</span>    
     <span class="n">U</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1218,6 +1227,12 @@ Apart from mathematical elegance, this usually allows far faster execution.</p>
         <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># Beware the case where U[k,k] is 0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
             <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>  <span class="c1"># Update row i</span>
+       
+            <span class="c1"># Insert the below-diagonal zeros in column k;</span>
+            <span class="c1"># this is not important for calculations, since those elements of U are not used in backward substitution,</span>
+            <span class="c1"># but it helps for displaying results and for checking the results via residuals.</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
         <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># update c values</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 </pre></div>
@@ -1227,13 +1242,101 @@ Apart from mathematical elegance, this usually allows far faster execution.</p>
 <p><strong>UPDATE:</strong> this was further updated on March 7 as follows, mainly to add <code class="docutils literal notranslate"><span class="pre">demoMode</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rowReduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;To avoid modifying the matrix and vector specified as input,</span>
+<span class="sd">    they are copied to new arrays, with the method .copy()</span>
+<span class="sd">    Warning: it does not work to say &quot;U = A&quot; and &quot;c = b&quot;;</span>
+<span class="sd">    this makes these names synonyms, referring to the same stored data.</span>
+<span class="sd">    </span>
+<span class="sd">    2021-03-07: added a demonstration mode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">U</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1"># The function zeros_like() is used to create L with the same size and shape as A,</span>
+    <span class="c1"># and with all its elements zero initially.</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">k</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># compute all the L values for column k:</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># Beware the case where U[k,k] is 0</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The multipliers in column </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> are </span><span class="si">{</span><span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>  <span class="c1"># Update row i</span>
+      
+            <span class="c1"># Insert the below-diagonal zeros in column k;</span>
+            <span class="c1"># this is not important for calculations, since those elements of U are not used in backward substitution,</span>
+            <span class="c1"># but it helps for displaying results and for checking the results via residuals.</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># update c values</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+            <span class="c1"># insert zeros in U:</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The updated matrix is</span><span class="se">\n</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The updated right-hand side is</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>UPDATE:</strong> this was updated yet again on March 17, with further vectorization, eliminating the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rowReduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;To avoid modifying the matrix and vector specified as input,</span>
+<span class="sd">    they are copied to new arrays, with the method .copy()</span>
+<span class="sd">    Warning: it does not work to say &quot;U = A&quot; and &quot;c = b&quot;;</span>
+<span class="sd">    this makes these names synonyms, referring to the same stored data.</span>
+<span class="sd">    </span>
+<span class="sd">    2021-03-07: added a demonstration mode.</span>
+<span class="sd">    2021-03-17: added further &quot;vectorization&quot;, eliminating the loop over i</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">U</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1"># The function zeros_like() is used to create L with the same size and shape as A,</span>
+    <span class="c1"># and with all its elements zero initially.</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">k</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># compute all the L values for column k:</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># Beware the case where U[k,k] is 0</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The multipliers in column </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> are </span><span class="si">{</span><span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># In the following, the index &quot;k:k+1&quot; refers to the single value k,</span>
+        <span class="c1"># but is needed to make it clear that</span>
+        <span class="c1">#    - L[k+1:n,k:k+1] is a matrix with one column (not a vector), and</span>
+        <span class="c1">#    -  U[k:k+1,k+1:n] is a matrix with one row (not a vector),</span>
+        <span class="c1"># to get the appropriate matrix multiplicaton</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="c1"># Insert the below-diagonal zeros in column k;</span>
+        <span class="c1"># this is not important for calculations, since those elements of U are not used in backward substitution,</span>
+        <span class="c1"># but it helps for displaying results and for checking the results via residuals.</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        
+        <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># update c values</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span> <span class="c1"># insert zeros in couln k of U:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The updated matrix is</span><span class="se">\n</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The updated right-hand side is</span><span class="se">\n</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zeros_below_diagonal</span><span class="p">(</span><span class="n">U</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Insert the below-diagonal zero values into U, ignored in the function rowReduce.</span>
 <span class="sd">    These are needed to display U correctly,</span>
-<span class="sd">    and to demonstrate that the new system of equations Ux=c$ has the same solution as Ax=b.</span>
+<span class="sd">    and to demonstrate that the new system of equations Ux=c has the same solution as Ax=b.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">)):</span>
-        <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
 </pre></div>
 </div>
 </div>
@@ -1241,23 +1344,39 @@ Apart from mathematical elegance, this usually allows far faster execution.</p>
 <p>Repeating the above testing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">c</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="n">U</span><span class="nd">@x</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U =</span><span class="se">\n</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c = </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The residual (backward error) Ux - c is </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, with maximum norm </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The residual (backward error) c - Ux is </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, with maximum norm </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U =
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step k=0
+The multipliers in column 1 are [0.75 0.25]
+The updated matrix is
+[[  4.     2.     7.  ]
+ [  0.     3.5  -11.25]
+ [  0.    -3.5    0.25]]
+The updated right-hand side is
+[2.  1.5 3.5]
+Step k=1
+The multipliers in column 2 are [-1.]
+The updated matrix is
+[[  4.     2.     7.  ]
+ [  0.     3.5  -11.25]
+ [  0.     0.   -11.  ]]
+The updated right-hand side is
+[2.  1.5 5. ]
+U =
 [[  4.     2.     7.  ]
  [  0.     3.5  -11.25]
  [  0.     0.   -11.  ]]
 c = [2.  1.5 5. ]
 
-The residual (backward error) Ux - c is [0. 0. 0.], with maximum norm 0.0.
+The residual (backward error) c - Ux is [0. 0. 0.], with maximum norm 0.0.
 </pre></div>
 </div>
 </div>
@@ -1386,8 +1505,8 @@ for i in range(2, n+1):
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The residual Ax - b = </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span><span class="nd">@x</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The residual b - Ax = </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with maximum norm </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1395,7 +1514,7 @@ for i in range(2, n+1):
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = [ 1.81168831 -1.03246753 -0.45454545]
 
-The residual Ax - b = [ 0.0000000e+00  4.4408921e-16 -8.8817842e-16],
+The residual b - Ax = [ 0.0000000e+00 -4.4408921e-16  8.8817842e-16],
 with maximum norm 8.88e-16.
 </pre></div>
 </div>
@@ -1422,12 +1541,12 @@ another is to use random numbers to avoid accidently using a test case that in u
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_random</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>  <span class="c1"># An array the same length as b, with no values specified yet</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
     <span class="n">x_random</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># gives random real value, from uniform distribution in [-1, 1]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_random = </span><span class="si">{</span><span class="n">x_random</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_random = </span><span class="si">{</span><span class="n">x_random</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_random = [-0.89138243  0.94379329  0.63207516]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_random = [-0.12411689 -0.15377245  0.42636405]
 </pre></div>
 </div>
 </div>
@@ -1442,18 +1561,18 @@ another is to use random numbers to avoid accidently using a test case that in u
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A =</span><span class="se">\n</span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">b_random = </span><span class="si">{</span><span class="n">b_random</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b_random = </span><span class="si">{</span><span class="n">b_random</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c_random</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b_random</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">U=</span><span class="se">\n</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Residual U@x_random - c_random = </span><span class="si">{</span><span class="n">U</span><span class="nd">@x_random</span> <span class="o">-</span> <span class="n">c_random</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">U=</span><span class="se">\n</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Residual c_random - U@x_random = </span><span class="si">{</span><span class="n">c_random</span> <span class="o">-</span> <span class="n">U</span><span class="nd">@x_random</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">x_computed</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c_random</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">x_computed = </span><span class="si">{</span><span class="n">x_computed</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Residual A@x_computed - b_random = </span><span class="si">{</span><span class="n">A</span><span class="nd">@x_computed</span> <span class="o">-</span> <span class="n">b_random</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Backward error |A@x_computed - b_random| = </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="nd">@x_computed</span> <span class="o">-</span> <span class="n">b_random</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Error x_random - x_computed = </span><span class="si">{</span><span class="n">x_random</span> <span class="o">-</span> <span class="n">x_computed</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Absolute error |x_random - x_computed| = </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_random</span> <span class="o">-</span> <span class="n">x_computed</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">x_computed = </span><span class="si">{</span><span class="n">x_computed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Residual b_random - A@x_computed = </span><span class="si">{</span><span class="n">b_random</span> <span class="o">-</span> <span class="n">A</span><span class="nd">@x_computed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Backward error |b_random - A@x_computed| = </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">b_random</span> <span class="o">-</span> <span class="n">A</span><span class="nd">@x_computed</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Error x_random - x_computed = </span><span class="si">{</span><span class="n">x_random</span> <span class="o">-</span> <span class="n">x_computed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Absolute error |x_random - x_computed| = </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_random</span> <span class="o">-</span> <span class="n">x_computed</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1463,24 +1582,24 @@ another is to use random numbers to avoid accidently using a test case that in u
  [ 3.  5. -6.]
  [ 1. -3.  2.]]
 
-b_random = [ 2.746583   -1.7476318  -2.45861199]
+b_random = [ 2.18053587 -3.69939722  1.18992855]
 
 U=
 [[  4.     2.     7.  ]
  [  0.     3.5  -11.25]
  [  0.     0.   -11.  ]]
 
-Residual U@x_random - c_random = [0.0000000e+00 4.4408921e-16 0.0000000e+00]
+Residual c_random - U@x_random = [0. 0. 0.]
 
-x_computed = [-0.89138243  0.94379329  0.63207516]
+x_computed = [-0.12411689 -0.15377245  0.42636405]
 
-Residual A@x_computed - b_random = [ 0.0000000e+00 -8.8817842e-16  4.4408921e-16]
+Residual b_random - A@x_computed = [0. 0. 0.]
 
-Backward error |A@x_computed - b_random| = 8.881784197001252e-16
+Backward error |b_random - A@x_computed| = 0.0
 
-Error x_random - x_computed = [0.00000000e+00 1.11022302e-16 0.00000000e+00]
+Error x_random - x_computed = [0. 0. 0.]
 
-Absolute error |x_random - x_computed| = 1.1102230246251565e-16
+Absolute error |x_random - x_computed| = 0.0
 </pre></div>
 </div>
 </div>
@@ -1510,28 +1629,28 @@ However when put into matrix form</p>
 <p>the above algorithm fails, because the fist <em>pivot element</em> <span class="math notranslate nohighlight">\(a_{11}\)</span> is zero:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-<span class="n">b2</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
-<span class="p">(</span><span class="n">U2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U2 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;c2 = </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x2 = </span><span class="si">{</span><span class="n">x2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="p">(</span><span class="n">U1</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U1 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c1 = </span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U1</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x1 = </span><span class="si">{</span><span class="n">x1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U2 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U1 = 
 [[  0.   1.]
  [  0. -inf]]
-c2 = [  1. -inf]
-x2 = [nan nan]
+c1 = [  1. -inf]
+x1 = [nan nan]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-10-5ec9fc6ceb05&gt;:17: RuntimeWarning: divide by zero encountered in true_divide
-  L[k+1:n,k] = U[k+1:n,k] / U[k,k]  # Beware the case where U[k,k] is 0
-/Users/lemesurierb/OneDrive - College of Charleston/UNCo-MATH375/elementary-numerical-analysis-python/python-notebooks-modules/numerical_methods_module.py:327: RuntimeWarning: invalid value encountered in double_scalars
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-12-a7d463b36315&gt;:20: RuntimeWarning: divide by zero encountered in true_divide
+  L[k+1:,k] = U[k+1:n,k] / U[k,k]  # Beware the case where U[k,k] is 0
+/Users/lemesurierb/OneDrive - College of Charleston/UNCo-MATH375/elementary-numerical-analysis-python/python_notebooks_modules/numerical_methods_module.py:388: RuntimeWarning: invalid value encountered in double_scalars
   x[-1] = c[-1]/U[-1,-1]
 </pre></div>
 </div>
@@ -1539,10 +1658,10 @@ x2 = [nan nan]
 </div>
 <p><strong>Python Note 8.</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">inf</span></code>, meaning “infinity”, is a special value given as the result of division by zero.
+<li><p><code class="docutils literal notranslate"><span class="pre">inf</span></code>, meaning “infinity”, is a special value given as the result of operations like division by zero.
 Surprisingly, it can have a sign!
-(This is avaiable in Python from package Numpy as <code class="docutils literal notranslate"><span class="pre">numpy.inf</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nan</span></code>, meaning “Not A Number”, is a special value given as the result of a calculation like <code class="docutils literal notranslate"><span class="pre">0/0</span></code>.
+(This is available in Python from package Numpy as <code class="docutils literal notranslate"><span class="pre">numpy.inf</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nan</span></code>, meaning “not a number”, is a special value given as the result of calculations like <code class="docutils literal notranslate"><span class="pre">0/0</span></code>.
 (This is available in Python from package Numpy as <code class="docutils literal notranslate"><span class="pre">numpy.nan</span></code>)</p></li>
 </ul>
 </div>
@@ -1561,34 +1680,34 @@ Surprisingly, it can have a sign!
 so it is not so obvoius that a divisin be zero probelms will occur, but:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
-<span class="n">b3</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U3</span><span class="p">,</span> <span class="n">c3</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A3</span><span class="p">,</span> <span class="n">b3</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U3 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;c3 = </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U2 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c2 = </span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">x2</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x2 = </span><span class="si">{</span><span class="n">x2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x2 = </span><span class="si">{</span><span class="n">x2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U3 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U2 = 
 [[  1.   1.   1.]
  [  0.   0.   1.]
  [  0.   0. -inf]]
-c3 = [  1. -inf]
-x2 = [nan nan]
+c2 = [  3.   1. -inf]
+x2 = [nan nan nan]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-10-5ec9fc6ceb05&gt;:17: RuntimeWarning: divide by zero encountered in true_divide
-  L[k+1:n,k] = U[k+1:n,k] / U[k,k]  # Beware the case where U[k,k] is 0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-12-a7d463b36315&gt;:20: RuntimeWarning: divide by zero encountered in true_divide
+  L[k+1:,k] = U[k+1:n,k] / U[k,k]  # Beware the case where U[k,k] is 0
 </pre></div>
 </div>
 </div>
@@ -1596,10 +1715,10 @@ x2 = [nan nan]
 <p>What happens here is that the first stage subtracts the first row from each of the others …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">-=</span> <span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
-<span class="n">b3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">b3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">A3</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">-=</span> <span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
-<span class="n">b3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">b3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">-=</span> <span class="n">A2</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="n">b2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">b2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">A2</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">-=</span> <span class="n">A2</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="n">b2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">b2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1607,17 +1726,17 @@ x2 = [nan nan]
 <p>… and the new matrix has the same problem as above at the next stage:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Now A3 is </span><span class="se">\n</span><span class="si">{</span><span class="n">A3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;and b3 is </span><span class="si">{</span><span class="n">b3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Now A2 is </span><span class="se">\n</span><span class="si">{</span><span class="n">A2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;and b2 is </span><span class="si">{</span><span class="n">b2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Now A3 is 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Now A2 is 
 [[1. 1. 1.]
  [0. 0. 1.]
  [0. 1. 1.]]
-and b3 is [3. 1. 2.]
+and b2 is [3. 1. 2.]
 </pre></div>
 </div>
 </div>
@@ -1644,39 +1763,39 @@ and b3 is [3. 1. 2.]
 <p>again have the solution <span class="math notranslate nohighlight">\(x_1 = x_2 = 1\)</span>, and the only division that happens in the above algorithm for row reduction is by that pivot element <span class="math notranslate nohighlight">\(a_{11} = 1, \neq 0\)</span>, so with exact arithmetic, all would be well. But:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1e16</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-<span class="n">b4</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">1e16</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A4 = </span><span class="se">\n</span><span class="si">{</span><span class="n">A4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;b4 = </span><span class="si">{</span><span class="n">b4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1e16</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">1e16</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A3 = </span><span class="se">\n</span><span class="si">{</span><span class="n">A3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b3 = </span><span class="si">{</span><span class="n">b3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A4 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A3 = 
 [[1.e+00 1.e+16]
  [1.e+00 1.e+00]]
-b4 = [1.e+16 2.e+00]
+b3 = [1.e+16 2.e+00]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U4</span><span class="p">,</span> <span class="n">c4</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">b4</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U4 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;c4 = </span><span class="si">{</span><span class="n">c4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">x4</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U4</span><span class="p">,</span> <span class="n">c4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x4 = </span><span class="si">{</span><span class="n">x4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U3</span><span class="p">,</span> <span class="n">c3</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A3</span><span class="p">,</span> <span class="n">b3</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U3)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U3 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c3 = </span><span class="si">{</span><span class="n">c3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U3</span><span class="p">,</span> <span class="n">c3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x3 = </span><span class="si">{</span><span class="n">x3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U4 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U3 = 
 [[ 1.e+00  1.e+16]
  [ 0.e+00 -1.e+16]]
-c4 = [ 1.e+16 -1.e+16]
-x4 = [2. 1.]
+c3 = [ 1.e+16 -1.e+16]
+x3 = [2. 1.]
 </pre></div>
 </div>
 </div>
@@ -1686,39 +1805,39 @@ x4 = [2. 1.]
 <p>On the other hand, all is well with less large values, like <span class="math notranslate nohighlight">\(10^{15}\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A5</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1e15</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-<span class="n">b5</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">1e15</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A5 = </span><span class="se">\n</span><span class="si">{</span><span class="n">A5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;b5 = </span><span class="si">{</span><span class="n">b5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1e15</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">b3a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">1e15</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A3a = </span><span class="se">\n</span><span class="si">{</span><span class="n">A3a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b3a = </span><span class="si">{</span><span class="n">b3a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A5 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A3a = 
 [[1.e+00 1.e+15]
  [1.e+00 1.e+00]]
-b5 = [1.e+15 2.e+00]
+b3a = [1.e+15 2.e+00]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U5</span><span class="p">,</span> <span class="n">c5</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A5</span><span class="p">,</span> <span class="n">b5</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U5 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;c5 = </span><span class="si">{</span><span class="n">c5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">x5</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U5</span><span class="p">,</span> <span class="n">c5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x5 = </span><span class="si">{</span><span class="n">x5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U3a</span><span class="p">,</span> <span class="n">c3a</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A3a</span><span class="p">,</span> <span class="n">b3a</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U3a)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U3a = </span><span class="se">\n</span><span class="si">{</span><span class="n">U3a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c3a = </span><span class="si">{</span><span class="n">c3a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x3a</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U3a</span><span class="p">,</span> <span class="n">c3a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x3a = </span><span class="si">{</span><span class="n">x3a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U5 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U3a = 
 [[ 1.e+00  1.e+15]
  [ 0.e+00 -1.e+15]]
-c5 = [ 1.e+15 -1.e+15]
-x5 = [1. 1.]
+c3a = [ 1.e+15 -1.e+15]
+x3a = [1. 1.]
 </pre></div>
 </div>
 </div>
@@ -1738,39 +1857,39 @@ x5 = [1. 1.]
 <p>Now the problem is more obvious: this system differs from the system in Example 1 just by a tiny change of <span class="math notranslate nohighlight">\(10^{-16}\)</span> in that pivot elements <span class="math notranslate nohighlight">\(a_{11}\)</span>, and the problem is <em>division by a value very close to zero</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A6</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1e-16</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-<span class="n">b6</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">1e-16</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A6 = </span><span class="se">\n</span><span class="si">{</span><span class="n">A6</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;b6 = </span><span class="si">{</span><span class="n">b6</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1e-16</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">b4</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">1e-16</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A4 = </span><span class="se">\n</span><span class="si">{</span><span class="n">A4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b4 = </span><span class="si">{</span><span class="n">b4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A6 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A4 = 
 [[1.e-16 1.e+00]
  [1.e+00 1.e+00]]
-b6 = [1. 2.]
+b4 = [1. 2.]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U6</span><span class="p">,</span> <span class="n">c6</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A6</span><span class="p">,</span> <span class="n">b6</span><span class="p">)</span>
-<span class="n">zeros_below_diagonal</span><span class="p">(</span><span class="n">U6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U6 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U6</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;c6 = </span><span class="si">{</span><span class="n">c6</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">x6</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U6</span><span class="p">,</span> <span class="n">c6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x6 = </span><span class="si">{</span><span class="n">x6</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U4</span><span class="p">,</span> <span class="n">c4</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">b4</span><span class="p">)</span>
+<span class="c1">#zeros_below_diagonal(U4)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U4 = </span><span class="se">\n</span><span class="si">{</span><span class="n">U4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c4 = </span><span class="si">{</span><span class="n">c4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x4</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U4</span><span class="p">,</span> <span class="n">c4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x4 = </span><span class="si">{</span><span class="n">x4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U6 = 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U4 = 
 [[ 1.e-16  1.e+00]
  [ 0.e+00 -1.e+16]]
-c6 = [ 1.e+00 -1.e+16]
-x6 = [2.22044605 1.        ]
+c4 = [ 1.e+00 -1.e+16]
+x4 = [2.22044605 1.        ]
 </pre></div>
 </div>
 </div>
