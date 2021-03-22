@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1. Introduction to Python Preview" href="../python_tutorial/introduction.html" />
-    <link rel="prev" title="2. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods" href="ODE-IVP-2-Runge-Kutta.html" />
+    <link rel="prev" title="1. Introduction to Preliminary Versions" href="../preliminary_versions/introduction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -234,8 +234,13 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta.html">
+   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   22. Some Future Topics
+   23. Some Future Topics
   </a>
  </li>
 </ul>
@@ -327,14 +332,9 @@
    </em>
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta.html">
-   2. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -563,27 +563,27 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#residuals-backward-errors-forward-errors-and-condition-numbers">
-   3.1. Residuals, backward errors, forward errors, and condition numbers
+   2.1. Residuals, backward errors, forward errors, and condition numbers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matrix-norms-induced-by-vector-norms">
-   3.2. Matrix norms induced by vector norms
+   2.2. Matrix norms induced by vector norms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-of-induced-matrix-norms">
-   3.3. Properties of (induced) matrix norms
+   2.3. Properties of (induced) matrix norms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relative-error-bound-and-condition-number">
-   3.4. Relative error bound and condition number
+   2.4. Relative error bound and condition number
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-     3.4.1. Aside: estimating
+     2.4.1. Aside: estimating
      <span class="math notranslate nohighlight">
       \(\|A^{-1}\|_\infty\)
      </span>
@@ -599,7 +599,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#well-conditioned-and-ill-conditioned-problems-and-matrices">
-   3.5. Well-conditioned and ill-conditioned problems and matrices
+   2.5. Well-conditioned and ill-conditioned problems and matrices
   </a>
  </li>
 </ul>
@@ -614,10 +614,10 @@
               <div>
                 
   <div class="section" id="error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version">
-<h1><span class="section-number">3. </span>Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version<a class="headerlink" href="#error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version<a class="headerlink" href="#error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version" title="Permalink to this headline">¶</a></h1>
 <p><strong>Reference:</strong> A bit in Section 8.4 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p>
 <div class="section" id="residuals-backward-errors-forward-errors-and-condition-numbers">
-<h2><span class="section-number">3.1. </span>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
 <p>For an approximation <span class="math notranslate nohighlight">\(x_a\)</span> of the solution <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(A x = b\)</span>, the <em>residual</em> <span class="math notranslate nohighlight">\(r = A x_a - b\)</span> measures error as <em>backward error</em>, often measerd by a single number, the residual norm <span class="math notranslate nohighlight">\(\| A x_a - b \|\)</span>.
 Any norm could be used, but the maximum norm is usualt preferred, for reasons that we will see soon.</p>
 <p>The corresponding (dimensionless) measure of relative error is defined as</p>
@@ -629,7 +629,7 @@ Any norm could be used, but the maximum norm is usualt preferred, for reasons th
 <p>To relate these to the residual, we need the concepts of a <em>matrix norm</em> and the <em>condition number</em> of a matrix.</p>
 </div>
 <div class="section" id="matrix-norms-induced-by-vector-norms">
-<h2><span class="section-number">3.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
 <p>Given any vector norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> — such as the maximum (“infinity”) norm <span class="math notranslate nohighlight">\(\| \cdot \|_\infty\)</span> or the Euclidean norm (length) <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> — the correponding <em>induced matrix norm</em> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -646,7 +646,7 @@ for any <span class="math notranslate nohighlight">\(m\times n\)</span> matrix,<
 This allows us to consider vectors as being just matrices with a single column, which we will often do from now on.</p>
 </div>
 <div class="section" id="properties-of-induced-matrix-norms">
-<h2><span class="section-number">3.3. </span>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
 <p>These induced matrix norms have nmany properties in common with Euclidean length and other vector norms, but there can also be products, and then one has to be careful.</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\|A\| \geq 0\)</span> (positivity)</p></li>
@@ -664,7 +664,7 @@ Indeed one can have <span class="math notranslate nohighlight">\(A B = 0\)</span
 Then the above properties are often then used to <em>define</em> what it is to be a matrix form, much as the the first four define what it is to be a vector norm.</p>
 </div>
 <div class="section" id="relative-error-bound-and-condition-number">
-<h2><span class="section-number">3.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
 <p>It can be proven that, for any choice of norm,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -683,7 +683,7 @@ Form this, an upper bound on the absolute error can be computed if needed.</p>
 <br>
 At the other extreme, the identity matrix <span class="math notranslate nohighlight">\(I\)</span> has norm 1 and condition number 1 (using any norm), and this is the best possible because in general <span class="math notranslate nohighlight">\(\kappa(A) \geq 1\)</span>. (This follows from sub-multiplicativity.)</p>
 <div class="section" id="aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-<h3><span class="section-number">3.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
 <p>In Python, a good approximation of the condition number <span class="math notranslate nohighlight">\(\kappa_\infty(A)\)</span> is given by <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A,</span> <span class="pre">numpy.inf)</span></code>.
 <br>
 As with <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code>, the simple form <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A)</span></code> defaults to using the 2-norm, based on the Euclidian length <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> for vectors.</p>
@@ -700,7 +700,7 @@ Then</p>
 </div>
 </div>
 <div class="section" id="well-conditioned-and-ill-conditioned-problems-and-matrices">
-<h2><span class="section-number">3.5. </span>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.5. </span>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
 <p>Condition numbers, giving upper limit on the ratio of forward error to backward error,
 measure the amplification of errors, and have counterparts in other contexts.
 For example, with an approximation <span class="math notranslate nohighlight">\(r_a\)</span> of a root <span class="math notranslate nohighlight">\(r\)</span> of the equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span>, the ratio of forward error to backward error is bounded by
@@ -745,7 +745,7 @@ An ill-conditioned problem might still be well-posed, but just requiring careful
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ODE-IVP-2-Runge-Kutta.html" title="previous page"><span class="section-number">2. </span>Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</a>
+    <a class='left-prev' id="prev-link" href="../preliminary_versions/introduction.html" title="previous page"><span class="section-number">1. </span>Introduction to <em>Preliminary Versions</em></a>
     <a class='right-next' id="next-link" href="../python_tutorial/introduction.html" title="next page"><span class="section-number">1. </span>Introduction to <em>Python Preview</em></a>
 
     </div>
