@@ -239,8 +239,13 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-comparison-of-methods.html">
+   23. Comparison of Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   23. Some Future Topics
+   24. Some Future Topics
   </a>
  </li>
 </ul>
@@ -845,7 +850,7 @@ the second equation is needed for <span class="math notranslate nohighlight">\(0
 <p>This “two-liner” do not need a pseudo-code description; instead, we can go directly to a rudimentary Python function for Euler’s Method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solve du/dt = f(t, u) for t in [a, b], with initial value u(a) = u_0&quot;&quot;&quot;</span>
     <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Note: &quot;n&quot; counts steps, so there are n+1 values for t.</span>
@@ -879,7 +884,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 <span class="n">u_0</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Typically enough for a nice graph.</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Often enough for a nice graph.</span>
 </pre></div>
 </div>
 </div>
