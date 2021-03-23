@@ -574,8 +574,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#three-examples">
-   21.2. Three Examples
+  <a class="reference internal nav-link" href="#three-examples-plus-one-more">
+   21.2. Three Examples (plus one more)
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -750,9 +750,10 @@ then the input <em>parameters</em> <span class="math notranslate nohighlight">\(
 <p>(It is standard mathematical convention to separate <em>parameters</em> like <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(u_0\)</span> from <em>variables</em> like <span class="math notranslate nohighlight">\(t\)</span> by putting the former after a semicolon.</p>
 </div>
 </div>
-<div class="section" id="three-examples">
-<h2><span class="section-number">21.2. </span>Three Examples<a class="headerlink" href="#three-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="three-examples-plus-one-more">
+<h2><span class="section-number">21.2. </span>Three Examples (plus one more)<a class="headerlink" href="#three-examples-plus-one-more" title="Permalink to this headline">¶</a></h2>
 <p>A lot of useful intuition comes from three simple examples:</p>
+<p><a name="example-1"></a></p>
 <div class="section" id="example-1-integration">
 <h3><span class="section-number">21.2.1. </span>Example 1: Integration<a class="headerlink" href="#example-1-integration" title="Permalink to this headline">¶</a></h3>
 <p>If the derivative depends only on the independent variable <span class="math notranslate nohighlight">\(t\)</span>, so that</p>
@@ -771,6 +772,7 @@ u(t) = u_0 + \int_a^t f(s)\, ds.
 u(t) = \int_a^b f(t)\, dt,
 \]</div>
 <p>and this gives us a back-door way to use numerical methods for solving ODEs to evaluate definite integrals.</p>
+<p><a name="example-2"></a></p>
 </div>
 <div class="section" id="example-2-the-simplest-real-ode">
 <h3><span class="section-number">21.2.2. </span>Example 2: The simplest “real” ODE<a class="headerlink" href="#example-2-the-simplest-real-ode" title="Permalink to this headline">¶</a></h3>
@@ -782,6 +784,7 @@ But it does not hurt to add a constant, so:</p>
 <div class="math notranslate nohighlight">
 \[ u(t) = u_0 e^{kt} \]</div>
 <p>We will see that this simple example contains the essence of ideas relevant far more generally.</p>
+<p><a name="example-3"></a></p>
 </div>
 <div class="section" id="example-3-a-nonlinear-equation-with-failure-of-solutions">
 <h3><span class="section-number">21.2.3. </span>Example 3: A nonlinear equation, with failure of solutions<a class="headerlink" href="#example-3-a-nonlinear-equation-with-failure-of-solutions" title="Permalink to this headline">¶</a></h3>
@@ -801,8 +804,8 @@ The equation</p>
 <div class="section" id="example-4-added-march-22-a-stiff-equation-with-disparate-time-scales">
 <h3><span class="section-number">21.2.4. </span>Example 4 (Added March 22): A “stiff” equation with disparate time scales<a class="headerlink" href="#example-4-added-march-22-a-stiff-equation-with-disparate-time-scales" title="Permalink to this headline">¶</a></h3>
 <p>One common problem in practical situations is differential equations where some phenomena happen on a very fast time scale, but only ever at very small amplitudes, so they have very little relevance to the overall solution.
-One example is decriptions of some chemical reactions, where some reaction products (like free radicals) are producd in tiny quantities and break down very rapidly, so they change on a very fast time scale but are scsrcl relevant to the overall solution.</p>
-<p>This disparity of time-sales is called <em>stiffness</em>, from the analgoy of a mechanical system in which some components are very stiff and so vibrate at very high frequencies, but typically only at very small amplitudes, or very quicky damped away, so that they can often be safely described by assuming that those stiff parts are completely rigid — do not move at all.</p>
+One example is decriptions of some chemical reactions, where some reaction products (like free radicals) are producd in tiny quantities and break down very rapidly, so they change on a very fast time scale but are scarcely relevant to the overall solution.</p>
+<p>This disparity of time-sales is called <em>stiffness</em>, from the analogy of a mechanical system in which some components are very stiff and so vibrate at very high frequencies, but typically only at very small amplitudes, or very quicky damped away, so that they can often be safely described by assuming that those stiff parts are completely rigid — do not move at all.</p>
 <p>One equation that illustrates this feature is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -816,8 +819,8 @@ u(t) = \cos t + c e^{-K t}
 \]</div>
 <p>with <span class="math notranslate nohighlight">\(c = u_0 - 1\)</span> for the initial value problem <span class="math notranslate nohighlight">\(u(0) = u_0\)</span>.</p>
 <p>These all get close to <span class="math notranslate nohighlight">\(\cos t\)</span> quickly and then stay nearby, but with a rapid and rapidly decaying “transient” <span class="math notranslate nohighlight">\(c e^{-K t}\)</span>.</p>
-<p>Many of the most basic and widely use numerical methods (including Euler’s Method thet w meet soon) need to use very small time steps to handle that fast transient, even when it is very small because <span class="math notranslate nohighlight">\(u_0 a\approx 1\)</span>.
-On the other hand there are methods that “supress” these transients, allowing use of larger time steps while still getting an accurate description of the main, slower, phenomena.
+<p>Many of the most basic and widely use numerical methods (including Euler’s Method thet we meet soon) need to use very small time steps to handle that fast transient, even when it is very small because <span class="math notranslate nohighlight">\(u_0 \approx 1\)</span>.</p>
+<p>On the other hand there are methods that “supress” these transients, allowing use of larger time steps while still getting an accurate description of the main, slower, phenomena.
 The simplest of these is the <em>Backward Euler Method</em> that we will see in a later section.</p>
 </div>
 </div>
@@ -861,7 +864,7 @@ the second equation is needed for <span class="math notranslate nohighlight">\(0
 as in the section <a class="reference internal" href="definite-integrals-2-composite-rules.html"><span class="doc std std-doc">Definite Integrals, Part 2</span></a>.</p>
 </div>
 <div class="section" id="solving-for-example-1-an-integration">
-<h3><span class="section-number">21.3.2. </span>Solving for Example 1: an integration<a class="headerlink" href="#solving-for-example-1-an-integration" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">21.3.2. </span>Solving for <a class="reference external" href="#example-1">Example 1</a>: an integration<a class="headerlink" href="#solving-for-example-1-an-integration" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
@@ -900,7 +903,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="section" id="solving-for-example-2-some-exponential-functions">
-<h3><span class="section-number">21.3.3. </span>Solving for Example 2: some exponential functions<a class="headerlink" href="#solving-for-example-2-some-exponential-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">21.3.3. </span>Solving for <a class="reference external" href="#example-2">Example 2</a>: some exponential functions<a class="headerlink" href="#solving-for-example-2-some-exponential-functions" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
@@ -980,7 +983,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="section" id="solving-for-example-3-solutions-that-blow-up">
-<h3><span class="section-number">21.3.4. </span>Solving for Example 3; solutions that blow up<a class="headerlink" href="#solving-for-example-3-solutions-that-blow-up" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">21.3.4. </span>Solving for <a class="reference external" href="#example-3">Example 3</a>; solutions that blow up<a class="headerlink" href="#solving-for-example-3-solutions-that-blow-up" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_3</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
@@ -1074,7 +1077,7 @@ The best we can do is improve accuracy by using more, smaller time steps:</p>
 <p><a name="solving-example-4"></a></p>
 </div>
 <div class="section" id="solving-for-example-4-added-march-22">
-<h3><span class="section-number">21.3.5. </span>Solving for Example 4 (Added March 22)<a class="headerlink" href="#solving-for-example-4-added-march-22" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">21.3.5. </span>Solving for <a class="reference external" href="#example-4">Example 4</a> (Added March 22)<a class="headerlink" href="#solving-for-example-4-added-march-22" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_4</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
