@@ -567,8 +567,13 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#index">
+   Index
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#zero-finding-solving-f-x-0-or-g-x-x">
-   Zero finding: solving
+   Zero Finding: solving
    <span class="math notranslate nohighlight">
     \(f(x) = 0\)
    </span>
@@ -611,8 +616,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-implementtion-of-the-most-basic-methods">
-     Basic implementtion of the most basic methods
+    <a class="reference internal nav-link" href="#basic-implementations-of-some-basic-methods">
+     Basic implementations of some basic methods
     </a>
    </li>
   </ul>
@@ -635,6 +640,14 @@ brenton.lemesurier&#64;unco.edu and lemesurierb&#64;cofc.edu</p>
 <p><strong>Last Revised: March 7, 2021,</strong>
 adding “demonstration modes” to <code class="docutils literal notranslate"><span class="pre">rowReduce</span></code>, <code class="docutils literal notranslate"><span class="pre">backwardSubstitution</span></code> and <code class="docutils literal notranslate"><span class="pre">forwardSubstitution</span></code>.</p>
 <p>A collection of functions implementing numerical algorithms from the course and book <em>Elementary Numerical Analysis</em>, and a module <code class="docutils literal notranslate"><span class="pre">numerical_methods_module</span></code> produced from that.</p>
+<div class="section" id="index">
+<h2>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h2>
+<p>The three main sections (so far) are</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Zero-Finding">Zero Finding</a></p></li>
+<li><p><a class="reference external" href="#Linear-Algebra">Linear Algebra</a></p></li>
+<li><p><a class="reference external" href="#ODE-IVPs">Solving Initial Value Problems for Ordinary Differential Equations</a></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -643,8 +656,10 @@ adding “demonstration modes” to <code class="docutils literal notranslate"><
 </div>
 </div>
 </div>
+<p><a name="Zero-Finding"></a></p>
+</div>
 <div class="section" id="zero-finding-solving-f-x-0-or-g-x-x">
-<h2>Zero finding: solving <span class="math notranslate nohighlight">\(f(x) = 0\)</span> or <span class="math notranslate nohighlight">\(g(x) = x\)</span><a class="headerlink" href="#zero-finding-solving-f-x-0-or-g-x-x" title="Permalink to this headline">¶</a></h2>
+<h2>Zero Finding: solving <span class="math notranslate nohighlight">\(f(x) = 0\)</span> or <span class="math notranslate nohighlight">\(g(x) = x\)</span><a class="headerlink" href="#zero-finding-solving-f-x-0-or-g-x-x" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bisection1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1608,12 +1623,14 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 </div>
+<p><a name="ODE-IVPs"></a></p>
 </div>
 </div>
 <div class="section" id="solving-initial-value-problems-for-ordinary-differential-equations">
 <h2>Solving Initial Value Problems for Ordinary Differential Equations<a class="headerlink" href="#solving-initial-value-problems-for-ordinary-differential-equations" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="basic-implementtion-of-the-most-basic-methods">
-<h3>Basic implementtion of the most basic methods<a class="headerlink" href="#basic-implementtion-of-the-most-basic-methods" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-implementations-of-some-basic-methods">
+<h3>Basic implementations of some basic methods<a class="headerlink" href="#basic-implementations-of-some-basic-methods" title="Permalink to this headline">¶</a></h3>
+<p>(More to come.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -1664,8 +1681,8 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/numerical_methods_module_42_0.png" src="../_images/numerical_methods_module_42_0.png" />
-<img alt="../_images/numerical_methods_module_42_1.png" src="../_images/numerical_methods_module_42_1.png" />
+<img alt="../_images/numerical_methods_module_43_0.png" src="../_images/numerical_methods_module_43_0.png" />
+<img alt="../_images/numerical_methods_module_43_1.png" src="../_images/numerical_methods_module_43_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1705,8 +1722,8 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/numerical_methods_module_43_0.png" src="../_images/numerical_methods_module_43_0.png" />
-<img alt="../_images/numerical_methods_module_43_1.png" src="../_images/numerical_methods_module_43_1.png" />
+<img alt="../_images/numerical_methods_module_44_0.png" src="../_images/numerical_methods_module_44_0.png" />
+<img alt="../_images/numerical_methods_module_44_1.png" src="../_images/numerical_methods_module_44_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1759,8 +1776,8 @@ c = [ 3.         -0.4         3.51543624]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=10
 </pre></div>
 </div>
-<img alt="../_images/numerical_methods_module_45_1.png" src="../_images/numerical_methods_module_45_1.png" />
-<img alt="../_images/numerical_methods_module_45_2.png" src="../_images/numerical_methods_module_45_2.png" />
+<img alt="../_images/numerical_methods_module_46_1.png" src="../_images/numerical_methods_module_46_1.png" />
+<img alt="../_images/numerical_methods_module_46_2.png" src="../_images/numerical_methods_module_46_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1800,8 +1817,8 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/numerical_methods_module_46_0.png" src="../_images/numerical_methods_module_46_0.png" />
-<img alt="../_images/numerical_methods_module_46_1.png" src="../_images/numerical_methods_module_46_1.png" />
+<img alt="../_images/numerical_methods_module_47_0.png" src="../_images/numerical_methods_module_47_0.png" />
+<img alt="../_images/numerical_methods_module_47_1.png" src="../_images/numerical_methods_module_47_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1850,8 +1867,8 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/numerical_methods_module_48_0.png" src="../_images/numerical_methods_module_48_0.png" />
-<img alt="../_images/numerical_methods_module_48_1.png" src="../_images/numerical_methods_module_48_1.png" />
+<img alt="../_images/numerical_methods_module_49_0.png" src="../_images/numerical_methods_module_49_0.png" />
+<img alt="../_images/numerical_methods_module_49_1.png" src="../_images/numerical_methods_module_49_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1891,8 +1908,8 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/numerical_methods_module_49_0.png" src="../_images/numerical_methods_module_49_0.png" />
-<img alt="../_images/numerical_methods_module_49_1.png" src="../_images/numerical_methods_module_49_1.png" />
+<img alt="../_images/numerical_methods_module_50_0.png" src="../_images/numerical_methods_module_50_0.png" />
+<img alt="../_images/numerical_methods_module_50_1.png" src="../_images/numerical_methods_module_50_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1947,8 +1964,8 @@ c = [ 3.         -0.4         3.51543624]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=10
 </pre></div>
 </div>
-<img alt="../_images/numerical_methods_module_51_1.png" src="../_images/numerical_methods_module_51_1.png" />
-<img alt="../_images/numerical_methods_module_51_2.png" src="../_images/numerical_methods_module_51_2.png" />
+<img alt="../_images/numerical_methods_module_52_1.png" src="../_images/numerical_methods_module_52_1.png" />
+<img alt="../_images/numerical_methods_module_52_2.png" src="../_images/numerical_methods_module_52_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1988,8 +2005,8 @@ c = [ 3.         -0.4         3.51543624]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/numerical_methods_module_52_0.png" src="../_images/numerical_methods_module_52_0.png" />
-<img alt="../_images/numerical_methods_module_52_1.png" src="../_images/numerical_methods_module_52_1.png" />
+<img alt="../_images/numerical_methods_module_53_0.png" src="../_images/numerical_methods_module_53_0.png" />
+<img alt="../_images/numerical_methods_module_53_1.png" src="../_images/numerical_methods_module_53_1.png" />
 </div>
 </div>
 </div>
