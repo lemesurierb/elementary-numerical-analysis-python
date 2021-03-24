@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Comparison of Methods" href="ODE-IVP-comparison-of-methods.html" />
+    <link rel="next" title="23. Some Future Topics" href="../future_topics.html" />
     <link rel="prev" title="21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method" href="ODE-IVP-1-basics-and-Euler.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -239,13 +239,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-comparison-of-methods.html">
-   23. Comparison of Methods
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   24. Some Future Topics
+   23. Some Future Topics
   </a>
  </li>
 </ul>
@@ -338,8 +333,13 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-comparison-of-methods.html">
+   2. Comparison of Methods — DRAFT
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+   3. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -570,49 +570,45 @@
   <a class="reference internal nav-link" href="#introduction">
    22.1. Introduction
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#euler-s-method-as-a-runge-kutta-method">
+   22.2. Euler’s Method as a Runge-Kutta method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-runge-kutta-methods">
+   22.3. Second order Runge-Kutta methods
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#euler-s-method-as-a-runge-kutta-method">
-     22.1.1. Euler’s Method as a Runge-Kutta method
+    <a class="reference internal nav-link" href="#the-explicit-trapezoid-method-a-k-a-the-improved-euler-method-or-huen-s-method">
+     22.3.1. The Explicit Trapezoid Method (a.k.a. the Improved Euler method or Huen’s method)
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#second-order-runge-kutta-methods">
-     22.1.2. Second order Runge-Kutta methods
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-explicit-trapezoid-method-a-k-a-the-improved-euler-method-or-huen-s-method">
-       22.1.2.1. The Explicit Trapezoid Method (a.k.a. the Improved Euler method or Huen’s method)
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#examples">
-     22.1.3. Examples
+     22.3.2. Examples
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-explicit-midpoint-method-a-k-a-modified-euler">
-       22.1.3.1. The Explicit Midpoint Method (a.k.a. Modified Euler)
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-explicit-midpoint-method-a-k-a-modified-euler">
+     22.3.3. The Explicit Midpoint Method (a.k.a. Modified Euler)
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-classical-fourth-order-accurate-runge-kutta-method">
-     22.1.4. The “classical”, fourth order accurate, Runge-Kutta Method
+     22.3.4. The “classical”, fourth order accurate, Runge-Kutta Method
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#solving-for-versions-of-example-2-and-4-in-the-previous-section">
-     22.1.5. Solving for versions of Example 2 and 4 in the previous section
+     22.3.5. Solving for versions of Example 2 and 4 in the previous section
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#for-comparison-the-above-two-examples-done-with-euler-s-method">
-     22.1.6. For comparison: the above two examples done with Euler’s Method
+     22.3.6. For comparison: the above two examples done with Euler’s Method
     </a>
    </li>
   </ul>
@@ -652,8 +648,9 @@
 <h2><span class="section-number">22.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The original Runge-Kutta method is the fourth order accurate one to be described below, which is still used a lot, though with some modifications.</p>
 <p>However, the name is now applied to a variety of methods based on a similar strategy, so first, herr are a few simpler methods, all of some value, at least for small, low precision calculations.</p>
+</div>
 <div class="section" id="euler-s-method-as-a-runge-kutta-method">
-<h3><span class="section-number">22.1.1. </span>Euler’s Method as a Runge-Kutta method<a class="headerlink" href="#euler-s-method-as-a-runge-kutta-method" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">22.2. </span>Euler’s Method as a Runge-Kutta method<a class="headerlink" href="#euler-s-method-as-a-runge-kutta-method" title="Permalink to this headline">¶</a></h2>
 <p>The simplest of all methods of this general form is Euler’s method.
 To set up the notation to be used below, rephrase it this way:</p>
 <p>To get from <span class="math notranslate nohighlight">\((t, u)\)</span> to an approximation of <span class="math notranslate nohighlight">\((t+h, u(t+h))\)</span>, use the approximation</p>
@@ -665,11 +662,37 @@ u(t+h) &amp;\approx u + K_1
 \end{split}\end{split}\]</div>
 </div>
 <div class="section" id="second-order-runge-kutta-methods">
-<h3><span class="section-number">22.1.2. </span>Second order Runge-Kutta methods<a class="headerlink" href="#second-order-runge-kutta-methods" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">22.3. </span>Second order Runge-Kutta methods<a class="headerlink" href="#second-order-runge-kutta-methods" title="Permalink to this headline">¶</a></h2>
 <p>We have seen that the global error of Euler’s method is <span class="math notranslate nohighlight">\(O(h)\)</span>: it is only first order accurate.
 This is often insufficient, so it is more common even for small, low precision calculation to use one of several second order methods:</p>
 <div class="section" id="the-explicit-trapezoid-method-a-k-a-the-improved-euler-method-or-huen-s-method">
-<h4><span class="section-number">22.1.2.1. </span>The Explicit Trapezoid Method (a.k.a. the Improved Euler method or Huen’s method)<a class="headerlink" href="#the-explicit-trapezoid-method-a-k-a-the-improved-euler-method-or-huen-s-method" title="Permalink to this headline">¶</a></h4>
+<h3><span class="section-number">22.3.1. </span>The Explicit Trapezoid Method (a.k.a. the Improved Euler method or Huen’s method)<a class="headerlink" href="#the-explicit-trapezoid-method-a-k-a-the-improved-euler-method-or-huen-s-method" title="Permalink to this headline">¶</a></h3>
+<p>One could try to adapt the trapezoid method for integrating <span class="math notranslate nohighlight">\(f(t)\)</span> to solve <span class="math notranslate nohighlight">\(du/dt = f(t)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+u(t + h) = u(t) + \int_{t}^{t + h} f(s) ds \approx u(t) + \frac{f(t) + f(t+h)}{2} h
+\]</div>
+<p>to solving the ODE <span class="math notranslate nohighlight">\(du/dt = f(t, u)\)</span> but there is a problem that needs to be overcome:</p>
+<p>we get</p>
+<div class="math notranslate nohighlight">
+\[
+u(t + h) \approx u(t) + \frac{f(t, u(t)) + f(t+h, u(t+h))}{2} h
+\]</div>
+<p>and inserting the values <span class="math notranslate nohighlight">\(U_i \approx u(t_i)\)</span> and so on gives</p>
+<div class="math notranslate nohighlight">
+\[
+U_{i+1} \approx U_i + \frac{f(t_i, U_i) + f(t_{i+1}, U_{i+1}))}{2} h
+\]</div>
+<p>But if we have so far only solved up to <span class="math notranslate nohighlight">\(t=t_i\)</span> and thus <span class="math notranslate nohighlight">\(U_i\)</span>, the unknown quantity that we seek, <span class="math notranslate nohighlight">\(U_{i+1}\)</span>, appears at the right-hand side too: we only have an <em>implicit</em> formula for it.</p>
+<p>This is known as the <em>Implicit Trapezoid Rule</em> and one could try to solve this equation for <span class="math notranslate nohighlight">\(U_{i+1}\)</span>, using methods seen earlier in this course such as fixed pint iteration or the secant method.</p>
+<p>However, for now we get around this by using an approximation of <span class="math notranslate nohighlight">\(U_{i+1}\)</span> at right — the only one we know so far, given by Euler’s Method.</p>
+<p>So at right, we replace <span class="math notranslate nohighlight">\(U_{i+1} \approx U_i + h f(t_i, U_i)\)</span>, giving the rule</p>
+<div class="math notranslate nohighlight">
+\[
+U_{i+1} = U_i + \frac{f(t_i, U_i) + f(t_{i+1}, U_i + h f(t_i, U_i))}{2} h
+\]</div>
+<p>It is convenient to break this down into two stages, one for each evalution of <span class="math notranslate nohighlight">\(f(t, u)\)</span>;
+the <em>Explicit Trapezoid Rule</em> is based on</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
 K_1 &amp;= h f(t, u)
@@ -678,7 +701,7 @@ K_2 &amp;= h f(t+h, u + K_1)
 \\
 u(t+h) &amp;\approx u + \frac{1}{2}(K_1 + K_2)
 \end{split}\end{split}\]</div>
-<p>For equal sized time steps, this leads to the approximate solutions</p>
+<p>For equal sized time steps, this leads to the approximate solution formulas</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
 U_0 &amp;= u_0
@@ -693,7 +716,7 @@ K_2 &amp;= h f(t_{i+1}, U_i + K_1)
 \end{split}\end{split}\]</div>
 <p><strong>Exercise 1</strong></p>
 <p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
-this gives the same result as the Composite Trapezoid Rule for integration (hence the name).</p>
+this gives the same result as the Composite Trapezoid Rule for integration.</p>
 <p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
 It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
 <p>C) Compare to <span class="math notranslate nohighlight">\(G=1+kh\)</span> seen for Euler’s Method.</p>
@@ -721,9 +744,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </pre></div>
 </div>
 </div>
-</div>
 <div class="section" id="examples">
-<h3><span class="section-number">22.1.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">22.3.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>For all methods in this section, we will solve for versions of Example 2 and 4 in the section
 <a class="reference internal" href="ODE-IVP-1-basics-and-Euler.html"><span class="doc std std-doc">Solving Initial Value Problems for Ordinary Differential Equations, Part 1</span></a>.</p>
 <div class="math notranslate nohighlight">
@@ -796,8 +818,8 @@ u(t) = u_2(t; a, u_0) = \cos(t) + C e^{-K t},\quad C = (u_0 - \cos(a)) e^{K a}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_14_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_14_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_14_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_14_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_16_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_16_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_16_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_16_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -837,12 +859,14 @@ u(t) = u_2(t; a, u_0) = \cos(t) + C e^{-K t},\quad C = (u_0 - \cos(a)) e^{K a}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_15_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_15_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_15_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_15_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_17_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_17_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_17_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_17_1.png" />
+</div>
 </div>
 </div>
 <div class="section" id="the-explicit-midpoint-method-a-k-a-modified-euler">
-<h4><span class="section-number">22.1.3.1. </span>The Explicit Midpoint Method (a.k.a. Modified Euler)<a class="headerlink" href="#the-explicit-midpoint-method-a-k-a-modified-euler" title="Permalink to this headline">¶</a></h4>
+<h3><span class="section-number">22.3.3. </span>The Explicit Midpoint Method (a.k.a. Modified Euler)<a class="headerlink" href="#the-explicit-midpoint-method-a-k-a-modified-euler" title="Permalink to this headline">¶</a></h3>
+<p>If we start with the Midpoint Rule in place of the Trapezoid Rule, we likewise get an <em>Implicit Midpoint Rule</em>, and the same appoximation strategy then gives the <em>Explicit Midpoint Rule</em></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
 K_1 &amp;= h f(t, u)
@@ -907,8 +931,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_21_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_21_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_21_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_21_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_23_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_23_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_23_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_23_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -937,14 +961,13 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_22_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_22_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_22_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_22_1.png" />
-</div>
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_24_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_24_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_24_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_24_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="the-classical-fourth-order-accurate-runge-kutta-method">
-<h3><span class="section-number">22.1.4. </span>The “classical”, fourth order accurate, Runge-Kutta Method<a class="headerlink" href="#the-classical-fourth-order-accurate-runge-kutta-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">22.3.4. </span>The “classical”, fourth order accurate, Runge-Kutta Method<a class="headerlink" href="#the-classical-fourth-order-accurate-runge-kutta-method" title="Permalink to this headline">¶</a></h3>
 <p>This is the original Runge-Kutta method:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
@@ -990,7 +1013,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="section" id="solving-for-versions-of-example-2-and-4-in-the-previous-section">
-<h3><span class="section-number">22.1.5. </span>Solving for versions of Example 2 and 4 in the previous section<a class="headerlink" href="#solving-for-versions-of-example-2-and-4-in-the-previous-section" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">22.3.5. </span>Solving for versions of Example 2 and 4 in the previous section<a class="headerlink" href="#solving-for-versions-of-example-2-and-4-in-the-previous-section" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span>
@@ -1016,8 +1039,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_28_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_28_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_28_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_28_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_30_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_30_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_30_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_30_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1054,14 +1077,14 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_29_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_29_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_29_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_29_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_31_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_31_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_31_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_31_1.png" />
 </div>
 </div>
 <p><a name="euler-redux"></a></p>
 </div>
 <div class="section" id="for-comparison-the-above-two-examples-done-with-euler-s-method">
-<h3><span class="section-number">22.1.6. </span>For comparison: the above two examples done with Euler’s Method<a class="headerlink" href="#for-comparison-the-above-two-examples-done-with-euler-s-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">22.3.6. </span>For comparison: the above two examples done with Euler’s Method<a class="headerlink" href="#for-comparison-the-above-two-examples-done-with-euler-s-method" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">euler</span>
@@ -1094,8 +1117,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_32_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_32_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_32_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_32_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_34_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_34_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_34_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_34_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1124,8 +1147,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_33_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_33_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_33_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_33_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_35_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_35_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_35_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_35_1.png" />
 </div>
 </div>
 </div>
@@ -1161,7 +1184,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="ODE-IVP-1-basics-and-Euler.html" title="previous page"><span class="section-number">21. </span>Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method</a>
-    <a class='right-next' id="next-link" href="ODE-IVP-comparison-of-methods.html" title="next page"><span class="section-number">23. </span>Comparison of Methods</a>
+    <a class='right-next' id="next-link" href="../future_topics.html" title="next page"><span class="section-number">23. </span>Some Future Topics</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
