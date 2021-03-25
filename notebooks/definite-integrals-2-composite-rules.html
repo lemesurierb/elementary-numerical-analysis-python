@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules &#8212; Elementary Numerical Analysis (with Python)</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation" href="definite-integrals-3-simpson-richardson.html" />
+    <link rel="prev" title="17. Definite Integrals, Part 1: The Building Blocks" href="definite-integrals-1-building-blocks.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface.html">
+   Elementary Numerical Analysis with Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Frontmatter
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Numerical Analysis
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving.html">
+   1. Root Finding by Interval Halving (Bisection)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration.html">
+   2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method.html">
+   3. Newton’s Method for Solving Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="taylors-theorem.html">
+   4. Taylor’s Theorem and the Accuracy of Linearization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
+   5. Measures of Error and Order of Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="convergence-rate-of-newtons-method.html">
+   6. The Convergence Rate of Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives.html">
+   7. Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction.html">
+   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation.html">
+   9. Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting.html">
+   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization.html">
+   11. Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   with LU factorization,
+   <span class="math notranslate nohighlight">
+    \(A = L U\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization.html">
+   12. Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   With Both Pivoting and LU factorization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation.html">
+   13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation-error-formulas.html">
+   14. Error Formulas for Polynomial Collocation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
+   15. Approximating Derivatives by the Method of Undetermined Coefficients
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="richardson-extrapolation.html">
+   16. Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-1-building-blocks.html">
+   17. Definite Integrals, Part 1: The Building Blocks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
+   19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
+   20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler.html">
+   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta.html">
+   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="future_topics.html">
+   23. Some Future Topics
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises.html">
+   Exercises on the Bisection Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
+   Exercises on Fixed Point Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
+   Exercises on Error Measures and Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
+   Exercises on Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
+   Exercises on Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
+   Exercises on Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
+   Exercises on Solving Simultaneous Linear Equations
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment1.html">
+   MATH 375 Assignment 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment2.html">
+   MATH 375 Assignment 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment3.html">
+   MATH 375 Assignment 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root_finding.html">
+   Module root_finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment4.html">
+   MATH 375 Assignment 4
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Preliminary Versions of Future Sections
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-comparison-of-methods.html">
+   1. Comparison of Methods — DRAFT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
+   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Python and Jupyter Notebook Review (with Numpy and Matplotlib)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
+   1. Introduction to
+   <em>
+    Python Preview
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
+   2. Getting Python Software for Scientific Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
+   3. Suggestions and Notes on Python and Jupyter Notebook Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
+   4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/functions.html">
+   5. Defining and Using Python Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
+   6. Decision Making With if, else, and elif
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
+   7. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
+   8. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
+   9. Code Files, Modules, and an Integrated Development Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
+   11. Plotting Graphs with Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
+   12. Numpy Array Operations and Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
+   13. Package Scipy and More Tools for Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
+   14. Summation and Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
+   15. Random Numbers, Histograms, and a Simulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
+   16. Formatted Output and Some Text String Manipulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
+   18. Exceptions and Exception Handling
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_methods_module.html">
+   Notebook for generating the module
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numerical_methods_module
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+   Linear algebra algorithms using 0-based indexing and semi-open intervals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sample-project-newtons-method-draft.html">
+   Numerical Analysis Sample Project on Newtons’s Method
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/definite-integrals-2-composite-rules.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/definite-integrals-2-composite-rules.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   18.1. Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-composite-midpoint-rule">
+     18.1.1. The Composite Midpoint Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-composite-trapezoid-rule">
+     18.1.2. The Composite Trapezoid Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accuracy-and-error-formulas">
+     18.1.3. Accuracy and Error Formulas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cancelling-some-error-terms-the-composite-simpson-s-rule">
+   18.2. Cancelling Some Error Terms: The Composite Simpson’s Rule
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-missing-step-a-generalized-mean-value-theorem">
+     18.2.1. The Missing Step: A Generalized Mean Value Theorem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#completing-the-derivation-of-the-error-formulas-for-these-composite-rules">
+     18.2.2. Completing the derivation of the error formulas for these composite rules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-error-formula-useful-for-richardson-extrapolation">
+     18.2.3. Another error formula, useful for Richardson Extrapolation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix-the-composite-left-hand-endpoint-rule-and-its-error">
+   18.3. Appendix: The Composite Left-hand Endpoint Rule, and its Error
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="definite-integrals-part-2-the-composite-trapezoid-and-midpoint-rules">
+<h1><span class="section-number">18. </span>Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules<a class="headerlink" href="#definite-integrals-part-2-the-composite-trapezoid-and-midpoint-rules" title="Permalink to this headline">¶</a></h1>
+<p><em>Expanded on Monday, March 8 after class,</em> adding an Appendix on the <a class="reference external" href="#Composite-Left-hand-Rule">Composite Left-hand Endpoint Rule</a></p>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 5.2.4 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 4.4 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+</ul>
+<div class="section" id="introduction">
+<h2><span class="section-number">18.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The “elementary” integral approximations of the definite integral</p>
+<div class="math notranslate nohighlight">
+\[ I = \int_a^b f(x) \, dx \]</div>
+<p>seen in the previous section
+the Trapzoid Rule</p>
+<div class="math notranslate nohighlight">
+\[T_1 = \int_a^b L(x) \, dx = \frac{f(a) + f(b)}{2} (b-a) \]</div>
+<p>and the Midpoint Rule</p>
+<div class="math notranslate nohighlight">
+\[M_1 =  f \left(\frac{a+b}{2}\right)(b-a)\]</div>
+<p>are of course of very low accuracy in themselves.
+They are however central building blocks for various more accurate methods and also for some good methods for numerical solution of differential equations.</p>
+<p>The basic strategy for improving accurcy is to derive the domain of integration <span class="math notranslate nohighlight">\([a, b]\)</span> into numerous smaller intervals, and use these rls on each such sub-interval teh <em>composite</em> rules.</p>
+<p>In turn, the most straightforward way to do this is to use <span class="math notranslate nohighlight">\(n\)</span> sub-intervals of equal width <span class="math notranslate nohighlight">\(h = (b-a)/n\)</span>, so that the sub-interval endpoints are <span class="math notranslate nohighlight">\(x_0 = a + ih\)</span>, <span class="math notranslate nohighlight">\(0 \leq i \leq n\)</span>: that is</p>
+<p>sub-intervals <span class="math notranslate nohighlight">\([x_{i-1}, x_i]\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span> separated by the nodes.</p>
+<div class="math notranslate nohighlight">
+\[a, a+h, a+2h, \dots, b-h, b\]</div>
+<div class="section" id="the-composite-midpoint-rule">
+<h3><span class="section-number">18.1.1. </span>The Composite Midpoint Rule<a class="headerlink" href="#the-composite-midpoint-rule" title="Permalink to this headline">¶</a></h3>
+<p>Using the Midpoint Rule on each interval and summing gives a formula that could be familiar:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+M_n &amp;:= f \left( \frac{x_0+x_1}{2}\right)h + f \left(\frac{x_1+x_2}{2}\right)h + \cdots + f \left( \frac{x_{n-1}+x_n}{2}\right)h
+\\
+&amp;= f \left(\frac{a+(a+h)}{2}\right)h +  f \left(\frac{(a+h) + (a+2h)}{2}\right)h + \cdots + f \left(\frac{(b-h)+b}{2}\right)h
+\\
+&amp;= \left[ f(a+h/2) + f(a+3h/2) + \cdots + f(b-h/2) \right] h
+\end{split}
+\end{split}\]</div>
+<p>This is a <em>Riemann Sum</em> as used in the definition of the defnite integral; possibly the best and natural one in most situations, by using the midpoints of each interval.
+The theory of definite integrals also guarantees that <span class="math notranslate nohighlight">\(M_n \to I\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> so long as the function <span class="math notranslate nohighlight">\(f\)</span> is continuous — the next question for us will be “how fast?*</p>
+</div>
+<div class="section" id="the-composite-trapezoid-rule">
+<h3><span class="section-number">18.1.2. </span>The Composite Trapezoid Rule<a class="headerlink" href="#the-composite-trapezoid-rule" title="Permalink to this headline">¶</a></h3>
+<p>Using the Tapezoid Rule on each interval instead gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+T_n &amp;:= \frac{f(x_0) + f(x_1)}{2} h + \frac{f(x_1) + f(x_2)}{2} h + \cdots + \frac{f(x_{n-1}) + f(x_n)}{2} h
+\\
+&amp;:= \frac{f(a + f(a+h)}{2} h + \frac{f(a+h + f(a+2h)}{2} h + \cdots + \frac{f(b-h) + f(b)}{2} h
+\\
+&amp;= \left[ \frac{f(a)}{2} + f(a+h) + f(a+2h) + \cdots + f(b-h) +  \frac{f(b)}{2} \right] h
+\end{split}
+\end{split}\]</div>
+<p>This is also a Riemann sum, with intervals if length <span class="math notranslate nohighlight">\(h/2\)</span> at each end, using value at teh ends of thos intervals, and the rest of width <span class="math notranslate nohighlight">\(h\)</span>, with the Midpoint Rule used.
+So again, we know that <span class="math notranslate nohighlight">\(T_n \to I\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> and next want to know “how fast?*</p>
+</div>
+<div class="section" id="accuracy-and-error-formulas">
+<h3><span class="section-number">18.1.3. </span>Accuracy and Error Formulas<a class="headerlink" href="#accuracy-and-error-formulas" title="Permalink to this headline">¶</a></h3>
+<p>In brief, the errors for ech of rhese rules is the sum of the errors for each of the pieces;
+I will just state them for now.</p>
+<p>Firstly,</p>
+<div class="math notranslate nohighlight">
+\[ I - M_n= \sum_{i=1}^n \frac{h^3}{24}f''(\xi_i), \quad \text{ for some } \xi_i \in [x_{i-1}, x_i] \]</div>
+<p>This can be rewitten as</p>
+<div class="math notranslate nohighlight">
+\[ I - M_n= \frac{h^3}{24} \sum_{i=1}^n f''(\xi_i) \]</div>
+<p>and as we will see, this sum can have each <span class="math notranslate nohighlight">\(f''(\xi_i)\)</span> replace by an “average value” <span class="math notranslate nohighlight">\(f''(\xi_i)\)</span>, <span class="math notranslate nohighlight">\(\xi \in[a, b]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+I - M_n= \frac{h^3}{24} \sum_{i=1}^n f''(\xi) = \frac{h^3}{24} n f''(\xi) = \frac{h^2}{24} (b-a) f''(\xi)
+\]</div>
+<p>and the most important conclusion for now is that</p>
+<div class="math notranslate nohighlight">
+\[
+I - M_n = O(h^2)
+\]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+I - T_n = - \frac{h^2}{12} (b-a) f''(\xi) = O(h^2)
+\]</div>
+<p>again with <span class="math notranslate nohighlight">\(\xi \in[a, b]\)</span>, but note well: these two <span class="math notranslate nohighlight">\(\xi\)</span> values are probably not the same!</p>
+</div>
+</div>
+<div class="section" id="cancelling-some-error-terms-the-composite-simpson-s-rule">
+<h2><span class="section-number">18.2. </span>Cancelling Some Error Terms: The Composite Simpson’s Rule<a class="headerlink" href="#cancelling-some-error-terms-the-composite-simpson-s-rule" title="Permalink to this headline">¶</a></h2>
+<p>Ignoring the <span class="math notranslate nohighlight">\(\xi\)</span> values being different, this suggests again that we can cancel some of the errors wi ha weighted average:</p>
+<div class="math notranslate nohighlight">
+\[ S_{2n} := \frac{2M_n + T_n}{3} \]</div>
+<p>Indeed we will see that the main, <span class="math notranslate nohighlight">\(O(h^2)\)</span>, errors cancel out, and also due to symmetry, the error is even in <span class="math notranslate nohighlight">\(h\)</span>, so that</p>
+<div class="math notranslate nohighlight">
+\[I - S_{2n}= O(h^4)\]</div>
+<p>The name is because this is the <em>Composite Simpson’s Rule</em>, and the interleaving of the different <span class="math notranslate nohighlight">\(x\)</span> values used by <span class="math notranslate nohighlight">\(M_n\)</span> and <span class="math notranslate nohighlight">\(T_n\)</span> means that is uses <span class="math notranslate nohighlight">\(2n+1\)</span> nodes, and so <span class="math notranslate nohighlight">\(2n\)</span> sub-intervals.</p>
+<div class="section" id="the-missing-step-a-generalized-mean-value-theorem">
+<h3><span class="section-number">18.2.1. </span>The Missing Step: A Generalized Mean Value Theorem<a class="headerlink" href="#the-missing-step-a-generalized-mean-value-theorem" title="Permalink to this headline">¶</a></h3>
+<p>A key step in getting more useful error formulas for approximations of integrals is the following result:</p>
+<p><strong>Theorem</strong></p>
+<p>For any continuous function <span class="math notranslate nohighlight">\(f\)</span> on an interval <span class="math notranslate nohighlight">\([a, b]\)</span> and any collection of points <span class="math notranslate nohighlight">\(x_i \in [a,b]\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span>,
+there is a point <span class="math notranslate nohighlight">\(\xi \in [a,b]\)</span> for which</p>
+<div class="math notranslate nohighlight">
+\[ f(c) = \frac{\sum_{i=1}^n f(x_i)}{n}, \text{ so } \sum_{i=1}^n f(x_i) = n f(c) \]</div>
+<p>That is, the value of the function at <span class="math notranslate nohighlight">\(c\)</span> is the average of its values at those other points.</p>
+<p><em>Proof:</em></p>
+<p>The proof is rather similar to that of Theorme 3 in th previos section; essenrial repaltin teh interal tehr by a sum here:</p>
+<p><em>As <span class="math notranslate nohighlight">\(f\)</span> is continuous on the closed, bounded interval <span class="math notranslate nohighlight">\([a, b]\)</span>, the <strong>Extreme Value Theorem</strong> from calculus says that <span class="math notranslate nohighlight">\(f\)</span> has a minimum <span class="math notranslate nohighlight">\(L\)</span> and a maximum <span class="math notranslate nohighlight">\(H\)</span> on this interval.
+Each of the values <span class="math notranslate nohighlight">\(f(x_i)\)</span> is in interval <span class="math notranslate nohighlight">\([L, H]\)</span> so their average is also:</em></p>
+<div class="math notranslate nohighlight">
+\[ f(x_i) \in [L, H] \quad \text{and thus} \quad \frac{\sum_{i=1}^n f(x_i)}{n} \in [L, H] \]</div>
+<p><em>The <strong>Mean Value Theorem</strong> then says that <span class="math notranslate nohighlight">\(f\)</span> attains this mean value for some <span class="math notranslate nohighlight">\(\xi \in [L, H]\)</span>.</em></p>
+</div>
+<div class="section" id="completing-the-derivation-of-the-error-formulas-for-these-composite-rules">
+<h3><span class="section-number">18.2.2. </span>Completing the derivation of the error formulas for these composite rules<a class="headerlink" href="#completing-the-derivation-of-the-error-formulas-for-these-composite-rules" title="Permalink to this headline">¶</a></h3>
+<p>I will spell this out for the Composite Trapezoid Rule; it works very similarly for the “midpoint” case.</p>
+<p>First, break the exact integral up as</p>
+<div class="math notranslate nohighlight">
+\[ I = \int_a^b f(x) \, dx = \sum_{i=1}^n I^{(i)}, \quad \text{where} \quad I^{(i)} = \int_{x_{i-1}}^{x_i} f(x) \, dx \]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[ T_n = \sum_{i=1}^n T^{(i)} \]</div>
+<p>where each <span class="math notranslate nohighlight">\(T^{(i)}\)</span> is the Trapezoid Rule approximation of <span class="math notranslate nohighlight">\(I^{(i)}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[T^{(i)} = \frac{f(x_{i-1}) + f(x_i)}{2} h\]</div>
+<p>The error in <span class="math notranslate nohighlight">\(T_n\)</span> is the sum of the errors in each piece:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+I - T_n
+&amp;= \sum_{i=1}^n I^{(i)} - \sum_{i=1}^n T^{(i)}
+\\&amp;= \sum_{i=1}^n ( I^{(i)} - T^{(i)} )
+\\&amp;= \sum_{i=1}^n -\frac{h^3}{12} f''(\xi_i), \quad x_i \in [x_{i-1}, x_i]
+\\&amp;= -\frac{h^3}{12} \sum_{i=1}^n f''(\xi_i)
+\end{split}
+\end{split}\]</div>
+<p>Now we can use the above mean value result (with <span class="math notranslate nohighlight">\(f''\)</span> in place of <span class="math notranslate nohighlight">\(f\)</span>) to replace the last sum above by
+<span class="math notranslate nohighlight">\(n f''(\xi)\)</span>, some <span class="math notranslate nohighlight">\(\xi \in [a, b]\)</span>, so that as claimed,</p>
+<div class="math notranslate nohighlight">
+\[I - T_n = -\frac{h^3}{12} n f''(\xi), = -\frac{h^2}{12} (b-a) f''(\xi) = O(h^2),\]</div>
+<p>using <span class="math notranslate nohighlight">\(h n = b-a\)</span>.</p>
+</div>
+<div class="section" id="another-error-formula-useful-for-richardson-extrapolation">
+<h3><span class="section-number">18.2.3. </span>Another error formula, useful for Richardson Extrapolation<a class="headerlink" href="#another-error-formula-useful-for-richardson-extrapolation" title="Permalink to this headline">¶</a></h3>
+<p>Starting from</p>
+<div class="math notranslate nohighlight">
+\[
+I - T_n = -\frac{h^3}{12} \sum_{i=1}^n f''(\xi_i), = -\frac{h^2}{12} \sum_{i=1}^n ( f''(\xi_i) h)
+\]</div>
+<p>note that the sum in the second version is a Riemann sum for approximating the integral</p>
+<div class="math notranslate nohighlight">
+\[I'' := \int_a^b f''(x) \, dx, = [f'(x)]_a^b = f'(b) - f'(a),\]</div>
+<p>so it seems that</p>
+<div class="math notranslate nohighlight">
+\[
+I - T_n \approx -\frac{f'(b) - f'(a)}{12} h^2, = O(h^2)
+\]</div>
+<p>A virtue of this form is that now we have a good chance of evaluating the coefficient of <span class="math notranslate nohighlight">\(h^2\)</span>,
+so this given a “practical error formula” when <span class="math notranslate nohighlight">\(f'(x)\)</span> is known.</p>
+<p>Another useful fact (not proven in these notes) is that the error for the basic Trapezoid rule can be computed with the help of Taylor’s Theorem in a series:</p>
+<div class="math notranslate nohighlight">
+\[
+T_1 = \int_a^b f(x) \, dx = B_2 D^2f(\xi_2) h^3 + B_4 D^4(\xi_4) h^5 + \cdots
+\]</div>
+<p>(where <span class="math notranslate nohighlight">\(B_2 = 1/12\)</span> as seen above).</p>
+<p>Putting the higher power terms into the above argument one can get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+T_n
+&amp;= \int_a^b f(x) \, dx + B_2 [Df(b) - Df(a)] h^2 + B_4 [D^3f(b) - D^3f(a)] h^4
++ \cdots + B_{2k} [D^{2k-1}f(b) - D^{2k-1}f(a)] h^{2k} + \cdots
+\\&amp;= O(h^2) + O(h^4) + \cdots +  O(h^{2k})
+\end{split}
+\end{split}\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[
+T_n = \int_a^b f(x) \,dx + \frac{Df(b) - Df(a)}{12} h^2 + O(h^4)
+\]</div>
+<p>The last form is the setup for Richardson extrapolation —
+and the previous one with a succession of “big-O” terms is the setup for <em>repeated</em> Richardson extrapolation,
+to get a succession of approximations with errors <span class="math notranslate nohighlight">\(O(h^2)\)</span>, then <span class="math notranslate nohighlight">\(O(h^4)\)</span>, then <span class="math notranslate nohighlight">\(O(h^6)\)</span>, and so on:
+<a class="reference internal" href="definite-integrals-4-romberg-integration.html"><span class="doc std std-doc">Romberg Integration</span></a>.</p>
+<p>There are similar formulas for the Composite Midpoint Rule, like</p>
+<div class="math notranslate nohighlight">
+\[
+I - M_n = \frac{h^2}{24} (b-a) f''(\xi) = \frac{Df(b) - Df(a)}{24} h^2 + O(h^4)
+\]</div>
+<p>but we will see why the Composite Trapezoid Rule is far more useful for Richardson extrapolation.</p>
+<p><a name="Composite-Left-hand-Rule"></a></p>
+</div>
+</div>
+<div class="section" id="appendix-the-composite-left-hand-endpoint-rule-and-its-error">
+<h2><span class="section-number">18.3. </span>Appendix: The Composite Left-hand Endpoint Rule, and its Error<a class="headerlink" href="#appendix-the-composite-left-hand-endpoint-rule-and-its-error" title="Permalink to this headline">¶</a></h2>
+<p>The Composite Left-hand Endpoint Rule with <span class="math notranslate nohighlight">\(n\)</span> sub-intervals of equal width <span class="math notranslate nohighlight">\(h = (b-a)/n\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[L_n = \sum_{i=0}^{n-1} f(x_i) h, \; = \sum_{i=0}^{n-1} f(a + i h) h\]</div>
+<p>To study its errors, start as with the Compound Trapezoid Rule: break the integral up as</p>
+<div class="math notranslate nohighlight">
+\[ I = \int_a^b f(x) \, dx = \sum_{i=1}^n I^{(i)}, \quad \text{where} \quad I^{(i)} = \int_{x_{i-1}}^{x_i} f(x) \, dx \]</div>
+<p>and the approximation as</p>
+<div class="math notranslate nohighlight">
+\[ L_n = \sum_{i=1}^n L^{(i)} \]</div>
+<p>where each <span class="math notranslate nohighlight">\(L^{(i)}\)</span> is the Left-hand Endpoint Rule approximation of <span class="math notranslate nohighlight">\(I^{(i)}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[L^{(i)} = f(x_{i-1}) h\]</div>
+<p>Then the error in <span class="math notranslate nohighlight">\(L_n\)</span> is again the sum of the errors in each piece:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+I - L_n
+&amp;= \sum_{i=1}^n I^{(i)} - \sum_{i=1}^n L^{(i)}
+\\&amp;= \sum_{i=1}^n ( I^{(i)} - L^{(i)} )
+\\&amp;= \sum_{i=1}^n \frac{h^2}{2} f'(\xi_i), \quad x_i \in [x_{i-1}, x_i]
+\\&amp;= \frac{h^2}{2} \sum_{i=1}^n f'(\xi_i)
+\end{split}
+\end{split}\]</div>
+<p>The Generalized Mean Value Theorem — now with <span class="math notranslate nohighlight">\(f'\)</span> in place of <span class="math notranslate nohighlight">\(f\)</span> — allows us to replace the last sum above by
+<span class="math notranslate nohighlight">\(n f'(\xi)\)</span>, some <span class="math notranslate nohighlight">\(\xi \in [a, b]\)</span>, so that as claimed,</p>
+<div class="math notranslate nohighlight">
+\[I - L_n = \frac{h^2}{2} n f'(\xi), = \frac{h}{2} (b-a) f'(\xi) = O(h)\]</div>
+<p><strong>Aside:</strong> As with the Composite Trapezoid Rule, one can also get</p>
+<div class="math notranslate nohighlight">
+\[
+L_n = \int_a^b f(x) \,dx + \frac{f(b) - f(a)}{2} h + O(h^2)
+\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="definite-integrals-1-building-blocks.html" title="previous page"><span class="section-number">17. </span>Definite Integrals, Part 1: The Building Blocks</a>
+    <a class='right-next' id="next-link" href="definite-integrals-3-simpson-richardson.html" title="next page"><span class="section-number">19. </span>Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Brenton LeMesurier, College of Charleston and University of Northern Colorado<br/>
+        
+            &copy; Copyright 2020–2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
