@@ -336,7 +336,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="task-2-centered-differences-richardson.html">
-   Improving on the Above with Richardson Extrapolation
+   Improving on the Centered Difference Approximaiton with Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
@@ -365,12 +365,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="test-cases.html">
+  <a class="reference internal" href="test-cases-differentiation.html">
    Test Cases for Differentiation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="test-cases.html#test-cases-for-integration">
+  <a class="reference internal" href="test-cases-integration.html">
    Test Cases for Integration
   </a>
  </li>
@@ -619,9 +619,30 @@
                 
   <div class="section" id="the-recursive-trapezoid-rule-with-error-control">
 <h1>The Recursive Trapezoid Rule, with error control<a class="headerlink" href="#the-recursive-trapezoid-rule-with-error-control" title="Permalink to this headline">¶</a></h1>
-<p>Write a function that uses the Recursive Trapezoid Rule, <span class="math notranslate nohighlight">\(R_m = T_{2^m}\)</span> to estimate a definite integral with a specified absolute error tolerance.
-- The input should specify the function <span class="math notranslate nohighlight">\(f\)</span> and interval <span class="math notranslate nohighlight">\([a,b]\)</span>, and also the error tolerance.
-- The output should include the approximate answer, estimated error, and also the number of evaluations of <span class="math notranslate nohighlight">\(f(x)\)</span>, as a measure of cost.</p>
+<p><strong>Notes added on Thursday March 25</strong></p>
+<p>Write a function that uses the Recursive Trapezoid Rule, <span class="math notranslate nohighlight">\(R_m = T_{2^m}\)</span> to estimate a definite integral with a specified absolute error tolerance.</p>
+<ul class="simple">
+<li><p>The input should specify the function <span class="math notranslate nohighlight">\(f\)</span> and interval <span class="math notranslate nohighlight">\([a,b]\)</span>, and also the error tolerance.</p></li>
+<li><p>The output should include the approximate answer, estimated error, and also the number of evaluations of <span class="math notranslate nohighlight">\(f(x)\)</span>, as a measure of cost.</p></li>
+</ul>
+<p><strong>Added note:</strong></p>
+<p>Recall the formula</p>
+<div class="math notranslate nohighlight">
+\[
+T_{2n} = (T_n + M_n)/2
+\]</div>
+<p>so</p>
+<div class="math notranslate nohighlight">
+\[
+R_m = T_{2^m} = \frac{T_{2^{m-1}} + M_{2^{m-1}}}{2}
+\]</div>
+<p>which makes the evaluations more efficient.
+Thus, a useful first step is to write a Python function for  the Composite Midpoint Rule,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def midpoint(f, a, b, n):
+    ...
+    return M_n
+</pre></div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

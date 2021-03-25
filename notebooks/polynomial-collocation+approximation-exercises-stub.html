@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Exercises on Polynomial Collocation and Approximation — STUB &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. Solving \(Ax = b\) with LU factorization, \(A = L U\)" href="simultaneous-linear-equations-3-lu-factorization.html" />
-    <link rel="prev" title="9. Machine Numbers, Rounding Error and Error Propagation" href="machine-numbers-rounding-error-and-error-propagation.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -116,7 +114,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -162,8 +160,8 @@
    9. Machine Numbers, Rounding Error and Error Propagation
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting.html">
    10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
@@ -568,7 +566,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/simultaneous-linear-equations-2-pivoting.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/polynomial-collocation+approximation-exercises-stub.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -593,7 +591,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/simultaneous-linear-equations-2-pivoting.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/polynomial-collocation+approximation-exercises-stub.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -610,52 +608,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   10.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-can-go-wrong-with-naive-gaussian-elimination">
-   10.2. What can go wrong with Naive Gaussian Elimination?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-basic-fix-partial-pivoting">
-   10.3. The basic fix: Partial Pivoting
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#handling-rounding-error-maximal-element-partial-pivoting">
-   10.4. Handling rounding error: Maximal Element Partial Pivoting
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#swapping-rows-in-python">
-   10.5. Swapping rows in Python
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-1-on-python-coding">
-     10.5.1. Exercise 1, on Python coding
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-demonstrations">
-     10.5.2. Some demonstrations
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -663,176 +615,12 @@
         
               <div>
                 
-  <div class="section" id="solving-simultaneous-linear-equations-part-2-partial-pivoting">
-<h1><span class="section-number">10. </span>Solving Simultaneous Linear Equations, Part 2: Partial Pivoting<a class="headerlink" href="#solving-simultaneous-linear-equations-part-2-partial-pivoting" title="Permalink to this headline">¶</a></h1>
-<p><strong>References:</strong></p>
-<ul class="simple">
-<li><p>Section 2.4.1 <em>Partial Pivoting</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
-<li><p>Section 6.2 <em>Pivoting Strategies</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
-<li><p>Section 7.1 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
-</ul>
-<p><strong>Note:</strong>
-Some references describe the method of <em>scaled</em> partial pivoting, but here we present instead a version without the “scaling”, because not only is it simpler, but modern research shows that it is esentially always as good, once the problem is set up in a “sane” way.</p>
-<div class="section" id="introduction">
-<h2><span class="section-number">10.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The basic row reduction method can fail due to divisoion by zero (and to have very large rouding errors when a denominator is extremely close to zero.
-A more robust modification is to swap the order of the equations to avaid these problems: <em>partial pivotng</em>.
-Here we look at a particularly robust version of this strategy, <em>Maximal Element Partial Pivoting</em>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># As in recent sections, we import some items from modules individually, so they can be used by &quot;first name only&quot;.</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="what-can-go-wrong-with-naive-gaussian-elimination">
-<h2><span class="section-number">10.2. </span>What can go wrong with Naive Gaussian Elimination?<a class="headerlink" href="#what-can-go-wrong-with-naive-gaussian-elimination" title="Permalink to this headline">¶</a></h2>
-<p>We have noted two problems with the naive algorithm for Gaussian elimination: total failure due the division be zero, and loss of precision due to dividing by very small values — or more preciselt calculations the lead to intermediate values far larger than the final results.
-The culprits in all cases are the same: the denominators are first the <em>pivot elements</em> <span class="math notranslate nohighlight">\(a_{k,k}^{(k-1)}\)</span> in evaluation of <span class="math notranslate nohighlight">\(l_{i,k}\)</span> during row reduction and then the <span class="math notranslate nohighlight">\(u_{k,k}\)</span> in back substitution.
-Further, those <span class="math notranslate nohighlight">\(a_{k,k}^{(k-1)}\)</span> are the final updated values at indices <span class="math notranslate nohighlight">\((k,k)\)</span>, so are the same as <span class="math notranslate nohighlight">\(u_{k,k}\)</span>.
-Thus it is exactly these <em>main diagonal elements</em> that we must deal with.</p>
-</div>
-<div class="section" id="the-basic-fix-partial-pivoting">
-<h2><span class="section-number">10.3. </span>The basic fix: Partial Pivoting<a class="headerlink" href="#the-basic-fix-partial-pivoting" title="Permalink to this headline">¶</a></h2>
-<p>The basic strategy is that at step <span class="math notranslate nohighlight">\(k\)</span>, we can swap equation <span class="math notranslate nohighlight">\(k\)</span> with any equation <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(i &gt; k\)</span>.
-Note that this involves swapping those rows of array <code class="docutils literal notranslate"><span class="pre">A</span></code> and also those elements of the array <code class="docutils literal notranslate"><span class="pre">b</span></code> for the right-hand side: <span class="math notranslate nohighlight">\(b_k \leftrightarrow b_i\)</span>.</p>
-<p>This approach of swapping equations (swapping rows in arrays <code class="docutils literal notranslate"><span class="pre">A</span></code> and<code class="docutils literal notranslate"><span class="pre">b</span></code>) is called <strong>pivoting</strong>, or more specifically <strong>partial pivoting</strong>, to distinguish from the more elaborate strategy where to columns of <code class="docutils literal notranslate"><span class="pre">A</span></code> are also reordered (which is equivalent to reordeting the unknowns in the equations).
-The row that is swapped with row <span class="math notranslate nohighlight">\(k\)</span> is sometimes called the <strong>pivot row</strong>, and the new denominator is the corresponding <strong>pivot element</strong>.</p>
-<p>This approach is robust so long as one is using exact arithmetic: it works for any well-posed system because so long as the <span class="math notranslate nohighlight">\(Ax = b\)</span> has a unique solution — so that the original matrix <span class="math notranslate nohighlight">\(A\)</span> is non-singular — at least one of the <span class="math notranslate nohighlight">\(a_{i,k}^{(k-1)}, i \geq k\)</span> will be non-zero, and thus the swap will give a new element in position <span class="math notranslate nohighlight">\((k,k)\)</span> that is non-zero.
-(I will stop caring about superscripts to distinguish updates, but if you wish to, the elements of the new row <span class="math notranslate nohighlight">\(k\)</span> could be called either <span class="math notranslate nohighlight">\(a_{k,j}^{(k)}\)</span> or even <span class="math notranslate nohighlight">\(u_{k,j}\)</span>, since those values are in their final state.)</p>
-</div>
-<div class="section" id="handling-rounding-error-maximal-element-partial-pivoting">
-<h2><span class="section-number">10.4. </span>Handling rounding error: Maximal Element Partial Pivoting<a class="headerlink" href="#handling-rounding-error-maximal-element-partial-pivoting" title="Permalink to this headline">¶</a></h2>
-<p>The final refinement is to seek the smallest possible magnitudes for intermediate values, and thus the smallest absolute errors in them, by making the multipliers <span class="math notranslate nohighlight">\(l_{i,k}\)</span> small, in turn by making the denominator <span class="math notranslate nohighlight">\(a_{k,k}^{(k-1)} = u_{k,k}\)</span> as large as possible in magnitude:</p>
-<p><em>At step <span class="math notranslate nohighlight">\(k\)</span>, choose the pivot row <span class="math notranslate nohighlight">\(p_k \geq k\)</span> so that <span class="math notranslate nohighlight">\(|a_{p_k,k}^{(k-1)}| \geq |a_{i,k}^{(k-1)}|\)</span> for all <span class="math notranslate nohighlight">\(i \geq k\)</span>. If there is more that one such element of largest magnitude, use the lowest value:
-in particular, if <span class="math notranslate nohighlight">\(p_k = k\)</span> works, use it and do not swap!</em></p>
-</div>
-<div class="section" id="swapping-rows-in-python">
-<h2><span class="section-number">10.5. </span>Swapping rows in Python<a class="headerlink" href="#swapping-rows-in-python" title="Permalink to this headline">¶</a></h2>
-<p>I will not give a detailed algorithm for this, since we will soon implement an even better variant.</p>
-<p>However, here are some notes on swapping values and how to avoid a possible pitfall.</p>
-<div class="section" id="exercise-1-on-python-coding">
-<h3><span class="section-number">10.5.1. </span>Exercise 1, on Python coding<a class="headerlink" href="#exercise-1-on-python-coding" title="Permalink to this headline">¶</a></h3>
-<p>a) Explain why we cannot just swap the relevant elements of rows <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(p\)</span> with:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for j in range(k,n):
-    A[k,j] = A[p,j]
-    A[p,j] = A[k,j]
-</pre></div>
-</div>
-<p>or with vectorized “slicing”:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A[k,k:] = A[p,k:]
-A[p,k:] = A[k,k:]
-</pre></div>
-</div>
-<p>Describe what happens instead.</p>
-<p>b) A common strategy to avoid this problem uses an intermediate temporary copy of each value being “moved”.
-This can be combined with slicing, but be careful: arrays (including slices of arrays) must be copied with the method <code class="docutils literal notranslate"><span class="pre">.copy()</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>temp = A[k,k:].copy()
-A[k,k:] = A[p,k:]
-A[p,k:] = temp
-</pre></div>
-</div>
-<ol>
-<li><p>Python also has an elegant alternative for swapping a pair of values:</p>
-<p>for j in range(k,n):
-( A[k,j] , A[p,j] ) = ( A[p,j] , A[k,j] )</p>
-</li>
-</ol>
-<p>This can also be done with slicing, with care to copy those slices:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>( A[k,k:] , A[p,k:] ) = ( A[p,k:].copy() , A[k,k:].copy() )
-</pre></div>
-</div>
-</div>
-<div class="section" id="some-demonstrations">
-<h3><span class="section-number">10.5.2. </span>Some demonstrations<a class="headerlink" href="#some-demonstrations" title="Permalink to this headline">¶</a></h3>
-<p>No row reduction is done here, so entire rows are swapped rather than just the elements from column <span class="math notranslate nohighlight">\(k\)</span> onward:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span> <span class="p">,</span> <span class="o">-</span><span class="mf">6.</span> <span class="p">,</span> <span class="mf">2.</span><span class="p">],[</span><span class="mf">3.</span> <span class="p">,</span> <span class="mf">5.</span> <span class="p">,</span> <span class="o">-</span><span class="mf">6.</span><span class="p">],[</span><span class="mf">4.</span> <span class="p">,</span> <span class="mf">2.</span> <span class="p">,</span> <span class="mf">7.</span><span class="p">]])</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initially,</span><span class="se">\n</span><span class="s2">A =</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initially,
-A =
- [[ 1. -6.  2.]
- [ 3.  5. -6.]
- [ 4.  2.  7.]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">temp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span>
-<span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span> <span class="o">=</span> <span class="n">temp</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After swapping rows 1 &lt;-&gt; 3 (row indices 0 &lt;-&gt; 2) using slicing and a temporary row,&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After swapping rows 1 &lt;-&gt; 3 (row indices 0 &lt;-&gt; 2) using slicing and a temporary row,
-A =
- [[ 4.  2.  7.]
- [ 3.  5. -6.]
- [ 1. -6.  2.]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After swapping rows 2 &lt;-&gt; 3 using a loop and tuples of elements, no temp,&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After swapping rows 2 &lt;-&gt; 3 using a loop and tuples of elements, no temp,
-A =
- [[ 4.  2.  7.]
- [ 1. -6.  2.]
- [ 3.  5. -6.]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span> <span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After swapping rows 1 &lt;-&gt; 2 using tuples of slices, no loop or temp,&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After swapping rows 1 &lt;-&gt; 2 using tuples of slices, no loop or temp,
-A =
- [[ 1. -6.  2.]
- [ 4.  2.  7.]
- [ 3.  5. -6.]]
-</pre></div>
-</div>
-</div>
-</div>
+  <div class="section" id="exercises-on-polynomial-collocation-and-approximation-stub">
+<h1>Exercises on Polynomial Collocation and Approximation — STUB<a class="headerlink" href="#exercises-on-polynomial-collocation-and-approximation-stub" title="Permalink to this headline">¶</a></h1>
+<p><strong>Created on Thursday March 25</strong></p>
+<p>TO DO: Create! — and insert back into the two relevant sections.</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -863,8 +651,6 @@ A =
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="machine-numbers-rounding-error-and-error-propagation.html" title="previous page"><span class="section-number">9. </span>Machine Numbers, Rounding Error and Error Propagation</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-3-lu-factorization.html" title="next page"><span class="section-number">11. </span>Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> with LU factorization, <span class="math notranslate nohighlight">\(A = L U\)</span></a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

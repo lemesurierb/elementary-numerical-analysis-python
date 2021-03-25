@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Comparison of Methods — DRAFT" href="../notebooks/ODE-IVP-comparison-of-methods.html" />
+    <link rel="next" title="Test Cases for Integration" href="test-cases-integration.html" />
     <link rel="prev" title="The Romberg Method" href="task-7-romberg-method.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -336,7 +336,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="task-2-centered-differences-richardson.html">
-   Improving on the Above with Richardson Extrapolation
+   Improving on the Centered Difference Approximaiton with Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
@@ -370,7 +370,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#test-cases-for-integration">
+  <a class="reference internal" href="test-cases-integration.html">
    Test Cases for Integration
   </a>
  </li>
@@ -568,7 +568,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/project-on-numerical-calculus/test-cases.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/project-on-numerical-calculus/test-cases-differentiation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -593,7 +593,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/project-on-numerical-calculus/test-cases.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/project-on-numerical-calculus/test-cases-differentiation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -610,25 +610,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Test Cases for Differentiation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#test-cases-for-integration">
-   Test Cases for Integration
-  </a>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -638,15 +619,10 @@
                 
   <div class="section" id="test-cases-for-differentiation">
 <h1>Test Cases for Differentiation<a class="headerlink" href="#test-cases-for-differentiation" title="Permalink to this headline">¶</a></h1>
+<p><strong>Revised on Thursday March 25</strong></p>
+<p><strong>Note:</strong> package Numpy provides the numbers <span class="math notranslate nohighlight">\(e\)</span> and <span class="math notranslate nohighlight">\(\pi\)</span>,
+as <code class="docutils literal notranslate"><span class="pre">numpy.e</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy.pi</span></code></p>
 <p>For initial testing, evaluate <span class="math notranslate nohighlight">\(f'(1)\)</span> for <span class="math notranslate nohighlight">\(f(x) = e^x\)</span>.</p>
-</div>
-<div class="section" id="test-cases-for-integration">
-<h1>Test Cases for Integration<a class="headerlink" href="#test-cases-for-integration" title="Permalink to this headline">¶</a></h1>
-<p>For initial testing, evaluate some integrals of polynomials of degree from one to four (for which some methods should give exact results), and then</p>
-<div class="math notranslate nohighlight">
-\[I_1 := \int_{1}^{3} \frac{dx}{x^2}
-\]</div>
-<p>We will then choose some more challenging test cases.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -678,7 +654,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="task-7-romberg-method.html" title="previous page">The Romberg Method</a>
-    <a class='right-next' id="next-link" href="../notebooks/ODE-IVP-comparison-of-methods.html" title="next page"><span class="section-number">1. </span>Comparison of Methods — DRAFT</a>
+    <a class='right-next' id="next-link" href="test-cases-integration.html" title="next page">Test Cases for Integration</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

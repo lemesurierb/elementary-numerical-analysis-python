@@ -336,7 +336,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../project-on-numerical-calculus/task-2-centered-differences-richardson.html">
-   Improving on the Above with Richardson Extrapolation
+   Improving on the Centered Difference Approximaiton with Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
@@ -365,12 +365,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/test-cases.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
    Test Cases for Differentiation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/test-cases.html#test-cases-for-integration">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
    Test Cases for Integration
   </a>
  </li>
@@ -846,7 +846,7 @@ E_{2n} &amp;:= \frac{Q_{2n} - Q_n}{2^p - 1},
 Q_0 &amp;= Q_{2n} + E_{2n} + O\left(\frac{1}{n^q}\right).
 \end{split}
 \end{split}\]</div>
-<p>so <span class="math notranslate nohighlight">\(E_{2n}\)</span> estimate the error in <span class="math notranslate nohighlight">\(Q_{2n}\)</span>, and the improved approxmation can be expressed as</p>
+<p>so <span class="math notranslate nohighlight">\(E_{2n}\)</span> estimates the error in <span class="math notranslate nohighlight">\(Q_{2n}\)</span>, and the improved approxmation can be expressed as</p>
 <div class="math notranslate nohighlight">
 \[
 Q_{2n} + E_{2n}.
@@ -858,7 +858,10 @@ Q_{2n} + E_{2n}.
 <p>The new improved approximation formulas have the same sort of error formula, but for order <span class="math notranslate nohighlight">\(q\)</span> instead of order <span class="math notranslate nohighlight">\(p\)</span>, so we could extrapolate again to get an even higher order method, and this can be done numerous times if there is a suitable power series in <span class="math notranslate nohighlight">\(h\)</span> or <span class="math notranslate nohighlight">\(1/n\)</span> for the errors.</p>
 <p>That is not so useful for derivative approximations, where one can get the same or better results with the method of underermined coefficients, but can be very useful for integration methods, and for the related task of solving boundary value problems for ordinary differential equations.</p>
 <p>For example, it can be applied to the composite trapezoid rule, giving the composite Simpson’s rule at the first step, and then a succession of approximations of ever higher order – this is known as the <strong>Romberg method.</strong></p>
-<p>Repeated Richardson extrapolation could also be applied to the approximate solution of the Euler-Bernoulli beam model in Project 1, to improve the accuracy of that result.</p>
+<p>Repeated Richardson extrapolation can also be applied to the approximate solution of dofferential equations;
+we might explore that later.</p>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
 </div>
 

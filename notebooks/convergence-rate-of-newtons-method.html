@@ -336,7 +336,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../project-on-numerical-calculus/task-2-centered-differences-richardson.html">
-   Improving on the Above with Richardson Extrapolation
+   Improving on the Centered Difference Approximaiton with Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
@@ -365,12 +365,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/test-cases.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
    Test Cases for Differentiation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/test-cases.html#test-cases-for-integration">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
    Test Cases for Integration
   </a>
  </li>
@@ -711,6 +711,14 @@ so the above guideline is valid.</p>
 <p><strong>Proposition 2:</strong> For a super-linearly convergent iteration, eventually <span class="math notranslate nohighlight">\(|E_{k+1}|/|E_{k}| &lt; 1/2\)</span>,
 and from that point onwards in the iterations, the above applies again.</p>
 <p>I leave verification as an exercise, or if you wish, to discuss in class.</p>
+<p>Using the Integral Mean Value Theorem again, now with weight <span class="math notranslate nohighlight">\(w(x) = x-a\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[
+\int_a^b f'(\xi_x)(x-a) dx = f'(\xi) \int_a^b (x-a) dx = f'(\xi) \frac{(b-a)^2}{2} = \frac{h^2}{2} f'(\xi) \; \text{for some} \; \xi \in [a, b]
+\]</div>
+<p>and inserting this into the previous formula gives the result.</p>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
 </div>
 </div>
