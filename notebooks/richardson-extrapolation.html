@@ -665,6 +665,11 @@
      16.3.1. A common verbal description for both forms
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#addendum-rewriting-to-get-an-error-estimate-again">
+     16.3.2. Addendum: Rewriting to get an error estimate, again
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -828,8 +833,11 @@ Q_0 = \frac{k^p Q_{k n} - Q_n}{k^p - 1} + O\left(\frac{1}{n^q}\right).
 </ul>
 <p>Also</p>
 <p>“The error in the more accurate approximation is approximated by the difference between the two approximations, divided by <span class="math notranslate nohighlight">\((2^p - 1)\)</span>”</p>
-<p><a name="n-error-estimates"></a>
-As with the “<span class="math notranslate nohighlight">\(h\)</span>” form above, this extrapolation can be broken into two steps</p>
+<p><a name="n-error-estimates"></a></p>
+</div>
+<div class="section" id="addendum-rewriting-to-get-an-error-estimate-again">
+<h3><span class="section-number">16.3.2. </span>Addendum: Rewriting to get an error estimate, again<a class="headerlink" href="#addendum-rewriting-to-get-an-error-estimate-again" title="Permalink to this headline">¶</a></h3>
+<p>As with the “<span class="math notranslate nohighlight">\(h\)</span>” form above, this extrapolation can be broken into two steps</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
@@ -838,7 +846,7 @@ E_{2n} &amp;:= \frac{Q_{2n} - Q_n}{2^p - 1},
 Q_0 &amp;= Q_{2n} + E_{2n} + O\left(\frac{1}{n^q}\right).
 \end{split}
 \end{split}\]</div>
-<p>so <span class="math notranslate nohighlight">\(E_{2n}\)</span> estimate the error in E_{2n}, and the improved approxmation is expressed as</p>
+<p>so <span class="math notranslate nohighlight">\(E_{2n}\)</span> estimate the error in <span class="math notranslate nohighlight">\(Q_{2n}\)</span>, and the improved approxmation can be expressed as</p>
 <div class="math notranslate nohighlight">
 \[
 Q_{2n} + E_{2n}.
