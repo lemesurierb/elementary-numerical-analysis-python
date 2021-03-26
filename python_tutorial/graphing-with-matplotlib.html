@@ -736,6 +736,8 @@
                 
   <div class="section" id="plotting-graphs-with-matplotlib">
 <h1><span class="section-number">11. </span>Plotting Graphs with Matplotlib<a class="headerlink" href="#plotting-graphs-with-matplotlib" title="Permalink to this headline">¶</a></h1>
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+<hr class="docutils" />
 <div class="section" id="introduction-matplotlib-and-pyplot">
 <h2><span class="section-number">11.1. </span>Introduction: Matplotlib and Pyplot<a class="headerlink" href="#introduction-matplotlib-and-pyplot" title="Permalink to this headline">¶</a></h2>
 <p>Numerical data is often presented with graphs, and the tools we use for this come from the module <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> which is part of the Python <em>package</em> <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. (A Python <em>package</em> is essentially a module that also contains other modules.)</p>
@@ -861,7 +863,7 @@ The function <code>linspace</code> gives an array containing a specified number 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa69a063d30&gt;]
 </pre></div>
 </div>
-<img alt="../_images/graphing-with-matplotlib_23_1.png" src="../_images/graphing-with-matplotlib_23_1.png" />
+<img alt="../_images/graphing-with-matplotlib_24_1.png" src="../_images/graphing-with-matplotlib_24_1.png" />
 </div>
 </div>
 <p>Here we see the default behavior of joining the given points with straight lines.</p>
@@ -874,7 +876,7 @@ The function <code>linspace</code> gives an array containing a specified number 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_26_0.png" src="../_images/graphing-with-matplotlib_26_0.png" />
+<img alt="../_images/graphing-with-matplotlib_27_0.png" src="../_images/graphing-with-matplotlib_27_0.png" />
 </div>
 </div>
 <p>(More on this output clean-up below.)</p>
@@ -887,7 +889,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_29_0.png" src="../_images/graphing-with-matplotlib_29_0.png" />
+<img alt="../_images/graphing-with-matplotlib_30_0.png" src="../_images/graphing-with-matplotlib_30_0.png" />
 </div>
 </div>
 <p>Or maybe both lines and markers:</p>
@@ -898,7 +900,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_31_0.png" src="../_images/graphing-with-matplotlib_31_0.png" />
+<img alt="../_images/graphing-with-matplotlib_32_0.png" src="../_images/graphing-with-matplotlib_32_0.png" />
 </div>
 </div>
 </div>
@@ -941,7 +943,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_35_0.png" src="../_images/graphing-with-matplotlib_35_0.png" />
+<img alt="../_images/graphing-with-matplotlib_36_0.png" src="../_images/graphing-with-matplotlib_36_0.png" />
 </div>
 </div>
 </div>
@@ -957,7 +959,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_37_0.png" src="../_images/graphing-with-matplotlib_37_0.png" />
+<img alt="../_images/graphing-with-matplotlib_38_0.png" src="../_images/graphing-with-matplotlib_38_0.png" />
 </div>
 </div>
 <p>On the other hand, when plotting externally, or from a Python script file or the IPython command line, successive <code class="docutils literal notranslate"><span class="pre">plot</span></code> commands keep adding to the same figure until you explicitly specify otherwise, with the function <code class="docutils literal notranslate"><span class="pre">figure</span></code> introduced below.</p>
@@ -973,7 +975,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_41_0.png" src="../_images/graphing-with-matplotlib_41_0.png" />
+<img alt="../_images/graphing-with-matplotlib_42_0.png" src="../_images/graphing-with-matplotlib_42_0.png" />
 </div>
 </div>
 <p>Note that even with multiple curves in a single plot command, markers can be specified on some, none or all: Matplotlib uses the difference between an array and a text string to recognize which arguments specify markers instead of data.</p>
@@ -985,7 +987,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_43_0.png" src="../_images/graphing-with-matplotlib_43_0.png" />
+<img alt="../_images/graphing-with-matplotlib_44_0.png" src="../_images/graphing-with-matplotlib_44_0.png" />
 </div>
 </div>
 </div>
@@ -1000,7 +1002,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_45_0.png" src="../_images/graphing-with-matplotlib_45_0.png" />
+<img alt="../_images/graphing-with-matplotlib_46_0.png" src="../_images/graphing-with-matplotlib_46_0.png" />
 </div>
 </div>
 <p>Note the color sequence.</p>
@@ -1015,7 +1017,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_48_0.png" src="../_images/graphing-with-matplotlib_48_0.png" />
+<img alt="../_images/graphing-with-matplotlib_49_0.png" src="../_images/graphing-with-matplotlib_49_0.png" />
 </div>
 </div>
 <p><strong>Aside on long lines of code:</strong> <em>The above illustrates a little Python coding hack: one way to have a long command continue over several lines is simply to have parentheses wrapped around the part that spans multiple lines—when a line ends with an opening parenthesis not yet matched, Python knowns that something is still to come.</em></p>
@@ -1038,7 +1040,7 @@ This is done by adding a third argument, a text string specifying a marker, such
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_52_0.png" src="../_images/graphing-with-matplotlib_52_0.png" />
+<img alt="../_images/graphing-with-matplotlib_53_0.png" src="../_images/graphing-with-matplotlib_53_0.png" />
 </div>
 </div>
 </div>
@@ -1064,8 +1066,8 @@ To instead start the next <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_55_0.png" src="../_images/graphing-with-matplotlib_55_0.png" />
-<img alt="../_images/graphing-with-matplotlib_55_1.png" src="../_images/graphing-with-matplotlib_55_1.png" />
+<img alt="../_images/graphing-with-matplotlib_56_0.png" src="../_images/graphing-with-matplotlib_56_0.png" />
+<img alt="../_images/graphing-with-matplotlib_56_1.png" src="../_images/graphing-with-matplotlib_56_1.png" />
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">figure</span></code> command can also do other things, like attach a name or number to a figure when it is displayed externally, and change from the default size.</p>
@@ -1084,8 +1086,8 @@ To instead start the next <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_57_0.png" src="../_images/graphing-with-matplotlib_57_0.png" />
-<img alt="../_images/graphing-with-matplotlib_57_1.png" src="../_images/graphing-with-matplotlib_57_1.png" />
+<img alt="../_images/graphing-with-matplotlib_58_0.png" src="../_images/graphing-with-matplotlib_58_0.png" />
+<img alt="../_images/graphing-with-matplotlib_58_1.png" src="../_images/graphing-with-matplotlib_58_1.png" />
 </div>
 </div>
 </div>
@@ -1103,7 +1105,7 @@ As seen above, this can be controlled by an optional text string argument after 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_59_0.png" src="../_images/graphing-with-matplotlib_59_0.png" />
+<img alt="../_images/graphing-with-matplotlib_60_0.png" src="../_images/graphing-with-matplotlib_60_0.png" />
 </div>
 </div>
 <p>These three-part curve specifications can be combined:
@@ -1116,7 +1118,7 @@ in the following, <code class="docutils literal notranslate"><span class="pre">p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/graphing-with-matplotlib_61_0.png" src="../_images/graphing-with-matplotlib_61_0.png" />
+<img alt="../_images/graphing-with-matplotlib_62_0.png" src="../_images/graphing-with-matplotlib_62_0.png" />
 </div>
 </div>
 </div>
