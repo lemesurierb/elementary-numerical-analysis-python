@@ -246,6 +246,23 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
+  Preliminary Versions of Future Sections
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
+   1. Global Error Bounds for One Step Methods — Preliminary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
+   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Exercises
  </span>
 </p>
@@ -283,6 +300,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
    Exercises on Solving Simultaneous Linear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+   Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
 </ul>
@@ -372,23 +394,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
    Test Cases for Integration
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Preliminary Versions of Future Sections
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-comparison-of-methods.html">
-   1. Comparison of Methods — DRAFT
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -731,8 +736,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-more-general-error-bound-exists">
-     21.3.12. A more general error bound exists
+    <a class="reference internal nav-link" href="#a-more-general-error-bound">
+     21.3.12. A more general error bound
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -1326,7 +1331,7 @@ and we only need this to the beginning of the last step, <span class="math notra
 </div>
 <div class="section" id="and-using-this-to-complete-the-bound-on-the-global-truncation-error">
 <h3><span class="section-number">21.3.11. </span>… and using this to complete the bound on the global truncation error<a class="headerlink" href="#and-using-this-to-complete-the-bound-on-the-global-truncation-error" title="Permalink to this headline">¶</a></h3>
-<p>Using this bound on tehlocal errors <span class="math notranslate nohighlight">\(e_i\)</span> in the above sum for the global error <span class="math notranslate nohighlight">\(E_i\)</span>,</p>
+<p>Using this bound on the local errors <span class="math notranslate nohighlight">\(e_i\)</span> in the above sum for the global error <span class="math notranslate nohighlight">\(E_i\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[ | E_i | \leq C h^2 (1 + g + \cdots g^{i-1}) = C \frac{g^i - 1}{g-1} h^2 \]</div>
 <p>Since <span class="math notranslate nohighlight">\(g^i = e^{k h i} = e^{k (t_i - a)}\)</span> and the denominator <span class="math notranslate nohighlight">\(g - 1 = e^{kh} - 1 &gt; k h\)</span>,
@@ -1347,8 +1352,8 @@ depends on <span class="math notranslate nohighlight">\(t\)</span>, and</p></li>
 <li><p>The third is <span class="math notranslate nohighlight">\(h\)</span>, showing the overall order of accuracy: first order: the overall absolute error is <span class="math notranslate nohighlight">\(O(h)\)</span>.</p></li>
 </ul>
 </div>
-<div class="section" id="a-more-general-error-bound-exists">
-<h3><span class="section-number">21.3.12. </span>A more general error bound exists<a class="headerlink" href="#a-more-general-error-bound-exists" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="a-more-general-error-bound">
+<h3><span class="section-number">21.3.12. </span>A more general error bound<a class="headerlink" href="#a-more-general-error-bound" title="Permalink to this headline">¶</a></h3>
 <p>A very similar result applies to the solution <span class="math notranslate nohighlight">\(u(t; a, u_0)\)</span> of the more general initial value problem</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1361,12 +1366,16 @@ that there is some constant <span class="math notranslate nohighlight">\(K\)</sp
 \left| \frac{\partial F}{\partial u}(t, u) \right| \leq K 
 \]</div>
 <p>for the relevant time values <span class="math notranslate nohighlight">\(a \leq t \leq b\)</span>.</p>
+<p>(<strong>Aside:</strong> As you might have seen in a course on differential equations, such a Lipschitz condition is necessary to even guarantee that the initial value problem has a unique solution, so it is a quite reasonable requirement.)</p>
 <p>Then this constant <span class="math notranslate nohighlight">\(K\)</span> plays the part of the exponential growth factor <span class="math notranslate nohighlight">\(k\)</span> above:</p>
+<p>first one shows that the local trunction error is bounded by</p>
+<div class="math notranslate nohighlight">
+\[ |e_i| \leq C h^2 \text{ where now } C := \frac{|u_0 e^{K(b - a)}|}{2}; \]</div>
+<p>then calculating as above bounds the global truncation error with</p>
 <div class="math notranslate nohighlight">
 \[
 | E_i | \leq \frac{|u_0 e^{K(b - a)}|}{2} \frac{e^{K (t_i - a)} - 1}{k} h, = O(h)
 \]</div>
-<p><strong>Aside:</strong> As you might have seen in a course on differential equations, such a Lipschitz Condition is necessary to even guarantee that the initial value problem has a unique solution, so it is a quite reasonable requirement.</p>
 </div>
 <div class="section" id="there-is-much-room-for-improvement">
 <h3><span class="section-number">21.3.13. </span>There is much room for improvement<a class="headerlink" href="#there-is-much-room-for-improvement" title="Permalink to this headline">¶</a></h3>

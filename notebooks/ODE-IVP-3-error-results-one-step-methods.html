@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercises on Newton’s Method &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>1. Global Error Bounds for One Step Methods — Preliminary &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises on Root-finding Without Derivatives" href="root-finding-without-derivatives-exercises.html" />
-    <link rel="prev" title="Exercises on Error Measures and Convergence" href="error-measures-convergence-rates-exercises.html" />
+    <link rel="next" title="2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html" />
+    <link rel="prev" title="23. Some Future Topics" href="future_topics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -249,9 +249,9 @@
   Preliminary Versions of Future Sections
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    1. Global Error Bounds for One Step Methods — Preliminary
   </a>
  </li>
@@ -266,7 +266,7 @@
   Exercises
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-exercises.html">
    Exercises on the Bisection Method
@@ -282,8 +282,8 @@
    Exercises on Error Measures and Convergence
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
    Exercises on Newton’s Method
   </a>
  </li>
@@ -573,7 +573,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/newtons-method-exercises.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-3-error-results-one-step-methods.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -598,7 +598,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/newtons-method-exercises.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-3-error-results-one-step-methods.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -621,8 +621,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise-1">
-   Exercise 1
+  <a class="reference internal nav-link" href="#order-of-accuracy-for-the-basic-runge-kutta-type-mehods">
+   1.1. Order of accuracy for the basic Runge-Kutta type mehods
   </a>
  </li>
 </ul>
@@ -636,18 +636,73 @@
         
               <div>
                 
-  <div class="section" id="exercises-on-newton-s-method">
-<h1>Exercises on Newton’s Method<a class="headerlink" href="#exercises-on-newton-s-method" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exercise-1">
-<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h2>
-<p>a) Show that Newton’s method applied to</p>
+  <div class="section" id="global-error-bounds-for-one-step-methods-preliminary">
+<h1><span class="section-number">1. </span>Global Error Bounds for One Step Methods — Preliminary<a class="headerlink" href="#global-error-bounds-for-one-step-methods-preliminary" title="Permalink to this headline">¶</a></h1>
+<p>All the methods seen so far for solving ODE IVP’s are <em>one-step methods</em>:
+they fit the general form</p>
 <div class="math notranslate nohighlight">
-\[ f(x) = x^k - a \]</div>
-<p>leads to fixed point iteration with function</p>
+\[
+U_{i+1} = F(t_i, U_i, h)
+\]</div>
+<p>For example, Euler’s Method has</p>
 <div class="math notranslate nohighlight">
-\[ g(x) = \frac{(k-1) x + \displaystyle \frac{a}{x^{k-1}}}{k}. \]</div>
-<p>b) Then verify mathematically that the iteration
-<span class="math notranslate nohighlight">\(x_{k+1} = g(x_k)\)</span> has super-linear convergence.</p>
+\[
+F(t, U, h) = U + h f(t, U),
+\]</div>
+<p>the Explicit Midpoint Method (Modified Euler) has</p>
+<div class="math notranslate nohighlight">
+\[
+F(t, U, h) = U + h f(t+h/2, U + hf(t, U)/2)
+\]</div>
+<p>and even the Runge-Kutta method has a similar form, but it is long and ugly.</p>
+<p>For these, there is a general result that gives a bound on the globl truncation error (“GTE”) once one has a suitable bound on the local truncation error (“LTE”).
+This is very useful, because bounds on the LTE are usually far easier to derive.</p>
+<p><strong>Theorem</strong></p>
+<p>When solving the ODE IVP</p>
+<div class="math notranslate nohighlight">
+\[
+du/dt = f(t, u),\quad u(a) = u_0
+\]</div>
+<p>on interval <span class="math notranslate nohighlight">\(t \in [a, b]\)</span> by a one step method</p>
+<p>one has a bound on the local truncation error</p>
+<div class="math notranslate nohighlight">
+\[
+|e_i| = |U_{i+1} - u(t_i+h; t_i, U_i) = |F(t_i, U_i, h) - u(t_i + h; t_i, U_i)| \leq Ch^{p+1} = O(h^{p+1})
+\]</div>
+<p>and the ODE itself satisfies the <em>Lipschitz Condition</em> that for some constant <span class="math notranslate nohighlight">\(K\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\left| \frac{\partial F}{\partial u}(t, u) \right| \leq K 
+\]</div>
+<p>then there is a bound on the global truncation error:</p>
+<div class="math notranslate nohighlight">
+\[
+| E_i | = |U_i - u(t_i; a, u_0)| \leq C \frac{e^{K (t_i - a)} - 1}{k} h^p, = O(h^p)
+\]</div>
+<p>So yet again, there is a loss of one factor of <span class="math notranslate nohighlight">\(h\)</span> in going from local to global error,
+as first seen with the composite rules for definite integrals.</p>
+<p>We saw a glimpse of this
+for Euler’s method,
+in the section
+<a class="reference internal" href="ODE-IVP-1-basics-and-Euler.html"><span class="doc std std-doc">Solving Initial Value Problems for Ordinary Differential Equations, Part 1</span></a>,
+where the Taylor’s Theorem error formula canbe used to get the LTE bound</p>
+<div class="math notranslate nohighlight">
+\[ |e_i| \leq C h^2 \text{ where } C = \frac{|u_0 e^{K(b - a)}|}{2} \]</div>
+<p>and this leads to to GTE bound</p>
+<div class="math notranslate nohighlight">
+\[
+| E_i | \leq \frac{|u_0 e^{K(b - a)}|}{2} \frac{e^{K (t_i - a)} - 1}{k} h.
+\]</div>
+<div class="section" id="order-of-accuracy-for-the-basic-runge-kutta-type-mehods">
+<h2><span class="section-number">1.1. </span>Order of accuracy for the basic Runge-Kutta type mehods<a class="headerlink" href="#order-of-accuracy-for-the-basic-runge-kutta-type-mehods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>For Euler’s method, it was stated in section
+<a class="reference internal" href="ODE-IVP-1-basics-and-Euler.html"><span class="doc std std-doc">Solving Initial Value Problems for Ordinary Differential Equations, Part 1</span></a>,
+(and verified for the test case of <span class="math notranslate nohighlight">\(du/dt = ku\)</span>)
+that the global truncation error is of first order n step-size <span class="math notranslate nohighlight">\(h\)</span>:</p></li>
+<li><p>The Explicit (and Implicit) Trapezoid and Midpoint rules, the local truncation error is <span class="math notranslate nohighlight">\(O(h^3)\)</span>
+and so their global truncation error is <span class="math notranslate nohighlight">\(O(h^2)\)</span> — they are second order accurate, just as for the corresponding approximate integration rules.</p></li>
+</ul>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
@@ -681,8 +736,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="error-measures-convergence-rates-exercises.html" title="previous page">Exercises on Error Measures and Convergence</a>
-    <a class='right-next' id="next-link" href="root-finding-without-derivatives-exercises.html" title="next page">Exercises on Root-finding Without Derivatives</a>
+    <a class='left-prev' id="prev-link" href="future_topics.html" title="previous page"><span class="section-number">23. </span>Some Future Topics</a>
+    <a class='right-next' id="next-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html" title="next page"><span class="section-number">2. </span>Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

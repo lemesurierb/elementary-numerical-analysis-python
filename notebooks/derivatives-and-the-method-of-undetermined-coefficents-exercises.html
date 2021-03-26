@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercises on Newton’s Method &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises on Root-finding Without Derivatives" href="root-finding-without-derivatives-exercises.html" />
-    <link rel="prev" title="Exercises on Error Measures and Convergence" href="error-measures-convergence-rates-exercises.html" />
+    <link rel="next" title="MATH 375 Assignment 1" href="assignment1.html" />
+    <link rel="prev" title="Exercises on Solving Simultaneous Linear Equations" href="simultaneous-linear-equations-exercises.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -282,8 +282,8 @@
    Exercises on Error Measures and Convergence
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
    Exercises on Newton’s Method
   </a>
  </li>
@@ -302,8 +302,8 @@
    Exercises on Solving Simultaneous Linear Equations
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
@@ -573,7 +573,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/newtons-method-exercises.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/derivatives-and-the-method-of-undetermined-coefficents-exercises.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -598,7 +598,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/newtons-method-exercises.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/derivatives-and-the-method-of-undetermined-coefficents-exercises.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -625,6 +625,31 @@
    Exercise 1
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-2">
+   Exercise 2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-3">
+   Exercise 3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-4">
+   Exercise 4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-5">
+   Exercise 5
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-6">
+   Exercise 6
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -636,18 +661,61 @@
         
               <div>
                 
-  <div class="section" id="exercises-on-newton-s-method">
-<h1>Exercises on Newton’s Method<a class="headerlink" href="#exercises-on-newton-s-method" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="exercises-on-approximating-derivatives-the-method-of-undetermined-coefficients-and-richardson-extrapolation">
+<h1>Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation<a class="headerlink" href="#exercises-on-approximating-derivatives-the-method-of-undetermined-coefficients-and-richardson-extrapolation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="exercise-1">
 <h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h2>
-<p>a) Show that Newton’s method applied to</p>
+<p>Show that for a three-point one-sided difference approximation of the first derivative</p>
 <div class="math notranslate nohighlight">
-\[ f(x) = x^k - a \]</div>
-<p>leads to fixed point iteration with function</p>
+\[Df(x) = \frac{C_{0} f(x) + C_1 f(x + h) + C_2 f(x + 2h)}{h} + O(h^p)\]</div>
+<p>the most accurate choice is <span class="math notranslate nohighlight">\(C_0 = -3/2\)</span>, <span class="math notranslate nohighlight">\(C_1 = 2\)</span>, <span class="math notranslate nohighlight">\(C_2 = -1/2\)</span>, giving</p>
 <div class="math notranslate nohighlight">
-\[ g(x) = \frac{(k-1) x + \displaystyle \frac{a}{x^{k-1}}}{k}. \]</div>
-<p>b) Then verify mathematically that the iteration
-<span class="math notranslate nohighlight">\(x_{k+1} = g(x_k)\)</span> has super-linear convergence.</p>
+\[Df(x) \approx \frac{-3 f(x) + 4 f(x + h) - f(x + 2h)}{2 h} + O(h^2).\]</div>
+<p>and verify that this is of second order</p>
+<p>Do this by setting up the three equations as above for the coefficients <span class="math notranslate nohighlight">\(C_0\)</span>, <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span>, and solving them.
+Do this “by hand”, to get exact fractions as the answers;
+us the two Taylor serei formulas, but now tak advanta of what we saw above, whi cis that the error stsrts at the terms in
+<span class="math notranslate nohighlight">\(D^3f(x)\)</span>, so use the forms</p>
+<div class="math notranslate nohighlight">
+\[f(x+h) = f(x) + Df(x) h + \frac{D^2f(x)}{2} h^2 + \frac{D^3f(x)}{6} h^3 + O(h^4)\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[f(x+2h) = f(x) + 2 Df(x) h + 2 D^2f(x) h^2 + \frac{4 D^3f(x)}{3} h^3 + O(h^4)\]</div>
+</div>
+<div class="section" id="exercise-2">
+<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h2>
+<p>Repeat Exercise 1, but using the degree of precision method.</p>
+<p>That is, impose the condition of giving the exact value for the derivative at <span class="math notranslate nohighlight">\(x=0\)</span> for the monomial <span class="math notranslate nohighlight">\(f(x) = 1\)</span>,
+then the same for <span class="math notranslate nohighlight">\(f(x) = x\)</span>, and so on until there are enough equations to determine a unique solution for the coefficients.</p>
+</div>
+<div class="section" id="exercise-3">
+<h2>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h2>
+<p>Verify that the most accurate three-point centered difference approximation of <span class="math notranslate nohighlight">\(D^2 f(x)\)</span>,
+form</p>
+<div class="math notranslate nohighlight">
+\[D^2f(x) \approx \frac{C_{-1} f(x - h) + C_{0} f(x) + C_1 f(x + h)}{h^2}\]</div>
+<p>is given by the coefficients <span class="math notranslate nohighlight">\(C_{-1} = C_1 = 1\)</span>, <span class="math notranslate nohighlight">\(C_0 = -2\)</span>
+in that this is of the highest order; <span class="math notranslate nohighlight">\(p=2\)</span>.</p>
+<p>That is</p>
+<div class="math notranslate nohighlight">
+\[D^2f(x) = \frac{f(x - h) -2 f(x) + f(x + h)}{h^2} + O(h^2).\]</div>
+<p>Do this by hand, and exploit the symmetry.</p>
+<p>Note that it works a bit better than expected, due to the symmetry.</p>
+</div>
+<div class="section" id="exercise-4">
+<h2>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h2>
+<p>Repeat Exercise 3, but using the degree of precision method.</p>
+</div>
+<div class="section" id="exercise-5">
+<h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this headline">¶</a></h2>
+<p>Derive a symmetric five-point approximation of the second derivative, using the Method of Undetermined Coefficients;
+I recomend that you use the simpler second, “monomials” approach.</p>
+<p>Note: try to exploit symmetry to reduce the number of equations that need to be solved.</p>
+</div>
+<div class="section" id="exercise-6">
+<h2>Exercise 6<a class="headerlink" href="#exercise-6" title="Permalink to this headline">¶</a></h2>
+<p>Use the symmetric centered difference approxmation of the second derivative and Richardson extrapolation to get another more accurate approximation of this derivative.</p>
+<p>Then compare to the result in Exercise 5.</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
@@ -681,8 +749,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="error-measures-convergence-rates-exercises.html" title="previous page">Exercises on Error Measures and Convergence</a>
-    <a class='right-next' id="next-link" href="root-finding-without-derivatives-exercises.html" title="next page">Exercises on Root-finding Without Derivatives</a>
+    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-exercises.html" title="previous page">Exercises on Solving Simultaneous Linear Equations</a>
+    <a class='right-next' id="next-link" href="assignment1.html" title="next page">MATH 375 Assignment 1</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
