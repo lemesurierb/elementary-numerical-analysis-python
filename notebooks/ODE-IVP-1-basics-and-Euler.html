@@ -772,6 +772,8 @@
 <h1><span class="section-number">21. </span>Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method<a class="headerlink" href="#solving-initial-value-problems-for-ordinary-differential-equations-part-1-basic-concepts-and-euler-s-method" title="Permalink to this headline">¶</a></h1>
 <p><strong>Updated on March 22</strong>
 with added <a class="reference external" href="#example-4">Example 4</a> and some <a class="reference external" href="#solving-example-4">numerical solutions of it</a>.</p>
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+<hr class="docutils" />
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Sections 6.1.1, 6.2.1, and 6.2.2 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -957,7 +959,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_17_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_17_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_19_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_19_0.png" />
 </div>
 </div>
 </div>
@@ -1007,7 +1009,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_21_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_21_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_23_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_23_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1037,7 +1039,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_23_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_23_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_25_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_25_0.png" />
 </div>
 </div>
 </div>
@@ -1075,7 +1077,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_27_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_27_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_29_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_29_0.png" />
 </div>
 </div>
 <p>There is clearly a problem when <span class="math notranslate nohighlight">\(t\)</span> reaches 1; let us explore that:</p>
@@ -1106,7 +1108,7 @@ as in the section <a class="reference internal" href="definite-integrals-2-compo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_30_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_30_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_32_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_32_0.png" />
 </div>
 </div>
 <p>Clearly Euler’s method can never produce the vertical asymptote; even less can it get the jump to negative values of <span class="math notranslate nohighlight">\(u\)</span>.
@@ -1130,7 +1132,7 @@ The best we can do is improve accuracy by using more, smaller time steps:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_32_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_32_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_34_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_34_0.png" />
 </div>
 </div>
 <p><a name="solving-example-4"></a></p>
@@ -1175,7 +1177,7 @@ The best we can do is improve accuracy by using more, smaller time steps:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_37_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_37_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_39_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_39_0.png" />
 </div>
 </div>
 <p>However, with large steps (still small enough to handle the <span class="math notranslate nohighlight">\(\cos t\)</span> part), there is a catastrophic failure, with growing oscillations that, as we will see, are a characteristic feature of <em>instability</em>.</p>
@@ -1201,7 +1203,7 @@ The best we can do is improve accuracy by using more, smaller time steps:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_40_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_40_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_42_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_42_0.png" />
 </div>
 </div>
 <p>To show that the <span class="math notranslate nohighlight">\(K\)</span> part is the problem, reduce <span class="math notranslate nohighlight">\(K\)</span> while leaving the rest unchanged:</p>
@@ -1227,7 +1229,7 @@ The best we can do is improve accuracy by using more, smaller time steps:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_43_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_43_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_45_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_45_0.png" />
 </div>
 </div>
 </div>
@@ -1432,7 +1434,7 @@ Later, we will see how to get even higher orders.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_60_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_60_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_62_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_62_0.png" />
 </div>
 </div>
 <p>This just shifts all the <span class="math notranslate nohighlight">\(u\)</span> values up by the perturbation of <span class="math notranslate nohighlight">\(u_0\)</span>.</p>
@@ -1470,7 +1472,7 @@ Later, we will see how to get even higher orders.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_65_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_65_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_67_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_67_0.png" />
 </div>
 </div>
 <p>Graphing the error shows its exponential growth:</p>
@@ -1484,11 +1486,9 @@ Later, we will see how to get even higher orders.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-1-basics-and-Euler_67_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_67_0.png" />
+<img alt="../_images/ODE-IVP-1-basics-and-Euler_69_0.png" src="../_images/ODE-IVP-1-basics-and-Euler_69_0.png" />
 </div>
 </div>
-<hr class="docutils" />
-<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
 </div>
 </div>

@@ -624,6 +624,13 @@
   <a class="reference internal nav-link" href="#programming-exercise">
    Programming Exercise
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#warm-up-exercise-forward-difference-aproximation">
+     Warm-up exercise: forward difference aproximation
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#mathematical-exercise">
@@ -643,7 +650,7 @@
                 
   <div class="section" id="centered-difference-approximation-of-the-derivative">
 <h1>Centered Difference Approximation of the Derivative<a class="headerlink" href="#centered-difference-approximation-of-the-derivative" title="Permalink to this headline">¶</a></h1>
-<p><strong>Revised March 22 and 25,</strong> adding details and a mathematical exercise.</p>
+<p><strong>Revised March 22, 25 and 26,</strong> adding a mathematical exercise, more details and an example.</p>
 <div class="section" id="programming-exercise">
 <h2>Programming Exercise<a class="headerlink" href="#programming-exercise" title="Permalink to this headline">¶</a></h2>
 <p>Write a (Python) function to approximate derivatives using the centered difference formula,</p>
@@ -655,6 +662,88 @@ Df(x) \approx \delta_hf(x) := \frac{f(x+h) - f(x-h)}{2h}
 (Also, remember that such a function should not do any interactive input, or any output to the screen or files.)</p>
 <p>Then — as usual — add code that tests this on some examples such as <span class="math notranslate nohighlight">\(f(x) = e^x\)</span>, <span class="math notranslate nohighlight">\(f'(1)\)</span> as suggested in the section on <a class="reference internal" href="test-cases-differentiation.html"><span class="doc std std-doc">Test Cases for Differentiation</span></a>.</p>
 <p><strong>Note:</strong> For the above function and every function below, create a Jupyter notebook to run test cases: this will handle any interactive input and any screen or file output.</p>
+<div class="section" id="warm-up-exercise-forward-difference-aproximation">
+<h3>Warm-up exercise: forward difference aproximation<a class="headerlink" href="#warm-up-exercise-forward-difference-aproximation" title="Permalink to this headline">¶</a></h3>
+<p>Let us do this for the forward difference approximation</p>
+<div class="math notranslate nohighlight">
+\[
+Df(x) \approx D_h(x) := \frac{f(x+h) - f(x)}{h}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">D_h</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="n">D_h_of_f_at_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">h</span>
+    <span class="k">return</span> <span class="n">D_h_of_f_at_x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="c1">#h = 0.01</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For </span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For </span><span class="si">{</span><span class="n">h</span><span class="si">=}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="n">D_hf</span> <span class="o">=</span> <span class="n">D_h</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">D_hf</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">Df_exact</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">D_hf</span> <span class="o">-</span> <span class="n">Df_exact</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For x=0.0:
+For h=0.1:
+D_hf=1.0517091807564771
+error=0.051709180756477124
+For h=0.01:
+D_hf=1.005016708416795
+error=0.005016708416794913
+For h=0.001:
+D_hf=1.0005001667083846
+error=0.0005001667083845973
+For x=1.0:
+For h=0.1:
+D_hf=2.858841954873883
+error=0.14056012641483795
+For h=0.01:
+D_hf=2.7319186557871245
+error=0.01363682732807936
+For h=0.001:
+D_hf=2.7196414225332255
+error=0.0013595940741804036
+For x=3.0:
+For h=0.1:
+D_hf=21.12414358253968
+error=1.0386066593520127
+For h=0.01:
+D_hf=20.186300205325836
+error=0.10076328213816765
+For h=0.001:
+D_hf=20.095583040074416
+error=0.01004611688674828
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="mathematical-exercise">
 <h2>Mathematical Exercise<a class="headerlink" href="#mathematical-exercise" title="Permalink to this headline">¶</a></h2>

@@ -672,6 +672,8 @@
                 
   <div class="section" id="root-finding-by-interval-halving-bisection">
 <h1><span class="section-number">1. </span>Root Finding by Interval Halving (Bisection)<a class="headerlink" href="#root-finding-by-interval-halving-bisection" title="Permalink to this headline">¶</a></h1>
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+<hr class="docutils" />
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 1.1 of <em>Numerical Analysis</em> by <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -726,7 +728,7 @@ and
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/root-finding-by-interval-halving_5_0.png" src="../_images/root-finding-by-interval-halving_5_0.png" />
+<img alt="../_images/root-finding-by-interval-halving_7_0.png" src="../_images/root-finding-by-interval-halving_7_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -750,7 +752,7 @@ and
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/root-finding-by-interval-halving_8_0.png" src="../_images/root-finding-by-interval-halving_8_0.png" />
+<img alt="../_images/root-finding-by-interval-halving_10_0.png" src="../_images/root-finding-by-interval-halving_10_0.png" />
 </div>
 </div>
 <p>And we could repeat, geting an approximation of any desired accuracy.</p>
@@ -782,7 +784,7 @@ The simplest way to do this is to repeatedly divide an interval known to contain
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/root-finding-by-interval-halving_11_0.png" src="../_images/root-finding-by-interval-halving_11_0.png" />
+<img alt="../_images/root-finding-by-interval-halving_13_0.png" src="../_images/root-finding-by-interval-halving_13_0.png" />
 </div>
 </div>
 <p><strong>Aside on Numpy’s math functions:</strong> note on line 3 above  that the function <code class="docutils literal notranslate"><span class="pre">cos</span></code> from Numpy (full name <code class="docutils literal notranslate"><span class="pre">numpy.cos</span></code>) can be evaluated simultaneously on a list of numbers; the version <code class="docutils literal notranslate"><span class="pre">math.cos</span></code> from module <code class="docutils literal notranslate"><span class="pre">math</span></code> can only handle one number at a time.
@@ -816,7 +818,7 @@ update the a, b, c values and plot again:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/root-finding-by-interval-halving_15_0.png" src="../_images/root-finding-by-interval-halving_15_0.png" />
+<img alt="../_images/root-finding-by-interval-halving_17_0.png" src="../_images/root-finding-by-interval-halving_17_0.png" />
 </div>
 </div>
 <p>Again <span class="math notranslate nohighlight">\(f(c)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span> have opposite signs, so the root is in <span class="math notranslate nohighlight">\([c, b]\)</span>, and …</p>
@@ -841,7 +843,7 @@ update the a, b, c values and plot again:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/root-finding-by-interval-halving_18_0.png" src="../_images/root-finding-by-interval-halving_18_0.png" />
+<img alt="../_images/root-finding-by-interval-halving_20_0.png" src="../_images/root-finding-by-interval-halving_20_0.png" />
 </div>
 </div>
 <p>This time <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(c)\)</span> have opposite sign, so the root is at left, in <span class="math notranslate nohighlight">\([a, c]\)</span>:</p>
@@ -866,7 +868,7 @@ update the a, b, c values and plot again:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/root-finding-by-interval-halving_21_0.png" src="../_images/root-finding-by-interval-halving_21_0.png" />
+<img alt="../_images/root-finding-by-interval-halving_23_0.png" src="../_images/root-finding-by-interval-halving_23_0.png" />
 </div>
 </div>
 </div>
@@ -985,8 +987,6 @@ This can be achieved with a <code class="docutils literal notranslate"><span cla
 <p>Test it with the above example: <span class="math notranslate nohighlight">\(f(x) = x - \cos x\)</span>, <span class="math notranslate nohighlight">\([a, b] = [-1, 1]\)</span>,
 this time accurate to within <span class="math notranslate nohighlight">\(10^{-4}\)</span>.</p>
 <p>Use the fact that there is a solution in the interval <span class="math notranslate nohighlight">\((-1, 1)\)</span>.</p>
-<hr class="docutils" />
-<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
 </div>
 </div>
