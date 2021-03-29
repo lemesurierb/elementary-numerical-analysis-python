@@ -615,6 +615,20 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-general-advice">
+   Some General Advice
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -626,8 +640,32 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>This project will combine and explore methods for approximation of derivatives and integrals, along with methods for estimating errors and <em>using these error estimates to improve accuracy.</em></p>
 <p>We will also compare the performance of various methods: this is often important in making the choice of algorithms for a larger task.</p>
-<p>In part, this is an exercise in \emph{good written presentation of mathematical and computational results}, and as preparation for the second individual project that each of you will do at the end of the semester.
+<p>In part, this is an exercise in <em>good written presentation of mathematical and computational results</em>, and as preparation for the second individual project that each of you will do at the end of the semester.
 The “introduction” and “methods” sections specified below can be quite brief in this project (as many details are specified below) but will be more significant in your final project.</p>
+<div class="section" id="some-general-advice">
+<h2>Some General Advice<a class="headerlink" href="#some-general-advice" title="Permalink to this headline">¶</a></h2>
+<p>I will add here some general tips and reminders about working on projects and more generaly on working with numerical methods;
+some that come out of discussing draft work with you.
+For now just these:</p>
+<p>A) For every approximate numerical value computed, strive to get some information about its acccuracy:</p>
+<ul class="simple">
+<li><p>An <strong>error bound</strong> is best, though often not available.</p></li>
+<li><p>An <strong>error estimate</strong> is next best;
+these should err towards “pessimism” — usually overestimating the error;</p></li>
+<li><p>in cases where you have neither of the above in general, test on some special cases for which you can get the exact result by another method, and use that to give the <strong>actual error</strong> for such test cases.</p></li>
+</ul>
+<p>B) For a great many methods, there is a useful general strategy for getting error estimates:
+1. get two approximations where you have good reason to believe that one is at least about twice as accuarate as the other.
+2. Use the difference to estimat the error in th <strong>less</strong> accurate of the two approximations — this is the “pessimistic” approach recommended above.</p>
+<p>For example with errors <span class="math notranslate nohighlight">\(O(h^p)\)</span>, <span class="math notranslate nohighlight">\(p \geq 1\)</span>, one can use results for <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h/2\)</span> to estimate the error in the first of these;
+likewise with errors <span class="math notranslate nohighlight">\(O(1/n^p)\)</span>, use the approximations for <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(2n\)</span> to estimate the error in the former.
+(We will soon see a variant for ODEs.)</p>
+<p>C) Initially use the test cases given in
+<a class="reference internal" href="test-cases-differentiation.html"><span class="doc std std-doc">Test Cases for Differentiation</span></a>
+and
+<a class="reference internal" href="test-cases-integration.html"><span class="doc std std-doc">Test Cases for Integration</span></a>;
+then choose and explore some others.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

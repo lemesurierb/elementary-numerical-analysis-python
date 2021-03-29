@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Centered Difference Approximation of the Derivative &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Project on Numerical Calculus &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Improving on the Centered Difference Approximaiton with Richardson Extrapolation" href="task-2-centered-differences-richardson.html" />
-    <link rel="prev" title="Introduction" href="introduction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -345,14 +343,14 @@
   Project on Numerical Calculus
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
    Introduction
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-centered-difference-derivative-approximation.html">
    Centered Difference Approximation of the Derivative
   </a>
  </li>
@@ -573,7 +571,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/project-on-numerical-calculus/task-1-centered-difference-derivative-approximation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/project-on-numerical-calculus/preface.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -598,7 +596,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/project-on-numerical-calculus/task-1-centered-difference-derivative-approximation.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/project-on-numerical-calculus/preface.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -615,32 +613,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#programming-exercise">
-   Programming Exercise
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#warm-up-exercise-forward-difference-approximation">
-     Warm-up exercise: forward difference approximation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mathematical-exercise">
-   Mathematical Exercise
-  </a>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -648,129 +620,20 @@
         
               <div>
                 
-  <div class="section" id="centered-difference-approximation-of-the-derivative">
-<h1>Centered Difference Approximation of the Derivative<a class="headerlink" href="#centered-difference-approximation-of-the-derivative" title="Permalink to this headline">¶</a></h1>
-<p><strong>Revised March 22, 25 and 26,</strong> adding a mathematical exercise, more details and an example.</p>
-<div class="section" id="programming-exercise">
-<h2>Programming Exercise<a class="headerlink" href="#programming-exercise" title="Permalink to this headline">¶</a></h2>
-<p>Write a (Python) function to approximate derivatives using the centered difference formula,</p>
-<div class="math notranslate nohighlight">
-\[
-Df(x) \approx \delta_hf(x) := \frac{f(x+h) - f(x-h)}{2h}
-\]</div>
-<p>The input variables should include the node spacing <span class="math notranslate nohighlight">\(h\)</span>; think about and discuss what all the input and output variables should be.
-(Also, remember that such a function should not do any interactive input, or any output to the screen or files.)</p>
-<p>Then — as usual — add code that tests this on some examples such as <span class="math notranslate nohighlight">\(f(x) = e^x\)</span>, <span class="math notranslate nohighlight">\(f'(1)\)</span> as suggested in the section on <a class="reference internal" href="test-cases-differentiation.html"><span class="doc std std-doc">Test Cases for Differentiation</span></a>.</p>
-<p><strong>Note:</strong> For the above function and every function below, create a Jupyter notebook to run test cases: this will handle any interactive input and any screen or file output.</p>
-<div class="section" id="warm-up-exercise-forward-difference-approximation">
-<h3>Warm-up exercise: forward difference approximation<a class="headerlink" href="#warm-up-exercise-forward-difference-approximation" title="Permalink to this headline">¶</a></h3>
-<p>Let us do this for the forward difference approximation</p>
-<div class="math notranslate nohighlight">
-\[
-Df(x) \approx D_h(x) := \frac{f(x+h) - f(x)}{h}
-\]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">D_h</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-    <span class="n">D_h_of_f_at_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">h</span>
-    <span class="k">return</span> <span class="n">D_h_of_f_at_x</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For </span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">:&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]:</span>
-        <span class="nb">print</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For </span><span class="si">{</span><span class="n">h</span><span class="si">=}</span><span class="s2">:&quot;</span><span class="p">)</span>
-        <span class="n">D_hf</span> <span class="o">=</span> <span class="n">D_h</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">D_hf</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">Df_exact</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="n">D_hf</span> <span class="o">-</span> <span class="n">Df_exact</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For x=0.0:
-
-For h=0.1:
-D_hf=1.0517091807564771
-error=0.051709180756477124
-
-For h=0.01:
-D_hf=1.005016708416795
-error=0.005016708416794913
-
-For h=0.001:
-D_hf=1.0005001667083846
-error=0.0005001667083845973
-
-For x=1.0:
-
-For h=0.1:
-D_hf=2.858841954873883
-error=0.14056012641483795
-
-For h=0.01:
-D_hf=2.7319186557871245
-error=0.01363682732807936
-
-For h=0.001:
-D_hf=2.7196414225332255
-error=0.0013595940741804036
-
-For x=3.0:
-
-For h=0.1:
-D_hf=21.12414358253968
-error=1.0386066593520127
-
-For h=0.01:
-D_hf=20.186300205325836
-error=0.10076328213816765
-
-For h=0.001:
-D_hf=20.095583040074416
-error=0.01004611688674828
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="mathematical-exercise">
-<h2>Mathematical Exercise<a class="headerlink" href="#mathematical-exercise" title="Permalink to this headline">¶</a></h2>
-<p>Verify the order of accuracy result</p>
-<div class="math notranslate nohighlight">
-\[
-Df(x) - \delta_hf(x) = O(h^2)
-\]</div>
-<p>and the (equivalent) fact that this method has degree of precision 2: it is exact fo all quadratics.</p>
-<p>One could in fact go further and derive the error formula</p>
-<div class="math notranslate nohighlight">
-\[
-Df(x) - \delta_hf(x) = -\frac{D^3f(\xi)}{6} h^2,\quad\text{for some } \xi \in (x-h, x+h)
-\]</div>
-</div>
+  <div class="section" id="project-on-numerical-calculus">
+<h1>Project on Numerical Calculus<a class="headerlink" href="#project-on-numerical-calculus" title="Permalink to this headline">¶</a></h1>
+<p><strong>Last updated on Monday March 29, 2021</strong></p>
+<p><strong>Brenton LeMesurier</strong></p>
+<p>University of Northern Colorado, Greeley, Colorado in Spring 2021,
+<a class="reference external" href="mailto:brenton&#46;lemesurier&#37;&#52;&#48;unco&#46;edu">brenton<span>&#46;</span>lemesurier<span>&#64;</span>unco<span>&#46;</span>edu</a>;
+<br>
+More permanent address: The College of Charleston, Charleston, South Carolina,
+<a class="reference external" href="mailto:lemesurierb&#37;&#52;&#48;cofc&#46;edu">lemesurierb<span>&#64;</span>cofc<span>&#46;</span>edu</a></p>
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+<hr class="docutils" />
+<p><em>First Drafts due by Friday March 26 — but preferably submit partial drafts earlier for feedback!</em></p>
+<p><strong>Second Drafts due by Wednesday March 31.</strong></p>
+<p><strong>Final versions due by Friday April 2</strong></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -801,8 +664,6 @@ Df(x) - \delta_hf(x) = -\frac{D^3f(\xi)}{6} h^2,\quad\text{for some } \xi \in (x
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page">Introduction</a>
-    <a class='right-next' id="next-link" href="task-2-centered-differences-richardson.html" title="next page">Improving on the Centered Difference Approximaiton with Richardson Extrapolation</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
