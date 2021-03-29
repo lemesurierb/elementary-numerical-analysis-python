@@ -110,6 +110,11 @@
    References
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plans-for-expansion-improvement.html">
+   Full Disclosure: Things I Plan to do to Expand and Improve This Book
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -239,7 +244,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/future_topics.html">
+  <a class="reference internal" href="future_topics.html">
    23. Some Future Topics
   </a>
  </li>
@@ -629,6 +634,13 @@
   <a class="reference internal nav-link" href="#presentation-of-results-notebooks-and-projects">
    Presentation of results: notebooks and projects
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restrictions-on-characters-used-in-names">
+     Restrictions on characters used in names
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -670,6 +682,21 @@ Thus much of the work will be presented in the form of Jupyter notebooks (or in 
 computed results with assessment of their accuracy and reliability, and suitably interpret the results.</p>
 <p>That last sentence might give the impression that the actual computer programming part is a distinct minority of the whole — that is not only true, but becomes more true given the fact that the core numerical methods are already well-implemented in readily available software, such as the packages <a class="reference external" href="http://www.numpy.org">Numpy</a> and <a class="reference external" href="http://www.scipy.org">SciPy</a> for use with Python.</p>
 <p>In addition to reports on homework assignments, a couple of more substantial projects will be done, presented in reports in the framework described above.</p>
+<div class="section" id="restrictions-on-characters-used-in-names">
+<h3>Restrictions on characters used in names<a class="headerlink" href="#restrictions-on-characters-used-in-names" title="Permalink to this headline">¶</a></h3>
+<p>TL;DR: “Mostly letters and digits”</p>
+<ul class="simple">
+<li><p>The names of <strong>Python variables</strong> (including the names of functions) <em>must</em> only contain <em>letters</em>, <em>digits</em>, and <em>underscores</em>: no <strong>dashes</strong>, <strong>spaces</strong> or other punctuation.</p></li>
+<li><p>The names of <strong>files containing Python modules</strong> <em>must</em> follow the above restrictions — because these names are used as variables in <code class="docutils literal notranslate"><span class="pre">import</span></code> statements.
+(Apart from the period in the suffix “.py” of course.]</p></li>
+<li><p>The names of <strong>notebook files</strong> have just a little more flexibility: they <em>should</em> only contain letters, digits, underscores and hyphens; no <strong>spaces</strong> or other punctuation. The only difference from the above is allowing <em>hyphens</em>.
+(And apart from the period in the suffix “.ipynb” of course.]
+<br>
+Aside: this is roughly the same rule as for web-site addresses.
+<br>
+You can get away with some other characters in some situations, but will run into problems in situations like cross-referencing to a notebook from another notebook, posting on a web-site, and using a notebook as a section in a Jupyter Book.</p></li>
+</ul>
+</div>
 </div>
 </div>
 
