@@ -687,7 +687,7 @@
                 
   <div class="section" id="solving-initial-value-problems-for-odes-part-2-runge-kutta-methods">
 <h1><span class="section-number">22. </span>Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods<a class="headerlink" href="#solving-initial-value-problems-for-odes-part-2-runge-kutta-methods" title="Permalink to this headline">¶</a></h1>
-<p><strong>Updated on March 24</strong>, adding derivations of the Trapezoid and Midpoint Methods, along with computational examples.</p>
+<p><strong>Updated (slightly) on Monday March 29</strong></p>
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 <hr class="docutils" />
 <p><strong>References:</strong></p>
@@ -945,8 +945,7 @@ u(t) = u_2(t; a, u_0) = \cos(t) + C e^{-K t},\quad C = (u_0 - \cos(a)) e^{K a}
 \[
 u(t + h) \approx u(t) + h f(t + h/2, u(t + h/2))
 \]</div>
-<p>This has the slight extra complicatio that it involves three values of <span class="math notranslate nohighlight">\(u\)</span> including <span class="math notranslate nohighlight">\(u(t+h/2)\)</span> which we are not trying to evaluate.
-We deal with that by making yet another approximation, using an average of <span class="math notranslate nohighlight">\(u\)</span> values:</p>
+<p>This has the slight extra complication that it involves three values of <span class="math notranslate nohighlight">\(u\)</span> including <span class="math notranslate nohighlight">\(u(t+h/2)\)</span> which we are not trying to evaluate.  We deal with that by making yet another approximation, using an average of <span class="math notranslate nohighlight">\(u\)</span> values:</p>
 <div class="math notranslate nohighlight">
 \[
 u(t+h/2) \approx \frac{u(t) + u(t+h)}{2}
@@ -1047,6 +1046,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 <img alt="../_images/ODE-IVP-2-Runge-Kutta_29_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_29_1.png" />
 </div>
 </div>
+<p><strong>Observation:</strong> The errors are very similar to those for the Explicit Trapezoid Method, not “half as much and of opposite sign” as seen with integration; the exercises give a hint as to why this is so.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span>
@@ -1073,10 +1073,11 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_30_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_30_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_30_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_30_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_31_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_31_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_31_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_31_1.png" />
 </div>
 </div>
+<p><strong>Observation:</strong> This time, the errors are slightly better than for the Explicit Trapezoid Method but still not “half as much ” as seen with integration; this is because this equation has a mix of integration (the “sin” and “cos” parts) and exponential growth (the “Ku” part.)</p>
 </div>
 </div>
 <div class="section" id="the-classical-fourth-order-accurate-runge-kutta-method">
@@ -1094,7 +1095,8 @@ K_4 &amp;= h f(t + h, u + K_3)
 \\
 u(t+h) &amp;\approx u + \frac{1}{6}(K_1 + 2 K_2 + 2 K_3 + K_4)
 \end{split}\end{split}\]</div>
-<p>The derivation of this is far more complicated than those above, and is omitted.
+<p>This — or rather some variants to estimate and contol errors — is perhaps the most widely used general purpose method for numerical solution of ODE IVP’s.</p>
+<p>The derivation of this is far more complicated than for the other methods above, and is omitted.
 For now, we will instead assess its accuracy “<em>a postiori</em>”, through the next exercise and some examples.</p>
 <p><strong>Exercise 4</strong></p>
 <p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
@@ -1153,8 +1155,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_36_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_36_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_36_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_36_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_38_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_38_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_38_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_38_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1183,8 +1185,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_37_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_37_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_37_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_37_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_39_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_39_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_39_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_39_1.png" />
 </div>
 </div>
 <p><a name="euler-redux"></a></p>
@@ -1224,8 +1226,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_40_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_40_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_40_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_40_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_42_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_42_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_42_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_42_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1254,8 +1256,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_41_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_41_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta_41_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_41_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_43_0.png" src="../_images/ODE-IVP-2-Runge-Kutta_43_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta_43_1.png" src="../_images/ODE-IVP-2-Runge-Kutta_43_1.png" />
 </div>
 </div>
 </div>

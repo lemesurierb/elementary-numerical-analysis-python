@@ -650,7 +650,7 @@
                 
   <div class="section" id="centered-difference-approximation-of-the-derivative">
 <h1>Centered Difference Approximation of the Derivative<a class="headerlink" href="#centered-difference-approximation-of-the-derivative" title="Permalink to this headline">¶</a></h1>
-<p><strong>Revised March 22, 25 and 26,</strong> adding a mathematical exercise, more details and an example.</p>
+<p><strong>Last Revised on Monday March 29</strong></p>
 <div class="section" id="programming-exercise">
 <h2>Programming Exercise<a class="headerlink" href="#programming-exercise" title="Permalink to this headline">¶</a></h2>
 <p>Write a (Python) function to approximate derivatives using the centered difference formula,</p>
@@ -661,7 +661,8 @@ Df(x) \approx \delta_hf(x) := \frac{f(x+h) - f(x-h)}{2h}
 <p>The input variables should include the node spacing <span class="math notranslate nohighlight">\(h\)</span>; think about and discuss what all the input and output variables should be.
 (Also, remember that such a function should not do any interactive input, or any output to the screen or files.)</p>
 <p>Then — as usual — add code that tests this on some examples such as <span class="math notranslate nohighlight">\(f(x) = e^x\)</span>, <span class="math notranslate nohighlight">\(f'(1)\)</span> as suggested in the section on <a class="reference internal" href="test-cases-differentiation.html"><span class="doc std std-doc">Test Cases for Differentiation</span></a>.</p>
-<p><strong>Note:</strong> For the above function and every function below, create a Jupyter notebook to run test cases: this will handle any interactive input and any screen or file output.</p>
+<p><strong>Update:</strong> For test cases like the above where the exact result can be calculated, use this to compute and display the error.</p>
+<p><strong>Note:</strong> For the above function and every function below, create a Jupyter notebook to run test cases: this will handle any output to the screen.</p>
 <div class="section" id="warm-up-exercise-forward-difference-approximation">
 <h3>Warm-up exercise: forward difference approximation<a class="headerlink" href="#warm-up-exercise-forward-difference-approximation" title="Permalink to this headline">¶</a></h3>
 <p>Let us do this for the forward difference approximation</p>
@@ -694,8 +695,7 @@ Df(x) \approx D_h(x) := \frac{f(x+h) - f(x)}{h}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For </span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">:&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]:</span>
