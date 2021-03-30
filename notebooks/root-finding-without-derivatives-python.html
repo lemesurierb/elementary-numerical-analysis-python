@@ -1,0 +1,1162 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7. Root-finding Without Derivatives &#8212; Elementary Numerical Analysis (with Python)</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination" href="simultaneous-linear-equations-1-row-reduction-python.html" />
+    <link rel="prev" title="6. The Convergence Rate of Newton’s Method" href="newtons-method-convergence-rate.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface.html">
+   Elementary Numerical Analysis with Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Frontmatter
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../plans-for-expansion-improvement.html">
+   Full Disclosure: Things I Plan to do to Expand and Improve This Book
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Numerical Analysis
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-python.html">
+   1. Root Finding by Interval Halving (Bisection)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-python.html">
+   2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-python.html">
+   3. Newton’s Method for Solving Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="taylors-theorem.html">
+   4. Taylor’s Theorem and the Accuracy of Linearization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
+   5. Measures of Error and Order of Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
+   6. The Convergence Rate of Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   7. Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
+   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-python.html">
+   9. Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
+   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
+   11. Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   with LU factorization,
+   <span class="math notranslate nohighlight">
+    \(A = L U\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
+   12. Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   With Both Pivoting and LU factorization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html">
+   13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation-error-formulas-python.html">
+   14. Error Formulas for Polynomial Collocation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
+   15. Approximating Derivatives by the Method of Undetermined Coefficients
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="richardson-extrapolation.html">
+   16. Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-1-building-blocks-python.html">
+   17. Definite Integrals, Part 1: The Building Blocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
+   18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
+   19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
+   20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
+   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
+   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   23. Some Future Topics
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Preliminary Versions of Future Sections
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
+   1. Global Error Bounds for One Step Methods — Preliminary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
+   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
+   Exercises on the Bisection Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
+   Exercises on Fixed Point Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
+   Exercises on Error Measures and Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
+   Exercises on Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
+   Exercises on Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
+   Exercises on Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
+   Exercises on Solving Simultaneous Linear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+   Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment1.html">
+   MATH 375 Assignment 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment2.html">
+   MATH 375 Assignment 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment3.html">
+   MATH 375 Assignment 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root_finding.html">
+   Module root_finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment4.html">
+   MATH 375 Assignment 4
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-centered-difference-derivative-approximation.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-2-centered-differences-richardson.html">
+   Improving on the Centered Difference Approximaiton with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-3-composite-trapezoid-rule.html">
+   The Composite Trapezoid Rule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-5-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-6-modified-trapezoid-without-derivatives.html">
+   The Modified Trapezoid Method, without derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-7-romberg-method.html">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Python and Jupyter Notebook Review (with Numpy and Matplotlib)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
+   1. Introduction to
+   <em>
+    Python Preview
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
+   2. Getting Python Software for Scientific Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
+   3. Suggestions and Notes on Python and Jupyter Notebook Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
+   4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/functions.html">
+   5. Defining and Using Python Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
+   6. Decision Making With if, else, and elif
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
+   7. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
+   8. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
+   9. Code Files, Modules, and an Integrated Development Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
+   11. Plotting Graphs with Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
+   12. Numpy Array Operations and Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
+   13. Package Scipy and More Tools for Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
+   14. Summation and Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
+   15. Random Numbers, Histograms, and a Simulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
+   16. Formatted Output and Some Text String Manipulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
+   18. Exceptions and Exception Handling
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_methods_module.html">
+   Notebook for generating the module
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numerical_methods_module
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+   Linear algebra algorithms using 0-based indexing and semi-open intervals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sample-project-newtons-method-python-draft.html">
+   Numerical Analysis Sample Project on Newtons’s Method
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/root-finding-without-derivatives-python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/root-finding-without-derivatives-python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   7.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-linear-approximation-without-derivatives">
+   7.2. Using Linear Approximation Without Derivatives
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-attempt-the-method-of-false-position">
+     7.2.1. First Attempt: The Method of False Position
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#refinement-alway-use-the-two-most-recent-approximations-the-secant-method">
+     7.2.2. Refinement: Alway Use the Two Most Recent Approximations — The Secant Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pseduo-code-for-a-secant-method-algorithm">
+     7.2.3. Pseduo-code for a Secant Method Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python-code-for-this-secant-method-algorithm">
+     7.2.4. Python Code for this Secant Method Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observations">
+     7.2.5. Observations
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="root-finding-without-derivatives">
+<h1><span class="section-number">7. </span>Root-finding Without Derivatives<a class="headerlink" href="#root-finding-without-derivatives" title="Permalink to this headline">¶</a></h1>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 1.5.2 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 2.3 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a> (the second half, on the Secant Method).</p></li>
+</ul>
+<div class="section" id="introduction">
+<h2><span class="section-number">7.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen one method for solving <span class="math notranslate nohighlight">\(f(x) = 0\)</span> without needing to know any derivatives of <span class="math notranslate nohighlight">\(f\)</span>:
+the <a class="reference internal" href="root-finding-by-interval-halving-python.html"><span class="doc std std-doc">Bisection Method</span></a>, a.k.a. <em>Interval Halving</em>.
+However, we have also seen that that method is far slower then Newton’s Method.</p>
+<p>Here we explore methods that are almost the best of both worlds:
+about as fast as Newton’s method but not needing derivatives.</p>
+<p>The first of these is the Secant Method.
+Later in this course we will see how this has been merged with the Bisection Method and
+<a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html"><span class="doc std std-doc">Polynomial Interpolation</span></a>
+to produce the current state-of-the-art approach;
+only perfected in the 1960’s.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will often need resources from the modules numpy and pyplot:</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># We can also import items from a module individually, so they can be used by &quot;first name only&quot;;</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">cos</span>
+
+<span class="c1"># Since we do a lot of graphics in this section, some more short-hands:</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+
+<span class="c1"># Also, some from the module for this book:</span>
+<span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">newton</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-linear-approximation-without-derivatives">
+<h2><span class="section-number">7.2. </span>Using Linear Approximation Without Derivatives<a class="headerlink" href="#using-linear-approximation-without-derivatives" title="Permalink to this headline">¶</a></h2>
+<p>One quirk of the <a class="reference internal" href="root-finding-by-interval-halving-python.html"><span class="doc std std-doc">Bisection Method</span></a> is that it only used the sign of the values <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span>, not their magnitudes.
+If one of these is far smaller than the other, one might guess that the root is closer to that end of the interval.
+This leads to the idea of:</p>
+<ul class="simple">
+<li><p>starting with an interval <span class="math notranslate nohighlight">\([a, b]\)</span> known to contain a zero of <span class="math notranslate nohighlight">\(f\)</span>,</p></li>
+<li><p>connecting the two points <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span> with a straight line, and</p></li>
+<li><p>finding the <span class="math notranslate nohighlight">\(x\)</span>-value <span class="math notranslate nohighlight">\(c\)</span> where this line crosses the <span class="math notranslate nohighlight">\(x\)</span>-axis.
+In the words, aproximating the function by a <em>secant line</em>, in place of the <em>tangent line</em> used in Newton’s Method.</p></li>
+</ul>
+<p><a name="method-of-false-position"></a></p>
+<div class="section" id="first-attempt-the-method-of-false-position">
+<h3><span class="section-number">7.2.1. </span>First Attempt: The Method of False Position<a class="headerlink" href="#first-attempt-the-method-of-false-position" title="Permalink to this headline">¶</a></h3>
+<p>The next step requires some care.
+The first idea (from almost a millenium ago) was to use this new approximation <span class="math notranslate nohighlight">\(c\)</span> as done with bisection:
+check which of the intervals <span class="math notranslate nohighlight">\([a, c]\)</span> and <span class="math notranslate nohighlight">\([c,b]\)</span> has the sign change and use it as the new interval <span class="math notranslate nohighlight">\([a, b]\)</span>;
+this is called <em>The Method of False Position</em> (or <em>Regula Falsi</em>, since the academic world used latin in those days.)</p>
+<p>The secant line between <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+L(x) = \frac{f(a)(b-x) + f(b)(x-a)}{b-a}
+\]</div>
+<p>and its zero is at</p>
+<div class="math notranslate nohighlight">
+\[
+c = \frac{a f(b) - f(a) b}{f(b) - f(a)}
+\]</div>
+<p>This is easy to implement, and an example will show that it sort of works, but with a weakness that hampers it a bit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">false_position</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">errorTolerance</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span> <span class="n">maxIterations</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solve f(x)=0 in the interval [a, b] by the Method of False Position.</span>
+<span class="sd">    This code also illustrates a few ideas that I encourage, such as:</span>
+<span class="sd">    - Avoiding infinite loops, by using for loops sand break</span>
+<span class="sd">    - Avoiding repeated evaluation of the same quantity</span>
+<span class="sd">    - Use of descriptive variable names</span>
+<span class="sd">    - Use of &quot;camelCase&quot; to turn descriptive phrases into valid Python variable names</span>
+<span class="sd">    - An optional &quot;demonstration mode&quot; to display intermediate results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solving by the Method of False Position.&quot;</span><span class="p">)</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIterations</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Iteration </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span><span class="p">)</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">fc</span>  <span class="c1"># N.B. When b is updated, so must be fb = f(b)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">fa</span> <span class="o">=</span> <span class="n">fc</span>
+        <span class="n">errorBound</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The root is in interval [</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The new approximation is </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">, with error bound </span><span class="si">{</span><span class="n">errorBound</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">, backward error </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">errorBound</span> <span class="o">&lt;</span> <span class="n">errorTolerance</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="c1"># Whether we got here due to accuracy of running out of iterations,</span>
+    <span class="c1"># return the information we have, including an error bound:</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">c</span>  <span class="c1"># the newest value is probably the most accurate</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">errorBound</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note:</strong> For a more concise presentation, you could omit the above <code class="docutils literal notranslate"><span class="pre">def</span></code> and instead import this function with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from numerical_methods_module import false_position
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">errorBound</span><span class="p">)</span> <span class="o">=</span> <span class="n">false_position</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The Method of False Position gave approximate root is </span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with estimate error </span><span class="si">{</span><span class="n">errorBound</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">, backward error </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">root</span><span class="p">))</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solving by the Method of False Position.
+
+Iteration 0:
+The root is in interval [0.5403023058681398, 1]
+The new approximation is 0.5403023058681398, with error bound 0.4597, backward error 0.3173
+
+Iteration 1:
+The root is in interval [0.7280103614676172, 1]
+The new approximation is 0.7280103614676172, with error bound 0.272, backward error 0.01849
+
+Iteration 2:
+The root is in interval [0.7385270062423998, 1]
+The new approximation is 0.7385270062423998, with error bound 0.2615, backward error 0.000934
+
+Iteration 3:
+The root is in interval [0.7390571666782676, 1]
+The new approximation is 0.7390571666782676, with error bound 0.2609, backward error 4.68e-05
+
+Iteration 4:
+The root is in interval [0.7390837322783136, 1]
+The new approximation is 0.7390837322783136, with error bound 0.2609, backward error 2.345e-06
+
+Iteration 5:
+The root is in interval [0.7390850630385933, 1]
+The new approximation is 0.7390850630385933, with error bound 0.2609, backward error 1.174e-07
+
+Iteration 6:
+The root is in interval [0.7390851296998365, 1]
+The new approximation is 0.7390851296998365, with error bound 0.2609, backward error 5.883e-09
+
+Iteration 7:
+The root is in interval [0.7390851330390691, 1]
+The new approximation is 0.7390851330390691, with error bound 0.2609, backward error 2.947e-10
+
+Iteration 8:
+The root is in interval [0.7390851332063397, 1]
+The new approximation is 0.7390851332063397, with error bound 0.2609, backward error 1.476e-11
+
+Iteration 9:
+The root is in interval [0.7390851332147188, 1]
+The new approximation is 0.7390851332147188, with error bound 0.2609, backward error 7.394e-13
+
+Iteration 10:
+The root is in interval [0.7390851332151385, 1]
+The new approximation is 0.7390851332151385, with error bound 0.2609, backward error 3.708e-14
+
+Iteration 11:
+The root is in interval [0.7390851332151596, 1]
+The new approximation is 0.7390851332151596, with error bound 0.2609, backward error 1.776e-15
+
+Iteration 12:
+The root is in interval [0.7390851332151606, 1]
+The new approximation is 0.7390851332151606, with error bound 0.2609, backward error 1.11e-16
+
+Iteration 13:
+The root is in interval [0.7390851332151607, 1]
+The new approximation is 0.7390851332151607, with error bound 0.2609, backward error 0.0
+
+Iteration 14:
+The root is in interval [0.7390851332151607, 1]
+The new approximation is 0.7390851332151607, with error bound 0.2609, backward error 0.0
+
+The Method of False Position gave approximate root is 0.7390851332151607,
+with estimate error 0.2609, backward error 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The good news is that the approximations are approaching the zero reasonably fast — far faster than bisection —
+as indicated by the backward errors improving by a factor of better than ten at each iteration.</p>
+<p>The bad news is that one end gets “stuck”, so the interval does not shrink on both sides, and the error bound stays large.</p>
+<p>This behavior is generic: with function <span class="math notranslate nohighlight">\(f\)</span> of the same convexity on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>, the secant line will always cross on the same side of the zero, so that one end-point persists;
+in this case, the curve is concave up, so the secant line always crosses to the left of the root, as seen in the following graphs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">graph_false_position</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">maxIterations</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Graph a few iterations of the Method of False Position for solving f(x)=0 in the interval [a, b].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIterations</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">fb</span> <span class="o">-</span> <span class="n">fa</span><span class="p">)</span>
+        <span class="n">fc</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">abc</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">abc</span><span class="p">)</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">abc</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+        <span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+        <span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">iteration</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, Method of False Position&quot;</span><span class="p">)</span>
+        <span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">plot</span><span class="p">([</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">right</span><span class="p">)])</span>  <span class="c1"># the secant line</span>
+        <span class="n">plot</span><span class="p">([</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>  <span class="c1"># the x-axis line</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">abc</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">abc</span><span class="p">),</span> <span class="s1">&#39;r*&#39;</span><span class="p">)</span>
+        <span class="n">show</span><span class="p">()</span>  <span class="c1"># The Windows version of JupytLab might need this command; it is harmless anyway.</span>
+        <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">fc</span>  <span class="c1"># N.B. When b is updated, so must be fb = f(b)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">fa</span> <span class="o">=</span> <span class="n">fc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph_false_position</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/root-finding-without-derivatives-python_12_0.png" src="../_images/root-finding-without-derivatives-python_12_0.png" />
+<img alt="../_images/root-finding-without-derivatives-python_12_1.png" src="../_images/root-finding-without-derivatives-python_12_1.png" />
+<img alt="../_images/root-finding-without-derivatives-python_12_2.png" src="../_images/root-finding-without-derivatives-python_12_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="refinement-alway-use-the-two-most-recent-approximations-the-secant-method">
+<h3><span class="section-number">7.2.2. </span>Refinement: Alway Use the Two Most Recent Approximations — The Secant Method<a class="headerlink" href="#refinement-alway-use-the-two-most-recent-approximations-the-secant-method" title="Permalink to this headline">¶</a></h3>
+<p>The basic solution is to always discard the oldest approximation — at the cost of not always having the zero surrounded!
+This gives the Secant Method.</p>
+<p>For a mathemacal description, one typically enumerates the successive approximations as <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span>, etc.,
+so the notation above gets translated with <span class="math notranslate nohighlight">\(a \to x_{k-2}\)</span>, <span class="math notranslate nohighlight">\(b \to x_{k-1}\)</span>, <span class="math notranslate nohighlight">\(c \to x_{k}\)</span>;
+then the formula becomes the recursive rule</p>
+<div class="math notranslate nohighlight">
+\[
+x_k = \frac{x_{k-2} f(x_{k-1}) - f(x_{k-2}) x_{k-1}}{f(x_{k-1}) - f(x_{k-2})}
+\]</div>
+<p>Two difference from above:</p>
+<ul class="simple">
+<li><p>previously we could assume that <span class="math notranslate nohighlight">\(a&lt;b\)</span>, but now we do not know the order of the various <span class="math notranslate nohighlight">\(x_k\)</span> values, and</p></li>
+<li><p>the root is not necessarily bewtween the two most recent values, so we no longer have tht simple error bound.
+(In fact, we will see that the zero is typically surrounded two-thirds of the time!)</p></li>
+</ul>
+<p>Instead, we use the <em>magnitude</em> of <span class="math notranslate nohighlight">\(b-a\)</span> which is now <span class="math notranslate nohighlight">\(|x_k - x_{k-1}|\)</span>, and this is only an <em>estimate</em> of the error.
+This is the same as used for Newton’s Method; as there, it is still useful as a condition for ending the iterations and indeed tends to be pessimistic, so that we typically do one more iteration than needed — but it is not on its own a complete guarantee of having achieved the desired accuracy.</p>
+</div>
+<div class="section" id="pseduo-code-for-a-secant-method-algorithm">
+<h3><span class="section-number">7.2.3. </span>Pseduo-code for a Secant Method Algorithm<a class="headerlink" href="#pseduo-code-for-a-secant-method-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>Input function <span class="math notranslate nohighlight">\(f\)</span>, interval endpoints <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span>, an error tolerance <span class="math notranslate nohighlight">\(E_{tol}\)</span>, and an iteration limit <span class="math notranslate nohighlight">\(N\)</span></p>
+<p>for k from 2 to N:
+<br><span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(\displaystyle x_k \leftarrow \frac{x_{k-2} f(x_{k-1}) - f(x_{k-2}) x_{k-1}}{f(x_{k-1}) - f(x_{k-2})}\)</span>
+<br><span class="math notranslate nohighlight">\(\quad\)</span> Evaluate the error estimate <span class="math notranslate nohighlight">\(E_{est} \leftarrow |x_k - x_{k-1}|\)</span>
+<br><span class="math notranslate nohighlight">\(\quad\)</span> if <span class="math notranslate nohighlight">\(E_{est} \leq E_{tol}\)</span>:
+<br><span class="math notranslate nohighlight">\(\quad\quad\)</span> End the iterations
+<br><span class="math notranslate nohighlight">\(\quad\)</span> else:
+<br><span class="math notranslate nohighlight">\(\quad\quad\)</span> Go around another time
+<br>end for
+<br>Output the final <span class="math notranslate nohighlight">\(x_k\)</span> as the approximate root and <span class="math notranslate nohighlight">\(E_{est}\)</span> as an estimate of its absolute error.</p>
+</div>
+<div class="section" id="python-code-for-this-secant-method-algorithm">
+<h3><span class="section-number">7.2.4. </span>Python Code for this Secant Method Algorithm<a class="headerlink" href="#python-code-for-this-secant-method-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>We could write Python code that closely follows this notation, accumulating a list of the values <span class="math notranslate nohighlight">\(x_k\)</span>.</p>
+<p>However, since we only ever need the two most recent values to compute the new one, we can instead just store these three,
+in the same way that we recylced the variables <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code>.
+Here I use more descriptive names though:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">secant_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">errorTolerance</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span> <span class="n">maxIterations</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solve f(x)=0 in the interval [a, b] by the Secant Method.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solving by the Secant Method.&quot;</span><span class="p">)</span>        
+    <span class="c1"># Some more descriptive names</span>
+    <span class="n">x_older</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">x_more_recent</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="n">f_x_older</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_older</span><span class="p">)</span>
+    <span class="n">f_x_more_recent</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_more_recent</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIterations</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Iteration </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_older</span> <span class="o">*</span> <span class="n">f_x_more_recent</span> <span class="o">-</span> <span class="n">f_x_older</span> <span class="o">*</span> <span class="n">x_more_recent</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">f_x_more_recent</span> <span class="o">-</span> <span class="n">f_x_older</span><span class="p">)</span>
+        <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">x_older</span><span class="p">,</span> <span class="n">x_more_recent</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_more_recent</span><span class="p">,</span> <span class="n">x_new</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">f_x_older</span><span class="p">,</span> <span class="n">f_x_more_recent</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_x_more_recent</span><span class="p">,</span> <span class="n">f_x_new</span><span class="p">)</span>
+        <span class="n">errorEstimate</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_older</span> <span class="o">-</span> <span class="n">x_more_recent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The latest pair of approximations are </span><span class="si">{</span><span class="n">x_older</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">x_more_recent</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;where the function&#39;s values are </span><span class="si">{</span><span class="n">f_x_older</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">f_x_more_recent</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2"> respectively.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The new approximation is </span><span class="si">{</span><span class="n">x_new</span><span class="si">}</span><span class="s2">, with estimated error </span><span class="si">{</span><span class="n">errorEstimate</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">, backward error </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">f_x_new</span><span class="p">)</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">errorEstimate</span> <span class="o">&lt;</span> <span class="n">errorTolerance</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="c1"># Whether we got here due to accuracy of running out of iterations,</span>
+    <span class="c1"># return the information we have, including an error estimate:</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">errorEstimate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note:</strong> As above, you could omit the above <code class="docutils literal notranslate"><span class="pre">def</span></code> and instead import this function with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from numerical_methods_module import secant_method
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">errorEstimate</span><span class="p">)</span> <span class="o">=</span> <span class="n">secant_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The Secant Method gave approximate root is </span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2">,&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with estimated error </span><span class="si">{</span><span class="n">errorEstimate</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">, backward error </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">root</span><span class="p">))</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solving by the Secant Method.
+
+Iteration 0:
+The latest pair of approximations are 1 and 0.5403023058681398,
+where the function&#39;s values are 0.4597 and -0.3173 respectively.
+The new approximation is 0.5403023058681398, with estimated error 0.4597, backward error 0.3173
+
+Iteration 1:
+The latest pair of approximations are 0.5403023058681398 and 0.7280103614676172,
+where the function&#39;s values are -0.3173 and -0.01849 respectively.
+The new approximation is 0.7280103614676172, with estimated error 0.1877, backward error 0.01849
+
+Iteration 2:
+The latest pair of approximations are 0.7280103614676172 and 0.7396270126307336,
+where the function&#39;s values are -0.01849 and 0.000907 respectively.
+The new approximation is 0.7396270126307336, with estimated error 0.01162, backward error 0.000907
+
+Iteration 3:
+The latest pair of approximations are 0.7396270126307336 and 0.7390838007832722,
+where the function&#39;s values are 0.000907 and -2.23e-06 respectively.
+The new approximation is 0.7390838007832722, with estimated error 0.0005432, backward error 2.23e-06
+
+Iteration 4:
+The latest pair of approximations are 0.7390838007832722 and 0.7390851330557805,
+where the function&#39;s values are -2.23e-06 and -2.667e-10 respectively.
+The new approximation is 0.7390851330557805, with estimated error 1.332e-06, backward error 2.667e-10
+
+Iteration 5:
+The latest pair of approximations are 0.7390851330557805 and 0.7390851332151607,
+where the function&#39;s values are -2.667e-10 and 0.0 respectively.
+The new approximation is 0.7390851332151607, with estimated error 1.594e-10, backward error 0.0
+
+Iteration 6:
+The latest pair of approximations are 0.7390851332151607 and 0.7390851332151607,
+where the function&#39;s values are 0.0 and 0.0 respectively.
+The new approximation is 0.7390851332151607, with estimated error 0.0, backward error 0.0
+
+The Secant Method gave approximate root is 0.7390851332151607,
+with estimated error 0.0, backward error 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">graph_secant_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">maxIterations</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Graph a few iterations of the Secant Method for solving f(x)=0 in the interval [a, b].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_older</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">x_more_recent</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="n">f_x_older</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_older</span><span class="p">)</span>
+    <span class="n">f_x_more_recent</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_more_recent</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxIterations</span><span class="p">):</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_older</span> <span class="o">*</span> <span class="n">f_x_more_recent</span> <span class="o">-</span> <span class="n">f_x_older</span> <span class="o">*</span> <span class="n">x_more_recent</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">f_x_more_recent</span> <span class="o">-</span> <span class="n">f_x_older</span><span class="p">)</span>
+        <span class="n">f_x_new</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+        <span class="n">latest_three_x_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_older</span><span class="p">,</span> <span class="n">x_more_recent</span><span class="p">,</span> <span class="n">x_new</span><span class="p">]</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">latest_three_x_values</span><span class="p">)</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">latest_three_x_values</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+        <span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+        <span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">iteration</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, Secant Method&quot;</span><span class="p">)</span>
+        <span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">plot</span><span class="p">([</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">right</span><span class="p">)])</span>  <span class="c1"># the secant line</span>
+        <span class="n">plot</span><span class="p">([</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>  <span class="c1"># the x-axis line</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">latest_three_x_values</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">latest_three_x_values</span><span class="p">),</span> <span class="s1">&#39;r*&#39;</span><span class="p">)</span>
+        <span class="n">show</span><span class="p">()</span>  <span class="c1"># The Windows version of JupytLab might need this command; it is harmless anyway.</span>
+        <span class="p">(</span><span class="n">x_older</span><span class="p">,</span> <span class="n">x_more_recent</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_more_recent</span><span class="p">,</span> <span class="n">x_new</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">f_x_older</span><span class="p">,</span> <span class="n">f_x_more_recent</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_x_more_recent</span><span class="p">,</span> <span class="n">f_x_new</span><span class="p">)</span>
+        <span class="n">errorEstimate</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_older</span> <span class="o">-</span> <span class="n">x_more_recent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph_secant_method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/root-finding-without-derivatives-python_20_0.png" src="../_images/root-finding-without-derivatives-python_20_0.png" />
+<img alt="../_images/root-finding-without-derivatives-python_20_1.png" src="../_images/root-finding-without-derivatives-python_20_1.png" />
+<img alt="../_images/root-finding-without-derivatives-python_20_2.png" src="../_images/root-finding-without-derivatives-python_20_2.png" />
+<img alt="../_images/root-finding-without-derivatives-python_20_3.png" src="../_images/root-finding-without-derivatives-python_20_3.png" />
+<img alt="../_images/root-finding-without-derivatives-python_20_4.png" src="../_images/root-finding-without-derivatives-python_20_4.png" />
+</div>
+</div>
+</div>
+<div class="section" id="observations">
+<h3><span class="section-number">7.2.5. </span>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>This converges faster than the <a class="reference external" href="#method-of-false-position">Method of False Position</a> (and far faster than Bisection).</p></li>
+<li><p>The majority of iterations do have the root surrounded (sign-change in <span class="math notranslate nohighlight">\(f\)</span>), but every third one — the second and fifth — do not.</p></li>
+<li><p>Comparing the error estimate to the backward error, the error estmte is in fact quite pessimistic (and so fairly trustworthy); in fact, it is typically of similar size to the backward error at the previous iteration.</p></li>
+</ul>
+<p>The last point is a quite common occurence: the available error estimates are often “trailing indicators”,
+closer to the error in the previous approximation in an iteration.
+For example, recall that we saw the same thing with Newton’s Method when we used <span class="math notranslate nohighlight">\(|x_k - x_{k-1}|\)</span> to estimate the error <span class="math notranslate nohighlight">\(E_k := x_k - r\)</span> and saw that it is in fact closer to the previous error, <span class="math notranslate nohighlight">\(E_{k-1}\)</span>.</p>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="newtons-method-convergence-rate.html" title="previous page"><span class="section-number">6. </span>The Convergence Rate of Newton’s Method</a>
+    <a class='right-next' id="next-link" href="simultaneous-linear-equations-1-row-reduction-python.html" title="next page"><span class="section-number">8. </span>Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Brenton LeMesurier, College of Charleston and University of Northern Colorado<br/>
+        
+            &copy; Copyright 2020–2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

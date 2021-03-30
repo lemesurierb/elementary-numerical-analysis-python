@@ -1,0 +1,1213 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Solving Equations by Fixed Point Iteration (of Contraction Mappings) &#8212; Elementary Numerical Analysis (with Python)</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Newton’s Method for Solving Equations" href="newtons-method-python.html" />
+    <link rel="prev" title="1. Root Finding by Interval Halving (Bisection)" href="root-finding-by-interval-halving-python.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface.html">
+   Elementary Numerical Analysis with Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Frontmatter
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../plans-for-expansion-improvement.html">
+   Full Disclosure: Things I Plan to do to Expand and Improve This Book
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Numerical Analysis
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-python.html">
+   1. Root Finding by Interval Halving (Bisection)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-python.html">
+   3. Newton’s Method for Solving Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="taylors-theorem.html">
+   4. Taylor’s Theorem and the Accuracy of Linearization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
+   5. Measures of Error and Order of Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
+   6. The Convergence Rate of Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-python.html">
+   7. Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
+   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-python.html">
+   9. Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
+   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
+   11. Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   with LU factorization,
+   <span class="math notranslate nohighlight">
+    \(A = L U\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
+   12. Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   With Both Pivoting and LU factorization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html">
+   13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation-error-formulas-python.html">
+   14. Error Formulas for Polynomial Collocation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
+   15. Approximating Derivatives by the Method of Undetermined Coefficients
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="richardson-extrapolation.html">
+   16. Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-1-building-blocks-python.html">
+   17. Definite Integrals, Part 1: The Building Blocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
+   18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
+   19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
+   20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
+   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
+   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   23. Some Future Topics
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Preliminary Versions of Future Sections
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
+   1. Global Error Bounds for One Step Methods — Preliminary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
+   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
+   Exercises on the Bisection Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
+   Exercises on Fixed Point Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
+   Exercises on Error Measures and Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
+   Exercises on Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
+   Exercises on Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
+   Exercises on Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
+   Exercises on Solving Simultaneous Linear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+   Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment1.html">
+   MATH 375 Assignment 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment2.html">
+   MATH 375 Assignment 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment3.html">
+   MATH 375 Assignment 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root_finding.html">
+   Module root_finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment4.html">
+   MATH 375 Assignment 4
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-centered-difference-derivative-approximation.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-2-centered-differences-richardson.html">
+   Improving on the Centered Difference Approximaiton with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-3-composite-trapezoid-rule.html">
+   The Composite Trapezoid Rule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-5-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-6-modified-trapezoid-without-derivatives.html">
+   The Modified Trapezoid Method, without derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-7-romberg-method.html">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Python and Jupyter Notebook Review (with Numpy and Matplotlib)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
+   1. Introduction to
+   <em>
+    Python Preview
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
+   2. Getting Python Software for Scientific Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
+   3. Suggestions and Notes on Python and Jupyter Notebook Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
+   4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/functions.html">
+   5. Defining and Using Python Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
+   6. Decision Making With if, else, and elif
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
+   7. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
+   8. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
+   9. Code Files, Modules, and an Integrated Development Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
+   11. Plotting Graphs with Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
+   12. Numpy Array Operations and Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
+   13. Package Scipy and More Tools for Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
+   14. Summation and Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
+   15. Random Numbers, Histograms, and a Simulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
+   16. Formatted Output and Some Text String Manipulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
+   18. Exceptions and Exception Handling
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_methods_module.html">
+   Notebook for generating the module
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numerical_methods_module
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+   Linear algebra algorithms using 0-based indexing and semi-open intervals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sample-project-newtons-method-python-draft.html">
+   Numerical Analysis Sample Project on Newtons’s Method
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/fixed-point-iteration-python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/fixed-point-iteration-python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   2.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fixed-point-equations">
+   2.2. Fixed-point equations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     2.2.1. Example 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#an-easy-way-of-checking-whether-a-differentiable-function-is-a-contraction">
+     2.2.2. An easy way of checking whether a differentiable function is a contraction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2-g-x-cos-x-is-a-contraction-on-domain-1-1">
+     2.2.3. Example 2.
+     <span class="math notranslate nohighlight">
+      \(g(x) = \cos x\)
+     </span>
+     is a contraction on domain
+     <span class="math notranslate nohighlight">
+      \([-1, 1]\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-contraction-constant-c-as-a-measure-of-how-fast-the-approximations-improve-the-smaller-the-better">
+     2.2.4. The contraction constant
+     <span class="math notranslate nohighlight">
+      \(C\)
+     </span>
+     as a measure of how fast the approximations improve (the smaller the better)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-3-solving-x-cos-x-with-a-naive-fixed-point-iteration">
+     2.2.5. Example 3. Solving
+     <span class="math notranslate nohighlight">
+      \(x = \cos x\)
+     </span>
+     with a naive fixed point iteration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-4-solving-f-x-x-2-5x-4-0-in-interval-0-3">
+     2.2.6. Example 4. Solving
+     <span class="math notranslate nohighlight">
+      \(f(x) = x^2 - 5x + 4 = 0\)
+     </span>
+     in interval
+     <span class="math notranslate nohighlight">
+      \([0, 3]\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="solving-equations-by-fixed-point-iteration-of-contraction-mappings">
+<h1><span class="section-number">2. </span>Solving Equations by Fixed Point Iteration (of Contraction Mappings)<a class="headerlink" href="#solving-equations-by-fixed-point-iteration-of-contraction-mappings" title="Permalink to this headline">¶</a></h1>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 1.2 of <a class="reference external" href="../references.html#sauer">Sauer</a></p></li>
+<li><p>Section 2.2 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+</ul>
+<div class="section" id="introduction">
+<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>in the next section we will meet <a class="reference internal" href="newtons-method-python.html"><span class="doc std std-doc">Newton’s Method</span></a>
+for root-finding, which you might have seen in a calculus course.
+This is one very important example of a more genetal strategy of <strong>fixed-point iteration</strong>, so we start with that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will often need resources from the modules numpy and pyplot:</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># We can also import items from a module individually, so they can be used by &quot;first name only&quot;.</span>
+<span class="c1"># Here this is done for mathematical functions; in some later sections it will be done for all imports.</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">cos</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fixed-point-equations">
+<h2><span class="section-number">2.2. </span>Fixed-point equations<a class="headerlink" href="#fixed-point-equations" title="Permalink to this headline">¶</a></h2>
+<p>A variant of stating equations as <em>root-finding</em> (<span class="math notranslate nohighlight">\(f(x) = 0\)</span>) is <em>fixed-point</em> form:
+given a function <span class="math notranslate nohighlight">\(g:\mathbb{R} \to \mathbb{R}\)</span> or <span class="math notranslate nohighlight">\(g:\mathbb{C} \to \mathbb{C}\)</span>
+(or even <span class="math notranslate nohighlight">\(g:\mathbb{R}^n \to \mathbb{R}^n\)</span>; a later topic),
+find a <em>fixed point</em> of <span class="math notranslate nohighlight">\(g\)</span>.
+That is, a value <span class="math notranslate nohighlight">\(p\)</span> for its argument such that</p>
+<div class="math notranslate nohighlight">
+\[g(p) = p\]</div>
+<p>Such problems are interchangeable with root-finding.
+One way to convert from <span class="math notranslate nohighlight">\(f(x) = 0\)</span> to <span class="math notranslate nohighlight">\(g(x) = x\)</span> is defining</p>
+<div class="math notranslate nohighlight">
+\[g(x) := x - w(x) f(x)\]</div>
+<p>for any “weight function” <span class="math notranslate nohighlight">\(w(x)\)</span>.</p>
+<p>One can convert the other way too, for example defining <span class="math notranslate nohighlight">\(f(x) := g(x) - x\)</span>.
+We have already seen this when we converted the equation <span class="math notranslate nohighlight">\(x = \cos x\)</span> to <span class="math notranslate nohighlight">\(f(x) = x - \cos x = 0\)</span>.</p>
+<p>Compare the two setups graphically: in each case, the <span class="math notranslate nohighlight">\(x\)</span> value at the intersection of the two curves is the solution we seek.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">g_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">f_1</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">g_1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$y = f(x) = x - \cos(x)$ and $y=0$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$y = g(x) = \cos (x)$ and $y=x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fixed-point-iteration-python_7_0.png" src="../_images/fixed-point-iteration-python_7_0.png" />
+<img alt="../_images/fixed-point-iteration-python_7_1.png" src="../_images/fixed-point-iteration-python_7_1.png" />
+</div>
+</div>
+<p>The fixed point form can be convenient partly because we almost always have to solve by successive approximations,
+or <em>iteration</em>, and fixed point form suggests <em>one</em> choice of iterative procedure:
+start with any first approximation <span class="math notranslate nohighlight">\(x_0\)</span>, and iterate with</p>
+<div class="math notranslate nohighlight">
+\[
+x_1 = g(x_0), \, x_2 = g(x_1), \dots, x_{k+1} = g(x_k), \dots
+\]</div>
+<p><strong>Proposition 1.</strong>
+If <span class="math notranslate nohighlight">\(g\)</span> is continuous, and <strong>if</strong> the above sequence <span class="math notranslate nohighlight">\(\{x_0, x_1, \dots \}\)</span> converges to a limit <span class="math notranslate nohighlight">\(p\)</span>, then that limit is a fixed point of function <span class="math notranslate nohighlight">\(g\)</span>: <span class="math notranslate nohighlight">\(g(p) = p\)</span>.</p>
+<p><strong>Proof:</strong>
+<em>From <span class="math notranslate nohighlight">\(\displaystyle \lim_{k \to \infty} x_k = p\)</span>, continuity gives</em></p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} g(x_k) = g(p).\]</div>
+<p><em>On the other hand, <span class="math notranslate nohighlight">\(g(x_k) = x_{k+1}\)</span>, so</em></p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} g(x_k) = \lim_{k \to \infty} x_{k+1} = p.\]</div>
+<p><em>Comparing gives <span class="math notranslate nohighlight">\(g(p) = p\)</span>.</em></p>
+<p>That second “if” is a big one.
+Fortunately, it can often be resolved using the idea of a <em>contraction mapping</em>.</p>
+<p><strong>Definiton 1: Mapping.</strong>
+A function <span class="math notranslate nohighlight">\(g(x)\)</span> defined on a closed interval <span class="math notranslate nohighlight">\(D = [a, b]\)</span> which sends values back into that interval,
+<span class="math notranslate nohighlight">\(g: D \to D\)</span>, is sometimes called a <em>map</em> or <em>mapping</em>.</p>
+<p>(<em>Aside:</em> The same applies for a function <span class="math notranslate nohighlight">\(g: D \to D\)</span> where <span class="math notranslate nohighlight">\(D\)</span> is a subset of the complex numbers,
+or even of vectors <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> or <span class="math notranslate nohighlight">\(\mathbb{C}^n\)</span>.)</p>
+<p>A mapping is sometimes thought of as moving a region <span class="math notranslate nohighlight">\(S\)</span> within its domain <span class="math notranslate nohighlight">\(D\)</span> to another such region, by moving each point
+<span class="math notranslate nohighlight">\(x \in S \subset D\)</span>
+to its image
+<span class="math notranslate nohighlight">\(g(x) \in g(S) \subset D\)</span>.</p>
+<p>A very important case is mappings that shrink the region, by reducing the distance between points:</p>
+<p><strong>Proposition 2:</strong>
+Any continuous mapping on a closed interval <span class="math notranslate nohighlight">\([a, b]\)</span> has at least one fixed point.</p>
+<p><strong>Proof:</strong>
+<em>Consider the “root-finding cousin”, <span class="math notranslate nohighlight">\(f(x) = x - g(x)\)</span>.</em></p>
+<p><em>First, <span class="math notranslate nohighlight">\(f(a) = a - g(a) \leq 0\)</span>, since <span class="math notranslate nohighlight">\(g(a) \geq a\)</span> so as to be in the domain <span class="math notranslate nohighlight">\([a,b]\)</span> — similarly, <span class="math notranslate nohighlight">\(f(b) = b - g(b) \geq 0\)</span>.</em></p>
+<p><em>From the Intermediate Value Theorem, <span class="math notranslate nohighlight">\(f\)</span> has a zero <span class="math notranslate nohighlight">\(p\)</span>, where <span class="math notranslate nohighlight">\(f(p) = p - g(p) = 0\)</span>.</em></p>
+<p><em>In other words, the graph of <span class="math notranslate nohighlight">\(y=g(x)\)</span> goes from being above the line <span class="math notranslate nohighlight">\(y=x\)</span> at <span class="math notranslate nohighlight">\(x=a\)</span> to below it at <span class="math notranslate nohighlight">\(x=b\)</span>,
+so at some point <span class="math notranslate nohighlight">\(x=p\)</span>, the curves meet: <span class="math notranslate nohighlight">\(y = x = p\)</span> and <span class="math notranslate nohighlight">\(y = g(p)\)</span>, so <span class="math notranslate nohighlight">\(p = g(p)\)</span>.</em></p>
+<div class="section" id="example-1">
+<h3><span class="section-number">2.2.1. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
+<p>Let us illustrate this with the mapping <span class="math notranslate nohighlight">\(g_4(x) := 4 \cos x\)</span>,
+for which the fact that <span class="math notranslate nohighlight">\(|g_4(x)| \leq 4\)</span> ensures that this is a map of the domain <span class="math notranslate nohighlight">\(D = [-4, 4]\)</span> into itself:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g_4</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fixed points of the map $g_4(x) = 4 \cos(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_4</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$y=g_4(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$y=x$&#39;</span><span class="p">)</span>
+<span class="n">ignore_me</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>  <span class="c1"># Note: the bogus output value &quot;ignore_me&quot; supresses some useless output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fixed-point-iteration-python_17_0.png" src="../_images/fixed-point-iteration-python_17_0.png" />
+</div>
+</div>
+<p>This example has multiple fixed points (three of them).
+To ensure both the existence of a <strong>unique</strong> solution, and covergence of the iteration to that solution, we need an extra condition.</p>
+<p><strong>Definition 2: Contraction Mapping</strong>.
+A mapping <span class="math notranslate nohighlight">\(g:D \to D\)</span>, is called a <em>contraction</em> or <em>contraction mapping</em> if there is a constant <span class="math notranslate nohighlight">\(C &lt; 1\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[|g(x) - g(y)| \leq C |x - y|\]</div>
+<p>for any <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.
+We then call <span class="math notranslate nohighlight">\(C\)</span> a <em>contraction constant</em>.</p>
+<p>(<em>Aside:</em> The same applies for a domain in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>: just replace the absolute value <span class="math notranslate nohighlight">\(| \dots |\)</span> by the vector norm
+<span class="math notranslate nohighlight">\(\| \dots \|\)</span>.)</p>
+<p><strong>Note:</strong> it is not enough to have <span class="math notranslate nohighlight">\(| g(x) - g(y) | &lt; | x - y |\)</span> or <span class="math notranslate nohighlight">\(C = 1\)</span>!
+We need the ratio
+<span class="math notranslate nohighlight">\(\displaystyle \frac{|g(x) - g(y)|}{|x - y|}\)</span>
+to be <em>uniformly</em> less than one for all possible values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p><strong>Theorem 1 (A Contraction Mapping Theorem).</strong>
+Any contraction mapping on a closed, bounded interval <span class="math notranslate nohighlight">\(D = [a, b]\)</span> has exactly one fixed point <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.
+Further, this can be calculated as the limit <span class="math notranslate nohighlight">\(\displaystyle p = \lim_{k \to \infty} x_k\)</span> of the iteration sequence given by <span class="math notranslate nohighlight">\(x_{k+1} = g(x_{k})\)</span> for <em>any</em> choice of the starting point <span class="math notranslate nohighlight">\(x_{0} \in D\)</span>.</p>
+<p><strong>Proof:</strong>
+<em>The main idea of the proof can be shown with the help of a few pictures.
+<br>
+First, uniqeness:
+between any two of the multiple fixed points above — call them <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_1\)</span> — the graph of <span class="math notranslate nohighlight">\(g(x)\)</span> has to rise with secant slope 1: <span class="math notranslate nohighlight">\((g(p_1) - g(p_0)/(p_1 - p_0) = (p_1 - p_0)/(p_1 - p_0) = 1\)</span>, and this violates the contraction property.</em></p>
+<p><em>So instead, for a contraction, the graph of a contraction map looks like the one below for our favorite example,
+<span class="math notranslate nohighlight">\(g(x) = \cos x\)</span> (which we will soon verify to be a contraction on interval <span class="math notranslate nohighlight">\([-1, 1]\)</span>):</em></p>
+<p>The second claim, about <strong>convergence</strong> to the fixed point from any initial approximation <span class="math notranslate nohighlight">\(x_0\)</span>,
+will be verified below, once we have seen some ideas about measuring errors.</p>
+</div>
+<div class="section" id="an-easy-way-of-checking-whether-a-differentiable-function-is-a-contraction">
+<h3><span class="section-number">2.2.2. </span>An easy way of checking whether a differentiable function is a contraction<a class="headerlink" href="#an-easy-way-of-checking-whether-a-differentiable-function-is-a-contraction" title="Permalink to this headline">¶</a></h3>
+<p>With differentiable functions, the contraction condition can often be easily verified using derivatives:</p>
+<p><strong>Theorem 2 (A derivative-based fixed point theorem).</strong>
+If a function <span class="math notranslate nohighlight">\(g:[a,b] \to [a,b]\)</span> is differentiable and there is a constant <span class="math notranslate nohighlight">\(C &lt; 1\)</span> such that <span class="math notranslate nohighlight">\(|g'(x)| \leq C\)</span> for all <span class="math notranslate nohighlight">\(x \in [a, b]\)</span>, then <span class="math notranslate nohighlight">\(g\)</span> is a contraction mapping, and so has a unique fixed point in this interval.</p>
+<p><strong>Proof:</strong>
+<em>Using the Mean Value Theorem, <span class="math notranslate nohighlight">\(g(x) - g(y) = g'(c)(x - y)\)</span> for some <span class="math notranslate nohighlight">\(c\)</span> between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>;
+<br>
+then taking absolute values,</em></p>
+<div class="math notranslate nohighlight">
+\[|g(x) - g(y)| = |g'(c)|
+\cdot |(x - y)| \leq C |(x - y)|.\]</div>
+</div>
+<div class="section" id="example-2-g-x-cos-x-is-a-contraction-on-domain-1-1">
+<h3><span class="section-number">2.2.3. </span>Example 2. <span class="math notranslate nohighlight">\(g(x) = \cos x\)</span> is a contraction on domain <span class="math notranslate nohighlight">\([-1, 1]\)</span><a class="headerlink" href="#example-2-g-x-cos-x-is-a-contraction-on-domain-1-1" title="Permalink to this headline">¶</a></h3>
+<p>Our favorite example <span class="math notranslate nohighlight">\(g(x) = \cos(x)\)</span> is a contraction, but we have to be a bit careful about the domain.</p>
+<p>For all real <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(g'(x) = -\sin x\)</span>, so <span class="math notranslate nohighlight">\(|g'(x)| \leq 1\)</span>; this is almost but not quite enough.</p>
+<p>However, we have seen that iteration values will settle in the interval <span class="math notranslate nohighlight">\(D = [-1,1]\)</span>,
+and considering <span class="math notranslate nohighlight">\(g\)</span> as a mapping of this domain,
+<span class="math notranslate nohighlight">\(|g'(x)| \leq \sin(1) = 0.841\dots &lt; 1\)</span>: that is, now we have a contraction, with <span class="math notranslate nohighlight">\(C = \sin(1) \approx 0.841\)</span>.</p>
+<p>And as seen in the graph above, there is indeed a unique fixed point.</p>
+</div>
+<div class="section" id="the-contraction-constant-c-as-a-measure-of-how-fast-the-approximations-improve-the-smaller-the-better">
+<h3><span class="section-number">2.2.4. </span>The contraction constant <span class="math notranslate nohighlight">\(C\)</span> as a measure of how fast the approximations improve (the smaller the better)<a class="headerlink" href="#the-contraction-constant-c-as-a-measure-of-how-fast-the-approximations-improve-the-smaller-the-better" title="Permalink to this headline">¶</a></h3>
+<p>It can be shown that if <span class="math notranslate nohighlight">\(C\)</span> is small (at least when one looks only at a reduced domain <span class="math notranslate nohighlight">\(|x - p| &lt; R\)</span>) then the convergence is “fast” once <span class="math notranslate nohighlight">\(|x_k - p| &lt; R\)</span>.</p>
+<p>To see this, we define some jargon for talking about errors.
+(For more details on error concepts, see the section on
+<a class="reference internal" href="error-measures-convergence-rates.html"><span class="doc std std-doc">Measures of Error and Convergence Rates</span></a>)</p>
+<p><strong>Definition 3: Error</strong>.
+The <em>error</em> in <span class="math notranslate nohighlight">\(\tilde x\)</span> as an approximation to an exact value <span class="math notranslate nohighlight">\(x\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\text{error} := \text{(approximation)} - \text{(exact value)} = \tilde x - x\]</div>
+<p>This will often be abbreviated as <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<p><strong>Definition 4: Absolute Error.</strong>
+The <em>absolute error</em> in <span class="math notranslate nohighlight">\(\tilde x\)</span> an approximation to an exact value <span class="math notranslate nohighlight">\(x\)</span> is the magnitude of the error:
+the absolute value <span class="math notranslate nohighlight">\(|E| = |\tilde x - x|\)</span>.</p>
+<p>(<em>Aside:</em> This will later be extended to <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\tilde x\)</span> being vectors,
+by again using the vector norm in place of the absolute value.
+In fact, I will sometimes blur the distinction by using the “single line” absolute value notation for vector norms too.)</p>
+<p>In the case of <span class="math notranslate nohighlight">\(x_k\)</span> as an approximation of <span class="math notranslate nohighlight">\(p\)</span>, we name the error <span class="math notranslate nohighlight">\(E_k := x_k - p\)</span>.
+Then <span class="math notranslate nohighlight">\(C\)</span> measures a worst case for how fast the error decreases as <span class="math notranslate nohighlight">\(k\)</span> increases, and this is “exponentially fast”:</p>
+<p><strong>Proposition 3.</strong>
+<span class="math notranslate nohighlight">\(|E_{k+1}| \leq C |E_{k}|\)</span>, or <span class="math notranslate nohighlight">\(|E_{k+1}|/|E_{k}|\leq C\)</span>,
+and so</p>
+<div class="math notranslate nohighlight">
+\[|E_k| \leq C^k |x_0 - p|\]</div>
+<p>That is, the error decreases at worst in a geometric sequence,
+which is exponential decrease with respect to the variable <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p><em><span class="math notranslate nohighlight">\(E_{k+1} = x_{k+1} - p = g(x_{k}) - g(p)\)</span>, using <span class="math notranslate nohighlight">\(g(p) = p\)</span>.
+Thus the contraction property gives</em></p>
+<div class="math notranslate nohighlight">
+\[|E_{k+1}| = |g(x_k) - g(p)| \leq C |x_k - p| = C |E_k|\]</div>
+<p><em>Applying this again,</em></p>
+<div class="math notranslate nohighlight">
+\[|E_k| \leq C |E_{k-1}| \leq C \cdot C |E_{k-2}| = C^2 |E_{k-2}|\]</div>
+<p><em>and repeating <span class="math notranslate nohighlight">\(k-2\)</span> more times,</em></p>
+<div class="math notranslate nohighlight">
+\[|E_k|\leq  C^k |E_0| = C^k |x_0 - p|.\]</div>
+<p><strong>Aside:</strong> We will often use this “recursive” strategy of relating the error in one iterate to that in the previous iterate.</p>
+<p><strong>The rest of the proof of the Contraction Mapping Theorem (Theorem 5): guaranteed convergence.</strong></p>
+<p><em>This now follows from the above proposition:
+<br>
+for</em> <strong>any</strong> <em>initial approximation <span class="math notranslate nohighlight">\(x_0\)</span>, we know that
+<span class="math notranslate nohighlight">\(|E_k|\leq C^k |x_0 - p|\)</span>, and with <span class="math notranslate nohighlight">\(C &lt; 1\)</span>, this can be made as small as we want by choosing a large enough value of <span class="math notranslate nohighlight">\(k\)</span>.
+Thus</em></p>
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} |E_k| = \lim_{k \to \infty} |x_k - p| = 0,\]</div>
+<p><em>which is another way of saying that <span class="math notranslate nohighlight">\(\displaystyle \lim_{k \to \infty} x_k = p\)</span>, or <span class="math notranslate nohighlight">\(x_k \to p\)</span>, as claimed.</em></p>
+</div>
+<div class="section" id="example-3-solving-x-cos-x-with-a-naive-fixed-point-iteration">
+<h3><span class="section-number">2.2.5. </span>Example 3. Solving <span class="math notranslate nohighlight">\(x = \cos x\)</span> with a naive fixed point iteration<a class="headerlink" href="#example-3-solving-x-cos-x-with-a-naive-fixed-point-iteration" title="Permalink to this headline">¶</a></h3>
+<p>We have seen that <em>one</em> way to convert the example
+<span class="math notranslate nohighlight">\(f(x) = x - \cos x = 0\)</span> to a fixed point iteration is <span class="math notranslate nohighlight">\(g(x) = \cos x\)</span>,
+and that this is a contraction on <span class="math notranslate nohighlight">\(D = [-1, 1]\)</span></p>
+<p>Here is what this iteration looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">g_1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Start at left</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solving x = cos(x) starting to the left, at x_0 = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x_k</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solving $x = \cos x$ starting to the left, at $x_0$ = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    <span class="n">g_x_k</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1"># Graph evalation of g(x_k) from x_k:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">x_k</span><span class="p">],</span> <span class="p">[</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">x_k_plus_1</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1">#Connect to the new x_k on the line y = x:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="p">[</span><span class="n">x_k_plus_1</span><span class="p">,</span> <span class="n">x_k_plus_1</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="c1"># Update names: the old x_k+1 is the new x_k</span>
+    <span class="n">x_k</span> <span class="o">=</span> <span class="n">x_k_plus_1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">x_k_plus_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Start at right</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solving x = cos(x) starting to the right, at x_0 = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x_k</span> <span class="o">=</span> <span class="n">b</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solving $x = \cos(x)$ starting to the right, at $x_0$ = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    <span class="n">g_x_k</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1"># Graph evalation of g(x_k) from x_k:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">x_k</span><span class="p">],</span> <span class="p">[</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">x_k_plus_1</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1">#Connect to the new x_k on the line y = x:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="p">[</span><span class="n">x_k_plus_1</span><span class="p">,</span> <span class="n">x_k_plus_1</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="c1"># Update names: the old x_k+1 is the new x_k</span>
+    <span class="n">x_k</span> <span class="o">=</span> <span class="n">x_k_plus_1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">x_k_plus_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solving x = cos(x) starting to the left, at x_0 = 0
+x_1 = 1.0
+x_2 = 0.5403023058681398
+x_3 = 0.8575532158463934
+x_4 = 0.6542897904977791
+x_5 = 0.7934803587425656
+x_6 = 0.7013687736227565
+x_7 = 0.7639596829006542
+x_8 = 0.7221024250267079
+x_9 = 0.7504177617637604
+x_10 = 0.7314040424225099
+</pre></div>
+</div>
+<img alt="../_images/fixed-point-iteration-python_35_1.png" src="../_images/fixed-point-iteration-python_35_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solving x = cos(x) starting to the right, at x_0 = 1
+x_1 = 0.5403023058681398
+x_2 = 0.8575532158463934
+x_3 = 0.6542897904977791
+x_4 = 0.7934803587425656
+x_5 = 0.7013687736227565
+x_6 = 0.7639596829006542
+x_7 = 0.7221024250267079
+x_8 = 0.7504177617637604
+x_9 = 0.7314040424225099
+x_10 = 0.7442373549005569
+</pre></div>
+</div>
+<img alt="../_images/fixed-point-iteration-python_35_3.png" src="../_images/fixed-point-iteration-python_35_3.png" />
+</div>
+</div>
+<p>In each case, one gets a “box spiral” in to the fixed point.
+It always looks like this when <span class="math notranslate nohighlight">\(g\)</span> is <em>decreasing</em> near the fixed point.</p>
+<p>If instead <span class="math notranslate nohighlight">\(g\)</span> is <em>increasing</em> near the fixed point, the iterates approach monotonically, either from above or below:</p>
+</div>
+<div class="section" id="example-4-solving-f-x-x-2-5x-4-0-in-interval-0-3">
+<h3><span class="section-number">2.2.6. </span>Example 4. Solving <span class="math notranslate nohighlight">\(f(x) = x^2 - 5x + 4 = 0\)</span> in interval <span class="math notranslate nohighlight">\([0, 3]\)</span><a class="headerlink" href="#example-4-solving-f-x-x-2-5x-4-0-in-interval-0-3" title="Permalink to this headline">¶</a></h3>
+<p>The roots are 1 and 4; for now we aim at the first of these,
+so we chose a domain <span class="math notranslate nohighlight">\([0, 3]\)</span> that contains just this root.</p>
+<p>Let us get a fixed point for by “partially solving for <span class="math notranslate nohighlight">\(x\)</span>”: solving for the <span class="math notranslate nohighlight">\(x\)</span> in the <span class="math notranslate nohighlight">\(5 x\)</span> term:</p>
+<div class="math notranslate nohighlight">
+\[x = g(x) = (x^2 + 4)/5\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span>
+<span class="k">def</span> <span class="nf">g_2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">f_2</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">g_2</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$y = f_2(x) = x^2-5x+4$ and $y = 0$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$y = g_2(x) = (x^2 + 4)/5$ and $y=x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fixed-point-iteration-python_39_0.png" src="../_images/fixed-point-iteration-python_39_0.png" />
+<img alt="../_images/fixed-point-iteration-python_39_1.png" src="../_images/fixed-point-iteration-python_39_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iterations</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">g_2</span>
+<span class="c1"># Start at left</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting to the left, at x_0 = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x_k</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Starting at left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    <span class="n">g_x_k</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1"># Graph evalation of g(x_k) from x_k:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">x_k</span><span class="p">],</span> <span class="p">[</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">x_k_plus_1</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1">#Connect to the new x_k on the line y = x:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g_2</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="p">[</span><span class="n">x_k_plus_1</span><span class="p">,</span> <span class="n">x_k_plus_1</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="c1"># Update names: the old x_k+1 is the new x_k</span>
+    <span class="n">x_k</span> <span class="o">=</span> <span class="n">x_k_plus_1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">x_k_plus_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Start at right</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting to the right, at x_0 = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x_k</span> <span class="o">=</span> <span class="n">b</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Starting at left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+    <span class="n">g_x_k</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1"># Graph evalation of g(x_k) from x_k:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">x_k</span><span class="p">],</span> <span class="p">[</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">x_k_plus_1</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)</span>
+    <span class="c1">#Connect to the new x_k on the line y = x:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_k</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">x_k</span><span class="p">)],</span> <span class="p">[</span><span class="n">x_k_plus_1</span><span class="p">,</span> <span class="n">x_k_plus_1</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="c1"># Update names: the old x_k+1 is the new x_k</span>
+    <span class="n">x_k</span> <span class="o">=</span> <span class="n">x_k_plus_1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">x_k_plus_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting to the left, at x_0 = 0
+x_1 = 0.8
+x_2 = 0.9280000000000002
+x_3 = 0.9722368000000001
+x_4 = 0.9890488790548482
+x_5 = 0.9956435370319303
+x_6 = 0.9982612105666906
+x_7 = 0.9993050889044148
+x_8 = 0.999722132142052
+x_9 = 0.9998888682989302
+x_10 = 0.999955549789623
+</pre></div>
+</div>
+<img alt="../_images/fixed-point-iteration-python_40_1.png" src="../_images/fixed-point-iteration-python_40_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting to the right, at x_0 = 3
+x_1 = 2.6
+x_2 = 2.152
+x_3 = 1.7262208
+x_4 = 1.3959676500705283
+x_5 = 1.1897451360086866
+x_6 = 1.0830986977312658
+x_7 = 1.0346205578054328
+x_8 = 1.014087939726725
+x_9 = 1.0056748698998388
+x_10 = 1.0022763887896116
+</pre></div>
+</div>
+<img alt="../_images/fixed-point-iteration-python_40_3.png" src="../_images/fixed-point-iteration-python_40_3.png" />
+</div>
+</div>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="root-finding-by-interval-halving-python.html" title="previous page"><span class="section-number">1. </span>Root Finding by Interval Halving (Bisection)</a>
+    <a class='right-next' id="next-link" href="newtons-method-python.html" title="next page"><span class="section-number">3. </span>Newton’s Method for Solving Equations</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Brenton LeMesurier, College of Charleston and University of Northern Colorado<br/>
+        
+            &copy; Copyright 2020–2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
