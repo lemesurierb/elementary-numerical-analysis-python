@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods" href="ODE-IVP-2-Runge-Kutta-python.html" />
+    <link rel="next" title="22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods" href="ODE-IVP-2-Runge-Kutta-python.html" />
     <link rel="prev" title="20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version" href="definite-integrals-4-romberg-integration.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -159,7 +159,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
-   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,12 +169,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
-   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
-   11. Solving
+   11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -186,7 +186,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
-   12. Solving
+   12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -235,22 +235,22 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
-   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
-   23. Global Error Bounds for One Step Methods
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
-   24. Systems of ODEs and Higher Order ODEs
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
@@ -266,8 +266,13 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  <a class="reference internal" href="ODE-IVP-5-error-control.html">
+   1. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preview Edition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   2. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -778,8 +783,8 @@
         
               <div>
                 
-  <div class="section" id="solving-initial-value-problems-for-ordinary-differential-equations-part-1-basic-concepts-and-euler-s-method">
-<h1><span class="section-number">21. </span>Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method<a class="headerlink" href="#solving-initial-value-problems-for-ordinary-differential-equations-part-1-basic-concepts-and-euler-s-method" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="initial-value-problems-for-ordinary-differential-equations-part-1-basic-concepts-and-euler-s-method">
+<h1><span class="section-number">21. </span>Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-1-basic-concepts-and-euler-s-method" title="Permalink to this headline">¶</a></h1>
 <p><strong>Updated on March 22</strong>
 with added <a class="reference external" href="#example-4">Example 4</a> and some <a class="reference external" href="#solving-example-4">numerical solutions of it</a>.</p>
 <p><strong>References:</strong></p>
@@ -1532,7 +1537,7 @@ Later, we will see how to get even higher orders.</p>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="definite-integrals-4-romberg-integration.html" title="previous page"><span class="section-number">20. </span>Definite Integrals, Part 4: Romberg Integration — Preliminary Version</a>
-    <a class='right-next' id="next-link" href="ODE-IVP-2-Runge-Kutta-python.html" title="next page"><span class="section-number">22. </span>Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</a>
+    <a class='right-next' id="next-link" href="ODE-IVP-2-Runge-Kutta-python.html" title="next page"><span class="section-number">22. </span>Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

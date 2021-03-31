@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises on the Bisection Method" href="root-finding-by-interval-halving-exercises-python.html" />
-    <link rel="prev" title="25. Some Future Topics" href="../future_topics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -159,7 +157,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
-   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,12 +167,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
-   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
-   11. Solving
+   11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -186,7 +184,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
-   12. Solving
+   12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -235,22 +233,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
-   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
-   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
-   23. Global Error Bounds for One Step Methods
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
-   24. Systems of ODEs and Higher Order ODEs
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
@@ -264,10 +262,15 @@
   Preliminary Versions of Future Sections
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-5-error-control.html">
+   1. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preview Edition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   2. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -632,27 +635,27 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#residuals-backward-errors-forward-errors-and-condition-numbers">
-   1.1. Residuals, backward errors, forward errors, and condition numbers
+   Residuals, backward errors, forward errors, and condition numbers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matrix-norms-induced-by-vector-norms">
-   1.2. Matrix norms induced by vector norms
+   Matrix norms induced by vector norms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-of-induced-matrix-norms">
-   1.3. Properties of (induced) matrix norms
+   Properties of (induced) matrix norms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relative-error-bound-and-condition-number">
-   1.4. Relative error bound and condition number
+   Relative error bound and condition number
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-     1.4.1. Aside: estimating
+     Aside: estimating
      <span class="math notranslate nohighlight">
       \(\|A^{-1}\|_\infty\)
      </span>
@@ -668,7 +671,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#well-conditioned-and-ill-conditioned-problems-and-matrices">
-   1.5. Well-conditioned and ill-conditioned problems and matrices
+   Well-conditioned and ill-conditioned problems and matrices
   </a>
  </li>
 </ul>
@@ -682,12 +685,17 @@
         
               <div>
                 
-  <div class="section" id="error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version">
-<h1><span class="section-number">1. </span>Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version<a class="headerlink" href="#error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version" title="Permalink to this headline">¶</a></h1>
-<p><strong>Reference:</strong> A bit in Section 8.4 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p>
+  <div class="section" id="simultaneous-linear-equations-part-5-error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version">
+<h1>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version<a class="headerlink" href="#simultaneous-linear-equations-part-5-error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc-preliminary-version" title="Permalink to this headline">¶</a></h1>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 2.3.1 <em>Error Magnification and Condition Number</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 7.5 <em>Error Bounds and Iterative Refinement</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a> — but the last part, on <em>Iterative Refinement</em>, is not relevant here.</p></li>
+<li><p>Section 8.4 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
+</ul>
 <div class="section" id="residuals-backward-errors-forward-errors-and-condition-numbers">
-<h2><span class="section-number">1.1. </span>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
-<p>For an approximation <span class="math notranslate nohighlight">\(x_a\)</span> of the solution <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(A x = b\)</span>, the <em>residual</em> <span class="math notranslate nohighlight">\(r = A x_a - b\)</span> measures error as <em>backward error</em>, often measerd by a single number, the residual norm <span class="math notranslate nohighlight">\(\| A x_a - b \|\)</span>.
+<h2>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
+<p>For an approximation <span class="math notranslate nohighlight">\(x_a\)</span> of the solution <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(A x = b\)</span>, the <em>residual</em> <span class="math notranslate nohighlight">\(r = A x_a - b\)</span> measures error as <em>backward error</em>, often measured by a single number, the <em>residual norm</em> <span class="math notranslate nohighlight">\(\| A x_a - b \|\)</span>.
 Any norm could be used, but the maximum norm is usualt preferred, for reasons that we will see soon.</p>
 <p>The corresponding (dimensionless) measure of relative error is defined as</p>
 <div class="math notranslate nohighlight">
@@ -698,25 +706,25 @@ Any norm could be used, but the maximum norm is usualt preferred, for reasons th
 <p>To relate these to the residual, we need the concepts of a <em>matrix norm</em> and the <em>condition number</em> of a matrix.</p>
 </div>
 <div class="section" id="matrix-norms-induced-by-vector-norms">
-<h2><span class="section-number">1.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
+<h2>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
 <p>Given any vector norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> — such as the maximum (“infinity”) norm <span class="math notranslate nohighlight">\(\| \cdot \|_\infty\)</span> or the Euclidean norm (length) <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> — the correponding <em>induced matrix norm</em> is</p>
 <div class="math notranslate nohighlight">
 \[
 \| A \| := \max_{x \neq 0} \frac{\| Ax \|}{\| x \|}, =  \max_{\|x\|=1} \| Ax \|
 \]</div>
-<p>This maximum exists for the infinity norm, and indeed there ia an explicit formula for it:
+<p>This maximum exists for ethe rof these vector norms, and for the infinity norm there ia an explicit formula for it:
 for any <span class="math notranslate nohighlight">\(m\times n\)</span> matrix,</p>
 <div class="math notranslate nohighlight">
 \[
 \|A\|_\infty = \max_{i=1}^m \sum_{j=1}^n |a_{ij}|
 \]</div>
 <p>(On the other hand, it is far harder to compute the Euclidean norm of a matrix: the formula requires computing eigenvalues.)</p>
-<p>Note that when the matrix is a vector considered as amatrix with a single column — so <span class="math notranslate nohighlight">\(n=1\)</span> — the sum goes away, and this agrees with the infinity vector norm.
+<p>Note that when the matrix is a vector considered as a matrix with a single column — so <span class="math notranslate nohighlight">\(n=1\)</span> — the sum goes away, and this agrees with the infinity vector norm.
 This allows us to consider vectors as being just matrices with a single column, which we will often do from now on.</p>
 </div>
 <div class="section" id="properties-of-induced-matrix-norms">
-<h2><span class="section-number">1.3. </span>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
-<p>These induced matrix norms have nmany properties in common with Euclidean length and other vector norms, but there can also be products, and then one has to be careful.</p>
+<h2>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
+<p>These induced matrix norms have many properties in common with Euclidean length and other vector norms, but there can also be products, and then one has to be careful.</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\|A\| \geq 0\)</span> (positivity)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\| A \| = 0\)</span> if and only if <span class="math notranslate nohighlight">\(A = 0\)</span> (definiteness)</p></li>
@@ -728,12 +736,12 @@ and when the product of two matrices makes sense (including matrix-vector produc
 </ol>
 <p>Note the failure to always have equality with products.
 Indeed one can have <span class="math notranslate nohighlight">\(A B = 0\)</span> with <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> both non-zero, such as when <span class="math notranslate nohighlight">\(A\)</span> is a singular matrix and <span class="math notranslate nohighlight">\(B\)</span> is a null-vector for it.</p>
-<p><strong>Aside:</strong> There are other matrix norms of use in some contexts, in particuar the
+<p><strong>Aside:</strong> There are other matrix norms of use in some contexts, in particular the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm">Frobenius norm</a>.
-Then the above properties are often then used to <em>define</em> what it is to be a matrix form, much as the the first four define what it is to be a vector norm.</p>
+Then the above properties are often used to <em>define</em> what it is to be a matrix form, much as the the first four define what it is to be a vector norm.</p>
 </div>
 <div class="section" id="relative-error-bound-and-condition-number">
-<h2><span class="section-number">1.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
+<h2>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
 <p>It can be proven that, for any choice of norm,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -741,7 +749,7 @@ Rel(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \|A\|\|A^{-1}\|\frac{\|r\|}{\|b\|},
 \]</div>
 <p>where the last factor is the relative backward error.</p>
 <p>Since we can (though often with considerable effort, due to the inverse!) compute the right-hand side when the infinity norm is used, we can compute an upper bound on the relative error.
-Form this, an upper bound on the absolute error can be computed if needed.</p>
+From this, an upper bound on the absolute error can be computed if needed.</p>
 <p>The <em>growth factor</em> between the relative backward error measured by the residual and the relative (forward) error is called the <em>condition number</em>, <span class="math notranslate nohighlight">\(K(A)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\kappa(A) := \|A\| \|A^{-1}\|\]</div>
@@ -752,7 +760,7 @@ Form this, an upper bound on the absolute error can be computed if needed.</p>
 <br>
 At the other extreme, the identity matrix <span class="math notranslate nohighlight">\(I\)</span> has norm 1 and condition number 1 (using any norm), and this is the best possible because in general <span class="math notranslate nohighlight">\(\kappa(A) \geq 1\)</span>. (This follows from sub-multiplicativity.)</p>
 <div class="section" id="aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-<h3><span class="section-number">1.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
+<h3>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
 <p>In Python, a good approximation of the condition number <span class="math notranslate nohighlight">\(\kappa_\infty(A)\)</span> is given by <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A,</span> <span class="pre">numpy.inf)</span></code>.
 <br>
 As with <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code>, the simple form <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A)</span></code> defaults to using the 2-norm, based on the Euclidian length <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> for vectors.</p>
@@ -769,7 +777,7 @@ Then</p>
 </div>
 </div>
 <div class="section" id="well-conditioned-and-ill-conditioned-problems-and-matrices">
-<h2><span class="section-number">1.5. </span>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
+<h2>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
 <p>Condition numbers, giving upper limit on the ratio of forward error to backward error,
 measure the amplification of errors, and have counterparts in other contexts.
 For example, with an approximation <span class="math notranslate nohighlight">\(r_a\)</span> of a root <span class="math notranslate nohighlight">\(r\)</span> of the equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span>, the ratio of forward error to backward error is bounded by
@@ -781,7 +789,7 @@ The condition number then guarantees that the (forward) relative error is no gre
 Compare this to the observation that one can expect to lose at least <span class="math notranslate nohighlight">\(p/2\)</span> significant bits when using the approximation <span class="math notranslate nohighlight">\(Df(x) \approx D_hf(x) - (f(x+h) = f(x))/h\)</span>.</p>
 <p>A <strong>well-conditioned problem</strong> is one that is not too highly sensitive to errors in rounding or input data; for an eqution <span class="math notranslate nohighlight">\(Ax = b\)</span>, this corresponds to the condition number of <span class="math notranslate nohighlight">\(A\)</span> not being to large; the matrix <span class="math notranslate nohighlight">\(A\)</span> is then sometimes also called well-conditioned.
 This is of course vague, but might typically mean that <span class="math notranslate nohighlight">\(p - \log_2(\kappa(A))\)</span> is a sufficient number of significant bits for a particular purpose.</p>
-<p>A problem that is not deemed well-conditioned is called <strong>ill-conditioned</strong>, so that a matrix of uncomfortably large condition number is also sometimes called ill-conditioned.
+<p>A problem that is not deemed well-conditioned is called <strong>ill-conditioned</strong>, so that a matrix of uncomfortably large condition number is also sometimes called <em>ill-conditioned</em>.
 An ill-conditioned problem might still be well-posed, but just requiring careful and precise solution methods.</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
@@ -816,8 +824,6 @@ An ill-conditioned problem might still be well-posed, but just requiring careful
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../future_topics.html" title="previous page"><span class="section-number">25. </span>Some Future Topics</a>
-    <a class='right-next' id="next-link" href="root-finding-by-interval-halving-exercises-python.html" title="next page">Exercises on the Bisection Method</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

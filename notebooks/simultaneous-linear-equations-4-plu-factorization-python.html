@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>12. Solving \(Ax = b\) With Both Pivoting and LU factorization &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>12. Simultaneous Linear Equations, Part 4: Solving \(Ax = b\) With Both Pivoting and LU factorization &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation" href="polynomial-collocation%2Bapproximation-python.html" />
-    <link rel="prev" title="11. Solving \(Ax = b\) with LU factorization, \(A = L U\)" href="simultaneous-linear-equations-3-lu-factorization-python.html" />
+    <link rel="prev" title="11. Simultaneous Linear Equations, Part 3: Solving \(Ax = b\) with LU factorization, \(A = L U\)" href="simultaneous-linear-equations-3-lu-factorization-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -159,7 +159,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
-   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,12 +169,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
-   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
-   11. Solving
+   11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -186,7 +186,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   12. Solving
+   12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -235,22 +235,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
-   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
-   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
-   23. Global Error Bounds for One Step Methods
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
-   24. Systems of ODEs and Higher Order ODEs
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
@@ -266,8 +266,13 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  <a class="reference internal" href="ODE-IVP-5-error-control.html">
+   1. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preview Edition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   2. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -691,14 +696,14 @@
         
               <div>
                 
-  <div class="section" id="solving-ax-b-with-both-pivoting-and-lu-factorization">
-<h1><span class="section-number">12. </span>Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> With Both Pivoting and LU factorization<a class="headerlink" href="#solving-ax-b-with-both-pivoting-and-lu-factorization" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="simultaneous-linear-equations-part-4-solving-ax-b-with-both-pivoting-and-lu-factorization">
+<h1><span class="section-number">12. </span>Simultaneous Linear Equations, Part 4: Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> With Both Pivoting and LU factorization<a class="headerlink" href="#simultaneous-linear-equations-part-4-solving-ax-b-with-both-pivoting-and-lu-factorization" title="Permalink to this headline">¶</a></h1>
 <p><strong>Updated on Wednesday February 17,</strong> with pseudo-code, Python code, and an example.</p>
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 <hr class="docutils" />
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Section 2.4 <em>The PA=LU Factorization</em></p></li>
+<li><p>Section 2.4 <em>The PA=LU Factorization</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
 <li><p>Section 6.5 <em>Matrix Factorizations</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>, from <em>Permutation Matrices</em> onward.</p></li>
 <li><p>Section 8.1 <em>Matrix Factorizations</em> of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
@@ -1125,7 +1130,7 @@ The residual r = b - Ax is
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-3-lu-factorization-python.html" title="previous page"><span class="section-number">11. </span>Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> with LU factorization, <span class="math notranslate nohighlight">\(A = L U\)</span></a>
+    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-3-lu-factorization-python.html" title="previous page"><span class="section-number">11. </span>Simultaneous Linear Equations, Part 3: Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> with LU factorization, <span class="math notranslate nohighlight">\(A = L U\)</span></a>
     <a class='right-next' id="next-link" href="polynomial-collocation%2Bapproximation-python.html" title="next page"><span class="section-number">13. </span>Polynomial Collocation (Interpolation/Extrapolation) and Approximation</a>
 
     </div>

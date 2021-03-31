@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -159,7 +159,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,12 +169,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
-   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
-   11. Solving
+   11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -186,7 +186,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
-   12. Solving
+   12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -235,22 +235,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
-   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
-   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
-   23. Global Error Bounds for One Step Methods
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
-   24. Systems of ODEs and Higher Order ODEs
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
@@ -266,8 +266,13 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  <a class="reference internal" href="ODE-IVP-5-error-control.html">
+   1. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preview Edition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   2. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -849,8 +854,8 @@
         
               <div>
                 
-  <div class="section" id="solving-simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination">
-<h1><span class="section-number">8. </span>Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination<a class="headerlink" href="#solving-simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination">
+<h1><span class="section-number">8. </span>Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination<a class="headerlink" href="#simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination" title="Permalink to this headline">¶</a></h1>
 <p><strong>Last Revised on March 18, 2021,</strong>
 adding further uses of Python slicing and “vectorization” in function <code class="docutils literal notranslate"><span class="pre">rowReduction</span></code>,
 eliminating function <code class="docutils literal notranslate"><span class="pre">zeros_below_diagonal</span></code> in favor of always doing this in function <code class="docutils literal notranslate"><span class="pre">row_reduce</span></code>.

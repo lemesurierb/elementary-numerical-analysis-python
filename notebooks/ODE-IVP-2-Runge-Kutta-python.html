@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Global Error Bounds for One Step Methods" href="ODE-IVP-3-error-results-one-step-methods.html" />
-    <link rel="prev" title="21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method" href="ODE-IVP-1-basics-and-Euler-python.html" />
+    <link rel="next" title="23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods" href="ODE-IVP-3-error-results-one-step-methods.html" />
+    <link rel="prev" title="21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method" href="ODE-IVP-1-basics-and-Euler-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -159,7 +159,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
-   8. Solving Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,12 +169,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
-   10. Solving Simultaneous Linear Equations, Part 2: Partial Pivoting
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
-   11. Solving
+   11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -186,7 +186,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
-   12. Solving
+   12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -235,22 +235,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
-   21. Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
-   23. Global Error Bounds for One Step Methods
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
-   24. Systems of ODEs and Higher Order ODEs
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
@@ -266,8 +266,13 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+  <a class="reference internal" href="ODE-IVP-5-error-control.html">
+   1. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preview Edition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   2. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -695,8 +700,8 @@
         
               <div>
                 
-  <div class="section" id="solving-initial-value-problems-for-odes-part-2-runge-kutta-methods">
-<h1><span class="section-number">22. </span>Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods<a class="headerlink" href="#solving-initial-value-problems-for-odes-part-2-runge-kutta-methods" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="initial-value-problems-for-odes-part-2-runge-kutta-methods">
+<h1><span class="section-number">22. </span>Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods<a class="headerlink" href="#initial-value-problems-for-odes-part-2-runge-kutta-methods" title="Permalink to this headline">¶</a></h1>
 <p><strong>Updated (slightly) on Monday March 29</strong></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -1031,7 +1036,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
     <span class="n">b</span> <span class="o">=</span> <span class="mf">3.</span>
     <span class="n">u_0</span> <span class="o">=</span> <span class="mf">2.</span>
     <span class="n">K</span> <span class="o">=</span> <span class="mf">1.</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
 
     <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">explicitMidpoint</span><span class="p">(</span><span class="n">f_1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
@@ -1215,7 +1220,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
     <span class="n">b</span> <span class="o">=</span> <span class="mf">3.</span>
     <span class="n">u_0</span> <span class="o">=</span> <span class="mf">2.</span>
     <span class="n">K</span> <span class="o">=</span> <span class="mf">1.0</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">40</span>
 
     <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">f_1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
@@ -1301,8 +1306,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ODE-IVP-1-basics-and-Euler-python.html" title="previous page"><span class="section-number">21. </span>Solving Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method</a>
-    <a class='right-next' id="next-link" href="ODE-IVP-3-error-results-one-step-methods.html" title="next page"><span class="section-number">23. </span>Global Error Bounds for One Step Methods</a>
+    <a class='left-prev' id="prev-link" href="ODE-IVP-1-basics-and-Euler-python.html" title="previous page"><span class="section-number">21. </span>Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method</a>
+    <a class='right-next' id="next-link" href="ODE-IVP-3-error-results-one-step-methods.html" title="next page"><span class="section-number">23. </span>Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
