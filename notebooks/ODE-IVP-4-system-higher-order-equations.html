@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercises on Machine Numbers, Rounding Error and Error Propagation &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>24. Systems of ODEs and Higher Order ODEs &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises on Solving Simultaneous Linear Equations" href="simultaneous-linear-equations-exercises.html" />
-    <link rel="prev" title="Exercises on Root-finding Without Derivatives" href="root-finding-without-derivatives-exercises.html" />
+    <link rel="next" title="25. Some Future Topics" href="../future_topics.html" />
+    <link rel="prev" title="23. Global Error Bounds for One Step Methods" href="ODE-IVP-3-error-results-one-step-methods.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +121,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -248,8 +248,8 @@
    23. Global Error Bounds for One Step Methods
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    24. Systems of ODEs and Higher Order ODEs
   </a>
  </li>
@@ -276,7 +276,7 @@
   Exercises
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
    Exercises on the Bisection Method
@@ -302,8 +302,8 @@
    Exercises on Root-finding Without Derivatives
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
    Exercises on Machine Numbers, Rounding Error and Error Propagation
   </a>
  </li>
@@ -583,7 +583,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/machine-numbers-rounding-error-and-error-propagation-exercises.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-4-system-higher-order-equations.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -608,7 +608,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/machine-numbers-rounding-error-and-error-propagation-exercises.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-4-system-higher-order-equations.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -631,18 +631,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise-1">
-   Exercise 1
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise-2">
-   Exercise 2
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise-3">
-   Exercise 3
+  <a class="reference internal nav-link" href="#motion-of-a-damped-mass-spring-system-in-one-dimension">
+   24.1. Motion of a Damped Mass-Spring System in One Dimension
   </a>
  </li>
 </ul>
@@ -656,34 +646,220 @@
         
               <div>
                 
-  <div class="section" id="exercises-on-machine-numbers-rounding-error-and-error-propagation">
-<h1>Exercises on Machine Numbers, Rounding Error and Error Propagation<a class="headerlink" href="#exercises-on-machine-numbers-rounding-error-and-error-propagation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exercise-1">
-<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h2>
-<p>Verify that when <em>dividing</em> two numbers, the relative error in the quotient is no worse than slightly more than the sum of the relative errors in the numbers divided.
-(Mimic the argument for the corresponding result on products.)</p>
-</div>
-<div class="section" id="exercise-2">
-<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h2>
-<p>For <span class="math notranslate nohighlight">\(x = 8.024\)</span> and <span class="math notranslate nohighlight">\(y = 8.006\)</span>,</p>
-<ul class="simple">
-<li><p>Round  each to three significant figures, giving <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(y_a\)</span>.</p></li>
-<li><p>Compute the absolute errors in each of these approximations, and in their difference as an approximation of <span class="math notranslate nohighlight">\(x - y\)</span>.</p></li>
-<li><p>Compute the relative errors in each of these three approximations.</p></li>
-</ul>
-<p>Then look at rounding to only two significant digits!</p>
-</div>
-<div class="section" id="exercise-3">
-<h2>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h2>
-<p>(a) Illustrate why computing the roots of the quadratic equation <span class="math notranslate nohighlight">\(ax^2 + bx + c = 0\)</span> with the standard formula</p>
+  <div class="section" id="systems-of-odes-and-higher-order-odes">
+<h1><span class="section-number">24. </span>Systems of ODEs and Higher Order ODEs<a class="headerlink" href="#systems-of-odes-and-higher-order-odes" title="Permalink to this headline">¶</a></h1>
+<p><strong>Preliminary version of March 30, 2021</strong></p>
+<p>The short version of this section is that the numerical methods and algorithms developed so for for the initial value problem</p>
 <div class="math notranslate nohighlight">
-\[x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]</div>
-<p>can sometimes give poor accuracy when evaluated using machine arithmetic such as IEEE-64 floating-point arithmetic.
-This is not alwys a problem, so identify specifically the situations when this could occur, in terms of a condition on the coefficents <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span>.
-(It is sufficient to consider real value of the ocefficients.
-Also as an aside, there is no loss pr precisio prbe, when th roots are non-real, so you only need consider quadratics with real roots.)</p>
-<p>(b) Then describe a careful procedure for always getting accurate answers.
-State the procedure first with words and mathematical formulas, and then express it in pseudo-code.</p>
+\[\begin{split}
+\begin{split}
+\frac{d u}{d t} &amp;= f(t, u(t)), \quad a \leq t \leq b
+\\
+u(a) &amp;= u_0
+\end{split}
+\end{split}\]</div>
+<p>all also work for system of first order ODEs by simply letting <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(f\)</span> be vector-valued,
+and the Python code requires only one very small change.</p>
+<p>Also, higher order ODE’s (and syrem of them) can be converted into system of first order ODEs.</p>
+<p>The second point is seen in a typical first course in differential equations, so I will just illutrate the procedure for a single famous example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># Shortcuts for some favorite commands:</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">legend</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="motion-of-a-damped-mass-spring-system-in-one-dimension">
+<h2><span class="section-number">24.1. </span>Motion of a Damped Mass-Spring System in One Dimension<a class="headerlink" href="#motion-of-a-damped-mass-spring-system-in-one-dimension" title="Permalink to this headline">¶</a></h2>
+<p>A simple mathematical model of a damped mass-spring system is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+M \frac{d^2 y}{d t^2} &amp;= -k u - D \frac{d y}{d t}
+\\
+&amp; \text{with initial conditions}
+\\
+y(a) &amp;= y_0
+\\
+\left. \frac{dy}{dt} \right|_{t=a} &amp;= v_0
+\end{split}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is the spring constant and <span class="math notranslate nohighlight">\(D\)</span> is the coefficient of friction, or drag.</p>
+<p>To convert to a first order system, introduction the two functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+u_0(t) &amp;= y(t)
+\\
+u_1(t) &amp;= \frac{d y}{d t}
+\end{split}
+\end{split}\]</div>
+<p>(Aside: this is one of many places where the Pythonic system of counting from <span class="math notranslate nohighlight">\(0\)</span> fits the mathematics better!)</p>
+<p>Then with <span class="math notranslate nohighlight">\(d^2 y/dt^2 = d u_1/dt\)</span> the above equation becomes</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d u_1}{d t} = -\frac{k}{M} u_0 - \frac{D}{M} u_1
+\]</div>
+<p>Combined with the definition of <span class="math notranslate nohighlight">\(u_1\)</span> give the system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\frac{d u_0}{d t} &amp;= u_1
+\\
+\frac{d u_1}{d t} &amp;= -\frac{k}{M} u_0 - \frac{D}{M} u_1
+\\
+&amp;\text{with initial conditions}
+\\
+u_0(a) &amp;= y_0
+\\
+u_1(a) &amp;= v_0
+\end{split}
+\end{split}\]</div>
+<p>Next this can be put into vector form.
+Defining the vector-valued functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\tilde{u}(t) &amp;= \langle u_0(t), u_1(t) \rangle
+\\
+\tilde{f}(t, \tilde{u}(t)) &amp;= \left\langle u_1(t), -\frac{k}{M} u_0(t) - \frac{D}{M} u_1(t) \right\rangle
+\end{split}
+\end{split}\]</div>
+<p>and initial data vector</p>
+<div class="math notranslate nohighlight">
+\[\tilde{u}_0 = \langle u_{0,0}, u_{0,1} \rangle = \langle y_0, v_0 \rangle\]</div>
+<p>puts the ODE IVP into the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\frac{d \tilde{u}}{d t} &amp;= \tilde{f}(t, \tilde{u}(t)), \quad a \leq t \leq b
+\\
+\tilde{u}(a) &amp;= \tilde{u}_0
+\end{split}
+\end{split}\]</div>
+<p>The Euler’s method code from before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Use Euler&#39;s Method to solve du/dt = f(t, u) for t in [a, b], with initial value u(a) = u_0&quot;&quot;&quot;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Note: &quot;n&quot; counts steps, so there are n+1 values for t.</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">h</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>does not quite work, but only slgiht modificsit is needed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler_system</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Use Euler&#39;s Method to solve du/dt = f(t, u) for t in [a, b], with initial value u(a) = u_0</span>
+<span class="sd">    Modified from function euler to handle systems.&quot;&quot;&quot;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Note: &quot;n&quot; counts steps, so there are n+1 values for t.</span>
+    
+    <span class="c1"># Only the following two lines change for the systems version</span>
+    <span class="n">n_unknowns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u_0</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_unknowns</span><span class="p">])</span>
+
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">u_0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">h</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">u_0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="c1"># Four periods</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">euler_system</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Dy</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">title</span><span class="p">(</span><span class="s2">&quot;U_0, = y with k=</span><span class="si">{k}</span><span class="s2">, D=</span><span class="si">{D}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">title</span><span class="p">(</span><span class="s2">&quot;U_1, = dy/dt with k=</span><span class="si">{k}</span><span class="s2">, D=</span><span class="si">{D}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Dy</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;dy/dt&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ODE-IVP-4-system-higher-order-equations_15_0.png" src="../_images/ODE-IVP-4-system-higher-order-equations_15_0.png" />
+<img alt="../_images/ODE-IVP-4-system-higher-order-equations_15_1.png" src="../_images/ODE-IVP-4-system-higher-order-equations_15_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U_0=y and U_1=dy/dt with k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, D=</span><span class="si">{</span><span class="n">D</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y and dy/dt&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ODE-IVP-4-system-higher-order-equations_16_0.png" src="../_images/ODE-IVP-4-system-higher-order-equations_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>  <span class="c1"># Make axes equal length; orbits should be circular or &quot;circular spirals&quot; </span>
+<span class="k">if</span> <span class="n">D</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+    <span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The &#39;orbits&#39; of the undamped mass-spring system, k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The &#39;orbits&#39; of the damped mass-spring system, k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, D=</span><span class="si">{</span><span class="n">D</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Dy</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;dy/dt&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Dy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;g*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Dy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;r*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;end&quot;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">()</span>
+<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ODE-IVP-4-system-higher-order-equations_17_0.png" src="../_images/ODE-IVP-4-system-higher-order-equations_17_0.png" />
+</div>
+</div>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
@@ -717,8 +893,8 @@ State the procedure first with words and mathematical formulas, and then express
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="root-finding-without-derivatives-exercises.html" title="previous page">Exercises on Root-finding Without Derivatives</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-exercises.html" title="next page">Exercises on Solving Simultaneous Linear Equations</a>
+    <a class='left-prev' id="prev-link" href="ODE-IVP-3-error-results-one-step-methods.html" title="previous page"><span class="section-number">23. </span>Global Error Bounds for One Step Methods</a>
+    <a class='right-next' id="next-link" href="../future_topics.html" title="next page"><span class="section-number">25. </span>Some Future Topics</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

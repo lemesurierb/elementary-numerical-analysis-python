@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Global Error Bounds for One Step Methods — Preliminary &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>23. Global Error Bounds for One Step Methods &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html" />
-    <link rel="prev" title="23. Some Future Topics" href="../future_topics.html" />
+    <link rel="next" title="24. Systems of ODEs and Higher Order ODEs" href="ODE-IVP-4-system-higher-order-equations.html" />
+    <link rel="prev" title="22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods" href="ODE-IVP-2-Runge-Kutta-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +121,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -243,9 +243,19 @@
    22. Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   23. Global Error Bounds for One Step Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
+   24. Systems of ODEs and Higher Order ODEs
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   23. Some Future Topics
+   25. Some Future Topics
   </a>
  </li>
 </ul>
@@ -254,15 +264,10 @@
   Preliminary Versions of Future Sections
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1. Global Error Bounds for One Step Methods — Preliminary
-  </a>
- </li>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html">
-   2. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
+   1. Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version
   </a>
  </li>
 </ul>
@@ -627,7 +632,7 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#order-of-accuracy-for-the-basic-runge-kutta-type-mehods">
-   1.1. Order of accuracy for the basic Runge-Kutta type mehods
+   23.1. Order of accuracy for the basic Runge-Kutta type mehods
   </a>
  </li>
 </ul>
@@ -641,8 +646,8 @@
         
               <div>
                 
-  <div class="section" id="global-error-bounds-for-one-step-methods-preliminary">
-<h1><span class="section-number">1. </span>Global Error Bounds for One Step Methods — Preliminary<a class="headerlink" href="#global-error-bounds-for-one-step-methods-preliminary" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="global-error-bounds-for-one-step-methods">
+<h1><span class="section-number">23. </span>Global Error Bounds for One Step Methods<a class="headerlink" href="#global-error-bounds-for-one-step-methods" title="Permalink to this headline">¶</a></h1>
 <p>All the methods seen so far for solving ODE IVP’s are <em>one-step methods</em>:
 they fit the general form</p>
 <div class="math notranslate nohighlight">
@@ -699,7 +704,7 @@ where the Taylor’s Theorem error formula canbe used to get the LTE bound</p>
 | E_i | \leq \frac{|u_0 e^{K(b - a)}|}{2} \frac{e^{K (t_i - a)} - 1}{k} h.
 \]</div>
 <div class="section" id="order-of-accuracy-for-the-basic-runge-kutta-type-mehods">
-<h2><span class="section-number">1.1. </span>Order of accuracy for the basic Runge-Kutta type mehods<a class="headerlink" href="#order-of-accuracy-for-the-basic-runge-kutta-type-mehods" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">23.1. </span>Order of accuracy for the basic Runge-Kutta type mehods<a class="headerlink" href="#order-of-accuracy-for-the-basic-runge-kutta-type-mehods" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>For Euler’s method, it was stated in section
 <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html"><span class="doc std std-doc">Solving Initial Value Problems for Ordinary Differential Equations, Part 1</span></a>,
@@ -741,8 +746,8 @@ and so their global truncation error is <span class="math notranslate nohighligh
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../future_topics.html" title="previous page"><span class="section-number">23. </span>Some Future Topics</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers.html" title="next page"><span class="section-number">2. </span>Error bounds for linear algebra: condition numbers, matrix norms, etc. — Preliminary Version</a>
+    <a class='left-prev' id="prev-link" href="ODE-IVP-2-Runge-Kutta-python.html" title="previous page"><span class="section-number">22. </span>Solving Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</a>
+    <a class='right-next' id="next-link" href="ODE-IVP-4-system-higher-order-equations.html" title="next page"><span class="section-number">24. </span>Systems of ODEs and Higher Order ODEs</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
