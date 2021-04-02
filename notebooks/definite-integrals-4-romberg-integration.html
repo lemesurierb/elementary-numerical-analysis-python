@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>20. Definite Integrals, Part 4: Romberg Integration &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -230,7 +230,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   20. Definite Integrals, Part 4: Romberg Integration — Preliminary Version
+   20. Definite Integrals, Part 4: Romberg Integration
   </a>
  </li>
  <li class="toctree-l1">
@@ -367,12 +367,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/task-1-centered-difference-derivative-approximation.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
    Centered Difference Approximation of the Derivative
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/task-2-centered-differences-richardson.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
    Improving on the Centered Difference Approximation with Richardson Extrapolation
   </a>
  </li>
@@ -641,8 +641,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-algorithm-in-pseudocode">
-   20.2. An algorithm, in pseudocode
+  <a class="reference internal nav-link" href="#a-first-algorithm-in-pseudocode">
+   20.2. A first algorithm, in pseudocode
   </a>
  </li>
 </ul>
@@ -656,8 +656,9 @@
         
               <div>
                 
-  <div class="section" id="definite-integrals-part-4-romberg-integration-preliminary-version">
-<h1><span class="section-number">20. </span>Definite Integrals, Part 4: Romberg Integration — Preliminary Version<a class="headerlink" href="#definite-integrals-part-4-romberg-integration-preliminary-version" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="definite-integrals-part-4-romberg-integration">
+<h1><span class="section-number">20. </span>Definite Integrals, Part 4: Romberg Integration<a class="headerlink" href="#definite-integrals-part-4-romberg-integration" title="Permalink to this headline">¶</a></h1>
+<p><strong>Updated on Thursday, April 1</strong> adding a note about an error estimate that can be used in an algorithm that computes to a specified error tolerance.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 5.3 <em>Romberg Integration</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -690,6 +691,12 @@ T_{2n} = \frac{T_n + M_n}{2}
 \[
 M_n = h \sum_{k=1}^n f(a + (k-1/2)h), \quad h = \frac{b-a}{n}
 \]</div>
+<p>With the “Romberg notation” <span class="math notranslate nohighlight">\(R_{i,0} = T_{2^i}\)</span> so that <span class="math notranslate nohighlight">\(n=2^i\)</span>, this becomes</p>
+<div class="math notranslate nohighlight">
+\[R_{i+1,0} = \frac{R_{i,0} + M_{2^i}}{2}\]</div>
+<p>or more conveniently for below,</p>
+<div class="math notranslate nohighlight">
+\[R_{i,0} = \frac{R_{i-1,0} + M_{2^{i-1}}}{2}\]</div>
 <p>Extrapolation is then done with the formula</p>
 <div class="math notranslate nohighlight">
 \[
@@ -697,16 +704,20 @@ R_{i,j} = \frac{4^j R_{i,j-1} - R_{i-1,j-1}}{4^j - 1}, \quad j = 1, 2, \dots, i
 \]</div>
 <p>which can also be expressed as</p>
 <div class="math notranslate nohighlight">
-\[
-R_{i,j} = R_{i,j-1} + E_{i,j-1}, \;\text{where}\; E_{i,j-1} = \frac{R_{i,j-1} - R_{i-1,j-1}}{4^j - 1}\quad\text{is an error estimate.}
-\]</div>
+\[R_{i,j} = R_{i,j-1} + E_{i,j-1}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[E_{i,j-1} = \frac{R_{i,j-1} - R_{i-1,j-1}}{4^j - 1}\]</div>
+<p>is an error estimate.
+This can be used as a stopping condition in an algorithm that computes to a specified error tolerance.</p>
+<p><strong>Aside:</strong> the first level of extrapolation gives the Composite Simpson’s Rule:</p>
 <div class="math notranslate nohighlight">
 \[
 R_{i,1} = S_{2n} = \frac{4 T_{2 n} - T_{n}}{4 - 1}, \; n=2^{i-1}
 \]</div>
 </div>
-<div class="section" id="an-algorithm-in-pseudocode">
-<h2><span class="section-number">20.2. </span>An algorithm, in pseudocode<a class="headerlink" href="#an-algorithm-in-pseudocode" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-first-algorithm-in-pseudocode">
+<h2><span class="section-number">20.2. </span>A first algorithm, in pseudocode<a class="headerlink" href="#a-first-algorithm-in-pseudocode" title="Permalink to this headline">¶</a></h2>
 <p>The above can now be arranged into a basic algorithm.
 It does a fixed number <span class="math notranslate nohighlight">\(M\)</span> of levels of extrapolation so using <span class="math notranslate nohighlight">\(2^M\)</span> intervals;
 a refinement would be to use the above error estimate <span class="math notranslate nohighlight">\(E_{i,j-1}\)</span> as the basis for a stopping condition.</p>
