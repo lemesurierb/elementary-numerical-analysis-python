@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6. The Convergence Rate of Newton’s Method &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preliminary Version &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Root-finding Without Derivatives" href="root-finding-without-derivatives-python.html" />
-    <link rel="prev" title="5. Measures of Error and Order of Convergence" href="error-measures-convergence-rates.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +119,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -147,8 +145,8 @@
    5. Measures of Error and Order of Convergence
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
    6. The Convergence Rate of Newton’s Method
   </a>
  </li>
@@ -648,7 +646,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/newtons-method-convergence-rate.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-5-error-control-backup.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -673,7 +671,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/newtons-method-convergence-rate.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-5-error-control-backup.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -696,16 +694,78 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-practical-error-estimate-for-fast-converging-iterative-methods">
-   6.1. A Practical error estimate for fast-converging iterative methods
+  <a class="reference internal nav-link" href="#the-basic-ode-initial-value-problem">
+   The Basic ODE Initial Value Problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-control-by-varying-the-time-step-size-h-i">
+   Error Control by Varying the Time Step Size
+   <span class="math notranslate nohighlight">
+    \(h_i\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-crude-error-estimator-for-euler-s-method-richardson-extrapolation">
+   A crude error estimator for Euler’s Method: Richardson Extrapolation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#when-is-a-fixed-point-iteration-fast-enough-for-this-heuristic">
-     6.1.1. When is a fixed point iteration “fast enough” for this heuristic?
+    <a class="reference internal nav-link" href="#step-size-choice">
+     Step size choice
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1">
+     Exercise 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#error-tolerance">
+     Error tolerance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-crude-approach-to-reducing-the-step-size-when-needed">
+     A crude approach to reducing the step size when needed
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#increasing-the-step-size-when-desirable">
+     Increasing the step size when desirable
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#another-strategy-for-getting-error-estimates-two-related-methods">
+   Another strategy for getting error estimates: two (related) methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2">
+     Exercise 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-accurate-methods-with-error-control">
+   Second Order Accurate Methods with Error Control
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-size-adjustment">
+     Step size adjustment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements">
+   Fourth Order Accurate Methods with Error Control: Runge-Kutta-Felberg and Some Newer Refinements
+  </a>
  </li>
 </ul>
 
@@ -718,88 +778,203 @@
         
               <div>
                 
-  <div class="section" id="the-convergence-rate-of-newton-s-method">
-<h1><span class="section-number">6. </span>The Convergence Rate of Newton’s Method<a class="headerlink" href="#the-convergence-rate-of-newton-s-method" title="Permalink to this headline">¶</a></h1>
-<p><strong>Last Revised on Monday January 25.</strong></p>
+  <div class="section" id="initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes-preliminary-version">
+<h1>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preliminary Version<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes-preliminary-version" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 5, 2021</strong></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Section 1.4.1 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
-<li><p>Theorem 2.9 in Section 2.4 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>, but done quite differently.</p></li>
+<li><p>Section 6.5 <em>Variable Step Size Methods</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 5.5 <em>Error Control and the Runge-Kutta-Fehlberg Method</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+<li><p>Section  7.3 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
-<p>Jumping to the punch line, we will see that when the iterates <span class="math notranslate nohighlight">\(x_k\)</span> given by <a class="reference internal" href="newtons-method-python.html"><span class="doc std std-doc">Newton’s method</span></a>
-converge to a <em>simple root</em> <span class="math notranslate nohighlight">\(r\)</span>
-(that is, <em>a solution of <span class="math notranslate nohighlight">\(f(r) = 0\)</span> with <span class="math notranslate nohighlight">\(f'(r) \neq 0\)</span></em>)
-then the errors <span class="math notranslate nohighlight">\(E_k = x_k - r\)</span> satisfy</p>
-<div class="math notranslate nohighlight">
-\[E_{k+1} = O(E_k^2) \text{ and therefore } E_{k+1} = o(E_k)\]</div>
-<p>In words, the error at each iteration is <em>of the order of</em> the square of the previous error, and so is <em>small of order</em> the previous error.</p>
-<p>(Yes, it this a slight abuse of the notation as defined above, but all will become clear and rigorous soon.)</p>
-<p>The first key step is getting a recursive relationship between consecutive errors <span class="math notranslate nohighlight">\(E_k\)</span> and <span class="math notranslate nohighlight">\(E_{k+1}\)</span> from the recursion formula for Newton’s method,</p>
-<div class="math notranslate nohighlight">
-\[x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}.\]</div>
-<p>Start by subtracting <span class="math notranslate nohighlight">\(r\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[E_{k+1} = x_{k+1} - r = x_k - \frac{f(x_k)}{f'(x_k)} - r = E_k - \frac{f(x_k)}{f'(x_k)}\]</div>
-<p>The other key step is to show that the two terms at right are very close,
-using the linearization of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x_k\)</span> with the error <span class="math notranslate nohighlight">\(E_k\)</span> as the small term <span class="math notranslate nohighlight">\(h\)</span>, and noting that <span class="math notranslate nohighlight">\(r = x_k - E_k\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[0 = f(r) = f(x_k - E_k) = f(x_k) - f'(x_k) E_k + O(E_k^2)\]</div>
-<p>Solve for <span class="math notranslate nohighlight">\(f(x_k)\)</span> to insert into the numerator above:
-<span class="math notranslate nohighlight">\(f(x_k) = f'(x_k) E_k + O(E_k^2)\)</span>.
-(There is no need for a minus sign on that last term; big-O terms can be of either sign, and this new one is a different but still small enough quantity!)</p>
-<p>Inserting above,</p>
+<div class="section" id="the-basic-ode-initial-value-problem">
+<h2>The Basic ODE Initial Value Problem<a class="headerlink" href="#the-basic-ode-initial-value-problem" title="Permalink to this headline">¶</a></h2>
+<p>We consider again the initial value problem</p>
 <div class="math notranslate nohighlight">
 \[
-E_{k+1} = E_k - \frac{f'(x_k) E_k + O(E_k^2)}{f'(x_k)} = E_k - E_k + \frac{O(E_k^2)}{f'(x_k)} = \frac{O(E_k^2)}{f'(x_k)} \to \frac{O(e_k^2)}{f'(r)} = O(E_k^2)
+\frac{d u}{d t} = f(t, u) \quad a \leq t \leq b, \quad u(a) = u_0
 \]</div>
-<p>As <span class="math notranslate nohighlight">\(k \to \infty\)</span>, <span class="math notranslate nohighlight">\(f'(E_k) \to f'(r) \neq 0\)</span>, so the term at right is still no larger than a multiple of <span class="math notranslate nohighlight">\(E_k^2\)</span>:
-it is <span class="math notranslate nohighlight">\(O(E_k^2)\)</span>, as claimed.</p>
-<p>If you wish to verify this more carefully, note that</p>
-<ul class="simple">
-<li><p>this <span class="math notranslate nohighlight">\(O(E_k^2)\)</span> term is no bigger than <span class="math notranslate nohighlight">\(\frac{M}{2} E_k^2\)</span> where <span class="math notranslate nohighlight">\(M\)</span> is an upper bound on <span class="math notranslate nohighlight">\(|f''(x)|\)</span>, and</p></li>
-<li><p>once <span class="math notranslate nohighlight">\(E_k\)</span> is small enough, so that <span class="math notranslate nohighlight">\(x_k\)</span> is close enough to <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(|f'(x_k)| \geq |f'(r)|/2\)</span>.</p></li>
-</ul>
-<p>Thus the term <span class="math notranslate nohighlight">\(\displaystyle \frac{O(E_k^2)}{f'(x_k)}\)</span> has magnitude no bigger than
-<span class="math notranslate nohighlight">\(\displaystyle \frac{M/2}{|f'(r)|/2} E_k^2 = \frac{M}{|f'(r)|} E_k^2\)</span>,
-which meets the definition of being of order <span class="math notranslate nohighlight">\(E_k^2\)</span>.</p>
-<p>A more careful calculation actually shows that</p>
-<div class="math notranslate nohighlight">
-\[ \lim_{k \to \infty} \frac{|E_{k+1}|}{E_k^2} = \left| \frac{f''(r)}{2 f'(r)} \right|, \]</div>
-<p>which is the way that this result is often stated in texts.
-For either form, it then easily follows that</p>
-<div class="math notranslate nohighlight">
-\[\lim_{k \to \infty} \frac{|E_{k+1}|}{|E_k|} = 0,\]</div>
-<p>giving the <em>super-linear convergence</em> already seen using the Contraction Mapping Theorem, now restated as <span class="math notranslate nohighlight">\(E_{k+1} = o(E_k)\)</span>.</p>
-<div class="section" id="a-practical-error-estimate-for-fast-converging-iterative-methods">
-<h2><span class="section-number">6.1. </span>A Practical error estimate for fast-converging iterative methods<a class="headerlink" href="#a-practical-error-estimate-for-fast-converging-iterative-methods" title="Permalink to this headline">¶</a></h2>
-<p>One problem for Newton’s Method (and many other numerical methods we will see) is that there is not a simple way to get a guaranteed upper bound on the absolute error in an approximation.
-Our best hope is finding an interval that is guaranteed to contain the solution, as the Bisection Method does,
-and we can <em>sometimes</em> also do that with Newton’s Method for a real root.
-But that approach fails as soon as the solution is a complex number or a vector.</p>
-<p>Fortunately, when convergnce is “fast enough” is some sense, the following <em>heuristic</em> or “rule of thumb” applies in many cases:</p>
-<p><em>The error in the latest approximation is typically smaller than the difference between the two most recent approximations.</em></p>
-<p>When combined with the <em>backward error</em>, this can give a fairly reliable measure of accuracy,
-and so can serve as a fairly reliable <em>stopping condition</em> for the loop in an iterative calculation.</p>
-<div class="section" id="when-is-a-fixed-point-iteration-fast-enough-for-this-heuristic">
-<h3><span class="section-number">6.1.1. </span>When is a fixed point iteration “fast enough” for this heuristic?<a class="headerlink" href="#when-is-a-fixed-point-iteration-fast-enough-for-this-heuristic" title="Permalink to this headline">¶</a></h3>
-<p>This heuristic can be shown to be reliable in several important cases:</p>
-<p><strong>Proposition 1:</strong> For the iterations <span class="math notranslate nohighlight">\(x_k\)</span> given by a contraction mapping that has <span class="math notranslate nohighlight">\(C \leq 1/2\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[|E_k| \leq |x_k - x_{k-1}|,\]</div>
-<p>or in words <em>the error in <span class="math notranslate nohighlight">\(x_k\)</span> is smaller than the change from <span class="math notranslate nohighlight">\(x_{k-1}\)</span> to <span class="math notranslate nohighlight">\(x_k\)</span></em>,
-so the above guideline is valid.</p>
-<p><strong>Proposition 2:</strong> For a super-linearly convergent iteration, eventually <span class="math notranslate nohighlight">\(|E_{k+1}|/|E_{k}| &lt; 1/2\)</span>,
-and from that point onwards in the iterations, the above applies again.</p>
-<p>I leave verification as an exercise, or if you wish, to discuss in class.</p>
-<p>Using the Integral Mean Value Theorem again, now with weight <span class="math notranslate nohighlight">\(w(x) = x-a\)</span> gives</p>
-<div class="math notranslate nohighlight">
-\[
-\int_a^b f'(\xi_x)(x-a) dx = f'(\xi) \int_a^b (x-a) dx = f'(\xi) \frac{(b-a)^2}{2} = \frac{h^2}{2} f'(\xi) \; \text{for some} \; \xi \in [a, b]
-\]</div>
-<p>and inserting this into the previous formula gives the result.</p>
-<hr class="docutils" />
-<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+<p>We now allow the possibility that <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(f\)</span> are vector-valued as in the section on
+<a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html"><span class="doc std std-doc">Systems of ODEs and Higher Order ODEs</span></a>,
+but omitting the tilde notation <span class="math notranslate nohighlight">\(\tilde u\)</span>, <span class="math notranslate nohighlight">\(\tilde f\)</span>.</p>
 </div>
+<div class="section" id="error-control-by-varying-the-time-step-size-h-i">
+<h2>Error Control by Varying the Time Step Size <span class="math notranslate nohighlight">\(h_i\)</span><a class="headerlink" href="#error-control-by-varying-the-time-step-size-h-i" title="Permalink to this headline">¶</a></h2>
+<p>Recall the variable step-size version of Euler’s method:</p>
+<p>Input: <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(n\)</span> <br></p>
+<p><span class="math notranslate nohighlight">\(t_0 = a\)</span> <br>
+<span class="math notranslate nohighlight">\(U_0 = u_0\)</span> <br>
+<span class="math notranslate nohighlight">\(h = (b-a)/n\)</span> <br></p>
+<p>for i in <span class="math notranslate nohighlight">\([0, n)\)</span>:
+<br></p>
+<p><span class="math notranslate nohighlight">\(\qquad\)</span> Choose step size <span class="math notranslate nohighlight">\(h_i\)</span> somehow!
+<br></p>
+<p><span class="math notranslate nohighlight">\(\qquad\)</span> <span class="math notranslate nohighlight">\(t_{i+1} = t_i + h_i\)</span>
+<br></p>
+<p><span class="math notranslate nohighlight">\(\qquad\)</span> <span class="math notranslate nohighlight">\(U_{i+1} = U_i + h_i f(t_i, U_i)\)</span>
+<br></p>
+<p>end for</p>
+<p>We now consider how to choose each step size, by estimating the error in each step, and aiming to have error per unit time below some limit like <span class="math notranslate nohighlight">\(\epsilon/(b-a)\)</span>, so that the global error is no more than about <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
+<p>As usual, the theoretical error bounds like <span class="math notranslate nohighlight">\(O(h_i^2)\)</span> for a single step of Euler’s method are not enough for quantitative tasks like choosing <span class="math notranslate nohighlight">\(h_i\)</span>, but they do motivate more practical estimates.</p>
+</div>
+<div class="section" id="a-crude-error-estimator-for-euler-s-method-richardson-extrapolation">
+<h2>A crude error estimator for Euler’s Method: Richardson Extrapolation<a class="headerlink" href="#a-crude-error-estimator-for-euler-s-method-richardson-extrapolation" title="Permalink to this headline">¶</a></h2>
+<p>Starting at a point (t, u(t)), we can estimate the error in Euler’s method approximato at a slightly later time <span class="math notranslate nohighlight">\(t_i + h\)</span> by using two approximations of <span class="math notranslate nohighlight">\(U(t + h)\)</span>:</p>
+<ul class="simple">
+<li><p>The value given by a step of Euler’s method with step size <span class="math notranslate nohighlight">\(h\)</span>: call this <span class="math notranslate nohighlight">\(U^{h}\)</span></p></li>
+<li><p>The value given by taking two steps of Euler’s method each with step size <span class="math notranslate nohighlight">\(h/2\)</span>: call this <span class="math notranslate nohighlight">\(U_2^{h/2}\)</span>,
+because it involves 2 steps of size <span class="math notranslate nohighlight">\(h/2\)</span>.</p></li>
+</ul>
+<p>The first order accuracy of Euler’s method gives <span class="math notranslate nohighlight">\(e_h := u(t+h) - U^{h} \approx 2(u(t+h) - U_2^{h/2})\)</span>,
+so that</p>
+<div class="math notranslate nohighlight">
+\[e_h \approx \frac{U_2^{h/2} - U^{h}}{2}\]</div>
+<div class="section" id="step-size-choice">
+<h3>Step size choice<a class="headerlink" href="#step-size-choice" title="Permalink to this headline">¶</a></h3>
+<p>What do we do with this error information?</p>
+<p>The first obvious ideas are:</p>
+<ul class="simple">
+<li><p>Accept this step if <span class="math notranslate nohighlight">\(e_h\)</span> is small enough, taking <span class="math notranslate nohighlight">\(h_i = h\)</span>, <span class="math notranslate nohighlight">\(t_{i+1} = t_i + h_i\)</span>, and <span class="math notranslate nohighlight">\(U_{i+1} = U^h\)</span>, but</p></li>
+<li><p>reject it and try again with a smaller <span class="math notranslate nohighlight">\(h\)</span> value otherwise; maybe halving <span class="math notranslate nohighlight">\(h\)</span>; but there are more sophisticated options too.</p></li>
+</ul>
+</div>
+<div class="section" id="exercise-1">
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<p>Write a formula for <span class="math notranslate nohighlight">\(U_h\)</span> and <span class="math notranslate nohighlight">\(e_h\)</span> if one starts from the point <span class="math notranslate nohighlight">\((t_i, U_i)\)</span>, so that <span class="math notranslate nohighlight">\((t_i + h, U^h)\)</span> is the proposed value for the next point <span class="math notranslate nohighlight">\((t_{i+1}, U_{i+1})\)</span> in the approximate solution — but only if <span class="math notranslate nohighlight">\(e_h\)</span> is small enough!</p>
+</div>
+<div class="section" id="error-tolerance">
+<h3>Error tolerance<a class="headerlink" href="#error-tolerance" title="Permalink to this headline">¶</a></h3>
+<p>One simple criterion for accuracy is that the estimated error in this step be no more than some overall upper limit on the error in ech time step, <span class="math notranslate nohighlight">\(\epsilon\)</span>.
+That is, accept the step size <span class="math notranslate nohighlight">\(h\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[|e_h| \leq \epsilon.\]</div>
+</div>
+<div class="section" id="a-crude-approach-to-reducing-the-step-size-when-needed">
+<h3>A crude approach to reducing the step size when needed<a class="headerlink" href="#a-crude-approach-to-reducing-the-step-size-when-needed" title="Permalink to this headline">¶</a></h3>
+<p>If this error tolerance is not met, we must choose a new step size <span class="math notranslate nohighlight">\(h'\)</span>, and we can predict roughly its error behavior using the known order natue of the error in Euler’s method: scaling dowen to <span class="math notranslate nohighlight">\(h' = s h\)</span>, the error in a step scales with <span class="math notranslate nohighlight">\(h^2\)</span>, so the error per unit time scales with <span class="math notranslate nohighlight">\(h\)</span> (in general it scales with <span class="math notranslate nohighlight">\(h^p\)</span> for a method of order <span class="math notranslate nohighlight">\(p\)</span>), and so to reduce the error by the needed factor <span class="math notranslate nohighlight">\(\displaystyle \frac{e_h/h}{\epsilon}\)</span> one needs approximately</p>
+<div class="math notranslate nohighlight">
+\[
+s = \frac{\epsilon}{|e_h|/h} = \frac{h \epsilon}{|e_h|}
+\]</div>
+<p>and so using <span class="math notranslate nohighlight">\(e_h \approx |U^{h/2} - U^{h}|\)</span> suggests using</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+s &amp;= \frac{h \epsilon}{|U^{h/2} - U^{h}|}
+\\
+h' &amp;= sh = \frac{2 h^2 \epsilon}{|U^{h/2} - U^{h}|}.
+\end{split}
+\end{split}\]</div>
+<p>However this new step size might have error that is still slightly too large, leading to a second failure.
+Another is that one might get into an infinite loop of step size reduction.</p>
+<p>So refinements of this choice must be considered.</p>
+</div>
+<div class="section" id="increasing-the-step-size-when-desirable">
+<h3>Increasing the step size when desirable<a class="headerlink" href="#increasing-the-step-size-when-desirable" title="Permalink to this headline">¶</a></h3>
+<p>If we simply follow the above aproach, the step size, once reduced, will never be increased.
+This could lead to great inefficiency, through using an unecessarily small step size just because at an earlier part of the time domain, accuracy required very small steps.</p>
+<p>Thus, after a successful time step, one might consider increasing <span class="math notranslate nohighlight">\(h\)</span> for the next step.
+This could be done using exactly the above formula, but again there are risks, so again refinement of this choice must be considered.</p>
+<p>One problem is that if the step size gets too large, the error estimate can become unreliable; another is that one might need some minimum “temporal resolution”, for nice graphs and such.</p>
+<p>Both suggest imposing an upper limit on the step size <span class="math notranslate nohighlight">\(h\)</span>.</p>
+</div>
+</div>
+<div class="section" id="another-strategy-for-getting-error-estimates-two-related-methods">
+<h2>Another strategy for getting error estimates: two (related) methods<a class="headerlink" href="#another-strategy-for-getting-error-estimates-two-related-methods" title="Permalink to this headline">¶</a></h2>
+<p>The recurring strategy of estimating errors by the difference of two different approximations — one expected to be far better than the other — can be used in a nice way here.
+I iwl ilusrat frst with the smplset version, using Euler’s Matha dnt explicit Trapezoid Method.</p>
+<p>Revsl th the increment in Euler’s Method from time <span class="math notranslate nohighlight">\(t\)</span> to time <span class="math notranslate nohighlight">\(t+h\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[K_1 = h f(t, u)\]</div>
+<p>whereas for the explict trapezoid method it is <span class="math notranslate nohighlight">\((K_1 + K_2)/2\)</span>, as given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+K_1 &amp;= h f(t_i, U_i)
+\\
+K_2 &amp;= h f(t_{i+1}, U_i + K_1)
+\end{split}\end{split}\]</div>
+<p>Thus we can use the difference, <span class="math notranslate nohighlight">\(|K_1 - (K_1 + K_2)/2| = |(K_1 - K_2)/2|\)</span> as an error estimate.
+In fact to be cautious, one often drops the factor of <span class="math notranslate nohighlight">\(1/2\)</span>, so using <span class="math notranslate nohighlight">\(e_h \approx |K_1 - K_2|\)</span>.</p>
+<p>One has to be careful: this estimates the error in Euler’s Method, so one has to use it that way: using the less accurate value <span class="math notranslate nohighlight">\(K_1\)</span> as the update.</p>
+<p>One basic algorithm for the time step starting with <span class="math notranslate nohighlight">\(t_i, U_i\)</span> is</p>
+<p><span class="math notranslate nohighlight">\(K_1 \leftarrow h f(t_i, U_i)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 \leftarrow f(t_{i+1}, U_i + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(e_{h} \leftarrow |K_1 - K_2|\)</span></p>
+<p><span class="math notranslate nohighlight">\(s \leftarrow (h \epsilon)/e_h\)</span></p>
+<p>if <span class="math notranslate nohighlight">\(s&gt;1\)</span>: <span class="math notranslate nohighlight">\(\qquad\)</span> (I.e.  <span class="math notranslate nohighlight">\(e_h/h &lt; \epsilon\)</span> and so good enough)</p>
+<p><span class="math notranslate nohighlight">\(\quad U_{i+1} = U_i + K_1\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad t_{i+1} = t_i + h\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad\)</span> Increase <span class="math notranslate nohighlight">\(h\)</span> for the <em>next</em> time step:</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow s h\)</span></p>
+<p>else: <span class="math notranslate nohighlight">\(\qquad\)</span> (<span class="math notranslate nohighlight">\(s \leq 1\)</span>, so not good enough: reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow s h\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad\)</span> Start again from <span class="math notranslate nohighlight">\(K_1 = \dots\)</span></p>
+<p>end if</p>
+<p>However, in practice one needs:</p>
+<ul class="simple">
+<li><p>An upper limit <span class="math notranslate nohighlight">\(h_{max}\)</span> on the step size <span class="math notranslate nohighlight">\(h\)</span>, partly becuase eror estimates are unreliable if <span class="math notranslate nohighlight">\(h\)</span> is too large,
+and subsequent use of the results (like graphs) might need sufficiently “fine” data.</p></li>
+<li><p>A lower limit <span class="math notranslate nohighlight">\(h_{max}\)</span> on <span class="math notranslate nohighlight">\(h\)</span>, to avoid infinite loops and such.</p></li>
+</ul>
+<p>Incorporating these refinements:</p>
+<p><span class="math notranslate nohighlight">\(K_1 \leftarrow h f(t_i, U_i)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 \leftarrow f(t_{i+1}, U_i + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(e_{h} \leftarrow |K_1 - K_2|\)</span></p>
+<p><span class="math notranslate nohighlight">\(s = \epsilon/(e_h/h)\)</span></p>
+<p>if <span class="math notranslate nohighlight">\(s&gt;1\)</span>: <span class="math notranslate nohighlight">\(\qquad\)</span> (I.e.  <span class="math notranslate nohighlight">\(e_h/h &lt; \epsilon\)</span> and so good enough)</p>
+<p><span class="math notranslate nohighlight">\(\quad U_{i+1} = U_i + K_1\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad t_{i+1} = t_i + h\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad\)</span> Increase <span class="math notranslate nohighlight">\(h\)</span> for the <em>next</em> time step:</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \min(s h, h_{max})\)</span></p>
+<p>else: <span class="math notranslate nohighlight">\(\qquad\)</span> (<span class="math notranslate nohighlight">\(s \leq 1\)</span>, so not good enough; reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \max(s h, h_{min})\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad\)</span> Start again from <span class="math notranslate nohighlight">\(K_1 = \dots\)</span></p>
+<p>end if</p>
+<div class="section" id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
+<p>Implement the above, and test on the two familiar examples</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+du/dt &amp;= Ku
+\\
+&amp;\text{and}
+\\
+du/dt &amp;= K(\cos(t) - u) - \sin(t)
+\end{split}
+\end{split}\]</div>
+<p>(<span class="math notranslate nohighlight">\(K=1\)</span> is enough.)</p>
+</div>
+</div>
+<div class="section" id="second-order-accurate-methods-with-error-control">
+<h2>Second Order Accurate Methods with Error Control<a class="headerlink" href="#second-order-accurate-methods-with-error-control" title="Permalink to this headline">¶</a></h2>
+<p>In practice, one usually needs at least second order accuracy, and one approach to that is using computing a “candidates” for teh next time step with a second order accurate Runge-Kutta method and also a third order accurate one, the latter used only to get an error estimate for the former.</p>
+<p>Perhaps the simplest of these is based on adding error estimation to the Explicit Trapezoid Rule;
+omitting the step sze adjustment for now, the main ingredients are:</p>
+<p><span class="math notranslate nohighlight">\(K_1 = h f(t_i, U_i)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 = f(t_i + h, U_i + K_1)\)</span></p>
+<p>(So far, as for the explicit trapezoid method)</p>
+<p><span class="math notranslate nohighlight">\(K_3 = f(t_i + h/2, U_i + (K_1+K_2)/2)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\delta_2 = (K_1 + K_2)/2\)</span>
+(The order 2 increment as for the explicit trapezoid method)</p>
+<p><span class="math notranslate nohighlight">\(\delta_3 = (K_1 + 4 K_3 + K_2)/6\)</span>
+(An order 3 increment — note the resemblance to Simpson’s Method)</p>
+<p><span class="math notranslate nohighlight">\(e_h = |\delta_2 - \delta_3 |, \, = (K_1 -2 K_3 + K_2)/3\)</span></p>
+<p>Again, if this step is accepted, one uses the explicit trapezoid rule step: <span class="math notranslate nohighlight">\(U_{i+1} = U_i + \delta_2\)</span>.</p>
+<div class="section" id="step-size-adjustment">
+<h3>Step size adjustment<a class="headerlink" href="#step-size-adjustment" title="Permalink to this headline">¶</a></h3>
+<p>The scale factor <span class="math notranslate nohighlight">\(s\)</span> for step size adjustment is a bit different; for a method order <span class="math notranslate nohighlight">\(p\)</span> (so <span class="math notranslate nohighlight">\(p=2\)</span> now)
+changing step size by a factor <span class="math notranslate nohighlight">\(s\)</span> will change the error <span class="math notranslate nohighlight">\(e_h\)</span> in a single time step by a factor of about <span class="math notranslate nohighlight">\(s^{p+1}\)</span>.</p>
+<p>Thus, we want a new step with this rescaled error of about <span class="math notranslate nohighlight">\(s^{p+1} e_h\)</span> roughly matching the tolerance <span class="math notranslate nohighlight">\(\epsilon\)</span>.
+Equating would give <span class="math notranslate nohighlight">\(s^{p+1} e_h/h = \epsilon\)</span> so that <span class="math notranslate nohighlight">\( = (\epsilon/(e_h/h))^{1/(p+1)}\)</span></p>
+<div class="math notranslate nohighlight">
+\[s = (\epsilon/(e_h/h))^{1/p}\]</div>
+</div>
+</div>
+<div class="section" id="fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements">
+<h2>Fourth Order Accurate Methods with Error Control: Runge-Kutta-Felberg and Some Newer Refinements<a class="headerlink" href="#fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements" title="Permalink to this headline">¶</a></h2>
+<p>The details involve some messy coefficients; see the references above for those.</p>
+<p>The basic idea is that …</p>
 </div>
 </div>
 
@@ -831,8 +1006,6 @@ and from that point onwards in the iterations, the above applies again.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="error-measures-convergence-rates.html" title="previous page"><span class="section-number">5. </span>Measures of Error and Order of Convergence</a>
-    <a class='right-next' id="next-link" href="root-finding-without-derivatives-python.html" title="next page"><span class="section-number">7. </span>Root-finding Without Derivatives</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Composite Trapezoid Rule &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>The Composite Trapezoid Rule (and Composite Midpoint Rule) &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -254,8 +254,13 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks/ODE-IVP-5-error-control.html">
+   25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   25. Some Future Topics
+   26. Some Future Topics
   </a>
  </li>
 </ul>
@@ -266,13 +271,8 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-5-error-control.html">
-   1. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes — Preview Edition
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   2. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. — Preliminary Version
+   1. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
 </ul>
@@ -438,7 +438,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   The Composite Trapezoid Rule
+   The Composite Trapezoid Rule (and Composite Midpoint Rule)
   </a>
  </li>
  <li class="toctree-l1">
@@ -690,6 +690,20 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#update-the-composite-midpoint-rule">
+   Update: The Composite Midpoint Rule
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -697,8 +711,9 @@
         
               <div>
                 
-  <div class="section" id="the-composite-trapezoid-rule">
-<h1>The Composite Trapezoid Rule<a class="headerlink" href="#the-composite-trapezoid-rule" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="the-composite-trapezoid-rule-and-composite-midpoint-rule">
+<h1>The Composite Trapezoid Rule (and Composite Midpoint Rule)<a class="headerlink" href="#the-composite-trapezoid-rule-and-composite-midpoint-rule" title="Permalink to this headline">¶</a></h1>
+<p><strong>Updated April 5,</strong> with the example of the Composite Midpoint Rule</p>
 <p>Write a Python function that can approximate any definite integral <span class="math notranslate nohighlight">\(I = \displaystyle \int_a^b f(x)\,dx\)</span>
 using the Composite Trapezoid Rule with <span class="math notranslate nohighlight">\(n\)</span> sub-intervals of equal width, <span class="math notranslate nohighlight">\(T_n\)</span>.</p>
 <ul class="simple">
@@ -706,6 +721,68 @@ using the Composite Trapezoid Rule with <span class="math notranslate nohighligh
 <li><p>The output will be just the approximation value of the integral; error estimates and tolerances are coming later!</p></li>
 <li><p>As usual add a code cell with testing of this on some examples, as suggested in the section on <a class="reference internal" href="test-cases-integration.html"><span class="doc std std-doc">Test Cases for Integration</span></a>.</p></li>
 </ul>
+<div class="section" id="update-the-composite-midpoint-rule">
+<h2>Update: The Composite Midpoint Rule<a class="headerlink" href="#update-the-composite-midpoint-rule" title="Permalink to this headline">¶</a></h2>
+<p>As the Composite Midpoint Rule is used in Recursive Trapezeoid Rule and the Romberg Method, I will illustrate with it:</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(x)', dx \approx M_n = \sum_{i=1}^n f(a + (i-1/2)h)\]</div>
+<p>where <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span></p>
+<p>Python has a function <code class="docutils literal notranslate"><span class="pre">sum</span></code>, and can get an array of the <span class="math notranslate nohighlight">\(x\)</span> values with <code class="docutils literal notranslate"><span class="pre">numpy.linspace</span></code>, so ths can be done as folllows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compositeMidpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">M_n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">h</span>
+    <span class="k">return</span> <span class="n">M_n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">I_exact</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">/</span><span class="mf">3.0</span>
+
+<span class="n">M_10</span> <span class="o">=</span> <span class="n">compositeMidpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">M_10</span> <span class="o">-</span> <span class="n">I_exact</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">M_10</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">M_20</span> <span class="o">=</span> <span class="n">compositeMidpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">M_20</span> <span class="o">-</span> <span class="n">I_exact</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">M_20</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = [1.1 1.3 1.5 1.7 1.9 2.1 2.3 2.5 2.7 2.9]
+M_10=0.6635018670317585, error=-0.003164799634908122
+
+x = [1.05 1.15 1.25 1.35 1.45 1.55 1.65 1.75 1.85 1.95 2.05 2.15 2.25 2.35
+ 2.45 2.55 2.65 2.75 2.85 2.95]
+M_20=0.6658670794632512, error=-0.0007995872034154416
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
