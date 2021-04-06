@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Test Cases for Differentiation" href="test-cases-differentiation.html" />
-    <link rel="prev" title="The Modified Trapezoid Method, without derivatives" href="task-6-modified-trapezoid-without-derivatives.html" />
+    <link rel="prev" title="The Modified Trapezoid Method" href="task-5-and-6-modified-trapezoid-method.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -357,6 +357,63 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
+   Improving on the Centered Difference Approximation with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-3-composite-trapezoid-rule.html">
+   The Composite Trapezoid Rule (and Composite Midpoint Rule)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-5-and-6-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-5-and-6-modified-trapezoid-method.html#the-modified-trapezoid-method-without-derivatives">
+   The Modified Trapezoid Method, without derivatives
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Some Final Project Possibilities
  </span>
 </p>
@@ -412,63 +469,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../notebooks/project-possibilities.html#boundary-value-problems-for-differential-equations">
    Boundary Value Problems for Differential Equations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Project on Numerical Calculus
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
-   Centered Difference Approximation of the Derivative
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
-   Improving on the Centered Difference Approximation with Richardson Extrapolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-3-composite-trapezoid-rule.html">
-   The Composite Trapezoid Rule (and Composite Midpoint Rule)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-4-recursive-trapezoid-rule.html">
-   The Recursive Trapezoid Rule, with error control
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-5-modified-trapezoid-method.html">
-   The Modified Trapezoid Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-6-modified-trapezoid-without-derivatives.html">
-   The Modified Trapezoid Method, without derivatives
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   The Romberg Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="test-cases-differentiation.html">
-   Test Cases for Differentiation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="test-cases-integration.html">
-   Test Cases for Integration
   </a>
  </li>
 </ul>
@@ -699,14 +699,43 @@
                 
   <div class="section" id="the-romberg-method">
 <h1>The Romberg Method<a class="headerlink" href="#the-romberg-method" title="Permalink to this headline">¶</a></h1>
-<p><strong>Slightly revised on Thursday March 25</strong></p>
+<p><strong>Revised on Monday April 5</strong></p>
 <p>Write a function to implement the Romberg method.</p>
 <ul class="simple">
 <li><p>Again, the input should include an error tolerance, and the output should include estimates of absolute error and of cost.</p></li>
-<li><p>We will discuss this in class; there ltos of detasisl to address.</p></li>
-<li><p>Note that some ideas for this are first explored in
-the part on <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html"><span class="doc std std-doc">Centered Difference Approximation and Richardson Extrapolation</span></a>.</p></li>
+<li><p>We will discuss this in class; there are lots of details to address.</p></li>
+<li><p>Note that some ideas for this are first explored in the part of
+<a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html"><span class="doc std std-doc">Centered Difference Approximation with Richardson Extrapolation</span></a>.</p></li>
 </ul>
+<p><strong>Additions on April 5</strong></p>
+<p>Recall that the basic algorithm is</p>
+<p><span class="math notranslate nohighlight">\(n \leftarrow 1\)</span>
+<br>
+<span class="math notranslate nohighlight">\(h \leftarrow b-a\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\displaystyle R_{0,0} = \frac{f(a) + f(b)}{2} h\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">M:</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(R_{i,0} = \left( R_{i-1,0} + h \sum_{k=1}^n f(a + (i - 1/2)h) \right)/2\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">i:</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad \displaystyle R_{i,j} = \frac{4^j R_{i,j-1} - R_{i-1,j-1}}{4^j - 1}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad n \leftarrow 2 n\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad h \leftarrow h/2\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+<p><strong>Python note:</strong>
+The needed 2D array for <span class="math notranslate nohighlight">\(R\)</span> can be created with the numpy function <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">numpy.array([M,M])</span></code>.
+It has the syntactic peculiarity that the dimensions of the array are given in a list, not as successive input parameters.</p>
+<p>Once the above basic verion is working, produce a second version that adds an error estimate,
+and ends once the final approximation <span class="math notranslate nohighlight">\(R_{i,i}\)</span> at stage <span class="math notranslate nohighlight">\(i\)</span> is good enough.</p>
+<p>As usual I recommend using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop organization, adding an <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">break</span></code></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -737,7 +766,7 @@ the part on <a class="reference internal" href="tasks-1-and-2-centered-differenc
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="task-6-modified-trapezoid-without-derivatives.html" title="previous page">The Modified Trapezoid Method, without derivatives</a>
+    <a class='left-prev' id="prev-link" href="task-5-and-6-modified-trapezoid-method.html" title="previous page">The Modified Trapezoid Method</a>
     <a class='right-next' id="next-link" href="test-cases-differentiation.html" title="next page">Test Cases for Differentiation</a>
 
     </div>

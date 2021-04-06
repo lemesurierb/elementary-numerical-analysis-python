@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Recursive Trapezoid Rule, with error control" href="task-4-recursive-trapezoid-rule.html" />
-    <link rel="prev" title="Centered Difference Approximation of the Derivative" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html" />
+    <link rel="prev" title="Centered Difference Approximation of the Derivative" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -357,6 +357,63 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
+   Improving on the Centered Difference Approximation with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The Composite Trapezoid Rule (and Composite Midpoint Rule)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-5-and-6-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-5-and-6-modified-trapezoid-method.html#the-modified-trapezoid-method-without-derivatives">
+   The Modified Trapezoid Method, without derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-7-romberg-method.html">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Some Final Project Possibilities
  </span>
 </p>
@@ -412,63 +469,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../notebooks/project-possibilities.html#boundary-value-problems-for-differential-equations">
    Boundary Value Problems for Differential Equations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Project on Numerical Calculus
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
-   Centered Difference Approximation of the Derivative
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
-   Improving on the Centered Difference Approximation with Richardson Extrapolation
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   The Composite Trapezoid Rule (and Composite Midpoint Rule)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-4-recursive-trapezoid-rule.html">
-   The Recursive Trapezoid Rule, with error control
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-5-modified-trapezoid-method.html">
-   The Modified Trapezoid Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-6-modified-trapezoid-without-derivatives.html">
-   The Modified Trapezoid Method, without derivatives
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-7-romberg-method.html">
-   The Romberg Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="test-cases-differentiation.html">
-   Test Cases for Differentiation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="test-cases-integration.html">
-   Test Cases for Integration
   </a>
  </li>
 </ul>
@@ -713,7 +713,7 @@
                 
   <div class="section" id="the-composite-trapezoid-rule-and-composite-midpoint-rule">
 <h1>The Composite Trapezoid Rule (and Composite Midpoint Rule)<a class="headerlink" href="#the-composite-trapezoid-rule-and-composite-midpoint-rule" title="Permalink to this headline">¶</a></h1>
-<p><strong>Updated April 5,</strong> with the example of the Composite Midpoint Rule</p>
+<p><strong>Last updated on April 5 (after class)</strong> with the example of the Composite Midpoint Rule.</p>
 <p>Write a Python function that can approximate any definite integral <span class="math notranslate nohighlight">\(I = \displaystyle \int_a^b f(x)\,dx\)</span>
 using the Composite Trapezoid Rule with <span class="math notranslate nohighlight">\(n\)</span> sub-intervals of equal width, <span class="math notranslate nohighlight">\(T_n\)</span>.</p>
 <ul class="simple">
@@ -725,8 +725,9 @@ using the Composite Trapezoid Rule with <span class="math notranslate nohighligh
 <h2>Update: The Composite Midpoint Rule<a class="headerlink" href="#update-the-composite-midpoint-rule" title="Permalink to this headline">¶</a></h2>
 <p>As the Composite Midpoint Rule is used in Recursive Trapezeoid Rule and the Romberg Method, I will illustrate with it:</p>
 <div class="math notranslate nohighlight">
-\[\int_a^b f(x)', dx \approx M_n = \sum_{i=1}^n f(a + (i-1/2)h)\]</div>
-<p>where <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span></p>
+\[\int_a^b f(x)\, dx \approx M_n = \sum_{i=1}^n f(a + (i-1/2)h)
+\quad \text{where } h=(b-a)/n
+\]</div>
 <p>Python has a function <code class="docutils literal notranslate"><span class="pre">sum</span></code>, and can get an array of the <span class="math notranslate nohighlight">\(x\)</span> values with <code class="docutils literal notranslate"><span class="pre">numpy.linspace</span></code>, so ths can be done as folllows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -741,7 +742,7 @@ using the Composite Trapezoid Rule with <span class="math notranslate nohighligh
     <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With </span><span class="si">{</span><span class="n">a</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">n</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">h</span><span class="si">=}</span><span class="s2"> and the nodes are </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">M_n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">h</span>
     <span class="k">return</span> <span class="n">M_n</span>
 </pre></div>
@@ -765,19 +766,17 @@ using the Composite Trapezoid Rule with <span class="math notranslate nohighligh
 <span class="n">error</span> <span class="o">=</span> <span class="n">M_10</span> <span class="o">-</span> <span class="n">I_exact</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">M_10</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
-<span class="n">M_20</span> <span class="o">=</span> <span class="n">compositeMidpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">error</span> <span class="o">=</span> <span class="n">M_20</span> <span class="o">-</span> <span class="n">I_exact</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">M_20</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">M_100</span> <span class="o">=</span> <span class="n">compositeMidpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">M_100</span> <span class="o">-</span> <span class="n">I_exact</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">M_100</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">error</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = [1.1 1.3 1.5 1.7 1.9 2.1 2.3 2.5 2.7 2.9]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With a=1, b=3, n=10, h=0.2 and the nodes are [1.1 1.3 1.5 1.7 1.9 2.1 2.3 2.5 2.7 2.9]
 M_10=0.6635018670317585, error=-0.003164799634908122
 
-x = [1.05 1.15 1.25 1.35 1.45 1.55 1.65 1.75 1.85 1.95 2.05 2.15 2.25 2.35
- 2.45 2.55 2.65 2.75 2.85 2.95]
-M_20=0.6658670794632512, error=-0.0007995872034154416
+M_100=0.6666345725472225, error=-3.20941194441593e-05
 </pre></div>
 </div>
 </div>
@@ -813,7 +812,7 @@ M_20=0.6658670794632512, error=-0.0007995872034154416
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html" title="previous page">Centered Difference Approximation of the Derivative</a>
+    <a class='left-prev' id="prev-link" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html" title="previous page">Centered Difference Approximation of the Derivative</a>
     <a class='right-next' id="next-link" href="task-4-recursive-trapezoid-rule.html" title="next page">The Recursive Trapezoid Rule, with error control</a>
 
     </div>

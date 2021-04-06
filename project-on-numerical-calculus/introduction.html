@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Centered Difference Approximation of the Derivative" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html" />
-    <link rel="prev" title="Some Final Project Possibilites" href="../notebooks/project-possibilities.html" />
+    <link rel="next" title="Centered Difference Approximation of the Derivative" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html" />
+    <link rel="prev" title="MATH 375 Assignment 4" href="../notebooks/assignment4.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -357,6 +357,63 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
+   Improving on the Centered Difference Approximation with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-3-composite-trapezoid-rule.html">
+   The Composite Trapezoid Rule (and Composite Midpoint Rule)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-5-and-6-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-5-and-6-modified-trapezoid-method.html#the-modified-trapezoid-method-without-derivatives">
+   The Modified Trapezoid Method, without derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-7-romberg-method.html">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Some Final Project Possibilities
  </span>
 </p>
@@ -412,63 +469,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../notebooks/project-possibilities.html#boundary-value-problems-for-differential-equations">
    Boundary Value Problems for Differential Equations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Project on Numerical Calculus
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
-   Centered Difference Approximation of the Derivative
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
-   Improving on the Centered Difference Approximation with Richardson Extrapolation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-3-composite-trapezoid-rule.html">
-   The Composite Trapezoid Rule (and Composite Midpoint Rule)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-4-recursive-trapezoid-rule.html">
-   The Recursive Trapezoid Rule, with error control
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-5-modified-trapezoid-method.html">
-   The Modified Trapezoid Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-6-modified-trapezoid-without-derivatives.html">
-   The Modified Trapezoid Method, without derivatives
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="task-7-romberg-method.html">
-   The Romberg Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="test-cases-differentiation.html">
-   Test Cases for Differentiation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="test-cases-integration.html">
-   Test Cases for Integration
   </a>
  </li>
 </ul>
@@ -696,6 +696,11 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-general-advice-updated-on-april-5">
+   Some General Advice (updated on April 5)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#some-general-advice">
    Some General Advice
   </a>
@@ -718,11 +723,26 @@
 <p>In part, this is an exercise in <em>good written presentation of mathematical and computational results</em>, and as preparation for the second individual project that each of you will do at the end of the semester.
 The “introduction” and “methods” sections specified below can be quite brief in this project (as many details are specified below) but will be more significant in your final project.</p>
 <p><strong>New Due Date for Final Versions: Friday April 9</strong></p>
+<div class="section" id="some-general-advice-updated-on-april-5">
+<h2>Some General Advice (updated on April 5)<a class="headerlink" href="#some-general-advice-updated-on-april-5" title="Permalink to this headline">¶</a></h2>
+<p>A) Always put your <strong>name</strong> and the <strong>current</strong> version date near the top: see above!</p>
+<p>B) When possible, start with test cases for which you know the exact result, and then check the actual errors and include those in the output. (This is mostly relevant to learning about an algorithm and developing code for it.)</p>
+<p>C) Initially use the test cases given in
+<a class="reference internal" href="test-cases-differentiation.html"><span class="doc std std-doc">Test Cases for Differentiation</span></a>
+and
+<a class="reference internal" href="test-cases-integration.html"><span class="doc std std-doc">Test Cases for Integration</span></a>;
+then choose and explore some others.</p>
+<p>D) When instead you can get an error estimate, compute that and include it in the output. (This is far more relevant to “real-world” use of an algorithm.)</p>
+<p>Note: For a great many methods, there is a useful general strategy for getting error estimates:
+1. get two approximations where you have good reason to believe that one is at least about twice as accuarate as the other.
+2. Use the difference to estimat the error in th <strong>less</strong> accurate of the two approximations — this is the “pessimistic” approach recommended above.</p>
+<p>E) While testing and demonstrating an iterative method, have a “demonstration” or “testing” mode which gives the option of displaying actual errors and or error estimates <em>at each iteration</em>, to illustrate convergence.</p>
+<p>F) In general (but not absolutely always), aim to make functions “self-contained”:
+- getting all the information they need via input parameters, and
+- delivering all results through <code class="docutils literal notranslate"><span class="pre">return</span></code> statements.</p>
+</div>
 <div class="section" id="some-general-advice">
 <h2>Some General Advice<a class="headerlink" href="#some-general-advice" title="Permalink to this headline">¶</a></h2>
-<p>I will add here some general tips and reminders about working on projects and more generaly on working with numerical methods;
-some that come out of discussing draft work with you.
-For now just these:</p>
 <p>A) For every approximate numerical value computed, strive to get some information about its acccuracy:</p>
 <ul class="simple">
 <li><p>An <strong>error bound</strong> is best, though often not available.</p></li>
@@ -772,8 +792,8 @@ then choose and explore some others.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../notebooks/project-possibilities.html" title="previous page">Some Final Project Possibilites</a>
-    <a class='right-next' id="next-link" href="tasks-1-and-2-centered-difference-derivative-approximation-and-richardson.html" title="next page">Centered Difference Approximation of the Derivative</a>
+    <a class='left-prev' id="prev-link" href="../notebooks/assignment4.html" title="previous page">MATH 375 Assignment 4</a>
+    <a class='right-next' id="next-link" href="task-1-and-2-centered-difference-derivative-approximation-and-richardson.html" title="next page">Centered Difference Approximation of the Derivative</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
