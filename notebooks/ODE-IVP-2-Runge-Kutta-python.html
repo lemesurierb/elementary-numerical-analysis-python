@@ -322,6 +322,11 @@
    Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-exercises.html">
+   Exercises on Initial Value Problems for Ordinary Differential Equations
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -352,6 +357,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="assignment4.html">
    MATH 375 Assignment 4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment5.html">
+   MATH 375 Assignment 5
   </a>
  </li>
 </ul>
@@ -714,6 +724,13 @@
     <a class="reference internal nav-link" href="#the-explicit-trapezoid-method-a-k-a-the-improved-euler-method-or-huen-s-method">
      22.3.1. The Explicit Trapezoid Method (a.k.a. the Improved Euler method or Huen’s method)
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-1">
+       22.3.1.1. Exercise 1
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#examples">
@@ -724,6 +741,18 @@
     <a class="reference internal nav-link" href="#the-explicit-midpoint-method-a-k-a-modified-euler">
      22.3.3. The Explicit Midpoint Method (a.k.a. Modified Euler)
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-2-a-lot-like-exercise-1">
+       22.3.3.1. Exercise 2 (a lot like Exercise 1)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-3">
+       22.3.3.2. Exercise 3
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
@@ -738,8 +767,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4">
+     22.4.1. Exercise 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
-     22.4.1. Examples
+     22.4.2. Examples
     </a>
    </li>
   </ul>
@@ -861,13 +895,14 @@ K_1 &amp;= h f(t_i, U_i)
 K_2 &amp;= h f(t_{i+1}, U_i + K_1)
 \end{split}\end{split}\]</div>
 <p>We will see that, despite the mere first order accuracy of the Euler approximation used in getting <span class="math notranslate nohighlight">\(K_2\)</span>, this method is second order accurate; the key is the fact that any error in the approximation used for <span class="math notranslate nohighlight">\(f(t+h, u(t+h))\)</span> gets multiplied by <span class="math notranslate nohighlight">\(h\)</span>.</p>
-<p><strong>Exercise 1</strong></p>
+<div class="section" id="exercise-1">
+<h4><span class="section-number">22.3.1.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h4>
 <p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
-this gives the same result as the Composite Trapezoid Rule for integration.</p>
+this gives the same result as the composite trapezoid rule for integration.</p>
 <p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
 It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
-<p>C) Compare to <span class="math notranslate nohighlight">\(G=1+kh\)</span> seen for Euler’s Method.</p>
-<p>D) Use the previous result to express <span class="math notranslate nohighlight">\(U_i\)</span> in terms of <span class="math notranslate nohighlight">\(U_0=u_0\)</span>, as done for Euler’s Method.</p>
+<p>C) Compare to <span class="math notranslate nohighlight">\(G=1+kh\)</span> seen for Euler’s method.</p>
+<p>D) Use the previous result to express <span class="math notranslate nohighlight">\(U_i\)</span> in terms of <span class="math notranslate nohighlight">\(U_0=u_0\)</span>, as done for Euler’s method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">explicitTrapezoid</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -889,6 +924,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 <p>As always, this function can now also be imported from <code class="docutils literal notranslate"><span class="pre">numerical_methods_module</span></code>, with</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from numerical_methods_module import explicitTrapezoid
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="examples">
@@ -1056,13 +1092,16 @@ K_1 &amp;= h f(t_i, U_i)
 \\
 K_2 &amp;= h f(t_{i}+h/2, U_i + K_1/2)
 \end{split}\end{split}\]</div>
-<p><strong>Exercise 2</strong> (a lot like Exercise 1)</p>
+<div class="section" id="exercise-2-a-lot-like-exercise-1">
+<h4><span class="section-number">22.3.3.1. </span>Exercise 2 (a lot like Exercise 1)<a class="headerlink" href="#exercise-2-a-lot-like-exercise-1" title="Permalink to this headline">¶</a></h4>
 <p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
-this give the same result as the Composite Midpoint rule for integration (same cooment as above).</p>
+this give the same result as the composite midpoint rule for integration (same comment as above).</p>
 <p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
 It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
 <p>C) Compare to the growth factors <span class="math notranslate nohighlight">\(G\)</span> seen for previous methods, and to the growth factor <span class="math notranslate nohighlight">\(g\)</span> for the exact solution.</p>
-<p><strong>Exercise 3</strong></p>
+</div>
+<div class="section" id="exercise-3">
+<h4><span class="section-number">22.3.3.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h4>
 <p>A) Apply Richardson extrapolation to one step of Euler’s method, using the values given by step sizes <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h/2\)</span>.</p>
 <p>B) This should give a second order accurate method, so compare it to the above two methods.</p>
 <div class="cell docutils container">
@@ -1086,6 +1125,7 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 <p>Again, available for import with</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from numerical_methods_module import explicitMidpoint
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="id1">
@@ -1171,9 +1211,10 @@ u(t+h) &amp;\approx u + \frac{1}{6}(K_1 + 2 K_2 + 2 K_3 + K_4)
 <p>This — or rather some variants to estimate and contol errors — is perhaps the most widely used general purpose method for numerical solution of ODE IVP’s.</p>
 <p>The derivation of this is far more complicated than for the other methods above, and is omitted.
 For now, we will instead assess its accuracy “<em>a postiori</em>”, through the next exercise and some examples.</p>
-<p><strong>Exercise 4</strong></p>
+<div class="section" id="exercise-4">
+<h3><span class="section-number">22.4.1. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h3>
 <p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
-this gives the same result as the Composite Simpson’s Rule for integration.</p>
+this gives the same result as the composite ximpson’s Rule for integration.</p>
 <p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
 It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
 <p>C) Compare to the growth factors <span class="math notranslate nohighlight">\(G\)</span> seen for previous methods, and to the growth factor <span class="math notranslate nohighlight">\(g\)</span> for the exact solution.</p>
@@ -1201,8 +1242,9 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from numerical_methods_module import RungeKutta
 </pre></div>
 </div>
+</div>
 <div class="section" id="id2">
-<h3><span class="section-number">22.4.1. </span>Examples<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">22.4.2. </span>Examples<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span>

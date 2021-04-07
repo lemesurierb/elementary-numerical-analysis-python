@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Exercises on Initial Value Problems for Ordinary Differential Equations &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation" href="definite-integrals-3-simpson-richardson.html" />
-    <link rel="prev" title="17. Definite Integrals, Part 1: The Building Blocks" href="definite-integrals-1-building-blocks-python.html" />
+    <link rel="next" title="MATH 375 Assignment 1" href="assignment1.html" />
+    <link rel="prev" title="Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +121,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -218,8 +218,8 @@
    17. Definite Integrals, Part 1: The Building Blocks
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
    18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
   </a>
  </li>
@@ -281,7 +281,7 @@
   Exercises
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
    Exercises on the Bisection Method
@@ -322,8 +322,8 @@
    Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-exercises.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Exercises on Initial Value Problems for Ordinary Differential Equations
   </a>
  </li>
@@ -658,7 +658,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/definite-integrals-2-composite-rules.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-exercises.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -683,7 +683,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/definite-integrals-2-composite-rules.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-exercises.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -706,52 +706,38 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   18.1. Introduction
+  <a class="reference internal nav-link" href="#exercise-1">
+   Exercise 1
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-composite-midpoint-rule">
-     18.1.1. The Composite Midpoint Rule
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-composite-trapezoid-rule">
-     18.1.2. The Composite Trapezoid Rule
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#accuracy-and-error-formulas">
-     18.1.3. Accuracy and Error Formulas
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cancelling-some-error-terms-the-composite-simpson-s-rule">
-   18.2. Cancelling Some Error Terms: The Composite Simpson’s Rule
+  <a class="reference internal nav-link" href="#exercise-2">
+   Exercise 2
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-missing-step-a-generalized-mean-value-theorem">
-     18.2.1. The Missing Step: A Generalized Mean Value Theorem
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#completing-the-derivation-of-the-error-formulas-for-these-composite-rules">
-     18.2.2. Completing the derivation of the error formulas for these composite rules
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#another-error-formula-useful-for-richardson-extrapolation">
-     18.2.3. Another error formula, useful for Richardson Extrapolation
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#appendix-the-composite-left-hand-endpoint-rule-and-its-error">
-   18.3. Appendix: The Composite Left-hand Endpoint Rule, and its Error
+  <a class="reference internal nav-link" href="#exercise-3-a-lot-like-exercise-2">
+   Exercise 3 (a lot like Exercise 2)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-4">
+   Exercise 4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-5">
+   Exercise 5
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-6">
+   Exercise 6
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-7">
+   Exercise 7
   </a>
  </li>
 </ul>
@@ -765,233 +751,65 @@
         
               <div>
                 
-  <div class="section" id="definite-integrals-part-2-the-composite-trapezoid-and-midpoint-rules">
-<h1><span class="section-number">18. </span>Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules<a class="headerlink" href="#definite-integrals-part-2-the-composite-trapezoid-and-midpoint-rules" title="Permalink to this headline">¶</a></h1>
-<p><strong>Expanded on Monday, March 8,</strong> adding an Appendix on the <a class="reference external" href="#Composite-Left-hand-Rule">Composite Left-hand Endpoint Rule</a></p>
-<p><strong>References:</strong></p>
-<ul class="simple">
-<li><p>Section 5.2.4 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
-<li><p>Section 4.4 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
-</ul>
-<div class="section" id="introduction">
-<h2><span class="section-number">18.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The “elementary” integral approximations of the definite integral</p>
-<div class="math notranslate nohighlight">
-\[I = \int_a^b f(x) \, dx\]</div>
-<p>seen in the previous section
-the Trapzoid Rule</p>
-<div class="math notranslate nohighlight">
-\[T_1 = \int_a^b L(x) \, dx = \frac{f(a) + f(b)}{2} (b-a) \]</div>
-<p>and the Midpoint Rule</p>
-<div class="math notranslate nohighlight">
-\[M_1 =  f \left(\frac{a+b}{2}\right)(b-a)\]</div>
-<p>are of course of very low accuracy in themselves.
-They are however central building blocks for various more accurate methods and also for some good methods for numerical solution of differential equations.</p>
-<p>The basic strategy for improving accurcy is to derive the domain of integration <span class="math notranslate nohighlight">\([a, b]\)</span> into numerous smaller intervals, and use these rls on each such sub-interval teh <em>composite</em> rules.</p>
-<p>In turn, the most straightforward way to do this is to use <span class="math notranslate nohighlight">\(n\)</span> sub-intervals of equal width <span class="math notranslate nohighlight">\(h = (b-a)/n\)</span>, so that the sub-interval endpoints are <span class="math notranslate nohighlight">\(x_0 = a + ih\)</span>, <span class="math notranslate nohighlight">\(0 \leq i \leq n\)</span>: that is</p>
-<p>sub-intervals <span class="math notranslate nohighlight">\([x_{i-1}, x_i]\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span> separated by the nodes.</p>
-<div class="math notranslate nohighlight">
-\[a, a+h, a+2h, \dots, b-h, b\]</div>
-<div class="section" id="the-composite-midpoint-rule">
-<h3><span class="section-number">18.1.1. </span>The Composite Midpoint Rule<a class="headerlink" href="#the-composite-midpoint-rule" title="Permalink to this headline">¶</a></h3>
-<p>Using the Midpoint Rule on each interval and summing gives a formula that could be familiar:</p>
+  <div class="section" id="exercises-on-initial-value-problems-for-ordinary-differential-equations">
+<h1>Exercises on Initial Value Problems for Ordinary Differential Equations<a class="headerlink" href="#exercises-on-initial-value-problems-for-ordinary-differential-equations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="exercise-1">
+<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h2>
+<p>Show that for the integration case <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>, Euler’s method is the same as the composite left-hand endpoint rule,
+as in the section <a class="reference internal" href="definite-integrals-2-composite-rules.html"><span class="doc std std-doc">Definite Integrals, Part 2</span></a>.</p>
+</div>
+<div class="section" id="exercise-2">
+<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h2>
+<p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
+the explicit trapezoid method gives the same result as the composite trapezoid rule for integration.</p>
+<p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
+It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
+<p>C) Compare to <span class="math notranslate nohighlight">\(G=1+kh\)</span> seen for Euler’s method.</p>
+<p>D) Use the previous result to express <span class="math notranslate nohighlight">\(U_i\)</span> in terms of <span class="math notranslate nohighlight">\(U_0=u_0\)</span>, as done for Euler’s method.</p>
+</div>
+<div class="section" id="exercise-3-a-lot-like-exercise-2">
+<h2>Exercise 3 (a lot like Exercise 2)<a class="headerlink" href="#exercise-3-a-lot-like-exercise-2" title="Permalink to this headline">¶</a></h2>
+<p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
+explicit midpoint method gives the same result as the composite midpoint rule for integration (same comment as above).</p>
+<p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
+It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
+<p>C) Compare to the growth factors <span class="math notranslate nohighlight">\(G\)</span> seen for Euler and explicit trapezoid methods, and to the growth factor <span class="math notranslate nohighlight">\(g\)</span> for the exact solution.</p>
+</div>
+<div class="section" id="exercise-4">
+<h2>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h2>
+<p>A) Apply Richardson extrapolation to one step of Euler’s method, using the values given by step sizes <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h/2\)</span>.</p>
+<p>B) This should give a second order accurate method, so compare it to the above two methods.</p>
+</div>
+<div class="section" id="exercise-5">
+<h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this headline">¶</a></h2>
+<p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
+this gives the same result as the Composite Simpson’s Rule for integration.</p>
+<p>B) Do one step of this method for the canonical example <span class="math notranslate nohighlight">\(du/dt = ku\)</span>, <span class="math notranslate nohighlight">\(u(t_0) = u_0\)</span>.
+It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)</span> where the growth factor <span class="math notranslate nohighlight">\(G\)</span> approximates the factor <span class="math notranslate nohighlight">\(g=e^{kh}\)</span> for the exact solution <span class="math notranslate nohighlight">\(u(t_1) = g u(t_0)\)</span> of the ODE.</p>
+<p>C) Compare to the growth factors <span class="math notranslate nohighlight">\(G\)</span> seen for previous methods, and to the growth factor <span class="math notranslate nohighlight">\(g\)</span> for the exact solution.</p>
+</div>
+<div class="section" id="exercise-6">
+<h2>Exercise 6<a class="headerlink" href="#exercise-6" title="Permalink to this headline">¶</a></h2>
+<p>Write a formula for <span class="math notranslate nohighlight">\(U_h\)</span> and <span class="math notranslate nohighlight">\(e_h\)</span> if one starts from the point <span class="math notranslate nohighlight">\((t_i, U_i)\)</span>, so that <span class="math notranslate nohighlight">\((t_i + h, U^h)\)</span> is the proposed value for the next point <span class="math notranslate nohighlight">\((t_{i+1}, U_{i+1})\)</span> in the approximate solution — but only if <span class="math notranslate nohighlight">\(e_h\)</span> is small enough!</p>
+</div>
+<div class="section" id="exercise-7">
+<h2>Exercise 7<a class="headerlink" href="#exercise-7" title="Permalink to this headline">¶</a></h2>
+<p>Implement the
+<a class="reference external" href="ODE-IVP-5-error-control-python.ipynb#ETMEC">error control version of the explicit trapezoid method</a>
+from section on
+<a class="reference internal" href="ODE-IVP-5-error-control-python.html"><span class="doc std std-doc">Error Control and Variable Step Sizes</span></a>
+and test on the two familiar examples</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
-M_n &amp;:= f \left( \frac{x_0+x_1}{2}\right)h + f \left(\frac{x_1+x_2}{2}\right)h + \cdots + f \left( \frac{x_{n-1}+x_n}{2}\right)h
+du/dt &amp;= Ku
 \\
-&amp;= f \left(\frac{a+(a+h)}{2}\right)h +  f \left(\frac{(a+h) + (a+2h)}{2}\right)h + \cdots + f \left(\frac{(b-h)+b}{2}\right)h
+&amp;\text{and}
 \\
-&amp;= \left[ f(a+h/2) + f(a+3h/2) + \cdots + f(b-h/2) \right] h
+du/dt &amp;= K(\cos(t) - u) - \sin(t)
 \end{split}
 \end{split}\]</div>
-<p>This is a <em>Riemann Sum</em> as used in the definition of the defnite integral; possibly the best and natural one in most situations, by using the midpoints of each interval.
-The theory of definite integrals also guarantees that <span class="math notranslate nohighlight">\(M_n \to I\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> so long as the function <span class="math notranslate nohighlight">\(f\)</span> is continuous — the next question for us will be “how fast?</p>
-</div>
-<div class="section" id="the-composite-trapezoid-rule">
-<h3><span class="section-number">18.1.2. </span>The Composite Trapezoid Rule<a class="headerlink" href="#the-composite-trapezoid-rule" title="Permalink to this headline">¶</a></h3>
-<p>Using the Trapezoid Rule on each interval instead gives</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-T_n &amp;:= \frac{f(x_0) + f(x_1)}{2} h + \frac{f(x_1) + f(x_2)}{2} h + \cdots + \frac{f(x_{n-1}) + f(x_n)}{2} h
-\\
-&amp;:= \frac{f(a + f(a+h)}{2} h + \frac{f(a+h + f(a+2h)}{2} h + \cdots + \frac{f(b-h) + f(b)}{2} h
-\\
-&amp;= \left[ \frac{f(a)}{2} + f(a+h) + f(a+2h) + \cdots + f(b-h) +  \frac{f(b)}{2} \right] h
-\end{split}
-\end{split}\]</div>
-<p>This is also a Riemann sum, with intervals if length <span class="math notranslate nohighlight">\(h/2\)</span> at each end, using value at teh ends of thos intervals, and the rest of width <span class="math notranslate nohighlight">\(h\)</span>, with the Midpoint Rule used.
-So again, we know that <span class="math notranslate nohighlight">\(T_n \to I\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span> and next want to know “how fast?*</p>
-</div>
-<div class="section" id="accuracy-and-error-formulas">
-<h3><span class="section-number">18.1.3. </span>Accuracy and Error Formulas<a class="headerlink" href="#accuracy-and-error-formulas" title="Permalink to this headline">¶</a></h3>
-<p>In brief, the errors for ech of rhese rules is the sum of the errors for each of the pieces;
-I will just state them for now.</p>
-<p>Firstly,</p>
-<div class="math notranslate nohighlight">
-\[ I - M_n= \sum_{i=1}^n \frac{h^3}{24}f''(\xi_i), \quad \text{ for some } \xi_i \in [x_{i-1}, x_i] \]</div>
-<p>This can be rewitten as</p>
-<div class="math notranslate nohighlight">
-\[ I - M_n= \frac{h^3}{24} \sum_{i=1}^n f''(\xi_i) \]</div>
-<p>and as we will see, this sum can have each <span class="math notranslate nohighlight">\(f''(\xi_i)\)</span> replace by an “average value” <span class="math notranslate nohighlight">\(f''(\xi_i)\)</span>, <span class="math notranslate nohighlight">\(\xi \in[a, b]\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-I - M_n= \frac{h^3}{24} \sum_{i=1}^n f''(\xi) = \frac{h^3}{24} n f''(\xi) = \frac{h^2}{24} (b-a) f''(\xi)
-\]</div>
-<p>and the most important conclusion for now is that</p>
-<div class="math notranslate nohighlight">
-\[
-I - M_n = O(h^2)
-\]</div>
-<p>Similarly,</p>
-<div class="math notranslate nohighlight">
-\[
-I - T_n = - \frac{h^2}{12} (b-a) f''(\xi) = O(h^2)
-\]</div>
-<p>again with <span class="math notranslate nohighlight">\(\xi \in[a, b]\)</span>, but note well: these two <span class="math notranslate nohighlight">\(\xi\)</span> values are probably not the same!</p>
-</div>
-</div>
-<div class="section" id="cancelling-some-error-terms-the-composite-simpson-s-rule">
-<h2><span class="section-number">18.2. </span>Cancelling Some Error Terms: The Composite Simpson’s Rule<a class="headerlink" href="#cancelling-some-error-terms-the-composite-simpson-s-rule" title="Permalink to this headline">¶</a></h2>
-<p>Ignoring the <span class="math notranslate nohighlight">\(\xi\)</span> values being different, this suggests again that we can cancel some of the errors wi ha weighted average:</p>
-<div class="math notranslate nohighlight">
-\[ S_{2n} := \frac{2M_n + T_n}{3} \]</div>
-<p>Indeed we will see that the main, <span class="math notranslate nohighlight">\(O(h^2)\)</span>, errors cancel out, and also due to symmetry, the error is even in <span class="math notranslate nohighlight">\(h\)</span>, so that</p>
-<div class="math notranslate nohighlight">
-\[I - S_{2n}= O(h^4)\]</div>
-<p>The name is because this is the <em>Composite Simpson’s Rule</em>, and the interleaving of the different <span class="math notranslate nohighlight">\(x\)</span> values used by <span class="math notranslate nohighlight">\(M_n\)</span> and <span class="math notranslate nohighlight">\(T_n\)</span> means that is uses <span class="math notranslate nohighlight">\(2n+1\)</span> nodes, and so <span class="math notranslate nohighlight">\(2n\)</span> sub-intervals.</p>
-<div class="section" id="the-missing-step-a-generalized-mean-value-theorem">
-<h3><span class="section-number">18.2.1. </span>The Missing Step: A Generalized Mean Value Theorem<a class="headerlink" href="#the-missing-step-a-generalized-mean-value-theorem" title="Permalink to this headline">¶</a></h3>
-<p>A key step in getting more useful error formulas for approximations of integrals is the following result:</p>
-<p><strong>Theorem</strong></p>
-<p>For any continuous function <span class="math notranslate nohighlight">\(f\)</span> on an interval <span class="math notranslate nohighlight">\([a, b]\)</span> and any collection of points <span class="math notranslate nohighlight">\(x_i \in [a,b]\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span>,
-there is a point <span class="math notranslate nohighlight">\(\xi \in [a,b]\)</span> for which</p>
-<div class="math notranslate nohighlight">
-\[ f(c) = \frac{\sum_{i=1}^n f(x_i)}{n}, \text{ so } \sum_{i=1}^n f(x_i) = n f(c) \]</div>
-<p>That is, the value of the function at <span class="math notranslate nohighlight">\(c\)</span> is the average of its values at those other points.</p>
-<p><em>Proof:</em></p>
-<p>The proof is rather similar to that of Theorme 3 in th previos section; essenrial repaltin teh interal tehr by a sum here:</p>
-<p><em>As <span class="math notranslate nohighlight">\(f\)</span> is continuous on the closed, bounded interval <span class="math notranslate nohighlight">\([a, b]\)</span>, the <strong>Extreme Value Theorem</strong> from calculus says that <span class="math notranslate nohighlight">\(f\)</span> has a minimum <span class="math notranslate nohighlight">\(L\)</span> and a maximum <span class="math notranslate nohighlight">\(H\)</span> on this interval.
-Each of the values <span class="math notranslate nohighlight">\(f(x_i)\)</span> is in interval <span class="math notranslate nohighlight">\([L, H]\)</span> so their average is also:</em></p>
-<div class="math notranslate nohighlight">
-\[ f(x_i) \in [L, H] \quad \text{and thus} \quad \frac{\sum_{i=1}^n f(x_i)}{n} \in [L, H] \]</div>
-<p><em>The <strong>Mean Value Theorem</strong> then says that <span class="math notranslate nohighlight">\(f\)</span> attains this mean value for some <span class="math notranslate nohighlight">\(\xi \in [L, H]\)</span>.</em></p>
-</div>
-<div class="section" id="completing-the-derivation-of-the-error-formulas-for-these-composite-rules">
-<h3><span class="section-number">18.2.2. </span>Completing the derivation of the error formulas for these composite rules<a class="headerlink" href="#completing-the-derivation-of-the-error-formulas-for-these-composite-rules" title="Permalink to this headline">¶</a></h3>
-<p>I will spell this out for the Composite Trapezoid Rule; it works very similarly for the “midpoint” case.</p>
-<p>First, break the exact integral up as</p>
-<div class="math notranslate nohighlight">
-\[ I = \int_a^b f(x) \, dx = \sum_{i=1}^n I^{(i)}, \quad \text{where} \quad I^{(i)} = \int_{x_{i-1}}^{x_i} f(x) \, dx \]</div>
-<p>Similarly,</p>
-<div class="math notranslate nohighlight">
-\[ T_n = \sum_{i=1}^n T^{(i)} \]</div>
-<p>where each <span class="math notranslate nohighlight">\(T^{(i)}\)</span> is the Trapezoid Rule approximation of <span class="math notranslate nohighlight">\(I^{(i)}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[T^{(i)} = \frac{f(x_{i-1}) + f(x_i)}{2} h\]</div>
-<p>The error in <span class="math notranslate nohighlight">\(T_n\)</span> is the sum of the errors in each piece:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-I - T_n
-&amp;= \sum_{i=1}^n I^{(i)} - \sum_{i=1}^n T^{(i)}
-\\&amp;= \sum_{i=1}^n ( I^{(i)} - T^{(i)} )
-\\&amp;= \sum_{i=1}^n -\frac{h^3}{12} f''(\xi_i), \quad x_i \in [x_{i-1}, x_i]
-\\&amp;= -\frac{h^3}{12} \sum_{i=1}^n f''(\xi_i)
-\end{split}
-\end{split}\]</div>
-<p>Now we can use the above mean value result (with <span class="math notranslate nohighlight">\(f''\)</span> in place of <span class="math notranslate nohighlight">\(f\)</span>) to replace the last sum above by
-<span class="math notranslate nohighlight">\(n f''(\xi)\)</span>, some <span class="math notranslate nohighlight">\(\xi \in [a, b]\)</span>, so that as claimed,</p>
-<div class="math notranslate nohighlight">
-\[I - T_n = -\frac{h^3}{12} n f''(\xi), = -\frac{h^2}{12} (b-a) f''(\xi) = O(h^2),\]</div>
-<p>using <span class="math notranslate nohighlight">\(h n = b-a\)</span>.</p>
-</div>
-<div class="section" id="another-error-formula-useful-for-richardson-extrapolation">
-<h3><span class="section-number">18.2.3. </span>Another error formula, useful for Richardson Extrapolation<a class="headerlink" href="#another-error-formula-useful-for-richardson-extrapolation" title="Permalink to this headline">¶</a></h3>
-<p>Starting from</p>
-<div class="math notranslate nohighlight">
-\[
-I - T_n = -\frac{h^3}{12} \sum_{i=1}^n f''(\xi_i), = -\frac{h^2}{12} \sum_{i=1}^n ( f''(\xi_i) h)
-\]</div>
-<p>note that the sum in the second version is a Riemann sum for approximating the integral</p>
-<div class="math notranslate nohighlight">
-\[I'' := \int_a^b f''(x) \, dx, = [f'(x)]_a^b = f'(b) - f'(a),\]</div>
-<p>so it seems that</p>
-<div class="math notranslate nohighlight">
-\[
-I - T_n \approx -\frac{f'(b) - f'(a)}{12} h^2, = O(h^2)
-\]</div>
-<p>A virtue of this form is that now we have a good chance of evaluating the coefficient of <span class="math notranslate nohighlight">\(h^2\)</span>,
-so this given a “practical error formula” when <span class="math notranslate nohighlight">\(f'(x)\)</span> is known.</p>
-<p>Another useful fact (not proven in these notes) is that the error for the basic Trapezoid rule can be computed with the help of Taylor’s Theorem in a series:</p>
-<div class="math notranslate nohighlight">
-\[
-T_1 = \int_a^b f(x) \, dx = B_2 D^2f(\xi_2) h^3 + B_4 D^4(\xi_4) h^5 + \cdots
-\]</div>
-<p>(where <span class="math notranslate nohighlight">\(B_2 = 1/12\)</span> as seen above).</p>
-<p>Putting the higher power terms into the above argument one can get</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-T_n
-&amp;= \int_a^b f(x) \, dx + B_2 [Df(b) - Df(a)] h^2 + B_4 [D^3f(b) - D^3f(a)] h^4
-+ \cdots + B_{2k} [D^{2k-1}f(b) - D^{2k-1}f(a)] h^{2k} + \cdots
-\\&amp;= O(h^2) + O(h^4) + \cdots +  O(h^{2k})
-\end{split}
-\end{split}\]</div>
-<p>so that</p>
-<div class="math notranslate nohighlight">
-\[
-T_n = \int_a^b f(x) \,dx + \frac{Df(b) - Df(a)}{12} h^2 + O(h^4)
-\]</div>
-<p>The last form is the setup for Richardson extrapolation —
-and the previous one with a succession of “big-O” terms is the setup for <em>repeated</em> Richardson extrapolation,
-to get a succession of approximations with errors <span class="math notranslate nohighlight">\(O(h^2)\)</span>, then <span class="math notranslate nohighlight">\(O(h^4)\)</span>, then <span class="math notranslate nohighlight">\(O(h^6)\)</span>, and so on:
-<a class="reference internal" href="definite-integrals-4-romberg-integration.html"><span class="doc std std-doc">Romberg Integration</span></a>.</p>
-<p>There are similar formulas for the Composite Midpoint Rule, like</p>
-<div class="math notranslate nohighlight">
-\[
-I - M_n = \frac{h^2}{24} (b-a) f''(\xi) = \frac{Df(b) - Df(a)}{24} h^2 + O(h^4)
-\]</div>
-<p>but we will see why the Composite Trapezoid Rule is far more useful for Richardson extrapolation.</p>
-<p><a name="Composite-Left-hand-Rule"></a></p>
-</div>
-</div>
-<div class="section" id="appendix-the-composite-left-hand-endpoint-rule-and-its-error">
-<h2><span class="section-number">18.3. </span>Appendix: The Composite Left-hand Endpoint Rule, and its Error<a class="headerlink" href="#appendix-the-composite-left-hand-endpoint-rule-and-its-error" title="Permalink to this headline">¶</a></h2>
-<p>The Composite Left-hand Endpoint Rule with <span class="math notranslate nohighlight">\(n\)</span> sub-intervals of equal width <span class="math notranslate nohighlight">\(h = (b-a)/n\)</span> is</p>
-<div class="math notranslate nohighlight">
-\[L_n = \sum_{i=0}^{n-1} f(x_i) h, \; = \sum_{i=0}^{n-1} f(a + i h) h\]</div>
-<p>To study its errors, start as with the Compound Trapezoid Rule: break the integral up as</p>
-<div class="math notranslate nohighlight">
-\[ I = \int_a^b f(x) \, dx = \sum_{i=1}^n I^{(i)}, \quad \text{where} \quad I^{(i)} = \int_{x_{i-1}}^{x_i} f(x) \, dx \]</div>
-<p>and the approximation as</p>
-<div class="math notranslate nohighlight">
-\[ L_n = \sum_{i=1}^n L^{(i)} \]</div>
-<p>where each <span class="math notranslate nohighlight">\(L^{(i)}\)</span> is the Left-hand Endpoint Rule approximation of <span class="math notranslate nohighlight">\(I^{(i)}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[L^{(i)} = f(x_{i-1}) h\]</div>
-<p>Then the error in <span class="math notranslate nohighlight">\(L_n\)</span> is again the sum of the errors in each piece:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-I - L_n
-&amp;= \sum_{i=1}^n I^{(i)} - \sum_{i=1}^n L^{(i)}
-\\&amp;= \sum_{i=1}^n ( I^{(i)} - L^{(i)} )
-\\&amp;= \sum_{i=1}^n \frac{h^2}{2} f'(\xi_i), \quad x_i \in [x_{i-1}, x_i]
-\\&amp;= \frac{h^2}{2} \sum_{i=1}^n f'(\xi_i)
-\end{split}
-\end{split}\]</div>
-<p>The Generalized Mean Value Theorem — now with <span class="math notranslate nohighlight">\(f'\)</span> in place of <span class="math notranslate nohighlight">\(f\)</span> — allows us to replace the last sum above by
-<span class="math notranslate nohighlight">\(n f'(\xi)\)</span>, some <span class="math notranslate nohighlight">\(\xi \in [a, b]\)</span>, so that as claimed,</p>
-<div class="math notranslate nohighlight">
-\[I - L_n = \frac{h^2}{2} n f'(\xi), = \frac{h}{2} (b-a) f'(\xi) = O(h)\]</div>
-<p><strong>Aside:</strong> As with the Composite Trapezoid Rule, one can also get</p>
-<div class="math notranslate nohighlight">
-\[
-L_n = \int_a^b f(x) \,dx + \frac{f(b) - f(a)}{2} h + O(h^2)
-\]</div>
+<p>(<span class="math notranslate nohighlight">\(K=1\)</span> is enough.)</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
@@ -1025,8 +843,8 @@ L_n = \int_a^b f(x) \,dx + \frac{f(b) - f(a)}{2} h + O(h^2)
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="definite-integrals-1-building-blocks-python.html" title="previous page"><span class="section-number">17. </span>Definite Integrals, Part 1: The Building Blocks</a>
-    <a class='right-next' id="next-link" href="definite-integrals-3-simpson-richardson.html" title="next page"><span class="section-number">19. </span>Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation</a>
+    <a class='left-prev' id="prev-link" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html" title="previous page">Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation</a>
+    <a class='right-next' id="next-link" href="assignment1.html" title="next page">MATH 375 Assignment 1</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

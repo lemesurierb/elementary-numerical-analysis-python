@@ -322,6 +322,11 @@
    Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-exercises.html">
+   Exercises on Initial Value Problems for Ordinary Differential Equations
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -352,6 +357,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="assignment4.html">
    MATH 375 Assignment 4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment5.html">
+   MATH 375 Assignment 5
   </a>
  </li>
 </ul>
@@ -762,6 +772,11 @@
      25.5.1. Step size adjustment
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3">
+     25.5.2. Exercise 3
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -989,6 +1004,23 @@ Approximating <span class="math notranslate nohighlight">\(u(t)\)</span> by <spa
 <div class="math notranslate nohighlight">
 \[s = 0.8 \left| \frac{T U_i}{\tilde{e}_h} \right|^{1/(p+1)}\]</div>
 </div>
+<div class="section" id="exercise-3">
+<h3><span class="section-number">25.5.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
+<p>Implement this
+<a class="reference external" href="#ETMEC">error control versn of thr explicit trapezoid method</a>,
+and test on the two familiar examples</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+du/dt &amp;= Ku
+\\
+&amp;\text{and}
+\\
+du/dt &amp;= K(\cos(t) - u) - \sin(t)
+\end{split}
+\end{split}\]</div>
+<p>(<span class="math notranslate nohighlight">\(K=1\)</span> is enough.)</p>
+</div>
 </div>
 <div class="section" id="fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements">
 <h2><span class="section-number">25.6. </span>Fourth order accurate methods with error control: Runge-Kutta-Felberg and some newer refinements<a class="headerlink" href="#fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements" title="Permalink to this headline">¶</a></h2>
@@ -1086,8 +1118,8 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-5-error-control-python_28_0.png" src="../_images/ODE-IVP-5-error-control-python_28_0.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_28_1.png" src="../_images/ODE-IVP-5-error-control-python_28_1.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python_29_0.png" src="../_images/ODE-IVP-5-error-control-python_29_0.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python_29_1.png" src="../_images/ODE-IVP-5-error-control-python_29_1.png" />
 </div>
 </div>
 <p>To read more about this SciPy function, run the following cell (in the notebook version of this page);</p>
