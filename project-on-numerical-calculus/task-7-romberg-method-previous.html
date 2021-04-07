@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Test Cases for Differentiation" href="test-cases-differentiation.html" />
-    <link rel="prev" title="The Modified Trapezoid Method" href="task-5-and-6-modified-trapezoid-method.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -370,7 +368,7 @@
   Project on Numerical Calculus
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="introduction.html">
    Introduction
@@ -406,8 +404,8 @@
    The Modified Trapezoid Method, without derivatives
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="task-7-romberg-method.html">
    The Romberg Method
   </a>
  </li>
@@ -658,7 +656,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/project-on-numerical-calculus/task-7-romberg-method.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/project-on-numerical-calculus/task-7-romberg-method-previous.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -683,7 +681,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/project-on-numerical-calculus/task-7-romberg-method.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/project-on-numerical-calculus/task-7-romberg-method-previous.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -709,7 +707,7 @@
                 
   <div class="section" id="the-romberg-method">
 <h1>The Romberg Method<a class="headerlink" href="#the-romberg-method" title="Permalink to this headline">¶</a></h1>
-<p><strong>Revised on Monday April 7</strong>, adding some notes on presenting the results and errors nicely.</p>
+<p><strong>Revised on Monday April 5</strong></p>
 <p>Write a function to implement the Romberg method.</p>
 <ul class="simple">
 <li><p>Again, the input should include an error tolerance, and the output should include estimates of absolute error and of cost.</p></li>
@@ -746,120 +744,6 @@ It has the syntactic peculiarity that the dimensions of the array are given in a
 <p>Once the above basic verion is working, produce a second version that adds an error estimate,
 and ends once the final approximation <span class="math notranslate nohighlight">\(R_{i,i}\)</span> at stage <span class="math notranslate nohighlight">\(i\)</span> is good enough.</p>
 <p>As usual I recommend using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop organization, adding an <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">break</span></code></p>
-<p><strong>Additions on April 7:</strong>
-some tips on printing, and formatting numbers.</p>
-<p>The final array only has relevant value at positions <code class="docutils literal notranslate"><span class="pre">R[i,j]</span></code> with <span class="math notranslate nohighlight">\( j \leq i\)</span>, so here is one way to print it:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">M</span><span class="p">,</span><span class="n">M</span><span class="p">])</span>
-<span class="c1"># Set up a fake array R;</span>
-<span class="c1"># the entries are from an important example: the Hilbert matrix. We will see it again soon.</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R is:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The relevant parts of R are:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R is:
-[[1.         0.         0.         0.        ]
- [0.5        0.33333333 0.         0.        ]
- [0.33333333 0.25       0.2        0.        ]
- [0.25       0.2        0.16666667 0.14285714]]
-The relevant parts of R are:
-[1.]
-[0.5        0.33333333]
-[0.33333333 0.25       0.2       ]
-[0.25       0.2        0.16666667 0.14285714]
-</pre></div>
-</div>
-</div>
-</div>
-<p>This strategy can also be used to print the errors.
-One can subtract a number from an array, which subtracts it from each element if the array.
-So pretending that the exact value is 1/8:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">8.0</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The fake errors are:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">exact</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The fake errors are:
-[0.875]
-[0.375      0.20833333]
-[0.20833333 0.125      0.075     ]
-[0.125      0.075      0.04166667 0.01785714]
-</pre></div>
-</div>
-</div>
-</div>
-<p>An alternative is to print one entry at a time, telling the print command to not start a new line except at the end of a row:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">8.0</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The fake errors are:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">exact</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>  <span class="c1"># This puts the &quot;end&quot; text (a space) at the end, instead of a new line.</span>
-    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># Start a new line only at the end of each row</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The fake errors are:
-0.875 
-0.375 0.20833333333333331 
-0.20833333333333331 0.125 0.07500000000000001 
-0.125 0.07500000000000001 0.04166666666666666 0.01785714285714285 
-</pre></div>
-</div>
-</div>
-</div>
-<p>One advantage of this “one at a time” approach is that one can specify the number of significant digits to display, using f-string formatting. Here, the “:7.4” part at the end of the braces means to use y spaces for each value (so they line up in columns) wth 4 sigificant digits:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">8.0</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The fake errors are:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">exact</span><span class="si">:</span><span class="s2">7.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>  <span class="c1"># This puts the &quot;end&quot; text (a space) at the end, instead of a new line.</span>
-    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># Start a new line only at the end of each row</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The fake errors are:
-  0.875 
-  0.375  0.2083 
- 0.2083   0.125   0.075 
-  0.125   0.075 0.04167 0.01786 
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -890,8 +774,6 @@ So pretending that the exact value is 1/8:</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="task-5-and-6-modified-trapezoid-method.html" title="previous page">The Modified Trapezoid Method</a>
-    <a class='right-next' id="next-link" href="test-cases-differentiation.html" title="next page">Test Cases for Differentiation</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
