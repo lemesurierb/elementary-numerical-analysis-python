@@ -804,7 +804,12 @@
                 
   <div class="section" id="initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes">
 <h1><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes" title="Permalink to this headline">¶</a></h1>
-<p><strong>Version of April 5, 2021 after class</strong>, adding the fourth order accurate Runge-Kutta Fehlberg method and an example with an ODE IVP solver from package SciPy.</p>
+<p><strong>Version of April 7, 2021</strong>, adding</p>
+<ul class="simple">
+<li><p>the fourth-order accurate Runge-Kutta Fehlberg method,</p></li>
+<li><p>an example with an ODE IVP solver from package SciPy, the function <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>, and</p></li>
+<li><p>an ilustration of how to measure the time taken to execute a piece of code, using the function <code class="docutils literal notranslate"><span class="pre">time.time</span></code></p></li>
+</ul>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 6.5 <em>Variable Step Size Methods</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -1076,8 +1081,55 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get an ODE IVP solve function, from module &quot;integrate&quot; within package &quot;scipy&quot;</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To read more about this SciPy function scipy.integrate.solve_ivp,</span>
+<span class="c1"># run this cell (in the notebook version of this page).</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+<span class="n">help</span><span class="p">(</span><span class="n">solve_ivp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a &quot;stop watch&quot;</span>
+<span class="c1"># This gives the &quot;wall clock&quot; time in seconds since a reference moment, called &quot;the epoch&quot;.</span>
+<span class="c1"># (For macOS and UNIX, the epoch is the beginning of 1970.)</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To read more about the function time.time, run this cell (in the notebook version of this page).</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">help</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function time in module time:
+
+time(...)
+    time() -&gt; floating point number
+    
+    Return the current time in seconds since the Epoch.
+    Fractions of a second may be present if the system clock provides them.
 </pre></div>
 </div>
 </div>
@@ -1102,7 +1154,55 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">ode_solution</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">y_0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_plot</span><span class="p">)</span>
+<span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">time_elapsed</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time take to solve: </span><span class="si">{</span><span class="n">time_elapsed</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
+<span class="c1"># The output is an &quot;object&quot; containing many items; the ones we need for now are t and y.</span>
+<span class="c1"># More precisely &quot;y&quot; is a 2D array (just as y_0 is always an array)</span>
+<span class="c1"># though with only a single row for this example, so we just want the 1D array y[0]</span>
+<span class="c1"># These are extracted as follows:</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">ode_solution</span><span class="o">.</span><span class="n">t</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">ode_solution</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Computed Solution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_exact</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Errors&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time take to solve: 0.0037457942962646484 seconds
+</pre></div>
+</div>
+<img alt="../_images/ODE-IVP-5-error-control-python_33_1.png" src="../_images/ODE-IVP-5-error-control-python_33_1.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python_33_2.png" src="../_images/ODE-IVP-5-error-control-python_33_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase accuracy requirement.</span>
+<span class="c1"># &quot;rtol&quot; is a relative error tolerance, defaulting to 1e-3</span>
+<span class="c1"># &quot;atol&quot; is an absolute error tolerance, defaulting to 1e-3</span>
+<span class="c1"># It solve to the less demanding of these two,</span>
+<span class="c1"># so both must be specified to increase accuracy.</span>
+
+<span class="n">t_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">ode_solution</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">y_0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_plot</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+<span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">time_elapsed</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time take to solve: </span><span class="si">{</span><span class="n">time_elapsed</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
 <span class="n">t</span> <span class="o">=</span> <span class="n">ode_solution</span><span class="o">.</span><span class="n">t</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">ode_solution</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -1118,17 +1218,11 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-5-error-control-python_29_0.png" src="../_images/ODE-IVP-5-error-control-python_29_0.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_29_1.png" src="../_images/ODE-IVP-5-error-control-python_29_1.png" />
-</div>
-</div>
-<p>To read more about this SciPy function, run the following cell (in the notebook version of this page);</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
-<span class="n">help</span><span class="p">(</span><span class="n">solve_ivp</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time take to solve: 0.03026294708251953 seconds
 </pre></div>
 </div>
+<img alt="../_images/ODE-IVP-5-error-control-python_34_1.png" src="../_images/ODE-IVP-5-error-control-python_34_1.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python_34_2.png" src="../_images/ODE-IVP-5-error-control-python_34_2.png" />
 </div>
 </div>
 </div>
