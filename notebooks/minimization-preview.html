@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>28. Finding the Minimum of a Function of One Variable, Without Derivatives — Preview &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>28. Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -270,7 +270,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   28. Finding the Minimum of a Function of One Variable, Without Derivatives — Preview
+   28. Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview
   </a>
  </li>
 </ul>
@@ -738,9 +738,9 @@
         
               <div>
                 
-  <div class="section" id="finding-the-minimum-of-a-function-of-one-variable-without-derivatives-preview">
-<h1><span class="section-number">28. </span>Finding the Minimum of a Function of One Variable, Without Derivatives — Preview<a class="headerlink" href="#finding-the-minimum-of-a-function-of-one-variable-without-derivatives-preview" title="Permalink to this headline">¶</a></h1>
-<p><strong>Version of April 11, 2021</strong></p>
+  <div class="section" id="finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-preview">
+<h1><span class="section-number">28. </span>Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview<a class="headerlink" href="#finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-preview" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 12, 2021</strong>, after class; just making some corrections to typos and such.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 13.1 <em>Unconstrained Optimization Without Derivatives</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a>,
@@ -754,20 +754,20 @@ in particular sub-section 13.1.1 <em>Golden Section Search</em>.</p></li>
 <ul class="simple">
 <li><p>Some restictions on the function <span class="math notranslate nohighlight">\(f\)</span> are needed:</p>
 <ul>
-<li><p>with zero-finding, to guarantee existnce of a solution we needed at least an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which the function is continuous and with a sign change between the endpoints;</p></li>
-<li><p>for minimization, the criterion for existence is simply an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on wi th fncit is continuous</p></li>
-<li><p>to guarantee <em>uniqueness</em> of a minimum in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, thr conditiom we use is being <em>monomodal</em>:
-The function is decreasing at left, then increasing at right, changing between decreasing and increasing only once (at the minimum.</p></li>
+<li><p>with zero-finding, to guarantee <em>existence</em> of a solution, we needed at least an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which the function is continuous and with a sign change between the endpoints;</p></li>
+<li><p>for minimization, the criterion for existence is simply an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which the function is continuous.</p></li>
 </ul>
 </li>
-<li><p>With zero-dinding, we needed to compare the values of the function at three points <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span> to determine a new, smaller interval containing the root;
+<li><p>With zero-finding, we needed to compare the values of the function at three points <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span> to determine a new, smaller interval containing the root;
 with minimzation, we instead need to compare the values of the function at four points <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span> to determine a new, smaller interval containing the minimum.</p></li>
 <li><p>There are often good reasons to be able to do this without using derivatives.</p></li>
 </ul>
-<p>As is often the case, a guarantee of a unique solution helps to devise a robust algorithm:
-to guarantee uniqueness of a zero in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, we needed an extra condition like the function being <em>monotonic</em>;
-to guarantee uniqueness of a minimum in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, the conditiom we use is being <em>monomodal</em>:</p>
-<p>The function is decreasing near <span class="math notranslate nohighlight">\(a\)</span>, increasing near <span class="math notranslate nohighlight">\(b\)</span>, and changes between decreasing and increasing only once (which must therfore be at the minimum.)</p>
+<p>As is often the case, a guarantee of a <em>unique</em> solution helps to devise a robust algorithm:</p>
+<ul class="simple">
+<li><p>to guarantee uniqueness of a zero in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, we needed an extra condition like the function being <em>monotonic</em>;</p></li>
+<li><p>to guarantee uniqueness of a minimum in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, the condition we use is being <em>monomodal</em>:
+The function is decreasing near <span class="math notranslate nohighlight">\(a\)</span>, increasing near <span class="math notranslate nohighlight">\(b\)</span>, and changes between decreasing and increasing only once (which must therefore happen at the minimum.)</p></li>
+</ul>
 <p>So we assume from now on that the function is <em>monomodal</em> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>.</p>
 </div>
 <div class="section" id="step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum">
@@ -776,18 +776,18 @@ to guarantee uniqueness of a minimum in interval <span class="math notranslate n
 the minimum could be either to the left or the right of <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <p>So instead, choose two internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span>.</p>
 <ul class="simple">
-<li><p>if <span class="math notranslate nohighlight">\(f(c) &lt; f(d)\)</span>, the function is decreasing on at least part of the interval <span class="math notranslate nohighlight">\([c, d]\)</span>, so the transition from decreasing to increasing is to the right of <span class="math notranslate nohighlight">\(c\)</span>: the minimum is in <span class="math notranslate nohighlight">\([c, b]\)</span>;</p></li>
-<li><p>if instead <span class="math notranslate nohighlight">\(f(c) &gt; f(d)\)</span>, the “mirror image” argument shows that the minimum is in <span class="math notranslate nohighlight">\([a, d]\)</span>.</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(f(c) &lt; f(d)\)</span>, the function is increasing on at least part of the interval <span class="math notranslate nohighlight">\([c, d]\)</span>, so the transition from decreasing to increasing is to the left of <span class="math notranslate nohighlight">\(d\)</span>: the minimum is in <span class="math notranslate nohighlight">\([a, d]\)</span>;</p></li>
+<li><p>if instead <span class="math notranslate nohighlight">\(f(c) &gt; f(d)\)</span>, the “mirror image” argument shows that the minimum is in <span class="math notranslate nohighlight">\([c, b]\)</span>.</p></li>
 </ul>
 <p>What about the borderline case when <span class="math notranslate nohighlight">\(f(c) = f(d)\)</span>?
-The monomodal funtion can not be either increasing or decreasing on all of <span class="math notranslate nohighlight">\([c, d]\)</span> so must first decrease and then increase:
+The monomodal function cannot be either increasing or decreasing on all of <span class="math notranslate nohighlight">\([c, d]\)</span> so must first decrease and then increase:
 the minimum is in <span class="math notranslate nohighlight">\([c, d]\)</span>, and so is in either of the above intervals.</p>
 <p>So we almost have a first algorithm, except for the isue of <em>choosing</em>;
 given an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which function <span class="math notranslate nohighlight">\(f\)</span> is monomodal:</p>
 <ol class="simple">
 <li><p><em>Choose</em> two internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, with <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span></p></li>
 <li><p>Evaluate <span class="math notranslate nohighlight">\(f(c)\)</span> and <span class="math notranslate nohighlight">\(f(d)\)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(f(c) &lt; f(d)\)</span>, replace the interval  <span class="math notranslate nohighlight">\([a, b]\)</span> by <span class="math notranslate nohighlight">\([c, d]\)</span>; else replcae it by <span class="math notranslate nohighlight">\([a, d]\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(c) &lt; f(d)\)</span>, replace the interval  <span class="math notranslate nohighlight">\([a, b]\)</span> by <span class="math notranslate nohighlight">\([a, d]\)</span>; else replace it by <span class="math notranslate nohighlight">\([c, b]\)</span>.</p></li>
 <li><p>If the new interval is short enough to locate the minimum with sufficient accuracy (e.g. its length is less that twice the error tolerance) stop; its midpoint is a sufficiently accurate approximate answer);
 othewise, repaeat from step (1).</p></li>
 </ol>
@@ -798,7 +798,7 @@ othewise, repaeat from step (1).</p></li>
 <p>(A) Deciding how to choose the internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>.</p>
 <p>(B) Verifying that the interval does indeed shrink to arbitrarily small length after enough iterations, so that the algorithm succeeds.</p>
 <p>Once we have done that and got a working algorithm, there will be the issue of speed:</p>
-<p>(C) Amongst the many ways that we could choose the internal points, finding one that (typically at least) is fastest, in the sense if minimizing the number of functions evaluations needed.</p>
+<p>(C) Amongst the many ways that we could choose the internal points, finding one that (typically at least) is fastest, in the sense of minimizing the number of functions evaluations needed.</p>
 <p>For now, I will just describe one “naive” approach that works, but is not optimal for speed; <strong>Trisection:</strong></p>
 <p>Take <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> to divide the interval <span class="math notranslate nohighlight">\([a, b]\)</span> into three equal-width sub-intervals:
 <span class="math notranslate nohighlight">\(c = (2a +b)/3\)</span>, <span class="math notranslate nohighlight">\(d = (a + 2b)/3\)</span>, so that each of <span class="math notranslate nohighlight">\([a, c]\)</span>, <span class="math notranslate nohighlight">\([c, d]\)</span> and <span class="math notranslate nohighlight">\([d, b]\)</span> are of length <span class="math notranslate nohighlight">\((b-a)/3\)</span>.</p>

@@ -1,9 +1,9 @@
-Full Disclosure: Things I Plan to do to Expand and Improve This Book
-===============
+# Full Disclosure: Things I Plan to do to Expand and Improve This Book
 
-- Notes on minimization (mostly without derivatives).
+- An introduction to iterative methods for simultaneous linear equations.
 
-- Notes on fitting curves to data with least squares (minimizing the root-mean-square ["RMS"] error)
+- An introduction to methods for *eigen-problems*: computing eigenvalues and eigenvectors.
 
-- Incorporate the two numerical examples on Euler's Method from the Runge-Kutta section back into the Euler's Method section.
+- An introduction to fitting curves to data with least squares (minimizing the root-mean-square ["RMS"] error).
 
+- Incorporating the two numerical examples on Euler's Method from the Runge-Kutta section back into the Euler's Method section.
