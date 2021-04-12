@@ -268,6 +268,11 @@
    27. Some Future Topics
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="minimization-preview.html">
+   28. Finding the Minimum of a Function of One Variable, Without Derivatives — Preview
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -751,6 +756,11 @@
    26.5. Well-conditioned and ill-conditioned problems and matrices
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-important-example-the-hilbert-matrices">
+   26.6. An important example: the Hilbert matrices
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -827,21 +837,22 @@ to get the maximum norm <span class="math notranslate nohighlight">\(\| A \|_\in
 <h2><span class="section-number">26.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
 <p>It can be proven that, for any choice of norm,</p>
 <div class="math notranslate nohighlight">
-\[
-Rel(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \|A\|\|A^{-1}\|\frac{\|r\|}{\|b\|},
-\]</div>
-<p>where the last factor is the relative backward error.</p>
+\[\text{Rel}(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \|A\|\|A^{-1}\| \frac{\|r\|}{\|b\|},\]</div>
+<p>where the last factor <span class="math notranslate nohighlight">\(\displaystyle \frac{\|r\|}{\|b\|}\)</span> is the <em>relative backward error</em>.</p>
 <p>Since we can (though often with considerable effort, due to the inverse!) compute the right-hand side when the infinity norm is used, we can compute an upper bound on the relative error.
 From this, an upper bound on the absolute error can be computed if needed.</p>
 <p>The <em>growth factor</em> between the relative backward error measured by the residual and the relative (forward) error is called the <em>condition number</em>, <span class="math notranslate nohighlight">\(K(A)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\kappa(A) := \|A\| \|A^{-1}\|\]</div>
-<p>Actually there is one condition number for each choice of norm, so we work with</p>
+<p>so that the above bound on the relative error can be restated as</p>
+<div class="math notranslate nohighlight">
+\[\text{Rel}(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \kappa(A) \frac{\|r\|}{\|b\|}\]</div>
+<p>Actually there is a different condition number for each choice of norm; we work with</p>
 <div class="math notranslate nohighlight">
 \[\kappa_\infty(A) := \|A\|_\infty \|A^{-1}\|_\infty\]</div>
 <p>Note that for a singular matrix, this is undefined: we can intuitively say that the condition number is then infinite.
 <br>
-At the other extreme, the identity matrix <span class="math notranslate nohighlight">\(I\)</span> has norm 1 and condition number 1 (using any norm), and this is the best possible because in general <span class="math notranslate nohighlight">\(\kappa(A) \geq 1\)</span>. (This follows from sub-multiplicativity.)</p>
+At the other extreme, the identity matrix <span class="math notranslate nohighlight">\(I\)</span> has norm 1 and condition number 1 (using any norm), and this is the best possible because in general <span class="math notranslate nohighlight">\(\kappa(A) \geq 1\)</span>. (This follows from property 5, sub-multiplicativity.)</p>
 <div class="section" id="aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
 <h3><span class="section-number">26.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
 <p>In Python, good approximations of condition numbers are given by the function <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code>.
@@ -875,6 +886,291 @@ Compare this to the observation that one can expect to lose at least <span class
 This is of course vague, but might typically mean that <span class="math notranslate nohighlight">\(p - \log_2(\kappa(A))\)</span> is a sufficient number of significant bits for a particular purpose.</p>
 <p>A problem that is not deemed well-conditioned is called <strong>ill-conditioned</strong>, so that a matrix of uncomfortably large condition number is also sometimes called ill-conditioned.
 An ill-conditioned problem might still be well-posed, but just requiring careful and precise solution methods.</p>
+</div>
+<div class="section" id="an-important-example-the-hilbert-matrices">
+<h2><span class="section-number">26.6. </span>An important example: the Hilbert matrices<a class="headerlink" href="#an-important-example-the-hilbert-matrices" title="Permalink to this headline">¶</a></h2>
+<p>The <span class="math notranslate nohighlight">\(n \times n\)</span> Hilbert matrix <span class="math notranslate nohighlight">\(H_n\)</span> has elements</p>
+<div class="math notranslate nohighlight">
+\[H_{i, j} = \frac{1}{i+j-1}\]</div>
+<p>Or if we index from zero in Pythonic fashion, the entries are <span class="math notranslate nohighlight">\(1/(1+i+j)\)</span></p>
+<p>For example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}H_4 = \left[ \begin{array}{cccc} 1 &amp; 1/2 &amp; 1/3 &amp; 1/4 \\ 1/2 &amp; 1/3 &amp; 1/4 &amp; 1/5 \\1/3 &amp; 1/4 &amp; 1/5 &amp; 1/6 \\1/4 &amp; 1/5 &amp; 1/6 &amp; 1/7 \end{array} \right]\end{split}\]</div>
+<p>and for larger or smaller <span class="math notranslate nohighlight">\(n\)</span>, one simply adds or remove rows below and columns at right.</p>
+<p>Thee matrices arise in important situations like finding the polynomial of degree <span class="math notranslate nohighlight">\(n-1\)</span> that fits given data in the sense of minimizing the root-mean-square error — as we will discuss later in this course if there is time and interest.</p>
+<p>Unfortunately as <span class="math notranslate nohighlight">\(n\)</span> increases the condition number grows rapidly, causing severe rounding error problems.
+To illustrate this, I will do something that one should usually avoid: compute the inverse of these matrices.
+This is also a case that shows th advatage of the LU factorization, since one compute thr inverse by succesively computing each column, by solving <span class="math notranslate nohighlight">\(n\)</span> different systems of equations, each with the same matrix <span class="math notranslate nohighlight">\(A\)</span> on the left-hand side.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
+<span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">lu</span><span class="p">,</span> <span class="n">forwardSubstitution</span><span class="p">,</span> <span class="n">backwardSubstitution</span><span class="p">,</span> <span class="n">rowReduce</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">cond</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Use sparingly; there is usually a way to avoid computing inverses that is faster and with less rounding error!&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">A_inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">forwardSubstitution</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">A_inverse</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A_inverse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hilbert</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">H_n</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;H_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">H_n</span><span class="p">)</span>
+    <span class="n">H_n_inverse</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">H_n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;and its inverse is&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">H_n_inverse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;to verify, their product is&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">H_n</span> <span class="o">@</span> <span class="n">H_n_inverse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H_2 is
+[[1.         0.5       ]
+ [0.5        0.33333333]]
+and its inverse is
+[[ 4. -6.]
+ [-6. 12.]]
+to verify, their product is
+[[1. 0.]
+ [0. 1.]]
+
+H_3 is
+[[1.         0.5        0.33333333]
+ [0.5        0.33333333 0.25      ]
+ [0.33333333 0.25       0.2       ]]
+and its inverse is
+[[   9.  -36.   30.]
+ [ -36.  192. -180.]
+ [  30. -180.  180.]]
+to verify, their product is
+[[ 1.00000000e+00  9.62193288e-16  1.40628250e-15]
+ [ 0.00000000e+00  1.00000000e+00  0.00000000e+00]
+ [-2.22044605e-17 -1.99840144e-15  1.00000000e+00]]
+
+H_4 is
+[[1.         0.5        0.33333333 0.25      ]
+ [0.5        0.33333333 0.25       0.2       ]
+ [0.33333333 0.25       0.2        0.16666667]
+ [0.25       0.2        0.16666667 0.14285714]]
+and its inverse is
+[[   16.  -120.   240.  -140.]
+ [ -120.  1200. -2700.  1680.]
+ [  240. -2700.  6480. -4200.]
+ [ -140.  1680. -4200.  2800.]]
+to verify, their product is
+[[ 1.00000000e+00  0.00000000e+00  4.54747351e-13 -2.27373675e-13]
+ [ 0.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-7.10542736e-15  0.00000000e+00  1.00000000e+00  0.00000000e+00]
+ [ 0.00000000e+00 -5.68434189e-14  2.27373675e-13  1.00000000e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how the inverses have some surprisingly large elements; this is the matrix equivalent of a number being very close to zero and so with a very large reciprocal.</p>
+<p>Since we have the inverses, we can compute the matrix norms of each <span class="math notranslate nohighlight">\(H_n\)</span> and its inverse, and thence their condition numbers; then this can be compared to the approximations of these condition numbers given by <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">H_n</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;H_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">H_n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with infinity norm </span><span class="si">{</span><span class="n">norm</span><span class="p">(</span><span class="n">H_n</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+    <span class="n">H_n_inverse</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">H_n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;and its inverse is&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">H_n_inverse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with infinity norm </span><span class="si">{</span><span class="n">norm</span><span class="p">(</span><span class="n">H_n_inverse</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thus the condition number of H_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">norm</span><span class="p">(</span><span class="n">H_n</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">H_n_inverse</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For comparison, numpy.linalg.cond gives </span><span class="si">{</span><span class="n">cond</span><span class="p">(</span><span class="n">H_n</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H_2 is
+[[1.         0.5       ]
+ [0.5        0.33333333]]
+with infinity norm 1.5
+and its inverse is
+[[ 4. -6.]
+ [-6. 12.]]
+with infinity norm 18.000000000000007
+Thus the condition number of H_2 is 27.00000000000001
+For comparison, numpy.linalg.cond gives 27.00000000000001
+
+H_3 is
+[[1.         0.5        0.33333333]
+ [0.5        0.33333333 0.25      ]
+ [0.33333333 0.25       0.2       ]]
+with infinity norm 1.8333333333333333
+and its inverse is
+[[   9.  -36.   30.]
+ [ -36.  192. -180.]
+ [  30. -180.  180.]]
+with infinity norm 408.00000000000165
+Thus the condition number of H_3 is 748.000000000003
+For comparison, numpy.linalg.cond gives 748.0000000000028
+
+H_4 is
+[[1.         0.5        0.33333333 0.25      ]
+ [0.5        0.33333333 0.25       0.2       ]
+ [0.33333333 0.25       0.2        0.16666667]
+ [0.25       0.2        0.16666667 0.14285714]]
+with infinity norm 2.083333333333333
+and its inverse is
+[[   16.  -120.   240.  -140.]
+ [ -120.  1200. -2700.  1680.]
+ [  240. -2700.  6480. -4200.]
+ [ -140.  1680. -4200.  2800.]]
+with infinity norm 13619.999999996671
+Thus the condition number of H_4 is 28374.999999993062
+For comparison, numpy.linalg.cond gives 28374.99999999729
+
+H_5 is
+[[1.         0.5        0.33333333 0.25       0.2       ]
+ [0.5        0.33333333 0.25       0.2        0.16666667]
+ [0.33333333 0.25       0.2        0.16666667 0.14285714]
+ [0.25       0.2        0.16666667 0.14285714 0.125     ]
+ [0.2        0.16666667 0.14285714 0.125      0.11111111]]
+with infinity norm 2.283333333333333
+and its inverse is
+[[ 2.500e+01 -3.000e+02  1.050e+03 -1.400e+03  6.300e+02]
+ [-3.000e+02  4.800e+03 -1.890e+04  2.688e+04 -1.260e+04]
+ [ 1.050e+03 -1.890e+04  7.938e+04 -1.176e+05  5.670e+04]
+ [-1.400e+03  2.688e+04 -1.176e+05  1.792e+05 -8.820e+04]
+ [ 6.300e+02 -1.260e+04  5.670e+04 -8.820e+04  4.410e+04]]
+with infinity norm 413279.99999865814
+Thus the condition number of H_5 is 943655.9999969361
+For comparison, numpy.linalg.cond gives 943655.9999992514
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, experiment with solving equations, to compare residuala with actual errors.</p>
+<p>I will use the testing strategy of starting with a known solution <span class="math notranslate nohighlight">\(x\)</span>, from which the right-hand side <span class="math notranslate nohighlight">\(b\)</span> is computed;
+then slight simulated error is introduced to <span class="math notranslate nohighlight">\(b\)</span>.
+Rngin the os repeatedlt with use differnt random “errors”, to gin an ide of how the actual error</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">H_n</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="c1">#x = np.zeros(n)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x is </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">H_n</span> <span class="o">@</span> <span class="n">x</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b is </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">error_scale</span> <span class="o">=</span> <span class="mf">1e-8</span>
+    <span class="n">b_imperfect</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">error_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1"># add random &quot;errors&quot; between -error_scale and error_scale</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b has been slightly changed to </span><span class="si">{</span><span class="n">b_imperfect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">rowReduce</span><span class="p">(</span><span class="n">H_n</span><span class="p">,</span> <span class="n">b_imperfect</span><span class="p">)</span>
+    <span class="n">x_computed</span> <span class="o">=</span> <span class="n">backwardSubstitution</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="n">residual</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">H_n</span> <span class="o">@</span> <span class="n">x_computed</span>
+    <span class="n">relative_backward_error</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="o">/</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The residual maximum norm is </span><span class="si">{</span><span class="n">norm</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;and the relative backward error ||r||/||b|| is </span><span class="si">{</span><span class="n">relative_backward_error</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">absolute_error</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_computed</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+    <span class="n">relative_error</span> <span class="o">=</span> <span class="n">absolute_error</span><span class="o">/</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The absolute error is </span><span class="si">{</span><span class="n">absolute_error</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The relative error is </span><span class="si">{</span><span class="n">relative_error</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">error_bound</span> <span class="o">=</span> <span class="n">cond</span><span class="p">(</span><span class="n">H_n</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span> <span class="o">*</span> <span class="n">relative_backward_error</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For comparison, the relative error bound from the formula above is </span><span class="si">{</span><span class="n">error_bound</span><span class="si">:</span><span class="s2">0.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Beware: the relative error is larger than the relative backward error by a factor </span><span class="si">{</span><span class="n">relative_error</span><span class="o">/</span><span class="n">relative_backward_error</span><span class="si">:</span><span class="s2">0.8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=2
+x is [1. 2.]
+b is [2.         1.16666667]
+b has been slightly changed to [1.99999999 1.16666667]
+The residual maximum norm is 5.544895209652623e-09
+and the relative backward error ||r||/||b|| is 2.772e-09
+The absolute error is 7.623e-08
+The relative error is 3.812e-08
+For comparison, the relative error bound from the formula above is 7.486e-08
+
+Beware: the relative error is larger than the relative backward error by a factor 13.747798
+
+n=3
+x is [1. 2. 3.]
+b is [3.         1.91666667 1.43333333]
+b has been slightly changed to [3.         1.91666668 1.43333334]
+The residual maximum norm is 9.565438219283351e-09
+and the relative backward error ||r||/||b|| is 3.188e-09
+The absolute error is 1.262e-06
+The relative error is 4.207e-07
+For comparison, the relative error bound from the formula above is 2.385e-06
+
+Beware: the relative error is larger than the relative backward error by a factor 131.95922
+
+n=4
+x is [1. 2. 3. 4.]
+b is [4.         2.71666667 2.1        1.72142857]
+b has been slightly changed to [4.         2.71666666 2.09999999 1.72142857]
+The residual maximum norm is 7.027153969829669e-09
+and the relative backward error ||r||/||b|| is 1.757e-09
+The absolute error is 2.73e-05
+The relative error is 6.826e-06
+For comparison, the relative error bound from the formula above is 4.985e-05
+
+Beware: the relative error is larger than the relative backward error by a factor 3885.2207
+
+n=5
+x is [1. 2. 3. 4. 5.]
+b is [5.         3.55       2.81428571 2.34642857 2.01746032]
+b has been slightly changed to [5.00000001 3.54999999 2.81428571 2.34642857 2.01746031]
+The residual maximum norm is 9.679805401674457e-09
+and the relative backward error ||r||/||b|| is 1.936e-09
+The absolute error is 0.001038
+The relative error is 0.0002077
+For comparison, the relative error bound from the formula above is 0.001827
+
+Beware: the relative error is larger than the relative backward error by a factor 107265.46
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see in these experiments that:</p>
+<ul class="simple">
+<li><p>As the condition number increases, the relative error becomes increasingly larger than the backward error computed from the residual.</p></li>
+<li><p>It is less than the above bound
+<span class="math notranslate nohighlight">\(\displaystyle \text{Rel}(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \kappa(A) \frac{\|r\|}{\|b\|},\)</span>
+and typically quite a bit less.</p></li>
+</ul>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
