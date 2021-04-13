@@ -264,13 +264,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../future_topics.html">
-   27. Some Future Topics
+  <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-preview.html">
    28. Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   29. Some Future Topics
   </a>
  </li>
 </ul>
@@ -397,11 +402,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html">
    The Modified Trapezoid Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html#the-modified-trapezoid-method-without-derivatives">
-   The Modified Trapezoid Method, without derivatives
   </a>
  </li>
  <li class="toctree-l1">
@@ -931,8 +931,9 @@ We then call <span class="math notranslate nohighlight">\(C\)</span> a <em>contr
 We need the ratio
 <span class="math notranslate nohighlight">\(\displaystyle \frac{|g(x) - g(y)|}{|x - y|}\)</span>
 to be <em>uniformly</em> less than one for all possible values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
-<p><strong>Theorem 1 (A Contraction Mapping Theorem).</strong>
-Any contraction mapping on a closed, bounded interval <span class="math notranslate nohighlight">\(D = [a, b]\)</span> has exactly one fixed point <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.
+<p><a name="CMT"></a>
+<strong>Theorem 1 (A Contraction Mapping Theorem).</strong>
+Any contraction mapping <span class="math notranslate nohighlight">\(g\)</span> on a closed, bounded interval <span class="math notranslate nohighlight">\(D = [a, b]\)</span> has exactly one fixed point <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.
 Further, this can be calculated as the limit <span class="math notranslate nohighlight">\(\displaystyle p = \lim_{k \to \infty} x_k\)</span> of the iteration sequence given by <span class="math notranslate nohighlight">\(x_{k+1} = g(x_{k})\)</span> for <em>any</em> choice of the starting point <span class="math notranslate nohighlight">\(x_{0} \in D\)</span>.</p>
 <p><strong>Proof:</strong>
 <em>The main idea of the proof can be shown with the help of a few pictures.

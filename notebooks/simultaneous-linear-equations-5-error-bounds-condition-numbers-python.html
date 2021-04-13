@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27. Some Future Topics" href="../future_topics.html" />
+    <link rel="next" title="27. Simultaneous Linear Equations, Part 6: Iterative Methods" href="simultaneous-linear-equations-6-iterative-methods.html" />
     <link rel="prev" title="25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes" href="ODE-IVP-5-error-control-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -264,13 +264,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../future_topics.html">
-   27. Some Future Topics
+  <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-preview.html">
    28. Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   29. Some Future Topics
   </a>
  </li>
 </ul>
@@ -397,11 +402,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html">
    The Modified Trapezoid Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html#the-modified-trapezoid-method-without-derivatives">
-   The Modified Trapezoid Method, without derivatives
   </a>
  </li>
  <li class="toctree-l1">
@@ -791,6 +791,7 @@ Any norm could be used, but the maximum norm is usualt preferred, for reasons th
 <div class="math notranslate nohighlight">
 \[Rel(x_a) = \frac{\|x - x_a\|}{\| x \|}\]</div>
 <p>To relate these to the residual, we need the concepts of a <em>matrix norm</em> and the <em>condition number</em> of a matrix.</p>
+<p><a name="matrix-norms"></a></p>
 </div>
 <div class="section" id="matrix-norms-induced-by-vector-norms">
 <h2><span class="section-number">26.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
@@ -1116,50 +1117,50 @@ Rngin the os repeatedlt with use differnt random “errors”, to gin an ide of 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=2
 x is [1. 2.]
 b is [2.         1.16666667]
-b has been slightly changed to [1.99999999 1.16666667]
-The residual maximum norm is 8.68219318661545e-09
-and the relative backward error ||r||/||b|| is 4.341e-09
-The absolute error is 3.811e-08
-The relative error is 1.906e-08
-For comparison, the relative error bound from the formula above is 1.172e-07
+b has been slightly changed to [2.00000001 1.16666667]
+The residual maximum norm is 6.413956921136332e-09
+and the relative backward error ||r||/||b|| is 3.207e-09
+The absolute error is 6.335e-09
+The relative error is 3.167e-09
+For comparison, the relative error bound from the formula above is 8.659e-08
 
-Beware: the relative error is larger than the relative backward error by a factor 4.3898894
+Beware: the relative error is larger than the relative backward error by a factor 0.98764383
 
 n=3
 x is [1. 2. 3.]
 b is [3.         1.91666667 1.43333333]
-b has been slightly changed to [3.         1.91666667 1.43333333]
-The residual maximum norm is 7.74533681635603e-09
-and the relative backward error ||r||/||b|| is 2.582e-09
-The absolute error is 2.409e-06
-The relative error is 8.031e-07
-For comparison, the relative error bound from the formula above is 1.931e-06
+b has been slightly changed to [2.99999999 1.91666667 1.43333333]
+The residual maximum norm is 7.406832036593869e-09
+and the relative backward error ||r||/||b|| is 2.469e-09
+The absolute error is 1.287e-06
+The relative error is 4.289e-07
+For comparison, the relative error bound from the formula above is 1.847e-06
 
-Beware: the relative error is larger than the relative backward error by a factor 311.05164
+Beware: the relative error is larger than the relative backward error by a factor 173.72107
 
 n=4
 x is [1. 2. 3. 4.]
 b is [4.         2.71666667 2.1        1.72142857]
-b has been slightly changed to [3.99999999 2.71666668 2.09999999 1.72142857]
-The residual maximum norm is 9.331236228149464e-09
-and the relative backward error ||r||/||b|| is 2.333e-09
-The absolute error is 6.648e-05
-The relative error is 1.662e-05
-For comparison, the relative error bound from the formula above is 6.619e-05
+b has been slightly changed to [4.         2.71666668 2.10000001 1.72142857]
+The residual maximum norm is 9.815670942714405e-09
+and the relative backward error ||r||/||b|| is 2.454e-09
+The absolute error is 3.499e-05
+The relative error is 8.748e-06
+For comparison, the relative error bound from the formula above is 6.963e-05
 
-Beware: the relative error is larger than the relative backward error by a factor 7124.8978
+Beware: the relative error is larger than the relative backward error by a factor 3564.9129
 
 n=5
 x is [1. 2. 3. 4. 5.]
 b is [5.         3.55       2.81428571 2.34642857 2.01746032]
 b has been slightly changed to [5.         3.55       2.81428572 2.34642857 2.01746031]
-The residual maximum norm is 9.993983418610242e-09
-and the relative backward error ||r||/||b|| is 1.999e-09
-The absolute error is 0.0005925
-The relative error is 0.0001185
-For comparison, the relative error bound from the formula above is 0.001886
+The residual maximum norm is 5.082728016247984e-09
+and the relative backward error ||r||/||b|| is 1.017e-09
+The absolute error is 0.000315
+The relative error is 6.3e-05
+For comparison, the relative error bound from the formula above is 0.0009593
 
-Beware: the relative error is larger than the relative backward error by a factor 59282.515
+Beware: the relative error is larger than the relative backward error by a factor 61972.109
 </pre></div>
 </div>
 </div>
@@ -1205,7 +1206,7 @@ and typically quite a bit less.</p></li>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="ODE-IVP-5-error-control-python.html" title="previous page"><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</a>
-    <a class='right-next' id="next-link" href="../future_topics.html" title="next page"><span class="section-number">27. </span>Some Future Topics</a>
+    <a class='right-next' id="next-link" href="simultaneous-linear-equations-6-iterative-methods.html" title="next page"><span class="section-number">27. </span>Simultaneous Linear Equations, Part 6: Iterative Methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

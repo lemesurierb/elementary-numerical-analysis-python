@@ -264,13 +264,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../future_topics.html">
-   27. Some Future Topics
+  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-6-iterative-methods.html">
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../notebooks/minimization-preview.html">
    28. Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   29. Some Future Topics
   </a>
  </li>
 </ul>
@@ -397,11 +402,6 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    The Modified Trapezoid Method
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#the-modified-trapezoid-method-without-derivatives">
-   The Modified Trapezoid Method, without derivatives
   </a>
  </li>
  <li class="toctree-l1">
@@ -703,14 +703,18 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   The Modified Trapezoid Method
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-write-a-function-based-on-the-modified-trapezoid-method">
+   A. Write a function based on the
+   <strong>
+    Modified Trapezoid Method
+   </strong>
+   .
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-modified-trapezoid-method-without-derivatives">
-   The Modified Trapezoid Method, without derivatives
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#b-the-modified-trapezoid-method-without-derivatives">
+   B. The Modified Trapezoid Method, without derivatives
   </a>
  </li>
 </ul>
@@ -726,8 +730,18 @@
                 
   <div class="section" id="the-modified-trapezoid-method">
 <h1>The Modified Trapezoid Method<a class="headerlink" href="#the-modified-trapezoid-method" title="Permalink to this headline">¶</a></h1>
-<p><strong>Updated April 5,</strong> with a hint.</p>
-<p>Write a function based on the <strong>Modified Trapezoid Method</strong>.</p>
+<p><strong>Updated April 12</strong></p>
+<p><strong>Update on April 8:</strong>
+I recommend first doing this with a fixed number of intervals <span class="math notranslate nohighlight">\(n\)</span> rather than an error tolerance, so comparable to the code for the composite trapezoid rule — inded it could use you function from Task 3 for the composite trapezoid rule.</p>
+<p>Then iteration in pursuit of an error tolerance (doubling <span class="math notranslate nohighlight">\(n\)</span> until the estimated error is small enough) could be done as a refinement.
+This can then by done by my favored approach of:</p>
+<ul class="simple">
+<li><p>First, implement with a <code class="docutils literal notranslate"><span class="pre">for</span></code> that does a predetermined number of steps <span class="math notranslate nohighlight">\(m\)</span>,
+computing <span class="math notranslate nohighlight">\(T_1', T_2', T_4', \dots, T_{2^m}'\)</span>.</p></li>
+<li><p>Then revise to add an error estimate (e.g the difference between the two most recent approximations) and exit the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop early with a <code class="docutils literal notranslate"><span class="pre">break</span></code> if and when the error estimate is small enough.</p></li>
+</ul>
+<div class="section" id="a-write-a-function-based-on-the-modified-trapezoid-method">
+<h2>A. Write a function based on the <strong>Modified Trapezoid Method</strong>.<a class="headerlink" href="#a-write-a-function-based-on-the-modified-trapezoid-method" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[
 T'_n = T_n - \frac{f'(b)-f'(a)}{12} h^2,
@@ -736,10 +750,11 @@ T'_n = T_n - \frac{f'(b)-f'(a)}{12} h^2,
 Its input needs a function for the derivative <span class="math notranslate nohighlight">\(Df\)</span>, along with other input and output as above for the Composite Trapezoid Rule.</p>
 <p><strong>Hint:</strong> You already have code for <span class="math notranslate nohighlight">\(T_n\)</span>, from Task 3.</p>
 </div>
-<div class="section" id="the-modified-trapezoid-method-without-derivatives">
-<h1>The Modified Trapezoid Method, without derivatives<a class="headerlink" href="#the-modified-trapezoid-method-without-derivatives" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="b-the-modified-trapezoid-method-without-derivatives">
+<h2>B. The Modified Trapezoid Method, without derivatives<a class="headerlink" href="#b-the-modified-trapezoid-method-without-derivatives" title="Permalink to this headline">¶</a></h2>
 <p>Write a new version of the function for the Modified Trapezoid Method, that does not input the derivative.</p>
-<p>This must use appropriate derivative approximation methods.</p>
+<p>This must therefore use appropriate derivative approximation methods.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
