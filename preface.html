@@ -268,13 +268,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/minimization-preview.html">
-   28. Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview
+  <a class="reference internal" href="notebooks/minimization-1D.html">
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/eigenproblems.html">
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="future_topics.html">
-   29. Some Future Topics
+   30. Some Future Topics
   </a>
  </li>
 </ul>
@@ -736,10 +741,12 @@ More permanent address: The College of Charleston, Charleston, South Carolina,
 <hr class="docutils" />
 <p>Some recent updates (most recent first):</p>
 <ul class="simple">
+<li><p>Added section <a class="reference internal" href="notebooks/eigenproblems.html"><span class="doc">Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond</span></a>,
+the third of the ones that I am adding to introduce topics relevant to some final projects.</p></li>
 <li><p>Added section <a class="reference internal" href="notebooks/simultaneous-linear-equations-6-iterative-methods.html"><span class="doc">Simultaneous Linear Equations, Part 6: Iterative Methods</span></a>,
 the second of the ones that I am adding to introduce topics relevant to some final projects.</p></li>
-<li><p>Corrected some typos and other errors in <a class="reference internal" href="notebooks/minimization-preview.html"><span class="doc">Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview</span></a> after class on Monday April 12.</p></li>
-<li><p>Added section <a class="reference internal" href="notebooks/minimization-preview.html"><span class="doc">Finding the Minimum of a Function of One Variable, Without Using Derivatives — Preview</span></a>,
+<li><p>Corrected some typos and other errors in <a class="reference internal" href="notebooks/minimization-1D.html"><span class="doc">Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</span></a></p></li>
+<li><p>Added section <a class="reference internal" href="notebooks/minimization-1D.html"><span class="doc">Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</span></a>,
 the first of several that I will add to introduce topics that some of you have chosen for your final projects.</p></li>
 <li><p>Updated section <a class="reference internal" href="notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html"><span class="doc">Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</span></a>,
 adding examples of computing matrix norms and condition numbers, and of how ill-conditioned matrices (ones with large condition number) can lead to errors far larger than the residual norm indicates.</p></li>
@@ -756,73 +763,7 @@ adding notes on the Numpy functions for computing matrix norms and condition num
 <li><p>Updated section <a class="reference internal" href="notebooks/definite-integrals-4-romberg-integration.html"><span class="doc">Definite Integrals, Part 4: Romberg Integration</span></a>, adding a note on error estimates (relevant to the project on numerical calculus) and a few other additional explanations.</p></li>
 <li><p>Added a section briefly describing <a class="reference internal" href="notebooks/project-possibilities.html"><span class="doc">Some Final Project Possibilites</span></a></p></li>
 <li><p>Updated section <a class="reference internal" href="notebooks/definite-integrals-4-romberg-integration.html"><span class="doc">Definite Integrals, Part 4: Romberg Integration</span></a>, adding a note on error estimates (relevant to the project on numerical calculus) and a few other additional explanations.</p></li>
-<li><p>Augmenting section <a class="reference internal" href="notebooks/ODE-IVP-4-system-higher-order-equations.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs</span></a>; it now has system versions of the Explicit Trapezoid, Explicit Midpoint, and classical Runge_Kutta methods</p></li>
-<li><p>Added a few comments to <a class="reference internal" href="notebooks/ODE-IVP-3-error-results-one-step-methods.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods</span></a></p></li>
-<li><p>Added section <a class="reference internal" href="notebooks/ODE-IVP-4-system-higher-order-equations.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs</span></a></p></li>
-<li><p>Added a few comments to <a class="reference internal" href="notebooks/ODE-IVP-2-Runge-Kutta-python.html"><span class="doc">Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</span></a></p></li>
-<li><p>Added section <a class="reference internal" href="notebooks/ODE-IVP-3-error-results-one-step-methods.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods</span></a></p></li>
-<li><p>Revised section
-<a class="reference internal" href="notebooks/ODE-IVP-1-basics-and-Euler-python.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method</span></a>,
-adding more details on the bound on the global error in Euler’s Method.</p></li>
-<li><p>Added a section containing notebooks for each task in the Project on Numerical Calculus,
-plus a couple of other notebooks that could be useful for creating your project report.</p></li>
-<li><p>Revised section</p></li>
 </ul>
-<p><a class="reference internal" href="notebooks/richardson-extrapolation.html"><span class="doc">Richardson Extrapolation</span></a>,</p>
-<p>adding a discussion of error estimates,
-which are useful for</p>
-<p><a class="reference internal" href="notebooks/definite-integrals-4-romberg-integration.html"><span class="doc">Definite Integrals, Part 4: Romberg Integration</span></a>,</p>
-<ul class="simple">
-<li><p>Revised section</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/ODE-IVP-2-Runge-Kutta-python.html"><span class="doc">Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</span></a>,
-adding derivations of the Trapezoid and Midpoint methds for ODE IVPs.</p>
-<ul class="simple">
-<li><p>Revised section</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/ODE-IVP-2-Runge-Kutta-python.html"><span class="doc">Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods</span></a>,
-adding Python code and examples for the three methods. (This code also added to th module <code class="docutils literal notranslate"><span class="pre">numerical_methods_module</span></code>.)</p>
-<ul class="simple">
-<li><p>Revised section</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/ODE-IVP-1-basics-and-Euler-python.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method</span></a>,
-- Adding a fourth example ODE, illustrating the potential problem of <em>stiffness</em>.
-- adding a more general accuracy result for Euler’s method (and, as usual, fixing a few typos).</p>
-<ul class="simple">
-<li><p>Revised section</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/simultaneous-linear-equations-1-row-reduction-python.html"><span class="doc">Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination</span></a>,
-- added further uses of Python slicing and “vectorization” in a new version of function <code class="docutils literal notranslate"><span class="pre">rowReduce</span></code>,
-- eliminated function <code class="docutils literal notranslate"><span class="pre">zeros_below_diagonal</span></code> in favor of always doing this in function <code class="docutils literal notranslate"><span class="pre">rowReduce</span></code>,
-- fixed a few typos.</p>
-<ul class="simple">
-<li><p>Revised section</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/richardson-extrapolation.html"><span class="doc">Richardson Extrapolation</span></a>,
-adding an error estimate formula, and changing notation to avoid some reported confusions.</p>
-<ul class="simple">
-<li><p>Added hosting at GitHub at
-<a class="reference external" href="https://lemesurierb.github.io/elementary-numerical-analysis-python/">https://lemesurierb.github.io/elementary-numerical-analysis-python/</a>,
-where there is now also an early version of
-<a class="reference external" href="https://lemesurierb.github.io/python-for-scientific-computing/intro.html">Python for Scientific Computing</a>
-intended for a programming lab course such as MATH 246 at the College of Charleston.</p></li>
-<li><p>Updated section</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/definite-integrals-3-simpson-richardson.html"><span class="doc">Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation</span></a>,
-adding a derivation of Simpson’s Rule using the Method of Undetermined Coefficients.</p>
-<ul class="simple">
-<li><p>Updated sections</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/definite-integrals-1-building-blocks-python.html"><span class="doc">Definite Integrals, Part 1: The Building Blocks</span></a>,
-and</p>
-<p><a class="reference internal" href="notebooks/definite-integrals-2-composite-rules.html"><span class="doc">Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules</span></a>,
-adding appendices on the (Composite) Left-hand Endpoint Rule.</p>
-<ul class="simple">
-<li><p>Updated the module</p></li>
-</ul>
-<p><a class="reference internal" href="notebooks/numerical_methods_module.html"><span class="doc">Notebook for generating the module numerical_methods_module</span></a>,
-and to the notebook that generates it,
-adding “demonstration modes” to <code class="docutils literal notranslate"><span class="pre">rowReduce</span></code>, <code class="docutils literal notranslate"><span class="pre">backwardSubstitution</span></code> and <code class="docutils literal notranslate"><span class="pre">forwardSubstitution</span></code>.</p>
 <p>This <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a> is for the course <em>Elementary Numerical Analysis</em> at the University of Northern Colorado (“UNCo”) in Spring 2021.
 It also contains some background material on programming in Python with the packages Numpy and Matplotlib; these are excerpts from the Jupyter book <em>Python for Scientific Computing</em> by the same author.</p>
 <p>The material is based in part on Jupyter notebooks and other materials for the courses MATH 245, MATH 246, MATH 445 and MATH 545 at the College of Charleston, South Carolina.</p>

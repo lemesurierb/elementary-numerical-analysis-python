@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5. Measures of Error and Order of Convergence &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. The Convergence Rate of Newton’s Method" href="newtons-method-convergence-rate.html" />
-    <link rel="prev" title="4. Taylor’s Theorem and the Accuracy of Linearization" href="taylors-theorem.html" />
+    <link rel="next" title="29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond" href="eigenproblems.html" />
+    <link rel="prev" title="27. Simultaneous Linear Equations, Part 6: Iterative Methods" href="simultaneous-linear-equations-6-iterative-methods.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -142,8 +142,8 @@
    4. Taylor’s Theorem and the Accuracy of Linearization
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
    5. Measures of Error and Order of Convergence
   </a>
  </li>
@@ -268,8 +268,8 @@
    27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="minimization-1D.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
@@ -661,7 +661,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/error-measures-convergence-rates.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/minimization-1D.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -686,7 +686,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/error-measures-convergence-rates.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/minimization-1D.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -709,33 +709,28 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-measures">
-   5.1. Error measures
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#backward-error-and-forward-error">
-     5.1.1. Backward error (and forward error)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#order-of-convergence-of-a-sequence-of-approximations">
-   5.2. Order of convergence of a sequence of approximations
+  <a class="reference internal nav-link" href="#introduction">
+   28.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#big-o-and-little-o-notation">
-   5.3. Big-O and little-o notation
+  <a class="reference internal nav-link" href="#step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum">
+   28.2. Step 1: finding a smaller interval within
+   <span class="math notranslate nohighlight">
+    \([a, b]\)
+   </span>
+   that contains the minimum
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#little-o-notation-for-negligibly-small-terms">
-     5.3.1. Little-o notation, for “negligibly small terms”
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge">
+   28.3. Step 2: choosing the internal points so that the method is guaranteed to converge
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible">
+   28.4. Step 3: choosing the internal points so that the method converges as fast as possible
+  </a>
  </li>
 </ul>
 
@@ -748,143 +743,77 @@
         
               <div>
                 
-  <div class="section" id="measures-of-error-and-order-of-convergence">
-<h1><span class="section-number">5. </span>Measures of Error and Order of Convergence<a class="headerlink" href="#measures-of-error-and-order-of-convergence" title="Permalink to this headline">¶</a></h1>
-<p><strong>Last Revised on Monday January 25, after class.</strong></p>
+  <div class="section" id="finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-a-brief-introduction">
+<h1><span class="section-number">28. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction<a class="headerlink" href="#finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 13, 2021</strong>, adding a reference for the next refinement of the algorithm, the <a class="reference external" href="https://en.wikipedia.org/wiki/Golden-section_search">Golden Section Search</a>.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Section 1.3.1 of <a class="reference external" href="../references.html#Sauer">Sauer</a> on <em>measures of error</em>;</p></li>
-<li><p>Section 2.4 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a> on <em>order of convergence.</em></p></li>
+<li><p>Section 13.1 <em>Unconstrained Optimization Without Derivatives</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a>,
+in particular sub-section 13.1.1 <em>Golden Section Search</em>.</p></li>
+<li><p>Section 11.1, <em>One-Variable Case</em> in Chapter 11 <em>Optimization</em> of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a>.</p></li>
 </ul>
-<p>These notes cover a number of small topics:</p>
+<div class="section" id="introduction">
+<h2><span class="section-number">28.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The goal of this section is to find the minimum of a function <span class="math notranslate nohighlight">\(f(x)\)</span> and more specifically to find its location: the argument <span class="math notranslate nohighlight">\(p\)</span> such that <span class="math notranslate nohighlight">\(f(p) \leq f(x)\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> in the domain of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>Several features are similar to what we have seen with zero-finding:</p>
 <ul class="simple">
-<li><p>Measures of error: absolute, relative, forward, backward, etc.</p></li>
-<li><p>Measuring the rate of convergence of a sequence of approximations.</p></li>
-<li><p>Big-O and little-o notation for describing how small a quantity (usually an error) is.</p></li>
+<li><p>Some restictions on the function <span class="math notranslate nohighlight">\(f\)</span> are needed:</p>
+<ul>
+<li><p>with zero-finding, to guarantee <em>existence</em> of a solution, we needed at least an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which the function is continuous and with a sign change between the endpoints;</p></li>
+<li><p>for minimization, the criterion for existence is simply an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which the function is continuous.</p></li>
 </ul>
-<div class="section" id="error-measures">
-<h2><span class="section-number">5.1. </span>Error measures<a class="headerlink" href="#error-measures" title="Permalink to this headline">¶</a></h2>
-<p>Consider a quantity <span class="math notranslate nohighlight">\(\tilde{x}\)</span> considered as an approximation of an exact value <span class="math notranslate nohighlight">\(x\)</span>.
-(This can be a number or a vector.)</p>
-<p><strong>Definition 1: Error</strong>
-The error in <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is <span class="math notranslate nohighlight">\(\tilde{x} - x\)</span> (or  <span class="math notranslate nohighlight">\(x - \tilde{x}\)</span>;
-different sources use both versions and either is fine so long as you are <strong>consistent</strong>.)</p>
-<p><strong>Definition 2: Absolute Error</strong>
-The absolute error is the absolute value of the error: <span class="math notranslate nohighlight">\(|\tilde{x} - x|\)</span>.
-For vector quantities this means the norm <span class="math notranslate nohighlight">\(\| \tilde{x} - x \|\)</span>,
-and it can be any norm, so long as we again choose one and use it consistently.
-Two favorites are the <em>Euclidean norm</em> <span class="math notranslate nohighlight">\(\| x \| = \sqrt{\sum |x_i|}\)</span>, denoted <span class="math notranslate nohighlight">\(\| x \|_2\)</span>,
-and the <em>maximum norm</em> (also mysteriously known at the <em>infinity norm</em>):</p>
-<div class="math notranslate nohighlight">
-\[\| x \|_\text{max} = \| x \|_\infty = \max_i |x_i|.\]</div>
-<p>For real-valued quantities, the absolute error is related to the number of <strong>correct decimal places</strong>:
-<span class="math notranslate nohighlight">\(p\)</span> decimal places of accuracy corresponds roughly to absolute error no more than <span class="math notranslate nohighlight">\(0.5 \times 10^{-p}\)</span>.</p>
-<p><strong>Definition 3: Relative Error</strong>
-The relative error is the ratio of the absolute error to the size of the exact quantity:
-<span class="math notranslate nohighlight">\(\displaystyle\frac{| \tilde{x} - x |}{|x|}\)</span> (again possibly with vector norms).
-This is often more relevant than absolute error for inherently positive quantities,
-but is obviously unwise where <span class="math notranslate nohighlight">\(x = 0\)</span> is a possibility.
-For real-valued quantities, this is related to the number of <strong>significant digits</strong>:
-accuracy to <span class="math notranslate nohighlight">\(p\)</span> significant digits corresponds roughly to relative error no more than <span class="math notranslate nohighlight">\(0.5 \times 10^{-p}\)</span>.</p>
-<p>When working with computer arithmetic, <span class="math notranslate nohighlight">\(p\)</span> significant <strong>bits</strong> corresponds to relative error no more than <span class="math notranslate nohighlight">\(2^{-(p+1)}\)</span>.</p>
-<div class="section" id="backward-error-and-forward-error">
-<h3><span class="section-number">5.1.1. </span>Backward error (and forward error)<a class="headerlink" href="#backward-error-and-forward-error" title="Permalink to this headline">¶</a></h3>
-<p>An obvious problem is that we usually do not know the exact solution <span class="math notranslate nohighlight">\(x\)</span>, so cannot evaluate any of these; instead we typically seek <strong>upper bounds</strong> on the absolute or relative error.
-Thus, when talking of approximate solutions to an equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span> the concept of <strong>backward error</strong> can be very useful,
-for example as a step in getting bounds on the size of the error.</p>
-<p><strong>Definition 4: Backward Error</strong></p>
-<p>The Backward Error in <span class="math notranslate nohighlight">\(\tilde{x}\)</span> as an approxiate solution to the equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span> is <span class="math notranslate nohighlight">\(f(\tilde{x})\)</span>;
-the amount by which function <span class="math notranslate nohighlight">\(f\)</span> would have to be changed in order for <span class="math notranslate nohighlight">\(\tilde{x}\)</span> to be an exact root.</p>
-<p>For the case of solving simultaneous linear equations in matrix-vector form <span class="math notranslate nohighlight">\(A x = b\)</span>, this is <span class="math notranslate nohighlight">\(b - A \tilde{x}\)</span>,
-also known as the <em>residual</em>.</p>
-<p><strong>Definition 5: Absolute Backward Error</strong></p>
-<p>The absolute backward error is — as you might have guessed — the absolute value of the backward error: <span class="math notranslate nohighlight">\(|f(\tilde{x})|\)</span>.
-This is sometimes also called simply the backward error. (The usual disclaimer about vector quantities applies.)</p>
-<p>For the case of solving simultaneous linear equations in matrix-vector form <span class="math notranslate nohighlight">\(A x = b\)</span>, this is <span class="math notranslate nohighlight">\(\| b - A \tilde{x} \|\)</span>,
-also known as the <em>residual norm</em>.</p>
-<p><strong>Notes</strong></p>
+</li>
+<li><p>With zero-finding, we needed to compare the values of the function at three points <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span> to determine a new, smaller interval containing the root;
+with minimzation, we instead need to compare the values of the function at four points <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span> to determine a new, smaller interval containing the minimum.</p></li>
+<li><p>There are often good reasons to be able to do this without using derivatives.</p></li>
+</ul>
+<p>As is often the case, a guarantee of a <em>unique</em> solution helps to devise a robust algorithm:</p>
 <ul class="simple">
-<li><p>One obvious advantage of the backward error concept is that you can actually evaluate it without knowing the exact solution <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
-<li><p>Also, one significance of backward error is that if the values of <span class="math notranslate nohighlight">\(f(x)\)</span> are only known to be accurate within an absolute error of <span class="math notranslate nohighlight">\(E\)</span> then any approximation with absolute backward error less than <span class="math notranslate nohighlight">\(E\)</span> could in fact be exact, so there is no point in seeking greater accuracy.</p></li>
-<li><p>The names <em>forward error</em> and <em>absolute forward error</em> are sometimes used as synonyms for <em>error</em> etc. as defined above, when they need to be distinguished from backward errors.</p></li>
+<li><p>to guarantee uniqueness of a zero in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, we needed an extra condition like the function being <em>monotonic</em>;</p></li>
+<li><p>to guarantee uniqueness of a minimum in interval <span class="math notranslate nohighlight">\([a, b]\)</span>, the condition we use is being <em>monomodal</em>:
+The function is decreasing near <span class="math notranslate nohighlight">\(a\)</span>, increasing near <span class="math notranslate nohighlight">\(b\)</span>, and changes between decreasing and increasing only once (which must therefore happen at the minimum.)</p></li>
 </ul>
+<p>So we assume from now on that the function is <em>monomodal</em> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>.</p>
 </div>
+<div class="section" id="step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum">
+<h2><span class="section-number">28.2. </span>Step 1: finding a smaller interval within <span class="math notranslate nohighlight">\([a, b]\)</span> that contains the minimum<a class="headerlink" href="#step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum" title="Permalink to this headline">¶</a></h2>
+<p>As claimed above, three points are not enough: even if for <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span> we have <span class="math notranslate nohighlight">\(f(a) &gt; f(c)\)</span> and <span class="math notranslate nohighlight">\(f(c) &lt; f(b)\)</span>,
+the minimum could be either to the left or the right of <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p>So instead, choose two internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span>.</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(f(c) &lt; f(d)\)</span>, the function is increasing on at least part of the interval <span class="math notranslate nohighlight">\([c, d]\)</span>, so the transition from decreasing to increasing is to the left of <span class="math notranslate nohighlight">\(d\)</span>: the minimum is in <span class="math notranslate nohighlight">\([a, d]\)</span>;</p></li>
+<li><p>if instead <span class="math notranslate nohighlight">\(f(c) &gt; f(d)\)</span>, the “mirror image” argument shows that the minimum is in <span class="math notranslate nohighlight">\([c, b]\)</span>.</p></li>
+</ul>
+<p>What about the borderline case when <span class="math notranslate nohighlight">\(f(c) = f(d)\)</span>?
+The monomodal function cannot be either increasing or decreasing on all of <span class="math notranslate nohighlight">\([c, d]\)</span> so must first decrease and then increase:
+the minimum is in <span class="math notranslate nohighlight">\([c, d]\)</span>, and so is in either of the above intervals.</p>
+<p>So we almost have a first algorithm, except for the isue of <em>choosing</em>;
+given an interval <span class="math notranslate nohighlight">\([a, b]\)</span> on which function <span class="math notranslate nohighlight">\(f\)</span> is monomodal:</p>
+<ol class="simple">
+<li><p><em>Choose</em> two internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, with <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span></p></li>
+<li><p>Evaluate <span class="math notranslate nohighlight">\(f(c)\)</span> and <span class="math notranslate nohighlight">\(f(d)\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(c) &lt; f(d)\)</span>, replace the interval  <span class="math notranslate nohighlight">\([a, b]\)</span> by <span class="math notranslate nohighlight">\([a, d]\)</span>; else replace it by <span class="math notranslate nohighlight">\([c, b]\)</span>.</p></li>
+<li><p>If the new interval is short enough to locate the minimum with sufficient accuracy (e.g. its length is less that twice the error tolerance) stop; its midpoint is a sufficiently accurate approximate answer);
+othewise, repaeat from step (1).</p></li>
+</ol>
 </div>
-<div class="section" id="order-of-convergence-of-a-sequence-of-approximations">
-<h2><span class="section-number">5.2. </span>Order of convergence of a sequence of approximations<a class="headerlink" href="#order-of-convergence-of-a-sequence-of-approximations" title="Permalink to this headline">¶</a></h2>
-<p>We have seen that for the sequence of approximations <span class="math notranslate nohighlight">\(x_k\)</span> to a quantity <span class="math notranslate nohighlight">\(x\)</span> given by the fixed point iteration
-<span class="math notranslate nohighlight">\(x_{k+1} = g(x_k)\)</span>, the absolute errors <span class="math notranslate nohighlight">\(E_k := |x_k - x|\)</span> typically have</p>
-<div class="math notranslate nohighlight">
-\[\frac{E_{k+1}}{E_k} \to C = |g'(x)|.\]</div>
-<p>so that eventually the errors diminsh in a roughly geometric fashion: <span class="math notranslate nohighlight">\(E_k \approx K C^k\)</span>.
-This is called <strong>linear convergence</strong>.</p>
-<p><strong>Aside:</strong> Why “linear” rather than “geometric”?
-Because there is an approximately linear relationship between consecutive error values,</p>
-<div class="math notranslate nohighlight">
-\[E_{n+1} \approx C E_n.\]</div>
-<p>This is a very common behavior for iterative numerical methods, but we will also see that a few methods do even better; for example, when Newton’s method converges to a simple root <span class="math notranslate nohighlight">\(r\)</span> of <span class="math notranslate nohighlight">\(f\)</span> (one with <span class="math notranslate nohighlight">\(f'(r) \neq 0\)</span>)</p>
-<div class="math notranslate nohighlight">
-\[E_{k+1} \approx C E_k^2\]</div>
-<p>This is called <strong>quadratic convergence</strong>.
-More generally, <strong>convergence of order <span class="math notranslate nohighlight">\(p\)</span></strong> means that</p>
-<div class="math notranslate nohighlight">
-\[E_{k+1} \approx C E_k^p, \text{ or more precisely, } \lim_{k \to \infty} \frac{E_{k+1}}{E_k^p} \text{ is finite.}\]</div>
-<p>We have already observed experimentally the intermediate result that “<span class="math notranslate nohighlight">\(C = 0\)</span>” for Newtons’s method in this case; that is,</p>
-<div class="math notranslate nohighlight">
-\[\frac{E_{k+1}}{E_k} \to 0.\]</div>
-<p>This is called <strong>super-linear convergence</strong> and includes any situation with order of convergence <span class="math notranslate nohighlight">\(p &gt; 1\)</span>.</p>
-<p>For most practical purposes, if you have established super-linear convergence, you can be happy, and not worry much about refinements like the particular order <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<div class="section" id="step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge">
+<h2><span class="section-number">28.3. </span>Step 2: choosing the internal points so that the method is guaranteed to converge<a class="headerlink" href="#step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge" title="Permalink to this headline">¶</a></h2>
+<p>There are a couple of details that need to be resolved:</p>
+<p>(A) Deciding how to choose the internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p>(B) Verifying that the interval does indeed shrink to arbitrarily small length after enough iterations, so that the algorithm succeeds.</p>
+<p>Once we have done that and got a working algorithm, there will be the issue of speed:</p>
+<p>(C) Amongst the many ways that we could choose the internal points, finding one that (typically at least) is fastest, in the sense of minimizing the number of functions evaluations needed.</p>
+<p>For now, I will just describe one “naive” approach that works, but is not optimal for speed; <strong>Trisection:</strong></p>
+<p>Take <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span> to divide the interval <span class="math notranslate nohighlight">\([a, b]\)</span> into three equal-width sub-intervals:
+<span class="math notranslate nohighlight">\(c = (2a +b)/3\)</span>, <span class="math notranslate nohighlight">\(d = (a + 2b)/3\)</span>, so that each of <span class="math notranslate nohighlight">\([a, c]\)</span>, <span class="math notranslate nohighlight">\([c, d]\)</span> and <span class="math notranslate nohighlight">\([d, b]\)</span> are of length <span class="math notranslate nohighlight">\((b-a)/3\)</span>.</p>
+<p>Then the new interval is <span class="math notranslate nohighlight">\(2/3\)</span> as long as the previous one, and the errors shrink by a factor of <span class="math notranslate nohighlight">\((2/3)^k\)</span> after <span class="math notranslate nohighlight">\(k\)</span> steps, eventually getting as small as one wishes.</p>
 </div>
-<div class="section" id="big-o-and-little-o-notation">
-<h2><span class="section-number">5.3. </span>Big-O and little-o notation<a class="headerlink" href="#big-o-and-little-o-notation" title="Permalink to this headline">¶</a></h2>
-<p>Consider the error formula for approximation of a function <span class="math notranslate nohighlight">\(f\)</span> with the Taylor polynomial of degree <span class="math notranslate nohighlight">\(n\)</span>, center <span class="math notranslate nohighlight">\(a\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-| f(a+h) - T_n(h) | \leq \frac{M_{n+1}}{(n+1)!} |h|^{n+1}
-\text{ where } M_{n+1} = \max |f^{(n+1)}(x)|.
-\]</div>
-<p>Since the coefficient of <span class="math notranslate nohighlight">\(h^{n+1}\)</span> is typicaly not known in practice, it is wise to focus on the power law part,
-and for this the “big-O” and little-o” notation is convenient.</p>
-<p>If a function <span class="math notranslate nohighlight">\(E(h)\)</span> goes to zero at least as fast as <span class="math notranslate nohighlight">\(h^p\)</span>, we say that it is <em>of order <span class="math notranslate nohighlight">\(h^p\)</span></em>, written <span class="math notranslate nohighlight">\(O(h^p)\)</span>.</p>
-<p>More precisely, <span class="math notranslate nohighlight">\(E(h)\)</span> is no bigger than a multiple of <span class="math notranslate nohighlight">\(h^p\)</span> for <span class="math notranslate nohighlight">\(h\)</span> small enough;
-that is, there is a constant <span class="math notranslate nohighlight">\(C\)</span> such that for some positive number <span class="math notranslate nohighlight">\(\delta\)</span></p>
-<div class="math notranslate nohighlight">
-\[\frac{|E(h)|}{|h|^p} \leq C \text{ for } |h| &lt; \delta.\]</div>
-<p>Another way to say this is in terms of the <em>lim-sup</em>, if you have seen that jargon:</p>
-<div class="math notranslate nohighlight">
-\[\limsup_{h \to 0} \frac{|E(h)|}{|h|^p} \text{ is finite.}\]</div>
-<p>This can be used to rephrase the above Taylor’s theorem error bound as</p>
-<div class="math notranslate nohighlight">
-\[f(x) - T_n(x) = O(|x-a|^{n+1})\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[f(a+h) - T_n(h) = O(h^{n+1}),\]</div>
-<p>and for the case of the linearization,</p>
-<div class="math notranslate nohighlight">
-\[
-f(a+h) - L(x) = f(a+h) - (f(a) + f'(a) h) = O(h^2).
-\]</div>
-<div class="section" id="little-o-notation-for-negligibly-small-terms">
-<h3><span class="section-number">5.3.1. </span>Little-o notation, for “negligibly small terms”<a class="headerlink" href="#little-o-notation-for-negligibly-small-terms" title="Permalink to this headline">¶</a></h3>
-<p>Sometimes it is enough to say that some error term is small enough to be neglected, at least when <span class="math notranslate nohighlight">\(h\)</span> is close enough to zero.
-For example, with a Taylor series we might be able to neglect the powers of <span class="math notranslate nohighlight">\(x-a\)</span> or of <span class="math notranslate nohighlight">\(h\)</span> higher than <span class="math notranslate nohighlight">\(p\)</span>.</p>
-<p>We will thus say that a quantity <span class="math notranslate nohighlight">\(E(h)\)</span> is <em>small of order <span class="math notranslate nohighlight">\(h^p\)</span></em>, written <span class="math notranslate nohighlight">\(o(h^p)\)</span>
-when</p>
-<div class="math notranslate nohighlight">
-\[\lim_{h \to 0} \frac{|E(h)|}{|h|^p} = 0.\]</div>
-<p>Note the addition of the word <strong>small</strong> compared to the above description of the big-O case!</p>
-<p>With this, the Taylor’s theorem error bound can be stated as</p>
-<div class="math notranslate nohighlight">
-\[f(x) - T_n(x) = o(|x-a|^n),\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[f(a+h) - T_n(h) = o(h^n),\]</div>
-<p>and for the case of the linearization,</p>
-<div class="math notranslate nohighlight">
-\[f(a+h) - L(x) = f(a+h) - (f(a) + f'(a) h) = o(h).\]</div>
+<div class="section" id="step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible">
+<h2><span class="section-number">28.4. </span>Step 3: choosing the internal points so that the method converges as fast as possible<a class="headerlink" href="#step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon: this leads to the <a class="reference external" href="https://en.wikipedia.org/wiki/Golden-section_search">Golden Section Search</a>  …</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
-</div>
 </div>
 </div>
 
@@ -916,8 +845,8 @@ when</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="taylors-theorem.html" title="previous page"><span class="section-number">4. </span>Taylor’s Theorem and the Accuracy of Linearization</a>
-    <a class='right-next' id="next-link" href="newtons-method-convergence-rate.html" title="next page"><span class="section-number">6. </span>The Convergence Rate of Newton’s Method</a>
+    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-6-iterative-methods.html" title="previous page"><span class="section-number">27. </span>Simultaneous Linear Equations, Part 6: Iterative Methods</a>
+    <a class='right-next' id="next-link" href="eigenproblems.html" title="next page"><span class="section-number">29. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

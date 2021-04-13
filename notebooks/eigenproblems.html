@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5. Measures of Error and Order of Convergence &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. The Convergence Rate of Newton’s Method" href="newtons-method-convergence-rate.html" />
-    <link rel="prev" title="4. Taylor’s Theorem and the Accuracy of Linearization" href="taylors-theorem.html" />
+    <link rel="next" title="30. Some Future Topics" href="../future_topics.html" />
+    <link rel="prev" title="28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction" href="minimization-1D.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -142,8 +142,8 @@
    4. Taylor’s Theorem and the Accuracy of Linearization
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
    5. Measures of Error and Order of Convergence
   </a>
  </li>
@@ -273,8 +273,8 @@
    28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="eigenproblems.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
@@ -661,7 +661,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/error-measures-convergence-rates.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/eigenproblems.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -686,7 +686,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/error-measures-convergence-rates.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/eigenproblems.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -709,33 +709,43 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#error-measures">
-   5.1. Error measures
+  <a class="reference internal nav-link" href="#the-power-method">
+   29.1. The Power Method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-basic-algorithm-for-the-power-method">
+   29.2. A basic algorithm for the Power Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#backward-error-and-forward-error">
-     5.1.1. Backward error (and forward error)
+    <a class="reference internal nav-link" href="#refinement-deciding-the-iteration-count">
+     29.2.1. Refinement: deciding the iteration count
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#order-of-convergence-of-a-sequence-of-approximations">
-   5.2. Order of convergence of a sequence of approximations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#big-o-and-little-o-notation">
-   5.3. Big-O and little-o notation
+  <a class="reference internal nav-link" href="#the-inverse-power-method">
+   29.3. The Inverse Power Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#little-o-notation-for-negligibly-small-terms">
-     5.3.1. Little-o notation, for “negligibly small terms”
+    <a class="reference internal nav-link" href="#basic-algorithm-for-the-inverse-power-method">
+     29.3.1. Basic algorithm for the Inverse Power Method
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-other-eigenvalues-with-the-shifted-inverse-power-method">
+   29.4. Getting other eigenvalues with the Shifted Inverse Power Method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc">
+   29.5. Further topics: getting all the eigenvalues with the QR Method, etc.
+  </a>
  </li>
 </ul>
 
@@ -748,143 +758,147 @@
         
               <div>
                 
-  <div class="section" id="measures-of-error-and-order-of-convergence">
-<h1><span class="section-number">5. </span>Measures of Error and Order of Convergence<a class="headerlink" href="#measures-of-error-and-order-of-convergence" title="Permalink to this headline">¶</a></h1>
-<p><strong>Last Revised on Monday January 25, after class.</strong></p>
+  <div class="section" id="computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond">
+<h1><span class="section-number">29. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond<a class="headerlink" href="#computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 13, 2021</strong></p>
+<p><strong>Brenton LeMesurier</strong></p>
+<p>University of Northern Colorado, Greeley, Colorado in Spring 2021,
+<a class="reference external" href="mailto:brenton&#46;lemesurier&#37;&#52;&#48;unco&#46;edu">brenton<span>&#46;</span>lemesurier<span>&#64;</span>unco<span>&#46;</span>edu</a>;
+<br>
+More permanent address: The College of Charleston, Charleston, South Carolina,
+<a class="reference external" href="mailto:lemesurierb&#37;&#52;&#48;cofc&#46;edu">lemesurierb<span>&#64;</span>cofc<span>&#46;</span>edu</a></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Section 1.3.1 of <a class="reference external" href="../references.html#Sauer">Sauer</a> on <em>measures of error</em>;</p></li>
-<li><p>Section 2.4 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a> on <em>order of convergence.</em></p></li>
+<li><p>Section of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>.</p></li>
+<li><p>Chapter 8, <em>More on Linear equations</em> of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a>,
+in particular Section 3 <em>Power Method</em>, and also Section 2 <em>Eigenvalues and Eigenvectors</em> as background reading.</p></li>
 </ul>
-<p>These notes cover a number of small topics:</p>
+<p>The <em>eigenproblem</em> for a square <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is to compute some or all non-trivial solutions of</p>
+<div class="math notranslate nohighlight">
+\[A \vec{v} = \lambda \vec{v}.\]</div>
+<p>(By non-trivial, I mean to exclude <span class="math notranslate nohighlight">\(\vec{v} = 0\)</span>, which gives a solution for any <span class="math notranslate nohighlight">\(\lambda\)</span>.)
+That is, to compute
+the eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span> (of which generically there are <span class="math notranslate nohighlight">\(n\)</span>, but sometimes less)
+and the eigenvectors <span class="math notranslate nohighlight">\(\vec{v}\)</span> corresponding to each.</p>
+<p>With eigenproblems, and particularly those arising from differential equations, one often needs only the few smallest and/or largest eigenvalues. For these, the power method described below can be adapted, giving the shifted inverse power method.</p>
+<p>Here we often restirx our attention to the case of a real symmetric matrix (<span class="math notranslate nohighlight">\(A^T = A\)</span>, or <span class="math notranslate nohighlight">\(A_{ij} = A_{ji}\)</span>), or a Hermitian matrix (<span class="math notranslate nohighlight">\(A^T = A*\)</span>), for which many things are a bit simpler:</p>
 <ul class="simple">
-<li><p>Measures of error: absolute, relative, forward, backward, etc.</p></li>
-<li><p>Measuring the rate of convergence of a sequence of approximations.</p></li>
-<li><p>Big-O and little-o notation for describing how small a quantity (usually an error) is.</p></li>
+<li><p>all eigenvalues are real,</p></li>
+<li><p>for symmetric matrices, all eigenvectors are also real,</p></li>
+<li><p>there is a complete set of orthogonal eigenvectors <span class="math notranslate nohighlight">\(\vec{v}_k\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span> that form a basis for all vectors
+and so on.</p></li>
 </ul>
-<div class="section" id="error-measures">
-<h2><span class="section-number">5.1. </span>Error measures<a class="headerlink" href="#error-measures" title="Permalink to this headline">¶</a></h2>
-<p>Consider a quantity <span class="math notranslate nohighlight">\(\tilde{x}\)</span> considered as an approximation of an exact value <span class="math notranslate nohighlight">\(x\)</span>.
-(This can be a number or a vector.)</p>
-<p><strong>Definition 1: Error</strong>
-The error in <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is <span class="math notranslate nohighlight">\(\tilde{x} - x\)</span> (or  <span class="math notranslate nohighlight">\(x - \tilde{x}\)</span>;
-different sources use both versions and either is fine so long as you are <strong>consistent</strong>.)</p>
-<p><strong>Definition 2: Absolute Error</strong>
-The absolute error is the absolute value of the error: <span class="math notranslate nohighlight">\(|\tilde{x} - x|\)</span>.
-For vector quantities this means the norm <span class="math notranslate nohighlight">\(\| \tilde{x} - x \|\)</span>,
-and it can be any norm, so long as we again choose one and use it consistently.
-Two favorites are the <em>Euclidean norm</em> <span class="math notranslate nohighlight">\(\| x \| = \sqrt{\sum |x_i|}\)</span>, denoted <span class="math notranslate nohighlight">\(\| x \|_2\)</span>,
-and the <em>maximum norm</em> (also mysteriously known at the <em>infinity norm</em>):</p>
+<p>However, the methods described here can be used more generally, or can be made to work with minor adjustments.</p>
+<p>The eigenvalue are roots of the characteristic polynomial, <span class="math notranslate nohighlight">\(\det(A - \lambda I)\)</span>;
+repeated roots are possible, and they will all be named, so there are always values <span class="math notranslate nohighlight">\(\lambda_i\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span>.
+Here, these eigenvalues will be enumerated in decreasing order of magnitude:</p>
 <div class="math notranslate nohighlight">
-\[\| x \|_\text{max} = \| x \|_\infty = \max_i |x_i|.\]</div>
-<p>For real-valued quantities, the absolute error is related to the number of <strong>correct decimal places</strong>:
-<span class="math notranslate nohighlight">\(p\)</span> decimal places of accuracy corresponds roughly to absolute error no more than <span class="math notranslate nohighlight">\(0.5 \times 10^{-p}\)</span>.</p>
-<p><strong>Definition 3: Relative Error</strong>
-The relative error is the ratio of the absolute error to the size of the exact quantity:
-<span class="math notranslate nohighlight">\(\displaystyle\frac{| \tilde{x} - x |}{|x|}\)</span> (again possibly with vector norms).
-This is often more relevant than absolute error for inherently positive quantities,
-but is obviously unwise where <span class="math notranslate nohighlight">\(x = 0\)</span> is a possibility.
-For real-valued quantities, this is related to the number of <strong>significant digits</strong>:
-accuracy to <span class="math notranslate nohighlight">\(p\)</span> significant digits corresponds roughly to relative error no more than <span class="math notranslate nohighlight">\(0.5 \times 10^{-p}\)</span>.</p>
-<p>When working with computer arithmetic, <span class="math notranslate nohighlight">\(p\)</span> significant <strong>bits</strong> corresponds to relative error no more than <span class="math notranslate nohighlight">\(2^{-(p+1)}\)</span>.</p>
-<div class="section" id="backward-error-and-forward-error">
-<h3><span class="section-number">5.1.1. </span>Backward error (and forward error)<a class="headerlink" href="#backward-error-and-forward-error" title="Permalink to this headline">¶</a></h3>
-<p>An obvious problem is that we usually do not know the exact solution <span class="math notranslate nohighlight">\(x\)</span>, so cannot evaluate any of these; instead we typically seek <strong>upper bounds</strong> on the absolute or relative error.
-Thus, when talking of approximate solutions to an equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span> the concept of <strong>backward error</strong> can be very useful,
-for example as a step in getting bounds on the size of the error.</p>
-<p><strong>Definition 4: Backward Error</strong></p>
-<p>The Backward Error in <span class="math notranslate nohighlight">\(\tilde{x}\)</span> as an approxiate solution to the equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span> is <span class="math notranslate nohighlight">\(f(\tilde{x})\)</span>;
-the amount by which function <span class="math notranslate nohighlight">\(f\)</span> would have to be changed in order for <span class="math notranslate nohighlight">\(\tilde{x}\)</span> to be an exact root.</p>
-<p>For the case of solving simultaneous linear equations in matrix-vector form <span class="math notranslate nohighlight">\(A x = b\)</span>, this is <span class="math notranslate nohighlight">\(b - A \tilde{x}\)</span>,
-also known as the <em>residual</em>.</p>
-<p><strong>Definition 5: Absolute Backward Error</strong></p>
-<p>The absolute backward error is — as you might have guessed — the absolute value of the backward error: <span class="math notranslate nohighlight">\(|f(\tilde{x})|\)</span>.
-This is sometimes also called simply the backward error. (The usual disclaimer about vector quantities applies.)</p>
-<p>For the case of solving simultaneous linear equations in matrix-vector form <span class="math notranslate nohighlight">\(A x = b\)</span>, this is <span class="math notranslate nohighlight">\(\| b - A \tilde{x} \|\)</span>,
-also known as the <em>residual norm</em>.</p>
-<p><strong>Notes</strong></p>
-<ul class="simple">
-<li><p>One obvious advantage of the backward error concept is that you can actually evaluate it without knowing the exact solution <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
-<li><p>Also, one significance of backward error is that if the values of <span class="math notranslate nohighlight">\(f(x)\)</span> are only known to be accurate within an absolute error of <span class="math notranslate nohighlight">\(E\)</span> then any approximation with absolute backward error less than <span class="math notranslate nohighlight">\(E\)</span> could in fact be exact, so there is no point in seeking greater accuracy.</p></li>
-<li><p>The names <em>forward error</em> and <em>absolute forward error</em> are sometimes used as synonyms for <em>error</em> etc. as defined above, when they need to be distinguished from backward errors.</p></li>
-</ul>
+\[|\lambda_1| \geq |\lambda_2| \cdots \geq |\lambda_n|.\]</div>
+<div class="section" id="the-power-method">
+<h2><span class="section-number">29.1. </span>The Power Method<a class="headerlink" href="#the-power-method" title="Permalink to this headline">¶</a></h2>
+<p>The basic tool is the <em>Power Method</em>, which will usually <em>but not always</em> succeed in computing the eigenvalue of largest magnitude, <span class="math notranslate nohighlight">\(\lambda_1\)</span>, and <strong>a</strong> corresponding eigenvector <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>.
+Its success mainly involves assuming there being a unique largest eigenvalue: <span class="math notranslate nohighlight">\(\lambda_1 &gt; \lambda_i\)</span> for <span class="math notranslate nohighlight">\(i&gt;1\)</span>.</p>
+<p>In its simplest form, one starts with a unit-length vector <span class="math notranslate nohighlight">\(\vec{x}^{\,0}\)</span>,
+so <span class="math notranslate nohighlight">\(\|\vec{x}^{\,0}\| = 1\)</span>, constructs the successive multiples
+<span class="math notranslate nohighlight">\(\vec{y}^{\,k} = A^k \vec{x}^{\,0}\)</span>
+by successive multiplications, and rescales at each stage to the unit vectors
+<span class="math notranslate nohighlight">\(\vec{x}^{\,k} = \vec{y}^{\,k}/\|\vec{y}^{\,k}\|\)</span>.</p>
+<p>Note that <span class="math notranslate nohighlight">\(\vec{y}^{\,k+1} = A \vec{x}^{\,k}\)</span>, so that once <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> is approximately an eigenvector for eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\vec{y}^{\,k+1} \approx \lambda \vec{x}^{\,k}\)</span>, leading to the eigenvalue approximation</p>
+<div class="math notranslate nohighlight">
+\[r^{(k)} := \langle\vec{y}^{\,k+1}, \vec{x}^{\,k} \rangle
+\approx \langle\lambda \vec{x}^{\,k}, \vec{x}^{\,k}\rangle \approx \lambda\]</div>
+<p><strong>Note:</strong> Here and below, I use <span class="math notranslate nohighlight">\(\langle \vec{a}, \vec{b}\rangle\)</span> to denote the inner product (dot product) of two vectors; with Python/NumPy arrays this is given by <code class="docutils literal notranslate"><span class="pre">a.dot(b)</span></code>.</p>
 </div>
-</div>
-<div class="section" id="order-of-convergence-of-a-sequence-of-approximations">
-<h2><span class="section-number">5.2. </span>Order of convergence of a sequence of approximations<a class="headerlink" href="#order-of-convergence-of-a-sequence-of-approximations" title="Permalink to this headline">¶</a></h2>
-<p>We have seen that for the sequence of approximations <span class="math notranslate nohighlight">\(x_k\)</span> to a quantity <span class="math notranslate nohighlight">\(x\)</span> given by the fixed point iteration
-<span class="math notranslate nohighlight">\(x_{k+1} = g(x_k)\)</span>, the absolute errors <span class="math notranslate nohighlight">\(E_k := |x_k - x|\)</span> typically have</p>
-<div class="math notranslate nohighlight">
-\[\frac{E_{k+1}}{E_k} \to C = |g'(x)|.\]</div>
-<p>so that eventually the errors diminsh in a roughly geometric fashion: <span class="math notranslate nohighlight">\(E_k \approx K C^k\)</span>.
-This is called <strong>linear convergence</strong>.</p>
-<p><strong>Aside:</strong> Why “linear” rather than “geometric”?
-Because there is an approximately linear relationship between consecutive error values,</p>
-<div class="math notranslate nohighlight">
-\[E_{n+1} \approx C E_n.\]</div>
-<p>This is a very common behavior for iterative numerical methods, but we will also see that a few methods do even better; for example, when Newton’s method converges to a simple root <span class="math notranslate nohighlight">\(r\)</span> of <span class="math notranslate nohighlight">\(f\)</span> (one with <span class="math notranslate nohighlight">\(f'(r) \neq 0\)</span>)</p>
-<div class="math notranslate nohighlight">
-\[E_{k+1} \approx C E_k^2\]</div>
-<p>This is called <strong>quadratic convergence</strong>.
-More generally, <strong>convergence of order <span class="math notranslate nohighlight">\(p\)</span></strong> means that</p>
-<div class="math notranslate nohighlight">
-\[E_{k+1} \approx C E_k^p, \text{ or more precisely, } \lim_{k \to \infty} \frac{E_{k+1}}{E_k^p} \text{ is finite.}\]</div>
-<p>We have already observed experimentally the intermediate result that “<span class="math notranslate nohighlight">\(C = 0\)</span>” for Newtons’s method in this case; that is,</p>
-<div class="math notranslate nohighlight">
-\[\frac{E_{k+1}}{E_k} \to 0.\]</div>
-<p>This is called <strong>super-linear convergence</strong> and includes any situation with order of convergence <span class="math notranslate nohighlight">\(p &gt; 1\)</span>.</p>
-<p>For most practical purposes, if you have established super-linear convergence, you can be happy, and not worry much about refinements like the particular order <span class="math notranslate nohighlight">\(p\)</span>.</p>
-</div>
-<div class="section" id="big-o-and-little-o-notation">
-<h2><span class="section-number">5.3. </span>Big-O and little-o notation<a class="headerlink" href="#big-o-and-little-o-notation" title="Permalink to this headline">¶</a></h2>
-<p>Consider the error formula for approximation of a function <span class="math notranslate nohighlight">\(f\)</span> with the Taylor polynomial of degree <span class="math notranslate nohighlight">\(n\)</span>, center <span class="math notranslate nohighlight">\(a\)</span>:</p>
+<div class="section" id="a-basic-algorithm-for-the-power-method">
+<h2><span class="section-number">29.2. </span>A basic algorithm for the Power Method<a class="headerlink" href="#a-basic-algorithm-for-the-power-method" title="Permalink to this headline">¶</a></h2>
+<p><em>Choose</em> initial vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span>, maybe with a random number generator.</p>
+<p>Normalize to <span class="math notranslate nohighlight">\(\vec{x}^{\,0} = \vec{y}^{\,0}/\|\vec{y}^{\,0}\|\)</span>.</p>
+<p>for <span class="math notranslate nohighlight">\(k\)</span> from 1 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(\vec{y}^{\,k+1} = A \vec{x}^{\,k}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(r^{(k)} = \langle \vec{y}^{\,k+1}, \vec{x}^{\,k} \rangle\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(\vec{x}^{\,k+1} = \vec{y}^{\,k+1}/\|\vec{y}^{\,k+1}\|\)</span>
+<br>
+end for</p>
+<p>The final values of <span class="math notranslate nohighlight">\(r^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> approximate <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> respectively.</p>
+<div class="section" id="refinement-deciding-the-iteration-count">
+<h3><span class="section-number">29.2.1. </span>Refinement: deciding the iteration count<a class="headerlink" href="#refinement-deciding-the-iteration-count" title="Permalink to this headline">¶</a></h3>
+<p>Some details are omitted above; above all, how to decide the number of iterations.</p>
+<p>One approach is to use the fact that an eigenvector-eigenvalue pair satisfies
+<span class="math notranslate nohighlight">\(A \vec{v} - \lambda \vec{v} = 0\)</span>, so the “residual norm”</p>
 <div class="math notranslate nohighlight">
 \[
-| f(a+h) - T_n(h) | \leq \frac{M_{n+1}}{(n+1)!} |h|^{n+1}
-\text{ where } M_{n+1} = \max |f^{(n+1)}(x)|.
+\frac{\|A \vec{x}^{\,k} - r^{(k)} \vec{x}^{\,k}\|}{\|\vec{x}^{\,k}\|},
+= \|\vec{y}^{\,k+1} - r^{(k)} \vec{x}^{\,k}\| \text{ since $\|\vec{x}^{\,k}\| = 1$}
 \]</div>
-<p>Since the coefficient of <span class="math notranslate nohighlight">\(h^{n+1}\)</span> is typicaly not known in practice, it is wise to focus on the power law part,
-and for this the “big-O” and little-o” notation is convenient.</p>
-<p>If a function <span class="math notranslate nohighlight">\(E(h)\)</span> goes to zero at least as fast as <span class="math notranslate nohighlight">\(h^p\)</span>, we say that it is <em>of order <span class="math notranslate nohighlight">\(h^p\)</span></em>, written <span class="math notranslate nohighlight">\(O(h^p)\)</span>.</p>
-<p>More precisely, <span class="math notranslate nohighlight">\(E(h)\)</span> is no bigger than a multiple of <span class="math notranslate nohighlight">\(h^p\)</span> for <span class="math notranslate nohighlight">\(h\)</span> small enough;
-that is, there is a constant <span class="math notranslate nohighlight">\(C\)</span> such that for some positive number <span class="math notranslate nohighlight">\(\delta\)</span></p>
+<p>is a measure of “relative backward error”.</p>
+<p>Thus one could repace the above <code class="docutils literal notranslate"><span class="pre">for</span></code> loop by a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop based on a condition like stopping when</p>
 <div class="math notranslate nohighlight">
-\[\frac{|E(h)|}{|h|^p} \leq C \text{ for } |h| &lt; \delta.\]</div>
-<p>Another way to say this is in terms of the <em>lim-sup</em>, if you have seen that jargon:</p>
+\[\|\vec{y}^{\,k+1} - r^{(k)} \vec{x}^{\,k}\| \leq \epsilon.\]</div>
+<p>Alternatively, keep the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, but exit early (with <code class="docutils literal notranslate"><span class="pre">break</span></code>) if this condition is met.</p>
+<p>I generally recommend this <code class="docutils literal notranslate"><span class="pre">for-if-break</span></code> form for implementing iterative methods, because it makes avoidance of infinite loops simpler, and avoids the common <code class="docutils literal notranslate"><span class="pre">while</span></code> loop issue that you do not yet have an error estimate when the loop starts.</p>
+</div>
+</div>
+<div class="section" id="the-inverse-power-method">
+<h2><span class="section-number">29.3. </span>The Inverse Power Method<a class="headerlink" href="#the-inverse-power-method" title="Permalink to this headline">¶</a></h2>
+<p>The next step is to note that if <span class="math notranslate nohighlight">\(A\)</span> is nonsingular, its inverse <span class="math notranslate nohighlight">\(B = A^{-1}\)</span> has the same eigenvectors, but with eigenvalues <span class="math notranslate nohighlight">\(\mu_i = 1/\lambda_i\)</span>.</p>
+<p>Thus we can apply the power method to <span class="math notranslate nohighlight">\(B\)</span> in order to compute its largest eigenvalue, which is <span class="math notranslate nohighlight">\(\mu_n = 1/\lambda_n\)</span>, along with the corresponding eigenvector <span class="math notranslate nohighlight">\(\vec{v}_n\)</span>.</p>
+<p>The main change to the above is that</p>
 <div class="math notranslate nohighlight">
-\[\limsup_{h \to 0} \frac{|E(h)|}{|h|^p} \text{ is finite.}\]</div>
-<p>This can be used to rephrase the above Taylor’s theorem error bound as</p>
+\[\vec{y}^{\,k+1} = A^{-1} \vec{x}_{k}.\]</div>
+<p>However, as usual one can (and should) avoid actually computing the inverse.
+Instead, express the above as the sysem of equations.</p>
 <div class="math notranslate nohighlight">
-\[f(x) - T_n(x) = O(|x-a|^{n+1})\]</div>
-<p>or</p>
+\[A \vec{y}^{\,k+1} = \vec{x}_{k}.\]</div>
+<p>Here is an important case where the LU factorization method can speed things up greatly: a single LU factorization is needed, after which for each <span class="math notranslate nohighlight">\(k\)</span> one only has to do the far quicker forward and backward substitution steps: <span class="math notranslate nohighlight">\(O(n^2)\)</span> cost for each iteration instead of <span class="math notranslate nohighlight">\(O(n^3/3)\)</span>.</p>
+<div class="section" id="basic-algorithm-for-the-inverse-power-method">
+<h3><span class="section-number">29.3.1. </span>Basic algorithm for the Inverse Power Method<a class="headerlink" href="#basic-algorithm-for-the-inverse-power-method" title="Permalink to this headline">¶</a></h3>
+<p><em>Choose</em> initial vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span>, maybe with a random number generator.</p>
+<p>Normalize to <span class="math notranslate nohighlight">\(\vec{x}^{\,0} = \vec{y}^{\,0}/\|\vec{y}^{\,0}\|\)</span>.</p>
+<p>Compute an LU factorization <span class="math notranslate nohighlight">\(L U = A\)</span>.</p>
+<p>for <span class="math notranslate nohighlight">\(k\)</span> from 1 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> Solve <span class="math notranslate nohighlight">\(L \vec{z}^{\,k+1} = \vec{x}^{\,k}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> Solve <span class="math notranslate nohighlight">\(U \vec{y}^{\,k+1} = \vec{z}^{\,k+1}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(r^{(k)} = \langle \vec{y}^{\,k+1}, \vec{x}^{\,k} \rangle\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(\vec{x}^{\,k+1} = \vec{y}^{\,k+1}/\| \vec{y}^{\,k+1} \|\)</span>
+<br>
+end for</p>
+<p>(If all goes well) the final values of <span class="math notranslate nohighlight">\(r^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> approximate <span class="math notranslate nohighlight">\(\lambda_n\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_n\)</span> respectively.</p>
+</div>
+</div>
+<div class="section" id="getting-other-eigenvalues-with-the-shifted-inverse-power-method">
+<h2><span class="section-number">29.4. </span>Getting other eigenvalues with the Shifted Inverse Power Method<a class="headerlink" href="#getting-other-eigenvalues-with-the-shifted-inverse-power-method" title="Permalink to this headline">¶</a></h2>
+<p>The inverse power method computes the eigenvalue closest to 0; by <em>shifting</em>, we can compute the eigenvalue closest to any chosen value <span class="math notranslate nohighlight">\(s\)</span>.
+Then by searching various values of <span class="math notranslate nohighlight">\(s\)</span>, we can hope to find all the eigenvectors.
+As a variant, once we have <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_n\)</span>, we can search nearby for other large or small eigenvalues: often the few largest and/or the few smallest are most important.</p>
+<p>With a symmetric (or Hermitian) matrix, once the eigenvalue of largest magnitude, <span class="math notranslate nohighlight">\(\lambda_1\)</span> is known, the rest are known to be real values in the interval <span class="math notranslate nohighlight">\([-|\lambda_1|,|\lambda_1|]\)</span>, so we know roughly where to seek them.</p>
+<p>The main idea here is that for any number <span class="math notranslate nohighlight">\(s\)</span>, matrix <span class="math notranslate nohighlight">\(A - s I\)</span> has eigenvalues
+<span class="math notranslate nohighlight">\(\lambda_i  - s\)</span>, with the same eigenvectors as <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[f(a+h) - T_n(h) = O(h^{n+1}),\]</div>
-<p>and for the case of the linearization,</p>
-<div class="math notranslate nohighlight">
-\[
-f(a+h) - L(x) = f(a+h) - (f(a) + f'(a) h) = O(h^2).
-\]</div>
-<div class="section" id="little-o-notation-for-negligibly-small-terms">
-<h3><span class="section-number">5.3.1. </span>Little-o notation, for “negligibly small terms”<a class="headerlink" href="#little-o-notation-for-negligibly-small-terms" title="Permalink to this headline">¶</a></h3>
-<p>Sometimes it is enough to say that some error term is small enough to be neglected, at least when <span class="math notranslate nohighlight">\(h\)</span> is close enough to zero.
-For example, with a Taylor series we might be able to neglect the powers of <span class="math notranslate nohighlight">\(x-a\)</span> or of <span class="math notranslate nohighlight">\(h\)</span> higher than <span class="math notranslate nohighlight">\(p\)</span>.</p>
-<p>We will thus say that a quantity <span class="math notranslate nohighlight">\(E(h)\)</span> is <em>small of order <span class="math notranslate nohighlight">\(h^p\)</span></em>, written <span class="math notranslate nohighlight">\(o(h^p)\)</span>
-when</p>
-<div class="math notranslate nohighlight">
-\[\lim_{h \to 0} \frac{|E(h)|}{|h|^p} = 0.\]</div>
-<p>Note the addition of the word <strong>small</strong> compared to the above description of the big-O case!</p>
-<p>With this, the Taylor’s theorem error bound can be stated as</p>
-<div class="math notranslate nohighlight">
-\[f(x) - T_n(x) = o(|x-a|^n),\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[f(a+h) - T_n(h) = o(h^n),\]</div>
-<p>and for the case of the linearization,</p>
-<div class="math notranslate nohighlight">
-\[f(a+h) - L(x) = f(a+h) - (f(a) + f'(a) h) = o(h).\]</div>
+\[(A - sI)\vec{v}_i = (\lambda_i  - s)\vec{v}_i\]</div>
+<p>Thus, applying the inverse power method to <span class="math notranslate nohighlight">\(A - s I\)</span> computes its largest eigenvalue <span class="math notranslate nohighlight">\(\gamma\)</span>,
+and then <span class="math notranslate nohighlight">\(\lambda = 1/(\gamma + s)\)</span> is the eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> closest to <span class="math notranslate nohighlight">\(s\)</span>.</p>
+</div>
+<div class="section" id="further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc">
+<h2><span class="section-number">29.5. </span>Further topics: getting all the eigenvalues with the QR Method, etc.<a class="headerlink" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc" title="Permalink to this headline">¶</a></h2>
+<p>The above methods are not ideal when many or all of the eigenvalues of a matrix are wanted; then a variety of more advanced methods have been developed, starting with the QR (factorization) Method.</p>
+<p>We will not address the details of that method in this course, but one way to think about it for a symmetric matrix is that:</p>
+<ul class="simple">
+<li><p>The eigenvectors are orthogonal.</p></li>
+<li><p>Thus, if after computing <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, one uses the power iteration starting with <span class="math notranslate nohighlight">\(\vec{x}^{\,0,2}\)</span> orthogonal to <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, then all the new iterates <span class="math notranslate nohighlight">\(\vec{x}^{\,k,2}\)</span> will stay orthogonal, and one will get the eignevector corresponding to the largest remaining eigenvector: you get <span class="math notranslate nohighlight">\(\vec{v}_2\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>.</p></li>
+<li><p>Continuing likewise, one can get the eigenvalues in descending order of magnitude.</p></li>
+<li><p>As a modification, one can do all these almost in parallel: at iteration <span class="math notranslate nohighlight">\(k\)</span>, have an approximation <span class="math notranslate nohighlight">\(\vec{x}^{\,k,i}\)</span> for each <span class="math notranslate nohighlight">\(\lambda_i\)</span> and at each stage, got by adjusting these new approximations so that <span class="math notranslate nohighlight">\(\vec{x}^{\,k,i}\)</span> is orthogonal to all the approximations <span class="math notranslate nohighlight">\(\vec{x}^{\,k,j}\)</span>, <span class="math notranslate nohighlight">\(j &lt; i\)</span>, for all the previous (larger) eigenvalues.
+This uses a variant of the <em>Gram-Schmidt</em> method for orthogonalizing a set of vectors.</p></li>
+</ul>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
-</div>
 </div>
 </div>
 
@@ -916,8 +930,8 @@ when</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="taylors-theorem.html" title="previous page"><span class="section-number">4. </span>Taylor’s Theorem and the Accuracy of Linearization</a>
-    <a class='right-next' id="next-link" href="newtons-method-convergence-rate.html" title="next page"><span class="section-number">6. </span>The Convergence Rate of Newton’s Method</a>
+    <a class='left-prev' id="prev-link" href="minimization-1D.html" title="previous page"><span class="section-number">28. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</a>
+    <a class='right-next' id="next-link" href="../future_topics.html" title="next page"><span class="section-number">30. </span>Some Future Topics</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
