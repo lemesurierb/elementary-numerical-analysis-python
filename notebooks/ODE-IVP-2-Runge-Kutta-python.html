@@ -280,7 +280,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting.html">
-   30. Least-squares Fitting to Data — Preliminary
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -297,7 +297,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="newtons-method-for-systems-introduction.html">
-   1. Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction
+   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
@@ -825,11 +825,12 @@
                 
   <div class="section" id="initial-value-problems-for-odes-part-2-runge-kutta-methods">
 <h1><span class="section-number">22. </span>Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods<a class="headerlink" href="#initial-value-problems-for-odes-part-2-runge-kutta-methods" title="Permalink to this headline">¶</a></h1>
-<p><strong>Updated (slightly) on Monday March 29</strong></p>
+<p><strong>Updated (slightly) on Monday March 29.</strong></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Sections 6.4 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
-<li><p>Section 5.4 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+<li><p>Section 6.4 <em>Runge-Kutta Methods and Applications</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a>;
+in particular Sub-section 6.4.1.</p></li>
+<li><p>Section 5.4 <em>Runge-Kutta Methods</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
 <li><p>Sections 7.1 and 7.2 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
 <div class="cell docutils container">
@@ -1030,8 +1031,8 @@ u(t) = u_2(t; a, u_0) = \cos(t) + C e^{-K t},\quad C = (u_0 - \cos(a)) e^{K a}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_18_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_18_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_18_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_18_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_19_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_19_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_19_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_19_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1071,8 +1072,8 @@ u(t) = u_2(t; a, u_0) = \cos(t) + C e^{-K t},\quad C = (u_0 - \cos(a)) e^{K a}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_19_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_19_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_19_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_19_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_20_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_20_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_20_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_20_1.png" />
 </div>
 </div>
 </div>
@@ -1184,8 +1185,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_28_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_28_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_28_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_28_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_29_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_29_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_29_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_29_1.png" />
 </div>
 </div>
 <p><strong>Observation:</strong> The errors are very similar to those for the Explicit Trapezoid Method, not “half as much and of opposite sign” as seen with integration; the exercises give a hint as to why this is so.</p>
@@ -1215,8 +1216,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_30_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_30_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_30_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_30_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_31_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_31_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_31_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_31_1.png" />
 </div>
 </div>
 <p><strong>Observation:</strong> This time, the errors are slightly better than for the Explicit Trapezoid Method but still not “half as much ” as seen with integration; this is because this equation has a mix of integration (the “sin” and “cos” parts) and exponential growth (the “Ku” part.)</p>
@@ -1299,8 +1300,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_37_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_37_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_37_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_37_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_38_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_38_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_38_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_38_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1329,8 +1330,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_38_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_38_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_38_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_38_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_39_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_39_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_39_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_39_1.png" />
 </div>
 </div>
 <p><a name="euler-redux"></a></p>
@@ -1370,8 +1371,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_41_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_41_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_41_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_41_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_42_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_42_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_42_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_42_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1400,8 +1401,8 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_42_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_42_0.png" />
-<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_42_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_42_1.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_43_0.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_43_0.png" />
+<img alt="../_images/ODE-IVP-2-Runge-Kutta-python_43_1.png" src="../_images/ODE-IVP-2-Runge-Kutta-python_43_1.png" />
 </div>
 </div>
 <hr class="docutils" />

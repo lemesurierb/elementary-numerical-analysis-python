@@ -280,7 +280,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting.html">
-   30. Least-squares Fitting to Data — Preliminary
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -297,7 +297,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="newtons-method-for-systems-introduction.html">
-   1. Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction
+   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
@@ -957,16 +957,14 @@
 <h1><span class="section-number">8. </span>Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination<a class="headerlink" href="#simultaneous-linear-equations-part-1-row-reduction-gaussian-elimination" title="Permalink to this headline">¶</a></h1>
 <p><strong>Last Revised on March 18, 2021,</strong>
 adding further uses of Python slicing and “vectorization” in function <code class="docutils literal notranslate"><span class="pre">rowReduction</span></code>,
-eliminating function <code class="docutils literal notranslate"><span class="pre">zeros_below_diagonal</span></code> in favor of always doing this in function <code class="docutils literal notranslate"><span class="pre">row_reduce</span></code>.
+eliminating function <code class="docutils literal notranslate"><span class="pre">zeros_below_diagonal</span></code> in favor of always doing this in function <code class="docutils literal notranslate"><span class="pre">row_reduce</span></code>,
 and fixing a few typos.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Section 2.1.1 of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
-<li><p>Section 6.1 of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+<li><p>Section 2.1.1 <em>Naive Gaussian Elimination</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 6.1 <em>Linear Sysems of Equations</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
 <li><p>Section 7.1 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
-<p>The basic strategy for solving simultaneous linear equations is row reduction and backward substitution,
-sometimes known as naive Gaussian elimination.</p>
 <div class="section" id="introduction">
 <h2><span class="section-number">8.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The problem of solving a system of <span class="math notranslate nohighlight">\(n\)</span> simultaneous linear equations in <span class="math notranslate nohighlight">\(n\)</span> unknowns,

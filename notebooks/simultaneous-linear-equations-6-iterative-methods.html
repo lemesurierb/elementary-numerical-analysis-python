@@ -280,7 +280,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting.html">
-   30. Least-squares Fitting to Data — Preliminary
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -297,7 +297,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="newtons-method-for-systems-introduction.html">
-   1. Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction
+   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
@@ -793,13 +793,15 @@
                 
   <div class="section" id="simultaneous-linear-equations-part-6-iterative-methods">
 <h1><span class="section-number">27. </span>Simultaneous Linear Equations, Part 6: Iterative Methods<a class="headerlink" href="#simultaneous-linear-equations-part-6-iterative-methods" title="Permalink to this headline">¶</a></h1>
-<p><strong>Created on April 13, 2021</strong></p>
-<p><strong>Brenton LeMesurier</strong></p>
-<p>University of Northern Colorado, Greeley, Colorado in Spring 2021,
-<a class="reference external" href="mailto:brenton&#46;lemesurier&#37;&#52;&#48;unco&#46;edu">brenton<span>&#46;</span>lemesurier<span>&#64;</span>unco<span>&#46;</span>edu</a>;
-<br>
-More permanent address: The College of Charleston, Charleston, South Carolina,
-<a class="reference external" href="mailto:lemesurierb&#37;&#52;&#48;cofc&#46;edu">lemesurierb<span>&#64;</span>cofc<span>&#46;</span>edu</a></p>
+<p><strong>Revised on Wednesaday April 14, 2021</strong> after class; just making a few corrections like fixing typos.</p>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 2.5 <em>Iterative Methods</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a>,
+Sub-sections 2.5.1 to 2.5.3.</p></li>
+<li><p>Chapter 7 <em>Iterative Techniques in Linear Algebra</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>,
+Sections 7.1 to 7.3.</p></li>
+<li><p>Section 8.4 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
+</ul>
 <div class="section" id="introduction">
 <h2><span class="section-number">27.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This topic is a huge area, with lots of ongoing research; this section just explores the first few methods in the field:</p>
@@ -877,51 +879,53 @@ To be cautious initially, try <span class="math notranslate nohighlight">\(n=2, 
 </div>
 <div class="section" id="the-underlying-strategy">
 <h2><span class="section-number">27.3. </span>The underlying strategy<a class="headerlink" href="#the-underlying-strategy" title="Permalink to this headline">¶</a></h2>
-<p>To analyse the Jacobi method — answetin queogt like for which matices it works, and how quickly — and also to improve on it, it helps to described a key strategy underlying it, which is this:
-approximate the matrix <span class="math notranslate nohighlight">\(A\)</span> by another one <span class="math notranslate nohighlight">\(E\)</span> one that is easier to solve with, chosne so that the discrepacy <span class="math notranslate nohighlight">\(R = A-E\)</span> is small enough. Thus repeatedly solving the new easier equations <span class="math notranslate nohighlight">\(Ex^{(k)} = b^{(k)}\)</span> play a similar role to repeatedly solving  the tangent line approximation in Newton’s method.</p>
+<p>To analyse the Jacobi method — answering questions like for which matrices it works, and how quickly it converges — and also to improve on it, it helps to described a key strategy underlying it, which is this:
+approximate the matrix <span class="math notranslate nohighlight">\(A\)</span> by another one <span class="math notranslate nohighlight">\(E\)</span> one that is easier to solve with, chosen so that the discrepacy <span class="math notranslate nohighlight">\(R = A-E\)</span> is small enough. Thus, repeatedly solving the new easier equations <span class="math notranslate nohighlight">\(Ex^{(k)} = b^{(k)}\)</span> plays a similar role to repeatedly solving tangent line approximations in Newton’s method.</p>
 <p>Of course to be of any use, <span class="math notranslate nohighlight">\(E\)</span> must be somewhat close to <span class="math notranslate nohighlight">\(A\)</span>; the remainder <span class="math notranslate nohighlight">\(R\)</span> must be small enough.
-We can make this requirment precise with the use of
+We can make this requirement precise with the use of
 <a class="reference external" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.ipynb#matrix-norms">matrix norms</a>
-and an upgrade of the contraction mapping theorem in the section on
+and an upgrade of the contraction mapping theorem seen the section on
 <a class="reference internal" href="fixed-point-iteration-python.html"><span class="doc std std-doc">fixed-point iteration</span></a>.</p>
 <p>Thus consider a general <em>splitting</em> of <span class="math notranslate nohighlight">\(A\)</span> as <span class="math notranslate nohighlight">\(A = E + R\)</span>.
-As abve we rewrite <span class="math notranslate nohighlight">\(Ax = Ex + Rx = b\)</span> as <span class="math notranslate nohighlight">\(Ex = b - Rx\)</span> and thence as <span class="math notranslate nohighlight">\(x = E^{-1}b - (E^{-1}R)x\)</span>.
-(It is alright to use the matrix inverse here, since we are not actually computing it; only using it for a theroretical argument!)
+As above, we rewrite <span class="math notranslate nohighlight">\(Ax = Ex + Rx = b\)</span> as <span class="math notranslate nohighlight">\(Ex = b - Rx\)</span> and thence as <span class="math notranslate nohighlight">\(x = E^{-1}b - (E^{-1}R)x\)</span>.
+(It is alright to use the matrix inverse here, since we are not actually computing it; only using it for a theoretical argument!)
 The fixed point iteration form is thus</p>
 <div class="math notranslate nohighlight">
 \[x^{(k)} = g(x^{(k-1)}) = c - S x^{(k-1)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(c = E^{-1}b\)</span> and <span class="math notranslate nohighlight">\(S = E^{-1}R\)</span>.</p>
 <p>For vector-valued functions we extend the previous definition as:</p>
 <p><strong>Definition 1: Vector-valued Contraction Mapping</strong>.
-For a set <span class="math notranslate nohighlight">\(D\)</span> of <span class="math notranslate nohighlight">\(n\)</span>-vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>,
-a mapping <span class="math notranslate nohighlight">\(g:D \to D\)</span> is called a <em>contraction</em> or <em>contraction mapping</em> if there is a constant <span class="math notranslate nohighlight">\(C &lt; 1\)</span> such that</p>
+For a set <span class="math notranslate nohighlight">\(D\)</span> of vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, a mapping <span class="math notranslate nohighlight">\(g:D \to D\)</span> is called a <em>contraction</em> or <em>contraction mapping</em> if there is a constant <span class="math notranslate nohighlight">\(C &lt; 1\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\|g(x) - g(y)\| \leq C \|x - y\|\]</div>
 <p>for any <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.
 We then call <span class="math notranslate nohighlight">\(C\)</span> a <em>contraction constant</em>.</p>
-<p>and extend the Contraction Mapping Theorem to</p>
-<p><strong>Theorem 1. (Contraction Mapping Theorem for vector-valued functions).</strong>
-Any contraction mapping <span class="math notranslate nohighlight">\(g\)</span> on a closed, bounded set <span class="math notranslate nohighlight">\(D \in \mathbb{R}^n\)</span> has exactly one fixed point <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.
-Further, this can be calculated as the limit <span class="math notranslate nohighlight">\(\displaystyle p = \lim_{k \to \infty} x^{(k)}\)</span> of the iteration sequence given by <span class="math notranslate nohighlight">\(x^{(k+1)} = g(x^{(k)})\)</span> for <em>any</em> choice of the starting point <span class="math notranslate nohighlight">\(x^{(0)} \in D\)</span>.</p>
-<p>Further the errors decrease at a guaranteed minimum speed:
-<span class="math notranslate nohighlight">\(\| x^{(k+1)} - p \| \leq C \| x^{(k)} - p \|\)</span>, so <span class="math notranslate nohighlight">\(\| x^{(k)} - p \| \leq C^k  \| x^{(0)} - p \|\)</span>.</p>
+<p>Next, also extend the Contraction Mapping Theorem to</p>
+<p><strong>Theorem 1. (Contraction Mapping Theorem for vector-valued functions).</strong></p>
+<ul class="simple">
+<li><p>Any contraction mapping <span class="math notranslate nohighlight">\(g\)</span> on a closed, bounded set <span class="math notranslate nohighlight">\(D \in \mathbb{R}^n\)</span> has exactly one fixed point <span class="math notranslate nohighlight">\(p\)</span> in <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+<li><p>This can be calculated as the limit <span class="math notranslate nohighlight">\(\displaystyle p = \lim_{k \to \infty} x^{(k)}\)</span> of the iteration sequence given by <span class="math notranslate nohighlight">\(x^{(k)} = g(x^{(k-1)})\)</span> for <em>any</em> choice of the starting point <span class="math notranslate nohighlight">\(x^{(0)} \in D\)</span>.</p></li>
+<li><p>The errors decrease at a guaranteed minimum speed:
+<span class="math notranslate nohighlight">\(\| x^{(k)} - p \| \leq C \| x^{(k-1)} - p \|\)</span>, so <span class="math notranslate nohighlight">\(\| x^{(k)} - p \| \leq C^k  \| x^{(0)} - p \|\)</span>.</p></li>
+</ul>
 <p>With this, it turns out that the above iteration converges if <span class="math notranslate nohighlight">\(S\)</span> is “small enough” in the sense that <span class="math notranslate nohighlight">\(\|S\| = C &lt; 1\)</span> — and it is enough that this works for <em>any</em> choice of matrix norm!</p>
 <p><strong>Theorem 2.</strong>
 If <span class="math notranslate nohighlight">\(S := E^{-1}R = E^{-1}A - I\)</span> has <span class="math notranslate nohighlight">\(\|S\| = C &lt; 1\)</span> for any choice of matrix norm,
 then the iterative scheme <span class="math notranslate nohighlight">\(x^{(k)} = c - S x^{(k-1)}\)</span> with <span class="math notranslate nohighlight">\(c = E^{-1}b\)</span> converges to the solution of
 <span class="math notranslate nohighlight">\(Ax = b\)</span> for any choice of the initial approximation <span class="math notranslate nohighlight">\(x^{(0)}\)</span>.
 (Aside: the zero vector is an obvious and popular choice for <span class="math notranslate nohighlight">\(x^{(0)}\)</span>.)</p>
-<p>Incidentally this condition also guarantees that <span class="math notranslate nohighlight">\(A\)</span> is non-singular so that there exists a unique solution.</p>
+<p>Incidentally, since this condition guarantees that there exists a unique solution to <span class="math notranslate nohighlight">\(Ax=b\)</span>,
+it also shows that <span class="math notranslate nohighlight">\(A\)</span> is non-singular.</p>
 <p><strong>Main Proof Idea:</strong>
 For <span class="math notranslate nohighlight">\(g(x) = c - S x\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\|g(x) - g(y)\| = \| (c - S x) - (c - S y) \| = \| S(y - x) \| \leq \|S\| \|y-x\| \leq C \|x - y\|,\]</div>
 <p>so with <span class="math notranslate nohighlight">\(C &lt; 1\)</span>, it is a contraction.</p>
-<p>(The omitted more “technical” detail is to find a suitable bounded domain <span class="math notranslate nohighlight">\(D\)</span> that all the iterates x^{(k)} stay inside.)</p>
+<p>(The omitted more “technical” detail is to find a suitable bounded domain <span class="math notranslate nohighlight">\(D\)</span> that all the iterates x^{(k)} stay inside it.)</p>
 <div class="section" id="what-does-this-say-about-the-jacobi-method">
 <h3><span class="section-number">27.3.1. </span>What does this say about the Jacobi method?<a class="headerlink" href="#what-does-this-say-about-the-jacobi-method" title="Permalink to this headline">¶</a></h3>
 <p>For the Jacobi method, <span class="math notranslate nohighlight">\(E = D\)</span> so <span class="math notranslate nohighlight">\(E^{-1}\)</span> is the diagonal matrix with elements <span class="math notranslate nohighlight">\(1/a_{i,i}\)</span> on the main diagonal, zero elsewhere.
-The product <span class="math notranslate nohighlight">\(E^{-1}A\)</span> then multiplies each row <span class="math notranslate nohighlight">\(i\)</span> by <span class="math notranslate nohighlight">\(1/a_{i,i}\)</span>, giving</p>
+The product <span class="math notranslate nohighlight">\(E^{-1}A\)</span> then multiplies each row <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> by <span class="math notranslate nohighlight">\(1/a_{i,i}\)</span>, giving</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 E^{-1}A = \left[ \begin{array}{cccc}
@@ -947,20 +951,28 @@ a_{3,1}/a_{3,3} &amp; a_{3,2}/a_{3,3} &amp; 0 &amp; \dots
 \vdots &amp; \vdots &amp; \vdots &amp; \ddots
 \end{array} \right]
 \end{split}\]</div>
-<p>Here is one of many places that using the maximum-norm, a.k.a. <span class="math notranslate nohighlight">\(\infty\)</span>-norm, makes life much easier!</p>
+<p>Here is one of many places that using the maximum-norm, a.k.a. <span class="math notranslate nohighlight">\(\infty\)</span>-norm, makes life much easier!
+Recalling that this is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\| A \|_\infty = \max_{i=1}^n \left( \sum_{j=1}^n |a_{i,j}| \right),
+\]</div>
 <ul class="simple">
 <li><p>First, sum the absolute values of elements in each row <span class="math notranslate nohighlight">\(i\)</span>; with the common factor <span class="math notranslate nohighlight">\(1/|a_{i,i}|\)</span>,
 this gives
-<span class="math notranslate nohighlight">\( (|a_{i,1}| + |a_{i,2}| + \cdots |a_{i,i-1}| + |a_{i,i+1}| + \cdots |a_{i,n}|) \)</span>.
+<span class="math notranslate nohighlight">\( \left( |a_{i,1}| + |a_{i,2}| + \cdots |a_{i,i-1}| + |a_{i,i+1}| + \cdots |a_{i,n}| \right)/|a_{i,i}| \)</span>.
+<br>
 Such a sum, skipping index <span class="math notranslate nohighlight">\(j=i\)</span>, can be abbreviated as</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\left( \sum_{1 \leq j \leq n, j \neq i}|a_{i,1}| \right) / |a_{i,i}|\]</div>
+\[\left( \sum_{1 \leq j \leq n, j \neq i}|a_{i,j}| \right) \Big/ |a_{i,i}|\]</div>
 <ul class="simple">
-<li><p>Then get the <span class="math notranslate nohighlight">\(\infty\)</span>-norm as</p></li>
+<li><p>Then get the norm as the maximum of these:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[C = \max_{i=1}^n \left( \sum_{1 \leq j \leq n, j \neq i}|a_{i,j}| \right) / |a_{i,i}|\]</div>
+\[
+C = \| E^{-1}A \|_\infty = \max_{i=1}^n  \left[ \left( \sum_{1 \leq j \leq n, j \neq i}|a_{i,j}| \right) \Big/ |a_{i,i}| \right]
+\]</div>
 <p>and the contraction condition <span class="math notranslate nohighlight">\(C &lt; 1\)</span> becomes the requirement that each of these <span class="math notranslate nohighlight">\(n\)</span> “row sums” is less than 1:</p>
 <p>Multiplying each of the inequalities by the denominator <span class="math notranslate nohighlight">\(|a_{i,i}|\)</span> gives <span class="math notranslate nohighlight">\(n\)</span> conditions</p>
 <div class="math notranslate nohighlight">
@@ -979,6 +991,9 @@ And indeed, combining this result with Theorem 2 gives:</p>
 The Jacobi Method converges if <span class="math notranslate nohighlight">\(A\)</span> is Strictly Diagonally Dominant, for any initial approximation <span class="math notranslate nohighlight">\(x^{(0)}\)</span>.</p>
 <p>Further, the error goes down by at least a factor of <span class="math notranslate nohighlight">\(\| I - D^{-1}A \|\)</span> at each iteration.</p>
 <p>By the way, other matrix norms give other conditions guaranteeing convergence; perhaps the most useful of these others is that it is also sufficient for <span class="math notranslate nohighlight">\(A\)</span> to be <em>Column-wise Strictly Diagonally Dominant</em> — I leave it to you to guess the definition of that!</p>
+<p><strong>Aside:</strong> This theorem also shows that any strictly diagonally dominant matrix is non-singular;
+this can be a useful way to verify in advance that a system of equation has a unique solution, even if you plan to compute it by some other method like row reduction.</p>
+<p>Further, it can be shown (as will be done in a proposed later section of this book!) that pivoting (row swapping) is not needed: the “dominance” of elements on the main diagonal persists, so that they are always good choices for the pivot element.</p>
 </div>
 </div>
 <div class="section" id="the-gauss-seidel-method">
@@ -1054,13 +1069,13 @@ Instead, solve with forward substitution.</p>
 \[x^{(k)} = A_L^{-1}b - (A_L^{-1}U) x^{(k-1)}\]</div>
 <p>is useful: the iteration map is now <span class="math notranslate nohighlight">\(g(x) = c - S x\)</span> with <span class="math notranslate nohighlight">\(c = (L + D)^{-1} b\)</span> and <span class="math notranslate nohighlight">\(S = (L + D)^{-1} U\)</span>.</p>
 <p>Arguing as above, we see that convergence is guaranteed if <span class="math notranslate nohighlight">\(\| (L + D)^{-1} U\| &lt; 1\)</span>.
-However it is not so easy in general to get a formulas for <span class="math notranslate nohighlight">\(\| (L + D)^{-1} U\|\)</span>;
+However it is not so easy in general to get a formula for <span class="math notranslate nohighlight">\(\| (L + D)^{-1} U\|\)</span>;
 what one can get is slightly disappointing in that, despite the <span class="math notranslate nohighlight">\(R=U\)</span> here being in some sense “smaller” than the <span class="math notranslate nohighlight">\(R=L+U\)</span> for the Jacobi method, the general convergence guarantee looks no better:</p>
 <p><strong>Theorem 3.</strong>
 The Gauss-Seidel method converges if <span class="math notranslate nohighlight">\(A\)</span> is Strictly Diagonally Dominant, for any initial approximation <span class="math notranslate nohighlight">\(x^{(0)}\)</span>.</p>
 <p>However, in practice the convergence rate as given by <span class="math notranslate nohighlight">\(C = C_{GS} = \| (L + D)^{-1} U\|\)</span> is often better than for the
 <span class="math notranslate nohighlight">\(C = C_J = \| D^{-1} (L+U) \|\)</span> for the Jacobi method.</p>
-<p>Sometimes this reduce the number of iterations enough to outweigh the extra computational effort involved in each iteration and make this faster overall than the Jacobi method — but not always.</p>
+<p>Sometimes this reduces the number of iterations enough to outweigh the extra computational effort involved in each iteration and make this faster overall than the Jacobi method — but not always.</p>
 <div class="section" id="exercise-2-implement-and-test-the-gauss-seidel-method-and-compare-to-jacobi">
 <h3><span class="section-number">27.4.1. </span>Exercise 2: Implement and test the Gauss-Seidel method, and compare to Jacobi<a class="headerlink" href="#exercise-2-implement-and-test-the-gauss-seidel-method-and-compare-to-jacobi" title="Permalink to this headline">¶</a></h3>
 <p>Do the two versions as above and use the same test cases.</p>

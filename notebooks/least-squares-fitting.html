@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>30. Least-squares Fitting to Data — Preliminary &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>30. Least-squares Fitting to Data &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -280,7 +280,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   30. Least-squares Fitting to Data — Preliminary
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -297,7 +297,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="newtons-method-for-systems-introduction.html">
-   1. Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction
+   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
@@ -794,19 +794,13 @@
         
               <div>
                 
-  <div class="section" id="least-squares-fitting-to-data-preliminary">
-<h1><span class="section-number">30. </span>Least-squares Fitting to Data — Preliminary<a class="headerlink" href="#least-squares-fitting-to-data-preliminary" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="least-squares-fitting-to-data">
+<h1><span class="section-number">30. </span>Least-squares Fitting to Data<a class="headerlink" href="#least-squares-fitting-to-data" title="Permalink to this headline">¶</a></h1>
 <p><strong>Version of April 14, 2021</strong></p>
-<p><strong>Brenton LeMesurier</strong></p>
-<p>University of Northern Colorado, Greeley, Colorado in Spring 2021,
-<a class="reference external" href="mailto:brenton&#46;lemesurier&#37;&#52;&#48;unco&#46;edu">brenton<span>&#46;</span>lemesurier<span>&#64;</span>unco<span>&#46;</span>edu</a>;
-<br>
-More permanent address: The College of Charleston, Charleston, South Carolina,
-<a class="reference external" href="mailto:lemesurierb&#37;&#52;&#48;cofc&#46;edu">lemesurierb<span>&#64;</span>cofc<span>&#46;</span>edu</a></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Chpater 4 “Least Squares” of <a class="reference external" href="../references.html#Sauer">Sauer</a>, Sections 1 and 2.</p></li>
-<li><p>Section 8.1 “Discrete Least Squares Approximation” of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>.</p></li>
+<li><p>Chapter 4 <em>Least Squares</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a>, Sections 1 and 2.</p></li>
+<li><p>Section 8.1 <em>Discrete Least Squares Approximation</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>.</p></li>
 </ul>
 <p>We have seen that when trying to fit a curve to a large collection of data points, fitting a single polynomial to all of them can be a bad approach.
 This is even more so if the data itself is inaccurate, due for example to measurement error.</p>
@@ -871,7 +865,7 @@ In the following example, all three lines minimize this measure of error, along 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7faaa244dfd0&gt;
 </pre></div>
 </div>
-<img alt="../_images/least-squares-fitting_6_1.png" src="../_images/least-squares-fitting_6_1.png" />
+<img alt="../_images/least-squares-fitting_7_1.png" src="../_images/least-squares-fitting_7_1.png" />
 </div>
 </div>
 <p>The Min-Max method is important and useful, but computationally difficult.
@@ -946,7 +940,7 @@ c = \left[\begin{array}{c} c_0 \\ c_1 \end{array}\right].
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7faaa25ec790&gt;
 </pre></div>
 </div>
-<img alt="../_images/least-squares-fitting_10_2.png" src="../_images/least-squares-fitting_10_2.png" />
+<img alt="../_images/least-squares-fitting_11_2.png" src="../_images/least-squares-fitting_11_2.png" />
 </div>
 </div>
 </div>
@@ -978,7 +972,7 @@ This time, let us look at extrapolation too: values beyond the interval containi
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7faaa26ab0a0&gt;
 </pre></div>
 </div>
-<img alt="../_images/least-squares-fitting_12_2.png" src="../_images/least-squares-fitting_12_2.png" />
+<img alt="../_images/least-squares-fitting_13_2.png" src="../_images/least-squares-fitting_13_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -992,7 +986,7 @@ This time, let us look at extrapolation too: values beyond the interval containi
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;errors fitting at N = 10 points&#39;)
 </pre></div>
 </div>
-<img alt="../_images/least-squares-fitting_14_1.png" src="../_images/least-squares-fitting_14_1.png" />
+<img alt="../_images/least-squares-fitting_15_1.png" src="../_images/least-squares-fitting_15_1.png" />
 </div>
 </div>
 <p>What if we fit at more points?</p>
@@ -1018,7 +1012,7 @@ fitting a simpler curve (like a cubic) to a function (like <span class="math not
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The coefficients are [-0.1137182  -0.06970463  1.02647568 -0.00200789]
 </pre></div>
 </div>
-<img alt="../_images/least-squares-fitting_16_1.png" src="../_images/least-squares-fitting_16_1.png" />
+<img alt="../_images/least-squares-fitting_17_1.png" src="../_images/least-squares-fitting_17_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1030,7 +1024,7 @@ fitting a simpler curve (like a cubic) to a function (like <span class="math not
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/least-squares-fitting_17_0.png" src="../_images/least-squares-fitting_17_0.png" />
+<img alt="../_images/least-squares-fitting_18_0.png" src="../_images/least-squares-fitting_18_0.png" />
 </div>
 </div>
 <p>Not much changes!</p>
@@ -1136,7 +1130,7 @@ this becomes the familiar problem of finding a linear approxation of the data <s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/least-squares-fitting_25_0.png" src="../_images/least-squares-fitting_25_0.png" />
+<img alt="../_images/least-squares-fitting_26_0.png" src="../_images/least-squares-fitting_26_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1149,7 +1143,7 @@ this becomes the familiar problem of finding a linear approxation of the data <s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/least-squares-fitting_26_0.png" src="../_images/least-squares-fitting_26_0.png" />
+<img alt="../_images/least-squares-fitting_27_0.png" src="../_images/least-squares-fitting_27_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1180,7 +1174,7 @@ this becomes the familiar problem of finding a linear approxation of the data <s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/least-squares-fitting_28_0.png" src="../_images/least-squares-fitting_28_0.png" />
+<img alt="../_images/least-squares-fitting_29_0.png" src="../_images/least-squares-fitting_29_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1194,7 +1188,7 @@ this becomes the familiar problem of finding a linear approxation of the data <s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/least-squares-fitting_29_0.png" src="../_images/least-squares-fitting_29_0.png" />
+<img alt="../_images/least-squares-fitting_30_0.png" src="../_images/least-squares-fitting_30_0.png" />
 </div>
 </div>
 <hr class="docutils" />
