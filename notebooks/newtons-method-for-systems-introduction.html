@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>16. Richardson Extrapolation &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>1. Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Definite Integrals, Part 1: The Building Blocks" href="definite-integrals-1-building-blocks-python.html" />
-    <link rel="prev" title="15. Approximating Derivatives by the Method of Undetermined Coefficients" href="derivatives-and-the-method-of-undetermined-coefficents.html" />
+    <link rel="next" title="2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving \(Ax = b\) for Tridiagonal and Banded matrices, and Strict Diagonal Dominance" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html" />
+    <link rel="prev" title="30. Some Future Topics" href="../future_topics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +121,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -208,8 +208,8 @@
    15. Approximating Derivatives by the Method of Undetermined Coefficients
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="richardson-extrapolation.html">
    16. Richardson Extrapolation
   </a>
  </li>
@@ -289,9 +289,9 @@
   Preliminary Versions of Some Possible Future Sections
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="newtons-method-for-systems-introduction.html">
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    1. Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction
   </a>
  </li>
@@ -682,7 +682,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/richardson-extrapolation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/newtons-method-for-systems-introduction.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -707,7 +707,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/richardson-extrapolation.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/newtons-method-for-systems-introduction.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -730,66 +730,21 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   16.1. Motivation
+  <a class="reference internal nav-link" href="#background">
+   1.1. Background
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#procedure">
-   16.2. Procedure
+  <a class="reference internal nav-link" href="#newton-s-method-iteration-formula-for-systems">
+   1.2. Newton’s method iteration formula for systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#addendum-rewriting-to-get-an-error-estimate">
-     16.2.1. Addendum: rewriting to get an error estimate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example">
-     16.2.2. Example
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-1-a">
-     16.2.3. Exercise 1(a)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-1-b">
-     16.2.4. Exercise 1(b)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-2">
-     16.2.5. Exercise 2
+    <a class="reference internal nav-link" href="#justification-linearization-for-function-of-several-variables">
+     1.2.1. Justification: linearization for function of several variables
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-variant-more-useful-for-integration-and-ode-boundary-value-problems-parameter-n">
-   16.3. A variant, more useful for integration and ODE boundary value problems: parameter
-   <span class="math notranslate nohighlight">
-    \(n\)
-   </span>
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-common-verbal-description-for-both-forms">
-     16.3.1. A common verbal description for both forms
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#addendum-rewriting-to-get-an-error-estimate-again">
-     16.3.2. Addendum: Rewriting to get an error estimate, again
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#repeated-richardson-extrapolation">
-   16.4. Repeated Richardson extrapolation
-  </a>
  </li>
 </ul>
 
@@ -802,182 +757,70 @@
         
               <div>
                 
-  <div class="section" id="richardson-extrapolation">
-<h1><span class="section-number">16. </span>Richardson Extrapolation<a class="headerlink" href="#richardson-extrapolation" title="Permalink to this headline">¶</a></h1>
-<p><strong>Revised March 24, 2021:</strong>
-adding notes on practical error estimates for both the <a class="reference external" href="#h-error-estimates"><span class="math notranslate nohighlight">\(h\)</span></a> and <a class="reference external" href="#n-error-estimates"><span class="math notranslate nohighlight">\(n\)</span></a> versions.</p>
-<p>Also in previous revisions,
-the notation has been changed from <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(\phi(h)\)</span> to <span class="math notranslate nohighlight">\(Q_0\)</span> and <span class="math notranslate nohighlight">\(Q(h)\)</span>.</p>
-<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
-<hr class="docutils" />
+  <div class="section" id="solving-system-of-nonlinear-equations-by-generalizations-of-newton-s-method-a-brief-introduction">
+<h1><span class="section-number">1. </span>Solving system of nonlinear equations by generalizations of Newton’s method; A Brief Introduction<a class="headerlink" href="#solving-system-of-nonlinear-equations-by-generalizations-of-newton-s-method-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 13, 2021</strong></p>
+<p><strong>Brenton LeMesurier</strong></p>
+<p>University of Northern Colorado, Greeley, Colorado in Spring 2021,
+<a class="reference external" href="mailto:brenton&#46;lemesurier&#37;&#52;&#48;unco&#46;edu">brenton<span>&#46;</span>lemesurier<span>&#64;</span>unco<span>&#46;</span>edu</a>;
+<br>
+More permanent address: The College of Charleston, Charleston, South Carolina,
+<a class="reference external" href="mailto:lemesurierb&#37;&#52;&#48;cofc&#46;edu">lemesurierb<span>&#64;</span>cofc<span>&#46;</span>edu</a></p>
 <p><strong>References:</strong></p>
+<p>Coming soon.</p>
+<div class="section" id="background">
+<h2><span class="section-number">1.1. </span>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>A system of simultaneous nonlinear equations</p>
+<div class="math notranslate nohighlight">
+\[
+F(x) = 0, \; F:\mathbb{R}^n \to \mathbb{R}^n
+\]</div>
+<p>can be solved by a variant of Newton’s method.</p>
+<p><strong>Aside on notation:</strong>
+For the sake of emphasise analogies between results for vector-vslued quantities and what we have already seen for real- or compex-valued quantities, severl notiot chices are made in thes notes:</p>
 <ul class="simple">
-<li><p>Section 5.1.3 <em>Extrapolation</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
-<li><p>Section 4.2 <em>Richardson Extrapolation</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
-<li><p>Section 4.2 <em>Estimating Derivatives and Richardson Extrapolation</em> of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
+<li><p>Using the same notation that vectors as for real or complex numbers (no over arrows or bold face).</p></li>
+<li><p>Often denoting the derivative of function <span class="math notranslate nohighlight">\(f\)</span> as <span class="math notranslate nohighlight">\(Df\)</span> rather than <span class="math notranslate nohighlight">\(f'\)</span>, and higher derivatives as <span class="math notranslate nohighlight">\(D^p f\)</span> rather than <span class="math notranslate nohighlight">\(f^{(p)}\)</span>. Partial derivatives of <span class="math notranslate nohighlight">\(f(x, y, \dots)\)</span> are <span class="math notranslate nohighlight">\(D_x f\)</span>, <span class="math notranslate nohighlight">\(D_y f\)</span>, etc., and for vector arguments <span class="math notranslate nohighlight">\(x = (x_1, \dots , x_j, \dots x_n)\)</span>, they are <span class="math notranslate nohighlight">\(D_{x_1} f, \dots , D_{x_j} f , \dots , D_{x_n} f\)</span>, or more concisely,
+<span class="math notranslate nohighlight">\(D_1 f \dots , D_j f , \dots ,D_n f\)</span>.
+(This also fits better with Python code notation — even for partial derivatives.)</p></li>
+<li><p>Subscripts will mostly be reserved for components of vectors, labelling the terms of a sequence with superscripts, <span class="math notranslate nohighlight">\(x^{(k)}\)</span> and such.</p></li>
+<li><p>Explicit division is avoided.</p></li>
 </ul>
-<div class="section" id="motivation">
-<h2><span class="section-number">16.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
-<p>With derivative approximations like</p>
+<p>However, I use capital letters for vector-valued functions, for analogy to the use of capital letter for matrices.</p>
+<p>Rewriting Newton’s method according to this new style,
+$<span class="math notranslate nohighlight">\(x^{(k+1)} = x^{(k)} - \frac{f(x^{(k)})}{Df(x^{(k)})}\)</span>$</p>
+<p>or to avoid explicit division and introducing the useful increment <span class="math notranslate nohighlight">\(\delta^{(k)} := x^{(k+1)} - x^{(k)}\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[\Delta_h f(x) := \frac{f(x+h) - f(x)}{h} = Df(x) + \frac{D^2f(x)}{2} h + O(h^2) = Df(x) + O(h)\]</div>
-<p>and</p>
-<div class="math notranslate nohighlight">
-\[\delta_h^2 f(x) := \frac{f(x-h) - 2f(x) + f(x+h)}{h^2} = D^2f(x) + \frac{D^4f(x)}{12}h^2 + O(h^4) = D^2f(x) + O(h^2)\]</div>
-<p>there are limits on the ability to improve accuracy by simply using a smaller value of <span class="math notranslate nohighlight">\(h\)</span>:
-one is that rounding error become problematic.</p>
-<p>Another is that when we are approximating the derivative at a collection of points in an interval <span class="math notranslate nohighlight">\([a,b]\)</span>, <span class="math notranslate nohighlight">\(x_i = a + ih\)</span>, <span class="math notranslate nohighlight">\(0 \leq i \leq n\)</span>, <span class="math notranslate nohighlight">\(h = \displaystyle\frac{b-a}{n}\)</span>, reducing <span class="math notranslate nohighlight">\(h\)</span> requires increasing the number of points <span class="math notranslate nohighlight">\(n+1\)</span>, and so increases the “cost” (time and other resources needed) of the calculation.</p>
-<p>Thus we would like to produce new approximation formulas of higher order <span class="math notranslate nohighlight">\(p\)</span>; that is, with error <span class="math notranslate nohighlight">\(O(h^p)\)</span> for <span class="math notranslate nohighlight">\(p\)</span> greater than the values <span class="math notranslate nohighlight">\(p=1\)</span> for <span class="math notranslate nohighlight">\(\Delta_h f(x)\)</span> or <span class="math notranslate nohighlight">\(p=2\)</span> for <span class="math notranslate nohighlight">\(\delta_h^2 f(x)\)</span>.</p>
+\[Df(x^{(k)}) (\delta^{(k)}) = f(x^{(k)}), \quad x^{(k+1)} = x^{(k)} + \delta^{(k)}.\]</div>
 </div>
-<div class="section" id="procedure">
-<h2><span class="section-number">16.2. </span>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
-<p>The general framework for this is an exact quantity <span class="math notranslate nohighlight">\(Q_0\)</span> for which we have an approximation formula <span class="math notranslate nohighlight">\(Q(h)\)</span> with</p>
-<div class="math notranslate nohighlight">
-\[Q(h) = Q_0 + c_p h^p + O(h^q), = Q_0 + O(h^p), \quad q &gt; p\]</div>
-<p>and we wish to achieve adequate accuracy while keeping <span class="math notranslate nohighlight">\(h\)</span> as large as possible.</p>
-<p>The kernel of the idea is to initially ignore the smaller part of the error, <span class="math notranslate nohighlight">\(O(h^q)\)</span> and just consider</p>
-<div class="math notranslate nohighlight">
-\[Q(h) \approx Q_0 + c_p h^p,\]</div>
-<p>and evaluate for two values of <span class="math notranslate nohighlight">\(h\)</span>; most often either <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(2h\)</span> (or <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(h/2\)</span>, which ismore or less equivalent.)</p>
-<p>That gives</p>
-<div class="math notranslate nohighlight">
-\[Q(2h) \approx Q_0 + c_p (2h)^p = Q_0 + c_p 2^p h^p,\]</div>
-<p>and with only <span class="math notranslate nohighlight">\(Q_0\)</span> and <span class="math notranslate nohighlight">\(c_p\)</span> unknown, this is two (approximate) linear equations in two unknowns, so we can solve for the desired quantity <span class="math notranslate nohighlight">\(Q_0\)</span> by basic Gaussian elimination.
-This gives</p>
+<div class="section" id="newton-s-method-iteration-formula-for-systems">
+<h2><span class="section-number">1.2. </span>Newton’s method iteration formula for systems<a class="headerlink" href="#newton-s-method-iteration-formula-for-systems" title="Permalink to this headline">¶</a></h2>
+<p>For vector valued functions, we will see in a while that an analogous result is true:</p>
 <div class="math notranslate nohighlight">
 \[
-Q_0 \approx \frac{2^p Q(h) - Q(2h)}{2^p - 1} =: Q_q(h).
+(D \textbf{F}(x^{(k)}) ({\delta}^{(k)}) = \textbf{F}(x^{(k)}),
+\quad x^{(k+1)} = x^{(k)} + \delta^{(k)}
 \]</div>
-<p>But is this new approximation any better than the original?
-Using the more complete error formula above for <span class="math notranslate nohighlight">\(Q(h)\)</span> and its version with <span class="math notranslate nohighlight">\(h\)</span> replaced by <span class="math notranslate nohighlight">\(2h\)</span>,</p>
+<p>where <span class="math notranslate nohighlight">\(DF(x)\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> matrix of all the partial derivatives
+<span class="math notranslate nohighlight">\((D_{x_j} F_i)(x)\)</span> or <span class="math notranslate nohighlight">\((D_j F_i)(x)\)</span>, where <span class="math notranslate nohighlight">\(x = (x_1, x_2, \dots, x_n).\)</span></p>
+<div class="section" id="justification-linearization-for-function-of-several-variables">
+<h3><span class="section-number">1.2.1. </span>Justification: linearization for function of several variables<a class="headerlink" href="#justification-linearization-for-function-of-several-variables" title="Permalink to this headline">¶</a></h3>
+<p>To justify the above result, we need at least a case of Taylor’s Theorem for functions of several variables, for both
+<span class="math notranslate nohighlight">\(f:\mathbb{R}^n \to \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(F:\mathbb{R}^n \to \mathbb{R}^n\)</span>; just for linear approximations.
+This material from multi-variable calculus will be reviewed when we need it.</p>
+<p><strong>Warning:</strong> although mathematically this can be written with matrix inverses as</p>
 <div class="math notranslate nohighlight">
 \[
-Q(2h) = Q_0 + c_p(2h)^p + O((2h)^q), = Q_0 + 2^p c_p h^p + O(h^q),
+\textbf{X}^{(k+1)} = \textbf{X}^{(k)} - (D \textbf{F}(\textbf{X}^{(k)})^{-1}(\textbf{F}(\textbf{X}^{(k)})
 \]</div>
-<p>one gets</p>
-<div class="math notranslate nohighlight">
-\[
-Q_q(h) = \frac{2^p \phi(h) - \phi(2h)}{2^p - 1} = Q_0 + O(h^q),
-\]</div>
-<p>so indeed an improvement, since <span class="math notranslate nohighlight">\(q&gt;p\)</span>.</p>
-<p><a name="h-error-estimates"></a></p>
-<div class="section" id="addendum-rewriting-to-get-an-error-estimate">
-<h3><span class="section-number">16.2.1. </span>Addendum: rewriting to get an error estimate<a class="headerlink" href="#addendum-rewriting-to-get-an-error-estimate" title="Permalink to this headline">¶</a></h3>
-<p>We can get a useful practical error estimate by rewriting the above result as</p>
-<div class="math notranslate nohighlight">
-\[
-Q_0 \approx Q(h) + \frac{Q(h) - Q(2h)}{2^p - 1}
-\]</div>
-<p>so that the quantity</p>
-<div class="math notranslate nohighlight">
-\[
-E_h := \frac{Q(h) - Q(2h)}{2^p - 1} \approx Q_0 - Q(h)
-\]</div>
-<p>is approximately the error in <span class="math notranslate nohighlight">\(Q(h)\)</span>.
-Thus,</p>
-<ol class="simple">
-<li><p>Richardson extrapolation can be viewed as “correcting” <span class="math notranslate nohighlight">\(Q_h\)</span> by subtracting of this estimated error:</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[
-Q_0 \approx Q_q(h) = Q_h + E_h
-\]</div>
-<ol class="simple">
-<li><p>This magnitude <span class="math notranslate nohighlight">\(|E_h|\)</span> of this error estimate can be used as a (typically pessimistic!) estimate of the error in the correted result <span class="math notranslate nohighlight">\(Q_q\)</span>.
-Sometimes makes sens to use an even more cautious error estimate, by discarding the denominator <span class="math notranslate nohighlight">\(2^p-1\)</span>:
-using <span class="math notranslate nohighlight">\(|Q(h) - Q(2h)|\)</span> as an estimate of the error in the extrapolated value <span class="math notranslate nohighlight">\(Q_q\)</span>.</p></li>
-</ol>
-<p>Either way, these follow the pervasive pattern of using the change between the two most recent approximations as an error estimate.</p>
-<p>Note the analogy to Newton’s method for solving <span class="math notranslate nohighlight">\(f(x)=0\)</span>, which can be broken into the two steps</p>
-<ul class="simple">
-<li><p>estimate the error in approximate root <span class="math notranslate nohighlight">\(x_n\)</span> as <span class="math notranslate nohighlight">\(E_n := -f(x_n)/f'(x_n)\)</span></p></li>
-<li><p>update the approximation to <span class="math notranslate nohighlight">\(x_{n+1} = x_n + E_n\)</span>.</p></li>
-</ul>
-<p>Finally, note that this is always <em>extrapolation</em>, in the sense of “going beyond”: the new approximation is on the opposite side of the better of the original approximations from the less accurate of them.</p>
-</div>
-<div class="section" id="example">
-<h3><span class="section-number">16.2.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<p>For the basic forward difference approximation above, this process give a three-point method of second order accuracy (<span class="math notranslate nohighlight">\(q=2\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{2 \Delta_h f(x) - \Delta_{2h}f(x)}{2 - 1} = 2 \frac{f(x+h) - f(x)}{h} - \frac{f(x+2h) - f(x)}{2h}
-= \frac{-3f(x) + 4f(x+h) - f(x+2h)}{2h} = Df(x) + O(h^2).
-\]</div>
-</div>
-<div class="section" id="exercise-1-a">
-<h3><span class="section-number">16.2.3. </span>Exercise 1(a)<a class="headerlink" href="#exercise-1-a" title="Permalink to this headline">¶</a></h3>
-<p>Apply Richardson extrapolation to the standard three-point, second order accurate approximation
-<span class="math notranslate nohighlight">\(Q(h) := \delta_h^2 f(x)\)</span> of the second derivative <span class="math notranslate nohighlight">\(Q_0 := D^2f(x)\)</span> as given above, and verify that it gives a fourth-order accurate five-point approximation formula.</p>
-</div>
-<div class="section" id="exercise-1-b">
-<h3><span class="section-number">16.2.4. </span>Exercise 1(b)<a class="headerlink" href="#exercise-1-b" title="Permalink to this headline">¶</a></h3>
-<p>As a supplementary exercise, one could verify the order of accuracy directly with Taylor polynomials, or verify that the new formula has degree of precision <span class="math notranslate nohighlight">\(d=5\)</span>, and hence is of order <span class="math notranslate nohighlight">\(p=4\)</span> due to the formula <span class="math notranslate nohighlight">\(d = p+k-1\)</span> for approximations of <span class="math notranslate nohighlight">\(k\)</span>-th derivatives, given in the notes for Day 11.</p>
-<p>One could also derive the same formula “from scratch” using the Method of Undetermined Coefficients.</p>
-</div>
-<div class="section" id="exercise-2">
-<h3><span class="section-number">16.2.5. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
-<p>Apply Richardson extrapolation to the above one-sided three-point, second order accurate approximation of the derivative <span class="math notranslate nohighlight">\(Df(x)\)</span>, and verify that it gives a third-order accurate four-point approximation formula.</p>
-<p>But note something strange about this new formula: it skips <span class="math notranslate nohighlight">\(f(x+3h)\)</span>.</p>
-<p>Here, instead of extrapolating, one is probably better off applying the Method of Undetermined Coefficients directly with data <span class="math notranslate nohighlight">\(f(x)\)</span>, <span class="math notranslate nohighlight">\(f(x+h)\)</span>, <span class="math notranslate nohighlight">\(f(x+2h)\)</span>, <span class="math notranslate nohighlight">\(f(x+3h)\)</span> and <span class="math notranslate nohighlight">\(f(x+4h)\)</span>: what order of accuracy does that give?</p>
-</div>
-</div>
-<div class="section" id="a-variant-more-useful-for-integration-and-ode-boundary-value-problems-parameter-n">
-<h2><span class="section-number">16.3. </span>A variant, more useful for integration and ODE boundary value problems: parameter <span class="math notranslate nohighlight">\(n\)</span><a class="headerlink" href="#a-variant-more-useful-for-integration-and-ode-boundary-value-problems-parameter-n" title="Permalink to this headline">¶</a></h2>
-<p>A slight variant of the above is approximation with an integer parameter <span class="math notranslate nohighlight">\(n\)</span>, such as approximations of integrals by the (composite) trapezoid rule with <span class="math notranslate nohighlight">\(n\)</span> intervals, <span class="math notranslate nohighlight">\(T_n\)</span>, or the approximate solution of an ordinary differential equation at the above-described collection of <span class="math notranslate nohighlight">\(n+1\)</span> equally spaced values in domain <span class="math notranslate nohighlight">\([a,b]\)</span>.
-Then a more natural ntito of teh approxatio formula is <span class="math notranslate nohighlight">\(Q_n\)</span> instead of <span class="math notranslate nohighlight">\(Q(h)\)</span>.</p>
-<p>The errors of the form <span class="math notranslate nohighlight">\(c_p h^p + O(h^q)\)</span> become</p>
-<div class="math notranslate nohighlight">
-\[Q_n = Q_0 + O\left(\frac{1}{n^p}\right) = Q_0 + \frac{c_p}{n^p} + O\left(\frac{1}{n^q}\right).\]</div>
-<p>The main difference is that to work with integer values of <span class="math notranslate nohighlight">\(n\)</span>, it must be the quantity that is doubled, whereas doubling of <span class="math notranslate nohighlight">\(h\)</span> would correspond to halving of <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>The extrapolation formula becomes</p>
-<div class="math notranslate nohighlight">
-\[
-Q_0 = \frac{2^p Q_{2n} - Q_n}{2^p - 1} + O\left(\frac{1}{n^q}\right).
-\]</div>
-<p><strong>Aside:</strong> For the slightly more general case of increasing from <span class="math notranslate nohighlight">\(n\)</span> to <span class="math notranslate nohighlight">\(k n\)</span>, one gets</p>
-<div class="math notranslate nohighlight">
-\[
-Q_0 = \frac{k^p Q_{k n} - Q_n}{k^p - 1} + O\left(\frac{1}{n^q}\right).
-\]</div>
-<div class="section" id="a-common-verbal-description-for-both-forms">
-<h3><span class="section-number">16.3.1. </span>A common verbal description for both forms<a class="headerlink" href="#a-common-verbal-description-for-both-forms" title="Permalink to this headline">¶</a></h3>
-<p>This can be summarized with the same verbal form as the original formula:</p>
-<ul class="simple">
-<li><p>“<span class="math notranslate nohighlight">\(2^p\)</span> times the more accurate approximation,</p></li>
-<li><p>minus the less accurate approximation,</p></li>
-<li><p>all divided by <span class="math notranslate nohighlight">\((2^p - 1)\)</span>”</p></li>
-</ul>
-<p>Also</p>
-<p>“The error in the more accurate approximation is approximated by the difference between the two approximations, divided by <span class="math notranslate nohighlight">\((2^p - 1)\)</span>”</p>
-<p><a name="n-error-estimates"></a></p>
-</div>
-<div class="section" id="addendum-rewriting-to-get-an-error-estimate-again">
-<h3><span class="section-number">16.3.2. </span>Addendum: Rewriting to get an error estimate, again<a class="headerlink" href="#addendum-rewriting-to-get-an-error-estimate-again" title="Permalink to this headline">¶</a></h3>
-<p>As with the “<span class="math notranslate nohighlight">\(h\)</span>” form above, this extrapolation can be broken into two steps</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-E_{2n} &amp;:= \frac{Q_{2n} - Q_n}{2^p - 1},
-\\
-Q_0 &amp;= Q_{2n} + E_{2n} + O\left(\frac{1}{n^q}\right).
-\end{split}
-\end{split}\]</div>
-<p>so <span class="math notranslate nohighlight">\(E_{2n}\)</span> estimates the error in <span class="math notranslate nohighlight">\(Q_{2n}\)</span>, and the improved approxmation can be expressed as</p>
-<div class="math notranslate nohighlight">
-\[
-Q_{2n} + E_{2n}.
-\]</div>
-</div>
-</div>
-<div class="section" id="repeated-richardson-extrapolation">
-<h2><span class="section-number">16.4. </span>Repeated Richardson extrapolation<a class="headerlink" href="#repeated-richardson-extrapolation" title="Permalink to this headline">¶</a></h2>
-<p>The new improved approximation formulas have the same sort of error formula, but for order <span class="math notranslate nohighlight">\(q\)</span> instead of order <span class="math notranslate nohighlight">\(p\)</span>, so we could extrapolate again to get an even higher order method, and this can be done numerous times if there is a suitable power series in <span class="math notranslate nohighlight">\(h\)</span> or <span class="math notranslate nohighlight">\(1/n\)</span> for the errors.</p>
-<p>That is not so useful for derivative approximations, where one can get the same or better results with the method of underermined coefficients, but can be very useful for integration methods, and for the related task of solving boundary value problems for ordinary differential equations.</p>
-<p>For example, it can be applied to the composite trapezoid rule, giving the composite Simpson’s rule at the first step, and then a succession of approximations of ever higher order – this is known as the <strong>Romberg method.</strong></p>
-<p>Repeated Richardson extrapolation can also be applied to the approximate solution of dofferential equations;
-we might explore that later.</p>
+<p>evaluation of the inverse is in general about three times slower than solving the linear system, so is best avoided.
+(We will soon see a “compromise”; the LU factorization of a matrix.)</p>
+<p>Even avoiding matrix inversion, this involves repeatedly solving systems of <span class="math notranslate nohighlight">\(n\)</span> simultaneous linear equations in <span class="math notranslate nohighlight">\(n\)</span> unknowns, <span class="math notranslate nohighlight">\(A x = b\)</span>, where the matrix <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(D\textbf{F}(x^{(k)})\)</span>, and that will be seen to involve about <span class="math notranslate nohighlight">\(n^3/3\)</span> arithmetic operations.</p>
+<p>It also requires computing the new values of these <span class="math notranslate nohighlight">\(n^2\)</span> partial derivatives at each iteration, also potentially with a cost proportional to <span class="math notranslate nohighlight">\(n^3\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(n\)</span> is large, as is common with differential equations problems, this factor of <span class="math notranslate nohighlight">\(n^3\)</span> indicates a potentially very large cost per iteration, so various modifications have been developed to reduce the computational cost of each iteration (with the trade-off being that more iterations are typically needed): so-called <em>quasi-Newton methods.</em></p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+</div>
 </div>
 </div>
 
@@ -1009,8 +852,8 @@ we might explore that later.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="derivatives-and-the-method-of-undetermined-coefficents.html" title="previous page"><span class="section-number">15. </span>Approximating Derivatives by the Method of Undetermined Coefficients</a>
-    <a class='right-next' id="next-link" href="definite-integrals-1-building-blocks-python.html" title="next page"><span class="section-number">17. </span>Definite Integrals, Part 1: The Building Blocks</a>
+    <a class='left-prev' id="prev-link" href="../future_topics.html" title="previous page"><span class="section-number">30. </span>Some Future Topics</a>
+    <a class='right-next' id="next-link" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html" title="next page"><span class="section-number">2. </span>Simultaneous Linear Equations, Part 7: Faster Methods for Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> for Tridiagonal and Banded matrices, and Strict Diagonal Dominance</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
