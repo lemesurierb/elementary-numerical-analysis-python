@@ -745,8 +745,18 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1">
+     29.2.1. Exercise 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#refinement-deciding-the-iteration-count">
-     29.2.1. Refinement: deciding the iteration count
+     29.2.2. Refinement: deciding the iteration count
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2">
+     29.2.3. Exercise 2
     </a>
    </li>
   </ul>
@@ -761,12 +771,24 @@
      29.3.1. Basic algorithm for the Inverse Power Method
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3">
+     29.3.2. Exercise 3
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#getting-other-eigenvalues-with-the-shifted-inverse-power-method">
    29.4. Getting other eigenvalues with the Shifted Inverse Power Method
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4">
+     29.4.1. Exercise 4
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc">
@@ -786,7 +808,8 @@
                 
   <div class="section" id="computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond">
 <h1><span class="section-number">29. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond<a class="headerlink" href="#computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond" title="Permalink to this headline">¶</a></h1>
-<p><strong>Version of April 13, 2021</strong></p>
+<p><strong>Version of Friday April 16, 2021</strong>, making a few corrections after class and adding a reference for the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Gershgorin_circle_theorem">Gershgorin circle theorem</a>.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 12.1 <em>Power Iteration Methods</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -801,12 +824,12 @@ in particular Section 3 <em>Power Method</em>, and also Section 2 <em>Eigenvalue
 That is, to compute
 the eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span> (of which generically there are <span class="math notranslate nohighlight">\(n\)</span>, but sometimes less)
 and the eigenvectors <span class="math notranslate nohighlight">\(\vec{v}\)</span> corresponding to each.</p>
-<p>With eigenproblems, and particularly those arising from differential equations, one often needs only the few smallest and/or largest eigenvalues. For these, the power method described below can be adapted, giving the shifted inverse power method.</p>
-<p>Here we often restirx our attention to the case of a real symmetric matrix (<span class="math notranslate nohighlight">\(A^T = A\)</span>, or <span class="math notranslate nohighlight">\(A_{ij} = A_{ji}\)</span>), or a Hermitian matrix (<span class="math notranslate nohighlight">\(A^T = A*\)</span>), for which many things are a bit simpler:</p>
+<p>With eigenproblems, and particularly those arising from differential equations, one often needs only the few smallest and/or largest eigenvalues. For these, the <em>power method</em> described next can be adapted, leading to the <em>shifted inverse power method</em>.</p>
+<p>Here we often restict our attention to the case of a real <em>symmetric</em> matrix (<span class="math notranslate nohighlight">\(A^T = A\)</span>, or <span class="math notranslate nohighlight">\(A_{ij} = A_{ji}\)</span>), or a Hermitian matrix (<span class="math notranslate nohighlight">\(A^T = A^*\)</span>), for which many things are a bit simpler:</p>
 <ul class="simple">
 <li><p>all eigenvalues are real,</p></li>
 <li><p>for symmetric matrices, all eigenvectors are also real,</p></li>
-<li><p>there is a complete set of orthogonal eigenvectors <span class="math notranslate nohighlight">\(\vec{v}_k\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span> that form a basis for all vectors
+<li><p>there is a complete set of orthogonal eigenvectors <span class="math notranslate nohighlight">\(\vec{v}_k\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span> that form a basis for all vectors,
 and so on.</p></li>
 </ul>
 <p>However, the methods described here can be used more generally, or can be made to work with minor adjustments.</p>
@@ -815,6 +838,8 @@ repeated roots are possible, and they will all be named, so there are always val
 Here, these eigenvalues will be enumerated in decreasing order of magnitude:</p>
 <div class="math notranslate nohighlight">
 \[|\lambda_1| \geq |\lambda_2| \cdots \geq |\lambda_n|.\]</div>
+<p>Generically, all the magnitudes are different, which makes things works more easily,
+so that will sometimes be assumed while developing the intuition of the method.</p>
 <div class="section" id="the-power-method">
 <h2><span class="section-number">29.1. </span>The Power Method<a class="headerlink" href="#the-power-method" title="Permalink to this headline">¶</a></h2>
 <p>The basic tool is the <em>Power Method</em>, which will usually <em>but not always</em> succeed in computing the eigenvalue of largest magnitude, <span class="math notranslate nohighlight">\(\lambda_1\)</span>, and <strong>a</strong> corresponding eigenvector <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>.
@@ -828,13 +853,13 @@ by successive multiplications, and rescales at each stage to the unit vectors
 <div class="math notranslate nohighlight">
 \[r^{(k)} := \langle\vec{y}^{\,k+1}, \vec{x}^{\,k} \rangle
 \approx \langle\lambda \vec{x}^{\,k}, \vec{x}^{\,k}\rangle \approx \lambda\]</div>
-<p><strong>Note:</strong> Here and below, I use <span class="math notranslate nohighlight">\(\langle \vec{a}, \vec{b}\rangle\)</span> to denote the inner product (dot product) of two vectors; with Python/NumPy arrays this is given by <code class="docutils literal notranslate"><span class="pre">a.dot(b)</span></code>.</p>
+<p><strong>Note:</strong> Here and below, I use <span class="math notranslate nohighlight">\(\langle \vec{a}, \vec{b}\rangle\)</span> to denote the inner product (a.k.a. <em>dot product</em>) of two vectors; with Numpy arrays this is given by <code class="docutils literal notranslate"><span class="pre">a.dot(b)</span></code>.</p>
 </div>
 <div class="section" id="a-basic-algorithm-for-the-power-method">
 <h2><span class="section-number">29.2. </span>A basic algorithm for the Power Method<a class="headerlink" href="#a-basic-algorithm-for-the-power-method" title="Permalink to this headline">¶</a></h2>
 <p><em>Choose</em> initial vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span>, maybe with a random number generator.</p>
 <p>Normalize to <span class="math notranslate nohighlight">\(\vec{x}^{\,0} = \vec{y}^{\,0}/\|\vec{y}^{\,0}\|\)</span>.</p>
-<p>for <span class="math notranslate nohighlight">\(k\)</span> from 1 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
+<p>for <span class="math notranslate nohighlight">\(k\)</span> from 0 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
 <br>
 <span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(\vec{y}^{\,k+1} = A \vec{x}^{\,k}\)</span>
 <br>
@@ -844,8 +869,85 @@ by successive multiplications, and rescales at each stage to the unit vectors
 <br>
 end for</p>
 <p>The final values of <span class="math notranslate nohighlight">\(r^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> approximate <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> respectively.</p>
+<div class="section" id="exercise-1">
+<h3><span class="section-number">29.2.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<p>Implement this algorithm and test it on the real, symmetric matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \left[ \begin{array}{ccc} 3 &amp; 1 &amp; 1 \\ 1 &amp; 8 &amp; 1 \\ 1 &amp; 1 &amp; 4 \end{array} \right]
+\end{split}\]</div>
+<p>This all real eigenvalues, all within <span class="math notranslate nohighlight">\(2\)</span> of the diagonal elements (this claim should be explained as part of the project write-up), so start with it.</p>
+<p>As a debugging strategy, you could replace all those off-diagonal ones by a small value <span class="math notranslate nohighlight">\(\delta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_\delta = \left[ \begin{array}{ccc} 3 &amp; \delta &amp; \delta \\ \delta &amp; 8 &amp; \delta \\ \delta &amp; \delta &amp; 4 \end{array} \right]
+\end{split}\]</div>
+<p>Then the <a class="reference external" href="https://en.wikipedia.org/wiki/Gershgorin_circle_theorem">Gershgorin circle theorem</a> ensures that each eigenvalue is within <span class="math notranslate nohighlight">\(2\delta\)</span> of an entry on the main diagonal.
+Furthermore, if <span class="math notranslate nohighlight">\(\delta\)</span> is small enough that the circles of radius <span class="math notranslate nohighlight">\(2\delta\)</span> centered on the diagonal elements do not overlap, then there is one eigenvalue in each circle.</p>
+<p>You could even start with <span class="math notranslate nohighlight">\(\delta=0\)</span>, for which yuo know exactly the eigenvalues: they are the diagonal elements.</p>
+<p>Here and below you could check your work with Numpy, using function <code class="docutils literal notranslate"><span class="pre">numpy.linalg.eig(A)</span></code>.</p>
+<p>However, thst is almost cheating, so note that there is also a backward error check:
+see how small <span class="math notranslate nohighlight">\(\|A v - \lambda v\|/\| v \|\)</span> is.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">],[</span><span class="n">delta</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">delta</span><span class="p">],[</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="p">[</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="p">]</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With </span><span class="si">{</span><span class="n">delta</span><span class="si">=}</span><span class="s2">, so that A is&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">lambda_0</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lambda_1</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lambda_2</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1"># The eigenvectors are the columns of the output array `eigenvectors`, so:</span>
+<span class="n">v_0</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># Lists print more nicely than arrays!</span>
+<span class="n">v_1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">v_2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The eigenvalues are </span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;and the eigenvalue-eigenvector pairs are&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lambda_0</span><span class="si">=}</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">v_0</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lambda_1</span><span class="si">=}</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">v_1</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lambda_2</span><span class="si">=}</span><span class="s2">, </span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">v_2</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With delta=0.01, so that A is
+[[3.   0.01 0.01]
+ [0.01 8.   0.01]
+ [0.01 0.01 4.  ]]
+The eigenvalues are [2.99988041 8.0000451  4.00007449]
+and the eigenvalue-eigenvector pairs are
+lambda_0=2.999880409987065, 	 v_0=[-0.9999482535404536, 0.0019798921714429085, 0.009978490285907764]
+lambda_1=8.000045099761195, 	 v_1=[0.0020049815629866285, 0.999994852570506, 0.0025049713419310364]
+lambda_2=4.000074490251736, 	 v_2=[0.00997347934918302, -0.0025248484075827684, 0.9999470760246215]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="refinement-deciding-the-iteration-count">
-<h3><span class="section-number">29.2.1. </span>Refinement: deciding the iteration count<a class="headerlink" href="#refinement-deciding-the-iteration-count" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">29.2.2. </span>Refinement: deciding the iteration count<a class="headerlink" href="#refinement-deciding-the-iteration-count" title="Permalink to this headline">¶</a></h3>
 <p>Some details are omitted above; above all, how to decide the number of iterations.</p>
 <p>One approach is to use the fact that an eigenvector-eigenvalue pair satisfies
 <span class="math notranslate nohighlight">\(A \vec{v} - \lambda \vec{v} = 0\)</span>, so the “residual norm”</p>
@@ -860,6 +962,10 @@ end for</p>
 \[\|\vec{y}^{\,k+1} - r^{(k)} \vec{x}^{\,k}\| \leq \epsilon.\]</div>
 <p>Alternatively, keep the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, but exit early (with <code class="docutils literal notranslate"><span class="pre">break</span></code>) if this condition is met.</p>
 <p>I generally recommend this <code class="docutils literal notranslate"><span class="pre">for-if-break</span></code> form for implementing iterative methods, because it makes avoidance of infinite loops simpler, and avoids the common <code class="docutils literal notranslate"><span class="pre">while</span></code> loop issue that you do not yet have an error estimate when the loop starts.</p>
+</div>
+<div class="section" id="exercise-2">
+<h3><span class="section-number">29.2.3. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
+<p>Modify your code from Exercise 1 to implement this accuracy control.</p>
 </div>
 </div>
 <div class="section" id="the-inverse-power-method">
@@ -879,7 +985,7 @@ Instead, express the above as the sysem of equations.</p>
 <p><em>Choose</em> initial vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span>, maybe with a random number generator.</p>
 <p>Normalize to <span class="math notranslate nohighlight">\(\vec{x}^{\,0} = \vec{y}^{\,0}/\|\vec{y}^{\,0}\|\)</span>.</p>
 <p>Compute an LU factorization <span class="math notranslate nohighlight">\(L U = A\)</span>.</p>
-<p>for <span class="math notranslate nohighlight">\(k\)</span> from 1 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
+<p>for <span class="math notranslate nohighlight">\(k\)</span> from 0 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
 <br>
 <span class="math notranslate nohighlight">\(\quad\)</span> Solve <span class="math notranslate nohighlight">\(L \vec{z}^{\,k+1} = \vec{x}^{\,k}\)</span>
 <br>
@@ -891,6 +997,11 @@ Instead, express the above as the sysem of equations.</p>
 <br>
 end for</p>
 <p>(If all goes well) the final values of <span class="math notranslate nohighlight">\(r^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> approximate <span class="math notranslate nohighlight">\(\lambda_n\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_n\)</span> respectively.</p>
+</div>
+<div class="section" id="exercise-3">
+<h3><span class="section-number">29.3.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
+<p>Implement this basic algorithm (with a fixed iteration count, as in Example 1),
+and then create a second version that imposes an accuracy target (as in Example 2).</p>
 </div>
 </div>
 <div class="section" id="getting-other-eigenvalues-with-the-shifted-inverse-power-method">
@@ -905,6 +1016,12 @@ As a variant, once we have <span class="math notranslate nohighlight">\(\lambda_
 \[(A - sI)\vec{v}_i = (\lambda_i  - s)\vec{v}_i\]</div>
 <p>Thus, applying the inverse power method to <span class="math notranslate nohighlight">\(A - s I\)</span> computes its largest eigenvalue <span class="math notranslate nohighlight">\(\gamma\)</span>,
 and then <span class="math notranslate nohighlight">\(\lambda = 1/(\gamma + s)\)</span> is the eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> closest to <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<div class="section" id="exercise-4">
+<h3><span class="section-number">29.4.1. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h3>
+<p>As above, implement this, probably sarting with a fixed iteration count version.</p>
+<p>For the test case above, some plausible initial choices for the shifts are each if the entries on the main diagonal,
+and as above, testing with <span class="math notranslate nohighlight">\(A_s\)</span></p>
+</div>
 </div>
 <div class="section" id="further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc">
 <h2><span class="section-number">29.5. </span>Further topics: getting all the eigenvalues with the QR Method, etc.<a class="headerlink" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc" title="Permalink to this headline">¶</a></h2>
@@ -912,10 +1029,10 @@ and then <span class="math notranslate nohighlight">\(\lambda = 1/(\gamma + s)\)
 <p>We will not address the details of that method in this course, but one way to think about it for a symmetric matrix is that:</p>
 <ul class="simple">
 <li><p>The eigenvectors are orthogonal.</p></li>
-<li><p>Thus, if after computing <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, one uses the power iteration starting with <span class="math notranslate nohighlight">\(\vec{x}^{\,0,2}\)</span> orthogonal to <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, then all the new iterates <span class="math notranslate nohighlight">\(\vec{x}^{\,k,2}\)</span> will stay orthogonal, and one will get the eignevector corresponding to the largest remaining eigenvector: you get <span class="math notranslate nohighlight">\(\vec{v}_2\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>.</p></li>
+<li><p>Thus, if after computing <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, one uses the power iteration starting with <span class="math notranslate nohighlight">\(\vec{x}^{\,0,2}\)</span> orthogonal to <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>, then all the new iterates <span class="math notranslate nohighlight">\(\vec{x}^{\,k,2}\)</span> will stay orthogonal, and one will get the eigenvector corresponding to the largest remaining eigenvector: you get <span class="math notranslate nohighlight">\(\vec{v}_2\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>.</p></li>
 <li><p>Continuing likewise, one can get the eigenvalues in descending order of magnitude.</p></li>
 <li><p>As a modification, one can do all these almost in parallel: at iteration <span class="math notranslate nohighlight">\(k\)</span>, have an approximation <span class="math notranslate nohighlight">\(\vec{x}^{\,k,i}\)</span> for each <span class="math notranslate nohighlight">\(\lambda_i\)</span> and at each stage, got by adjusting these new approximations so that <span class="math notranslate nohighlight">\(\vec{x}^{\,k,i}\)</span> is orthogonal to all the approximations <span class="math notranslate nohighlight">\(\vec{x}^{\,k,j}\)</span>, <span class="math notranslate nohighlight">\(j &lt; i\)</span>, for all the previous (larger) eigenvalues.
-This uses a variant of the <em>Gram-Schmidt</em> method for orthogonalizing a set of vectors.</p></li>
+This uses a variant of the <a class="reference external" href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram-Schmidt</a> method for orthogonalizing a set of vectors.</p></li>
 </ul>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>

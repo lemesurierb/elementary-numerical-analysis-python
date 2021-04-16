@@ -837,7 +837,7 @@
 <ul class="simple">
 <li><p>the fourth-order accurate Runge-Kutta Fehlberg method,</p></li>
 <li><p>an example with an ODE IVP solver from package SciPy, the function <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>, and</p></li>
-<li><p>an ilustration of how to measure the time taken to execute a piece of code, using the function <code class="docutils literal notranslate"><span class="pre">time.time</span></code></p></li>
+<li><p>an illustration of how to measure the time taken to execute a piece of code, using the function <code class="docutils literal notranslate"><span class="pre">time.time</span></code></p></li>
 </ul>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -1003,7 +1003,7 @@ du/dt &amp;= K(\cos(t) - u) - \sin(t)
 <h2><span class="section-number">25.5. </span>The explicit trapezoid method with error control<a class="headerlink" href="#the-explicit-trapezoid-method-with-error-control" title="Permalink to this headline">¶</a></h2>
 <p>In practice, one usually needs at least second order accuracy, and one approach to that is using computing a “candidates” for teh next time step with a second order accurate Runge-Kutta method and also a third order accurate one, the latter used only to get an error estimate for the former.</p>
 <p>Perhaps the simplest of these is based on adding error estimation to the Explicit Trapezoid Rule;
-omitting the step sze adjustment for now, the main ingredients are:</p>
+omitting the step size adjustment for now, the main ingredients are:</p>
 <p><span class="math notranslate nohighlight">\(K_1 = h f(t, U)\)</span></p>
 <p><span class="math notranslate nohighlight">\(K_2 = f(t + h, U + K_1)\)</span></p>
 <p>(So far, as for the explicit trapezoid method)</p>
