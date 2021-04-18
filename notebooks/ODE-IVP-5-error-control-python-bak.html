@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc." href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" />
-    <link rel="prev" title="24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs" href="ODE-IVP-4-system-higher-order-equations.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +119,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -253,8 +251,8 @@
    24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-5-error-control-python.html">
    25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
   </a>
  </li>
@@ -687,9 +685,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-5-error-control-python.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-5-error-control-python-bak.rst"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
+                data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -712,7 +710,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-5-error-control-python.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-5-error-control-python-bak.rst"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -736,12 +734,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-basic-ode-initial-value-problem">
-   25.1. The Basic ODE Initial Value Problem
+   The Basic ODE Initial Value Problem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#error-control-by-varying-the-time-step-size-h-i">
-   25.2. Error Control by Varying the Time Step Size
+   Error Control by Varying the Time Step Size
    <span class="math notranslate nohighlight">
     \(h_i\)
    </span>
@@ -749,80 +747,73 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-crude-error-estimate-for-euler-s-method-richardson-extrapolation">
-   25.3. A crude error estimate for Euler’s Method: Richardson Extrapolation
+   A crude error estimate for Euler’s Method: Richardson Extrapolation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-size-choice">
-     25.3.1. Step size choice
+     Step size choice
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
-     25.3.2. Exercise 1
+     Exercise 1
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#error-tolerance">
-     25.3.3. Error tolerance
+     Error tolerance
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-crude-approach-to-reducing-the-step-size-when-needed">
-     25.3.4. A crude approach to reducing the step size when needed
+     A crude approach to reducing the step size when needed
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#increasing-the-step-size-when-desirable">
-     25.3.5. Increasing the step size when desirable
+     Increasing the step size when desirable
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#another-strategy-for-getting-error-estimates-two-related-runge-kutta-methods">
-   25.4. Another strategy for getting error estimates: two (related) Runge-Kutta methods
+   Another strategy for getting error estimates: two (related) Runge-Kutta methods
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-2">
-     25.4.1. Exercise 2
+     Exercise 2
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#partial-solution-to-exercise-2">
-       25.4.1.1. Partial Solution to Exercise 2
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-explicit-trapezoid-method-with-error-control">
-   25.5. The explicit trapezoid method with error control
+   The explicit trapezoid method with error control
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-size-adjustment">
-     25.5.1. Step size adjustment
+     Step size adjustment
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-3">
-     25.5.2. Exercise 3
+     Exercise 3
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements">
-   25.6. Fourth order accurate methods with error control: Runge-Kutta-Felberg and some newer refinements
+   Fourth order accurate methods with error control: Runge-Kutta-Felberg and some newer refinements
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example">
-     25.6.1. Example
+     Example
     </a>
    </li>
   </ul>
@@ -839,17 +830,12 @@
               <div>
                 
   <div class="section" id="initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes">
-<h1><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes" title="Permalink to this headline">¶</a></h1>
-<p><strong>Version of April 17, 2021</strong>,</p>
-<ul class="simple">
-<li><p>revising the description of the step control method; it is better to only apply the “safety factor” when choosing the next step size; not when checking whether the current step is accurtate enough, and</p></li>
-<li><p>adding Python code and examples for error control in Euler’s method.</p></li>
-</ul>
-<p>Previous additions on April 7 include</p>
+<h1>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 7, 2021</strong>, adding</p>
 <ul class="simple">
 <li><p>the fourth-order accurate Runge-Kutta Fehlberg method,</p></li>
 <li><p>an example with an ODE IVP solver from package SciPy, the function <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>, and</p></li>
-<li><p>an illustration of how to measure the time taken to execute a piece of code, using the function <code class="docutils literal notranslate"><span class="pre">time.time</span></code>.</p></li>
+<li><p>an illustration of how to measure the time taken to execute a piece of code, using the function <code class="docutils literal notranslate"><span class="pre">time.time</span></code></p></li>
 </ul>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -858,7 +844,7 @@
 <li><p>Section 7.3 of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
 <div class="section" id="the-basic-ode-initial-value-problem">
-<h2><span class="section-number">25.1. </span>The Basic ODE Initial Value Problem<a class="headerlink" href="#the-basic-ode-initial-value-problem" title="Permalink to this headline">¶</a></h2>
+<h2>The Basic ODE Initial Value Problem<a class="headerlink" href="#the-basic-ode-initial-value-problem" title="Permalink to this headline">¶</a></h2>
 <p>We consider again the initial value problem</p>
 <div class="math notranslate nohighlight">
 \[
@@ -869,7 +855,7 @@
 but omitting the tilde notation <span class="math notranslate nohighlight">\(\tilde u\)</span>, <span class="math notranslate nohighlight">\(\tilde f\)</span>.</p>
 </div>
 <div class="section" id="error-control-by-varying-the-time-step-size-h-i">
-<h2><span class="section-number">25.2. </span>Error Control by Varying the Time Step Size <span class="math notranslate nohighlight">\(h_i\)</span><a class="headerlink" href="#error-control-by-varying-the-time-step-size-h-i" title="Permalink to this headline">¶</a></h2>
+<h2>Error Control by Varying the Time Step Size <span class="math notranslate nohighlight">\(h_i\)</span><a class="headerlink" href="#error-control-by-varying-the-time-step-size-h-i" title="Permalink to this headline">¶</a></h2>
 <p>Recall the variable step-size version of Euler’s method:</p>
 <p>Input: <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(n\)</span> <br></p>
 <p><span class="math notranslate nohighlight">\(t_0 = a\)</span> <br>
@@ -888,7 +874,7 @@ but omitting the tilde notation <span class="math notranslate nohighlight">\(\ti
 <p>As usual, the theoretical error bounds like <span class="math notranslate nohighlight">\(O(h_i^2)\)</span> for a single step of Euler’s method are not enough for quantitative tasks like choosing <span class="math notranslate nohighlight">\(h_i\)</span>, but they do motivate more practical estimates.</p>
 </div>
 <div class="section" id="a-crude-error-estimate-for-euler-s-method-richardson-extrapolation">
-<h2><span class="section-number">25.3. </span>A crude error estimate for Euler’s Method: Richardson Extrapolation<a class="headerlink" href="#a-crude-error-estimate-for-euler-s-method-richardson-extrapolation" title="Permalink to this headline">¶</a></h2>
+<h2>A crude error estimate for Euler’s Method: Richardson Extrapolation<a class="headerlink" href="#a-crude-error-estimate-for-euler-s-method-richardson-extrapolation" title="Permalink to this headline">¶</a></h2>
 <p>Starting at a point (t, u(t)), we can estimate the error in Euler’s method approximato at a slightly later time <span class="math notranslate nohighlight">\(t_i + h\)</span> by using two approximations of <span class="math notranslate nohighlight">\(U(t + h)\)</span>:</p>
 <ul class="simple">
 <li><p>The value given by a step of Euler’s method with step size <span class="math notranslate nohighlight">\(h\)</span>: call this <span class="math notranslate nohighlight">\(U^{h}\)</span></p></li>
@@ -900,7 +886,7 @@ so that</p>
 <div class="math notranslate nohighlight">
 \[e_h \approx \frac{U_2^{h/2} - U^{h}}{2}\]</div>
 <div class="section" id="step-size-choice">
-<h3><span class="section-number">25.3.1. </span>Step size choice<a class="headerlink" href="#step-size-choice" title="Permalink to this headline">¶</a></h3>
+<h3>Step size choice<a class="headerlink" href="#step-size-choice" title="Permalink to this headline">¶</a></h3>
 <p>What do we do with this error information?</p>
 <p>The first obvious ideas are:</p>
 <ul class="simple">
@@ -909,18 +895,18 @@ so that</p>
 </ul>
 </div>
 <div class="section" id="exercise-1">
-<h3><span class="section-number">25.3.2. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
 <p>Write a formula for <span class="math notranslate nohighlight">\(U_h\)</span> and <span class="math notranslate nohighlight">\(e_h\)</span> if one starts from the point <span class="math notranslate nohighlight">\((t_i, U_i)\)</span>, so that <span class="math notranslate nohighlight">\((t_i + h, U^h)\)</span> is the proposed value for the next point <span class="math notranslate nohighlight">\((t_{i+1}, U_{i+1})\)</span> in the approximate solution — but only if <span class="math notranslate nohighlight">\(e_h\)</span> is small enough!</p>
 </div>
 <div class="section" id="error-tolerance">
-<h3><span class="section-number">25.3.3. </span>Error tolerance<a class="headerlink" href="#error-tolerance" title="Permalink to this headline">¶</a></h3>
+<h3>Error tolerance<a class="headerlink" href="#error-tolerance" title="Permalink to this headline">¶</a></h3>
 <p>One simple criterion for accuracy is that the estimated error in this step be no more than some overall upper limit on the error in each time step, <span class="math notranslate nohighlight">\(T\)</span>.
 That is, accept the step size <span class="math notranslate nohighlight">\(h\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[|e_h| \leq T\]</div>
 </div>
 <div class="section" id="a-crude-approach-to-reducing-the-step-size-when-needed">
-<h3><span class="section-number">25.3.4. </span>A crude approach to reducing the step size when needed<a class="headerlink" href="#a-crude-approach-to-reducing-the-step-size-when-needed" title="Permalink to this headline">¶</a></h3>
+<h3>A crude approach to reducing the step size when needed<a class="headerlink" href="#a-crude-approach-to-reducing-the-step-size-when-needed" title="Permalink to this headline">¶</a></h3>
 <p>If this error tolerance is not met, we must choose a new step size <span class="math notranslate nohighlight">\(h'\)</span>, and we can predict roughly its error behavior using the known order natue of the error in Euler’s method: scaling dowen to <span class="math notranslate nohighlight">\(h' = s h\)</span>, the error in a single step scales with <span class="math notranslate nohighlight">\(h^2\)</span> (in general it scales with <span class="math notranslate nohighlight">\(h^{p+1}\)</span> for a method of order <span class="math notranslate nohighlight">\(p\)</span>), and so to reduce the error by the needed factor <span class="math notranslate nohighlight">\(\displaystyle \frac{e_h}{T}\)</span> one needs approximately</p>
 <div class="math notranslate nohighlight">
 \[
@@ -934,7 +920,7 @@ Another is that one might get into an infinite loop of step size reduction.</p>
 <p>So refinements of this choice must be considered.</p>
 </div>
 <div class="section" id="increasing-the-step-size-when-desirable">
-<h3><span class="section-number">25.3.5. </span>Increasing the step size when desirable<a class="headerlink" href="#increasing-the-step-size-when-desirable" title="Permalink to this headline">¶</a></h3>
+<h3>Increasing the step size when desirable<a class="headerlink" href="#increasing-the-step-size-when-desirable" title="Permalink to this headline">¶</a></h3>
 <p>If we simply follow the above aproach, the step size, once reduced, will never be increased.
 This could lead to great inefficiency, through using an unecessarily small step size just because at an earlier part of the time domain, accuracy required very small steps.</p>
 <p>Thus, after a successful time step, one might consider increasing <span class="math notranslate nohighlight">\(h\)</span> for the next step.
@@ -944,7 +930,7 @@ This could be done using exactly the above formula, but again there are risks, s
 </div>
 </div>
 <div class="section" id="another-strategy-for-getting-error-estimates-two-related-runge-kutta-methods">
-<h2><span class="section-number">25.4. </span>Another strategy for getting error estimates: two (related) Runge-Kutta methods<a class="headerlink" href="#another-strategy-for-getting-error-estimates-two-related-runge-kutta-methods" title="Permalink to this headline">¶</a></h2>
+<h2>Another strategy for getting error estimates: two (related) Runge-Kutta methods<a class="headerlink" href="#another-strategy-for-getting-error-estimates-two-related-runge-kutta-methods" title="Permalink to this headline">¶</a></h2>
 <p>The recurring strategy of estimating errors by the difference of two different approximations — one expected to be far better than the other — can be used in a nice way here.
 I will first illustrate with the simplset version, using Euler’s Mathod and the Explicit Trapezoid Method.</p>
 <p>Recall that the increment in Euler’s Method from time <span class="math notranslate nohighlight">\(t\)</span> to time <span class="math notranslate nohighlight">\(t+h\)</span> is</p>
@@ -959,19 +945,18 @@ K_2 &amp;= h f(t+h, U + K_1)
 \end{split}\end{split}\]</div>
 <p>Thus we can use the difference, <span class="math notranslate nohighlight">\(|K_1 - (K_1 + K_2)/2| = |(K_1 - K_2)/2|\)</span> as an error estimate.
 In fact to be cautious, one often drops the factor of <span class="math notranslate nohighlight">\(1/2\)</span>, so using approximation <span class="math notranslate nohighlight">\(\tilde{e}_h = |K_1 - K_2|\)</span>.</p>
-<p>One has to be careful: this estimates the error in Euler’s Method, and one has to use it that way:
-using the less accurate value <span class="math notranslate nohighlight">\(K_1\)</span> as the update.</p>
+<p>One has to be careful: this estimates the error in Euler’s Method, so one has to use it that way: using the less accurate value <span class="math notranslate nohighlight">\(K_1\)</span> as the update.</p>
 <p>A basic algorithm for the time step starting with <span class="math notranslate nohighlight">\(t_i, U_i\)</span> is</p>
 <p><span class="math notranslate nohighlight">\(K_1 \leftarrow h f(t_i, U_i)\)</span></p>
-<p><span class="math notranslate nohighlight">\(K_2 \leftarrow f(t_i + h, U_i + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 \leftarrow f(t_{i+1}, U_i + K_1)\)</span></p>
 <p><span class="math notranslate nohighlight">\(e_h \leftarrow |K_1 - K_2|\)</span></p>
 <p><span class="math notranslate nohighlight">\(s \leftarrow \sqrt{T/e_h}\)</span></p>
-<p>if <span class="math notranslate nohighlight">\(e_h &lt; T\)</span></p>
+<p>if <span class="math notranslate nohighlight">\(s&gt;1\)</span>: <span class="math notranslate nohighlight">\(\qquad\)</span> (I.e.  <span class="math notranslate nohighlight">\(e_h/h &lt; T\)</span> and so good enough)</p>
 <p><span class="math notranslate nohighlight">\(\quad U_{i+1} = U_i + K_1\)</span></p>
 <p><span class="math notranslate nohighlight">\(\quad t_{i+1} = t_i + h\)</span></p>
 <p><span class="math notranslate nohighlight">\(\quad\)</span> Increase <span class="math notranslate nohighlight">\(h\)</span> for the <em>next</em> time step:</p>
 <p><span class="math notranslate nohighlight">\(\quad h \leftarrow s h\)</span></p>
-<p>else:  <span class="math notranslate nohighlight">\(\quad\)</span> (not good enough: reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
+<p>else: <span class="math notranslate nohighlight">\(\qquad\)</span> (<span class="math notranslate nohighlight">\(s \leq 1\)</span>, so not good enough: reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
 <p><span class="math notranslate nohighlight">\(\quad h \leftarrow s h\)</span></p>
 <p><span class="math notranslate nohighlight">\(\quad\)</span> Start again from <span class="math notranslate nohighlight">\(K_1 = \dots\)</span></p>
 <p>end if</p>
@@ -980,25 +965,23 @@ using the less accurate value <span class="math notranslate nohighlight">\(K_1\)
 <li><p>An upper limit <span class="math notranslate nohighlight">\(h_{max}\)</span> on the step size <span class="math notranslate nohighlight">\(h\)</span>, partly because error estimates become unreliable if <span class="math notranslate nohighlight">\(h\)</span> gets too large,
 and also becuase subsequent use of the results (like graphs) might need sufficiently “fine” data.</p></li>
 <li><p>A lower limit <span class="math notranslate nohighlight">\(h_{max}\)</span> on <span class="math notranslate nohighlight">\(h\)</span>, to avoid infinite loops and such.</p></li>
-<li><p>Since we are using only an approximation <span class="math notranslate nohighlight">\(\tilde{e}_h\)</span> of <span class="math notranslate nohighlight">\(e_h\)</span>, and out of general caution,
-it is typical to include a “safety factor” of about <span class="math notranslate nohighlight">\(0.8\)</span> or <span class="math notranslate nohighlight">\(0.9\)</span>, when computing the <em>next</em> time step: reducing the step size scale factor to <span class="math notranslate nohighlight">\(S = 0.9 \sqrt{T/e_h}\)</span>.</p></li>
 </ul>
 <p>Incorporating these refinements:</p>
 <p><span class="math notranslate nohighlight">\(K_1 = h f(t_i, U_i)\)</span></p>
-<p><span class="math notranslate nohighlight">\(K_2 = f(t_i+h, U_i + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 = f(t_{i+1}, U_i + K_1)\)</span></p>
 <p><span class="math notranslate nohighlight">\(e_{h} = |K_1 - K_2|\)</span></p>
-<p><span class="math notranslate nohighlight">\(s = 0.9\sqrt{T/e_h}\)</span></p>
-<p>if <span class="math notranslate nohighlight">\(e_h &lt; T\)</span></p>
+<p><span class="math notranslate nohighlight">\(s = \sqrt{T/e_h}\)</span></p>
+<p>if <span class="math notranslate nohighlight">\(s&gt;1\)</span>: <span class="math notranslate nohighlight">\(\qquad\)</span> (I.e.  <span class="math notranslate nohighlight">\(e_h/h &lt; \epsilon\)</span> and so good enough)</p>
 <p><span class="math notranslate nohighlight">\(\quad U_{i+1} = U_i + K_1\)</span></p>
 <p><span class="math notranslate nohighlight">\(\quad t_{i+1} = t_i + h\)</span></p>
 <p><span class="math notranslate nohighlight">\(\quad\)</span> Increase <span class="math notranslate nohighlight">\(h\)</span> for the <em>next</em> time step:</p>
-<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \min(0.9 s h, h_{max})\)</span></p>
-<p>else: <span class="math notranslate nohighlight">\(\quad\)</span> (not good enough; reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
-<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \max(0.9 s h, h_{min})\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \min(s h, h_{max})\)</span></p>
+<p>else: <span class="math notranslate nohighlight">\(\qquad\)</span> (<span class="math notranslate nohighlight">\(s \leq 1\)</span>, so not good enough; reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \max(s h, h_{min})\)</span></p>
 <p><span class="math notranslate nohighlight">\(\quad\)</span> Start again from <span class="math notranslate nohighlight">\(K_1 = \dots\)</span></p>
 <p>end if</p>
 <div class="section" id="exercise-2">
-<h3><span class="section-number">25.4.1. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
 <p>Implement the above, and test on the two familiar examples</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1011,245 +994,11 @@ du/dt &amp;= K(\cos(t) - u) - \sin(t)
 \end{split}
 \end{split}\]</div>
 <p>(<span class="math notranslate nohighlight">\(K=1\)</span> is enough.)</p>
-<div class="section" id="partial-solution-to-exercise-2">
-<h4><span class="section-number">25.4.1.1. </span>Partial Solution to Exercise 2<a class="headerlink" href="#partial-solution-to-exercise-2" title="Permalink to this headline">¶</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">grid</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sqrt</span>
-
-<span class="k">def</span> <span class="nf">euler_error_control</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">errorTolerance</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">h_min</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">h_max</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">steps_max</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="c1"># Use Python lists rather than Numpy arrays; they are easier to &quot;increment&quot;</span>
-    <span class="c1"># Initialize variables holding the current values of t and U</span>
-    <span class="n">steps</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">t_i</span> <span class="o">=</span> <span class="n">a</span>
-    <span class="n">U_i</span> <span class="o">=</span> <span class="n">u_0</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">t_i</span><span class="p">]</span>
-    <span class="n">U</span> <span class="o">=</span> <span class="p">[</span><span class="n">U_i</span><span class="p">]</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">h_max</span>  <span class="c1"># Start optimistically!</span>
-    <span class="k">while</span> <span class="n">t_i</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">steps</span> <span class="o">&lt;</span> <span class="n">steps_max</span><span class="p">:</span>
-        <span class="n">K_1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t_i</span><span class="p">,</span> <span class="n">U_i</span><span class="p">)</span>
-        <span class="n">K_2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t_i</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">U_i</span> <span class="o">+</span> <span class="n">K_1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">errorEstimate</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">K_1</span> <span class="o">-</span> <span class="n">K_2</span><span class="p">)</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">errorTolerance</span><span class="o">/</span><span class="n">errorEstimate</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">errorEstimate</span> <span class="o">&lt;=</span> <span class="n">errorTolerance</span><span class="p">:</span>  <span class="c1"># Success!</span>
-            <span class="n">t_i</span> <span class="o">+=</span> <span class="n">h</span>
-            <span class="n">U_i</span> <span class="o">+=</span> <span class="n">K_1</span>
-            <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_i</span><span class="p">)</span>
-            <span class="n">U</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U_i</span><span class="p">)</span>
-            <span class="c1"># Adjust step size up, but not too big</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">h_max</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1">#Innacurate; reduce step size and try again</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">h_min</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">demoMode</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t_i</span><span class="si">=}</span><span class="s2">: Decreasing step size to </span><span class="si">{</span><span class="n">h</span><span class="si">:</span><span class="s2">0.3e</span><span class="si">}</span><span class="s2"> and trying again.&quot;</span><span class="p">)</span>
-        <span class="c1"># A refinement not mentioned above; the next step should not overshoot t=b:</span>
-        <span class="k">if</span> <span class="n">t_i</span> <span class="o">+</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">t_i</span>
-        <span class="n">steps</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="c1"># Convert out to Numpy arrays, so that they can be used as input to numerical functions and such:</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>    
-    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
-    <span class="c1"># Note: if the step count ran out, this does not reach t=b, but at least it is correct as fas as it goes</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">k</span><span class="o">*</span><span class="n">U</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mf">3.0</span>
-<span class="n">u_0</span> <span class="o">=</span> <span class="mf">2.0</span>
-<span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Note: the input &quot;t&quot; must be a numpy array or a number; not a Python list.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">u_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">a</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a &quot;stop watch&quot;</span>
-<span class="c1"># This gives the &quot;wall clock&quot; time in seconds since a reference moment, called &quot;the epoch&quot;.</span>
-<span class="c1"># (For macOS and UNIX, the epoch is the beginning of 1970.)</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To read more about the function time.time, run this cell (in the notebook version of this page).</span>
-<span class="n">help</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function time in module time:
-
-time(...)
-    time() -&gt; floating point number
-    
-    Return the current time in seconds since the Epoch.
-    Fractions of a second may be present if the system clock provides them.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errorTolerance</span> <span class="o">=</span> <span class="mf">1e-2</span>
-<span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">euler_error_control</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">errorTolerance</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">time_elapsed</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span>
-
-<span class="n">steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="n">h_ave</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">steps</span>
-<span class="n">U_exact</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="n">U_error</span> <span class="o">=</span> <span class="n">U</span><span class="o">-</span><span class="n">U_exact</span>
-<span class="n">U_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">U_error</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With </span><span class="si">{</span><span class="n">errorTolerance</span><span class="si">=}</span><span class="s2">, this took </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2"> time steps, of average length </span><span class="si">{</span><span class="n">h_ave</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum absolute error is </span><span class="si">{</span><span class="n">U_max</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum absolute error per time step is </span><span class="si">{</span><span class="n">U_max</span><span class="o">/</span><span class="n">steps</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The time taken to solve was </span><span class="si">{</span><span class="n">time_elapsed</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
-
-<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution to du/dt=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">u, u(</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">u_0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in the above&quot;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U_error</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t_i=1.0: Decreasing step size to 9.000e-02 and trying again.
-
-With errorTolerance=0.01, this took 36 time steps, of average length 0.0556
-The maximum absolute error is 0.831
-The maximum absolute error per time step is 0.0231
-The time taken to solve was 0.00146 seconds
-</pre></div>
-</div>
-<img alt="../_images/ODE-IVP-5-error-control-python_22_1.png" src="../_images/ODE-IVP-5-error-control-python_22_1.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_22_2.png" src="../_images/ODE-IVP-5-error-control-python_22_2.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errorTolerance</span> <span class="o">=</span> <span class="mf">1e-3</span>
-<span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">euler_error_control</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">errorTolerance</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">time_elapsed</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span>
-
-<span class="n">steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="n">h_ave</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">steps</span>
-<span class="n">U_exact</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="n">U_error</span> <span class="o">=</span> <span class="n">U</span><span class="o">-</span><span class="n">U_exact</span>
-<span class="n">U_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">U_error</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With </span><span class="si">{</span><span class="n">errorTolerance</span><span class="si">=}</span><span class="s2">, this took </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2"> time steps, of average length </span><span class="si">{</span><span class="n">h_ave</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum absolute error is </span><span class="si">{</span><span class="n">U_max</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum absolute error per time step is </span><span class="si">{</span><span class="n">U_max</span><span class="o">/</span><span class="n">steps</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The time taken to solve was </span><span class="si">{</span><span class="n">time_elapsed</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
-
-<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution to du/dt=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">u, u(</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">u_0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in the above&quot;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U_error</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t_i=1.0: Decreasing step size to 2.846e-02 and trying again.
-
-With errorTolerance=0.001, this took 119 time steps, of average length 0.0168
-The maximum absolute error is 0.265
-The maximum absolute error per time step is 0.00223
-The time taken to solve was 0.0149 seconds
-</pre></div>
-</div>
-<img alt="../_images/ODE-IVP-5-error-control-python_23_1.png" src="../_images/ODE-IVP-5-error-control-python_23_1.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_23_2.png" src="../_images/ODE-IVP-5-error-control-python_23_2.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errorTolerance</span> <span class="o">=</span> <span class="mf">1e-4</span>
-<span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">euler_error_control</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u_0</span><span class="p">,</span> <span class="n">errorTolerance</span><span class="p">,</span> <span class="n">demoMode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">time_elapsed</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span>
-
-<span class="n">steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="n">h_ave</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">steps</span>
-<span class="n">U_exact</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="n">U_error</span> <span class="o">=</span> <span class="n">U</span><span class="o">-</span><span class="n">U_exact</span>
-<span class="n">U_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">U_error</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;With </span><span class="si">{</span><span class="n">errorTolerance</span><span class="si">=}</span><span class="s2">, this took </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2"> time steps, of average length </span><span class="si">{</span><span class="n">h_ave</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum absolute error is </span><span class="si">{</span><span class="n">U_max</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The maximum absolute error per time step is </span><span class="si">{</span><span class="n">U_max</span><span class="o">/</span><span class="n">steps</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The time taken to solve was </span><span class="si">{</span><span class="n">time_elapsed</span><span class="si">:</span><span class="s2">0.3</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
-
-<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution to du/dt=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">u, u(</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">u_0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in the above&quot;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U_error</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t_i=1.0: Decreasing step size to 9.000e-03 and trying again.
-
-With errorTolerance=0.0001, this took 380 time steps, of average length 0.00526
-The maximum absolute error is 0.084
-The maximum absolute error per time step is 0.000221
-The time taken to solve was 0.0156 seconds
-</pre></div>
-</div>
-<img alt="../_images/ODE-IVP-5-error-control-python_24_1.png" src="../_images/ODE-IVP-5-error-control-python_24_1.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_24_2.png" src="../_images/ODE-IVP-5-error-control-python_24_2.png" />
-</div>
-</div>
 <p><a name="ETMEC"></a></p>
 </div>
 </div>
-</div>
 <div class="section" id="the-explicit-trapezoid-method-with-error-control">
-<h2><span class="section-number">25.5. </span>The explicit trapezoid method with error control<a class="headerlink" href="#the-explicit-trapezoid-method-with-error-control" title="Permalink to this headline">¶</a></h2>
+<h2>The explicit trapezoid method with error control<a class="headerlink" href="#the-explicit-trapezoid-method-with-error-control" title="Permalink to this headline">¶</a></h2>
 <p>In practice, one usually needs at least second order accuracy, and one approach to that is using computing a “candidates” for teh next time step with a second order accurate Runge-Kutta method and also a third order accurate one, the latter used only to get an error estimate for the former.</p>
 <p>Perhaps the simplest of these is based on adding error estimation to the Explicit Trapezoid Rule;
 omitting the step size adjustment for now, the main ingredients are:</p>
@@ -1266,14 +1015,14 @@ This is only used to get:)</p>
 <p><span class="math notranslate nohighlight">\(e_h = |\delta_2 - \delta_3 |, \, = |K_1 -2 K_3 + K_2|/3\)</span></p>
 <p>Again, if this step is accepted, one uses the explicit trapezoid rule step: <span class="math notranslate nohighlight">\(U_{i+1} = U_i + \delta_2\)</span>.</p>
 <div class="section" id="step-size-adjustment">
-<h3><span class="section-number">25.5.1. </span>Step size adjustment<a class="headerlink" href="#step-size-adjustment" title="Permalink to this headline">¶</a></h3>
+<h3>Step size adjustment<a class="headerlink" href="#step-size-adjustment" title="Permalink to this headline">¶</a></h3>
 <p>The scale factor <span class="math notranslate nohighlight">\(s\)</span> for step size adjustment must be modified for a method order <span class="math notranslate nohighlight">\(p\)</span> (with <span class="math notranslate nohighlight">\(p=2\)</span> now):</p>
 <ul class="simple">
 <li><p>Changing step size by a factor <span class="math notranslate nohighlight">\(s\)</span> will change the error <span class="math notranslate nohighlight">\(e_h\)</span> in a single time step by a factor of about <span class="math notranslate nohighlight">\(s^{p+1}\)</span>.</p></li>
 <li><p>Thus, we want a new step with this rescaled error of about <span class="math notranslate nohighlight">\(s^{p+1} e_h\)</span> roughly matching the tolerance <span class="math notranslate nohighlight">\(T\)</span>.
 Equating would give <span class="math notranslate nohighlight">\(s^{p+1} e_h = T\)</span>, so <span class="math notranslate nohighlight">\(s = (T/e_h))^{1/(p+1)}\)</span>,
-but as noted above, since we are using only an approximation <span class="math notranslate nohighlight">\(\tilde{e}_h\)</span> of <span class="math notranslate nohighlight">\(e_h\)</span>
-it is typical to include a “safety factor” of about <span class="math notranslate nohighlight">\(0.9\)</span>, so something like</p></li>
+but since we are using only an approximation <span class="math notranslate nohighlight">\(\tilde{e}_h\)</span> of <span class="math notranslate nohighlight">\(e_h\)</span>, and out of general caution,
+it is typical to include a “safety factor” of about <span class="math notranslate nohighlight">\(0.8\)</span> or <span class="math notranslate nohighlight">\(0.9\)</span>, so something like</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[s = 0.9 \left( \frac{T}{|\tilde{e}_h|} \right)^{1/(p+1)}\]</div>
@@ -1285,12 +1034,12 @@ it is typical to include a “safety factor” of about <span class="math notran
 or <span class="math notranslate nohighlight">\(|e_h| \leq T|u(t)|\)</span>.
 Approximating <span class="math notranslate nohighlight">\(u(t)\)</span> by <span class="math notranslate nohighlight">\(U_i\)</span>, this changes the step size rescaling guideline to</p>
 <div class="math notranslate nohighlight">
-\[s = 0.9 \left| \frac{T U_i}{\tilde{e}_h} \right|^{1/(p+1)}\]</div>
+\[s = 0.8 \left| \frac{T U_i}{\tilde{e}_h} \right|^{1/(p+1)}\]</div>
 </div>
 <div class="section" id="exercise-3">
-<h3><span class="section-number">25.5.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
+<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
 <p>Implement this
-<a class="reference external" href="#ETMEC">error control version of the explicit trapezoid method</a>,
+<a class="reference external" href="#ETMEC">error control versn of thr explicit trapezoid method</a>,
 and test on the two familiar examples</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1306,7 +1055,7 @@ du/dt &amp;= K(\cos(t) - u) - \sin(t)
 </div>
 </div>
 <div class="section" id="fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements">
-<h2><span class="section-number">25.6. </span>Fourth order accurate methods with error control: Runge-Kutta-Felberg and some newer refinements<a class="headerlink" href="#fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements" title="Permalink to this headline">¶</a></h2>
+<h2>Fourth order accurate methods with error control: Runge-Kutta-Felberg and some newer refinements<a class="headerlink" href="#fourth-order-accurate-methods-with-error-control-runge-kutta-felberg-and-some-newer-refinements" title="Permalink to this headline">¶</a></h2>
 <p>The details involve some messy coefficients; see the references above for those.</p>
 <p>The basic idea is to devise a fifth order accurate Runge-Kutta method such that we can also get a fourth order accurate method from the same colection of <em>stages</em> <span class="math notranslate nohighlight">\(K_i\)</span> values.
 One catch is that any such fifth order method requires six stages (not five as you might have guessed).</p>
@@ -1335,20 +1084,14 @@ s = 0.9 \left| \frac{T U_i}{\tilde{e}_h} \right|^{1/5},
 Newer software often uses a variant called the <a class="reference external" href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">Dormand–Prince method</a> published in 1980; for example this is the default method in the module <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code> within Python package SciPy.
 This is similar in form to “R-K-F”, but has somewhat smaller errors.</p>
 <p>The basic usage is</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ode_solution = scipy.integrate.solve_ivp(f, [a, b], y_0)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[t, y] = scipy.integrate.solve_ivp(f, [a, b], y_0)
 </pre></div>
 </div>
-<p>because the output is an “object” containing many items; the ones we need for now are t and y,
-extracted with</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>t = ode_solution.t
-y = ode_solution.y
+<p>which is synonymous with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[t, y] = scipy.integrate.solve_ivp(f, [a, b], y_0, method=&quot;RK45&quot;)
 </pre></div>
 </div>
-<p>This defaut usage is synonymous with</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ode_solution = scipy.integrate.solve_ivp(f, [a, b], y_0, method=&quot;RK45&quot;)
-</pre></div>
-</div>
-<p>where “RK45” refers to the Dormand–Prince method.
+<p>where “RK45” refer to the Dormand–Prince method.
 Other options include <code class="docutils literal notranslate"><span class="pre">method=&quot;RK23&quot;</span></code>, which is second order accurate, and very similar to the above
 <a class="reference external" href="#ETMEC">explicit trapezoid method with error control</a>.</p>
 <p>Notes:</p>
@@ -1361,7 +1104,7 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 <p><code class="docutils literal notranslate"><span class="pre">t_plot</span> <span class="pre">=</span> <span class="pre">np.linspace(a,</span> <span class="pre">b)</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">[t,</span> <span class="pre">y]</span> <span class="pre">=</span> <span class="pre">solve_ivp(f,</span> <span class="pre">[a,</span> <span class="pre">b],</span> <span class="pre">y_0,</span> <span class="pre">t_eval=t_plot)</span></code></p>
 <div class="section" id="example">
-<h3><span class="section-number">25.6.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1382,6 +1125,7 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To read more about this SciPy function scipy.integrate.solve_ivp,</span>
 <span class="c1"># run this cell (in the notebook version of this page).</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
 <span class="n">help</span><span class="p">(</span><span class="n">solve_ivp</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1393,6 +1137,26 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 <span class="c1"># This gives the &quot;wall clock&quot; time in seconds since a reference moment, called &quot;the epoch&quot;.</span>
 <span class="c1"># (For macOS and UNIX, the epoch is the beginning of 1970.)</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To read more about the function time.time, run this cell (in the notebook version of this page).</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">help</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function time in module time:
+
+time(...)
+    time() -&gt; floating point number
+    
+    Return the current time in seconds since the Epoch.
+    Fractions of a second may be present if the system clock provides them.
 </pre></div>
 </div>
 </div>
@@ -1443,11 +1207,11 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time take to solve: 0.004698753356933594 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time take to solve: 0.0037457942962646484 seconds
 </pre></div>
 </div>
-<img alt="../_images/ODE-IVP-5-error-control-python_42_1.png" src="../_images/ODE-IVP-5-error-control-python_42_1.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_42_2.png" src="../_images/ODE-IVP-5-error-control-python_42_2.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python-bak_33_1.png" src="../_images/ODE-IVP-5-error-control-python-bak_33_1.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python-bak_33_2.png" src="../_images/ODE-IVP-5-error-control-python-bak_33_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1481,11 +1245,11 @@ Other options include <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time take to solve: 0.05581021308898926 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time take to solve: 0.03026294708251953 seconds
 </pre></div>
 </div>
-<img alt="../_images/ODE-IVP-5-error-control-python_43_1.png" src="../_images/ODE-IVP-5-error-control-python_43_1.png" />
-<img alt="../_images/ODE-IVP-5-error-control-python_43_2.png" src="../_images/ODE-IVP-5-error-control-python_43_2.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python-bak_34_1.png" src="../_images/ODE-IVP-5-error-control-python-bak_34_1.png" />
+<img alt="../_images/ODE-IVP-5-error-control-python-bak_34_2.png" src="../_images/ODE-IVP-5-error-control-python-bak_34_2.png" />
 </div>
 </div>
 </div>
@@ -1520,8 +1284,6 @@ Other options include <code class="docutils literal notranslate"><span class="pr
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ODE-IVP-4-system-higher-order-equations.html" title="previous page"><span class="section-number">24. </span>Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" title="next page"><span class="section-number">26. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
