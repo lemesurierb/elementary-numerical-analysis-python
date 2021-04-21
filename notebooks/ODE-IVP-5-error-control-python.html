@@ -285,7 +285,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   31. Least-squares Fitting to Data: The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
@@ -845,7 +845,9 @@
                 
   <div class="section" id="initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes">
 <h1><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes" title="Permalink to this headline">¶</a></h1>
-<p><strong>Version of April 17, 2021</strong>,</p>
+<p><strong>Corrections on April 21:</strong>
+Missing factors of <span class="math notranslate nohighlight">\(h\)</span> inserted to <span class="math notranslate nohighlight">\(K_2\)</span> and <span class="math notranslate nohighlight">\(K_3\)</span>.</p>
+<p><strong>Revisions on April 17, 2021:</strong></p>
 <ul class="simple">
 <li><p>revising the description of the step control method; it is better to only apply the “safety factor” when choosing the next step size; not when checking whether the current step is accurtate enough, and</p></li>
 <li><p>adding Python code and examples for error control in Euler’s method.</p></li>
@@ -968,7 +970,7 @@ In fact to be cautious, one often drops the factor of <span class="math notransl
 using the less accurate value <span class="math notranslate nohighlight">\(K_1\)</span> as the update.</p>
 <p>A basic algorithm for the time step starting with <span class="math notranslate nohighlight">\(t_i, U_i\)</span> is</p>
 <p><span class="math notranslate nohighlight">\(K_1 \leftarrow h f(t_i, U_i)\)</span></p>
-<p><span class="math notranslate nohighlight">\(K_2 \leftarrow f(t_i + h, U_i + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 \leftarrow h f(t_i + h, U_i + K_1)\)</span></p>
 <p><span class="math notranslate nohighlight">\(e_h \leftarrow |K_1 - K_2|\)</span></p>
 <p><span class="math notranslate nohighlight">\(s \leftarrow \sqrt{T/e_h}\)</span></p>
 <p>if <span class="math notranslate nohighlight">\(e_h &lt; T\)</span></p>
@@ -990,7 +992,7 @@ it is typical to include a “safety factor” of about <span class="math notran
 </ul>
 <p>Incorporating these refinements:</p>
 <p><span class="math notranslate nohighlight">\(K_1 = h f(t_i, U_i)\)</span></p>
-<p><span class="math notranslate nohighlight">\(K_2 = f(t_i+h, U_i + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 = h f(t_i+h, U_i + K_1)\)</span></p>
 <p><span class="math notranslate nohighlight">\(e_{h} = |K_1 - K_2|\)</span></p>
 <p><span class="math notranslate nohighlight">\(s = 0.9\sqrt{T/e_h}\)</span></p>
 <p>if <span class="math notranslate nohighlight">\(e_h &lt; T\)</span></p>
@@ -1259,9 +1261,9 @@ The time taken to solve was 0.0156 seconds
 <p>Perhaps the simplest of these is based on adding error estimation to the Explicit Trapezoid Rule;
 omitting the step size adjustment for now, the main ingredients are:</p>
 <p><span class="math notranslate nohighlight">\(K_1 = h f(t, U)\)</span></p>
-<p><span class="math notranslate nohighlight">\(K_2 = f(t + h, U + K_1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 = h f(t + h, U + K_1)\)</span></p>
 <p>(So far, as for the explicit trapezoid method)</p>
-<p><span class="math notranslate nohighlight">\(K_3 = f(t + h/2, U + (K_1 + K_2)/2)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_3 = h f(t + h/2, U + (K_1 + K_2)/2)\)</span></p>
 <p>(a midpoint approximation, using the above)</p>
 <p><span class="math notranslate nohighlight">\(\delta_2 = (K_1 + K_2)/2\)</span></p>
 <p>(The order 2 increment as for the explicit trapezoid method)</p>

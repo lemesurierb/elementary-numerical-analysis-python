@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>31. Least-squares Fitting to Data: The Geometrical Approach &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>31. Least-squares Fitting to Data: Appendix on The Geometrical Approach &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -285,7 +285,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   31. Least-squares Fitting to Data: The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
@@ -765,8 +765,8 @@
         
               <div>
                 
-  <div class="section" id="least-squares-fitting-to-data-the-geometrical-approach">
-<h1><span class="section-number">31. </span>Least-squares Fitting to Data: The Geometrical Approach<a class="headerlink" href="#least-squares-fitting-to-data-the-geometrical-approach" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="least-squares-fitting-to-data-appendix-on-the-geometrical-approach">
+<h1><span class="section-number">31. </span>Least-squares Fitting to Data: Appendix on The Geometrical Approach<a class="headerlink" href="#least-squares-fitting-to-data-appendix-on-the-geometrical-approach" title="Permalink to this headline">¶</a></h1>
 <p><strong>April 19, 2021</strong>, after class</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -781,8 +781,8 @@
 <p>by a polynomial <span class="math notranslate nohighlight">\(y = p(x)= c_0 + \cdots c_n x^n\)</span> of degree at most <span class="math notranslate nohighlight">\(n\)</span> is to minimize the “average” of the errors</p>
 <div class="math notranslate nohighlight">
 \[e_i = y_i - f(x_i),\]</div>
-<p>in the sense of the <em>root-mean-square error</em> <span class="math notranslate nohighlight">\(E_{RMS} = \displaystyle \sqrt{\sum_{i=1}^N e_i^2}\)</span>,
-or equivalently just the sum of the squares of the errors:</p>
+<p>in the sense of the <em>root-mean-square error</em> <span class="math notranslate nohighlight">\(E_{RMS} = \displaystyle \sqrt{\sum_{i=1}^N e_i^2}\)</span>.
+Equivalently, we will avoid the square root and just minimize the sum of the squares of the errors:</p>
 <div class="math notranslate nohighlight">
 \[E(c_0, c_1, \dots, c_n) = \sum_{i=1}^N e_i^2\]</div>
 </div>

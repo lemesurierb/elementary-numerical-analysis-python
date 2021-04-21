@@ -285,7 +285,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   31. Least-squares Fitting to Data: The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
@@ -753,6 +753,13 @@
   <a class="reference internal nav-link" href="#exercise-iii-python">
    Exercise (III) [Python]
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#an-illustration-of-working-with-lists-instead-of-arrays">
+     An illustration of working with lists instead of arrays
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -767,17 +774,16 @@
                 
   <div class="section" id="math-375-assignment-5">
 <h1>MATH 375 Assignment 5<a class="headerlink" href="#math-375-assignment-5" title="Permalink to this headline">¶</a></h1>
-<p><strong>Brenton LeMesurier, April 6</strong></p>
-<p><strong>Python code draft for the last Exercise due Wednesday April 14</strong>
-(There is a bonus for doing this part on time!)</p>
-<p><strong>Final version due Monday April 19</strong></p>
-<p>From <a class="reference internal" href="ODE-IVP-exercises.html"><span class="doc std std-doc">Exercises on IVPs for ODEs</span></a>:</p>
+<p><strong>Brenton LeMesurier</strong></p>
+<p><strong>Revisions on April 21:</strong></p>
 <ul class="simple">
-<li><p><a class="reference external" href="ODE-IVP-exercises.ipynb#Exercise2">Exercise 2</a></p></li>
-<li><p><a class="reference external" href="ODE-IVP-exercises.ipynb#Exercise4">Exercise 4</a></p></li>
-<li><p><a class="reference external" href="ODE-IVP-exercises.ipynb#Exercise7">Exercise 7</a></p></li>
+<li><p>Added test case <span class="math notranslate nohighlight">\(du/dt = u^2\)</span>, <span class="math notranslate nohighlight">\(u(0) = 1\)</span> on <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p></li>
+<li><p>Correction: Missing factors of <span class="math notranslate nohighlight">\(h\)</span> inserted to <span class="math notranslate nohighlight">\(K_2\)</span> and <span class="math notranslate nohighlight">\(K_3\)</span>.</p></li>
 </ul>
-<p>That is:</p>
+<p><strong>Previously updated on April 15:</strong> Some extra tips.</p>
+<p><strong>Next versions due by Friday April 23</strong></p>
+<p>Exercises  2, 4 and 7 from the Exercises on IVPs for ODEs.
+That is:</p>
 <div class="section" id="exercise-i">
 <h2>Exercise (I)<a class="headerlink" href="#exercise-i" title="Permalink to this headline">¶</a></h2>
 <p>A) Verify that for the simple case where <span class="math notranslate nohighlight">\(f(t, u) = f(t)\)</span>,
@@ -795,10 +801,10 @@ It will have the form <span class="math notranslate nohighlight">\(U_1 = G U_0\)
 <div class="section" id="exercise-iii-python">
 <h2>Exercise (III) [Python]<a class="headerlink" href="#exercise-iii-python" title="Permalink to this headline">¶</a></h2>
 <p>Implement the
-<a class="reference external" href="ODE-IVP-5-error-control-python.ipynb#ETMEC">error control version of the explicit trapezoid method</a>
+<a class="reference external" href="https://lemesurierb.github.io/elementary-numerical-analysis-python/notebooks/ODE-IVP-5-error-control-python.html#ETMEC">error control version of the explicit trapezoid method</a>
 from section on
-<a class="reference internal" href="ODE-IVP-5-error-control-python.html"><span class="doc std std-doc">Error Control and Variable Step Sizes</span></a>
-and test on the two familiar examples</p>
+<a class="reference external" href="https://lemesurierb.github.io/elementary-numerical-analysis-python/notebooks/ODE-IVP-5-error-control-python.html">Error Control and Variable Step Sizes</a></p>
+<p>and test on the two familiar examples</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
@@ -810,8 +816,109 @@ du/dt &amp;= K(\cos(t) - u) - \sin(t)
 \end{split}
 \end{split}\]</div>
 <p>(<span class="math notranslate nohighlight">\(K=1\)</span> is enough.)</p>
+<p><strong>Added April 21:</strong>
+As a final more challenging test, solve <span class="math notranslate nohighlight">\(du/dt = u^2\)</span>, <span class="math notranslate nohighlight">\(u(0) = 1\)</span> on interval <span class="math notranslate nohighlight">\([0, 1]\)</span>
+(As seen in Example 3 of the first section on ODE’s, there is a problem at <span class="math notranslate nohighlight">\(t=1\)</span>!).</p>
+<p><strong>Added April 15</strong></p>
+<p>Here is the key elements of the algorithm; one important note is that the time steps are done according to the explicit trapezoid rule, even though another, higher order accurate, approximate increment of <span class="math notranslate nohighlight">\(U\)</span> is computed; the latter is used solely to compute the error estimate.</p>
+<p>The basic formulas for each time step are:</p>
+<p><span class="math notranslate nohighlight">\(K_1 = h f(t, U)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_2 = h f(t + h, U + K_1)\)</span></p>
+<p>(So far, as for the explicit trapezoid method)</p>
+<p><span class="math notranslate nohighlight">\(K_3 = h f(t + h/2, U + (K_1 + K_2)/2)\)</span></p>
+<p>(a midpoint approximation, using the above)</p>
+<p><span class="math notranslate nohighlight">\(\delta_2 = (K_1 + K_2)/2\)</span></p>
+<p>(The order 2 increment as for the explicit trapezoid method)</p>
+<p>I omit the third order increment <span class="math notranslate nohighlight">\(\delta_3\)</span>, as that is only used to get the following error estimate</p>
+<p><span class="math notranslate nohighlight">\(e_h = |\delta_2 - \delta_3 |, \, = |K_1 -2 K_3 + K_2|/3\)</span></p>
+<p>If this step is accepted, one uses the explicit trapezoid rule step: <span class="math notranslate nohighlight">\(U_{i+1} = U_i + \delta_2\)</span>.</p>
+<p>The other ingredient is the time step adjustment.
+A simple first version for this is:</p>
+<ul class="simple">
+<li><p>If the error is too large, reject that attempted time step, half h, and try again.</p></li>
+<li><p>Never increase the time step size!</p></li>
+</ul>
+<p>This could be inefficient, but will do as well as the more refined step0size adjustment algorithm for accuracy,
+and it is usually best to address accuracy first efficiency later.</p>
+<p>For the more refined step-size adjustment, the scale factor for a second order accurate method like this is</p>
+<div class="math notranslate nohighlight">
+\[s = 0.9 \left( \frac{3 T}{|K_1 -2 K_3 + K_2|} \right)^{1/3}\]</div>
+<p>and the step-size adjustment procedure is as shown in the section on <em>Error Control and Variable Step Sizes</em> for the case of the Euler method:</p>
+<p>if <span class="math notranslate nohighlight">\(s&gt;1\)</span>: <span class="math notranslate nohighlight">\(\qquad\)</span> (I.e.  <span class="math notranslate nohighlight">\(e_h/h &lt; T\)</span> and so good enough)</p>
+<p><span class="math notranslate nohighlight">\(\quad\)</span>Update <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(t\)</span> with the new time values and then increase <span class="math notranslate nohighlight">\(h\)</span> for the <em>next</em> time step:</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \min(s h, h_{max})\)</span></p>
+<p>else: <span class="math notranslate nohighlight">\(\qquad\)</span> (<span class="math notranslate nohighlight">\(s \leq 1\)</span>, so not good enough: reduce <span class="math notranslate nohighlight">\(h\)</span> and try again)</p>
+<p><span class="math notranslate nohighlight">\(\quad h \leftarrow \max(s h, h_{min})\)</span></p>
+<p><span class="math notranslate nohighlight">\(\quad\)</span>Start again from <span class="math notranslate nohighlight">\(K_1 = \dots\)</span></p>
+<p><strong>Python coding notes</strong></p>
+<p>The number of time steps is not known in advance, so:</p>
+<ol class="simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop is probably more appropriate (contrary to my usual preference for <code class="docutils literal notranslate"><span class="pre">for</span></code> loops!), and</p></li>
+<li><p>Python lists are probably most convenient (contrary to my usual preference for Numpy arrays!),
+as they allow incremental expansion by appending new values:</p>
+<ol class="simple">
+<li><p>Initialize with <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">[a]</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">=</span> <span class="pre">[u_0]</span></code>, and then</p></li>
+<li><p>Append new values with syntax like <code class="docutils literal notranslate"><span class="pre">t.append(t_new)</span></code> and <code class="docutils literal notranslate"><span class="pre">U.append(U_new)</span></code>
+(Aside: the final values could then be converted to arrays at the end, with <code class="docutils literal notranslate"><span class="pre">U=np.array(U)</span></code> and such,
+but that may not be necessary; for example, matplotlib can handle lists too, as illustrated below.)</p></li>
+</ol>
+</li>
+<li><p>It might be a useful approach to first implement the somewhat simpler procedure of error control in Euler’s method, as described in the notes: see section 25.4 in
+<a class="reference external" href="https://lemesurierb.github.io/elementary-numerical-analysis-python/notebooks/ODE-IVP-5-error-control-python.html">Error Control and Variable Step Sizes</a></p></li>
+</ol>
+<div class="section" id="an-illustration-of-working-with-lists-instead-of-arrays">
+<h3>An illustration of working with lists instead of arrays<a class="headerlink" href="#an-illustration-of-working-with-lists-instead-of-arrays" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">u_0</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">[</span><span class="n">u_0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">U</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">U</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List U is&quot;</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">U</span><span class="p">,</span> <span class="s1">&#39;-*&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;A Graph of List vs List&quot;</span><span class="p">)</span>
+
+<span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Array U is&quot;</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>i=1, U=[2.0, 1.0]
+i=2, U=[2.0, 1.0, 0.5]
+i=3, U=[2.0, 1.0, 0.5, 0.3333333333333333]
+i=4, U=[2.0, 1.0, 0.5, 0.3333333333333333, 0.25]
+i=5, U=[2.0, 1.0, 0.5, 0.3333333333333333, 0.25, 0.2]
+i=6, U=[2.0, 1.0, 0.5, 0.3333333333333333, 0.25, 0.2, 0.16666666666666666]
+i=7, U=[2.0, 1.0, 0.5, 0.3333333333333333, 0.25, 0.2, 0.16666666666666666, 0.14285714285714285]
+
+List U is [2.0, 1.0, 0.5, 0.3333333333333333, 0.25, 0.2, 0.16666666666666666, 0.14285714285714285]
+Array U is [2.         1.         0.5        0.33333333 0.25       0.2
+ 0.16666667 0.14285714]
+</pre></div>
+</div>
+<img alt="../_images/assignment5_14_1.png" src="../_images/assignment5_14_1.png" />
+</div>
+</div>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+</div>
 </div>
 </div>
 
