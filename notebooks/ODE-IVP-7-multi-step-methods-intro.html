@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving \(Ax = b\) for Tridiagonal and Banded matrices, and Strict Diagonal Dominance" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html" />
-    <link rel="prev" title="34. Some Future Topics" href="../future_topics.html" />
+    <link rel="next" title="28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc." href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" />
+    <link rel="prev" title="26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations" href="ODE-IVP-6-implicit-methods-intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +121,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -263,8 +263,8 @@
    26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
   </a>
  </li>
@@ -309,9 +309,9 @@
   Preliminary Versions of Some Possible Future Sections
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-for-systems-introduction.html">
    1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
@@ -702,7 +702,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/newtons-method-for-systems-introduction.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-7-multi-step-methods-intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -727,7 +727,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/newtons-method-for-systems-introduction.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-7-multi-step-methods-intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -750,21 +750,24 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   1.1. Background
+  <a class="reference internal nav-link" href="#introduction">
+   27.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-s-method-iteration-formula-for-systems">
-   1.2. Newton’s method iteration formula for systems
+  <a class="reference internal nav-link" href="#example-1-the-leap-frog-method">
+   27.2. Example 1: The Leap-frog method
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#justification-linearization-for-function-of-several-variables">
-     1.2.1. Justification: linearization for function of several variables
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-accuracy-of-the-leap-frog-method">
+   27.3. Second order accuracy of the leap-frog method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-speed-advantage-of-multi-step-methds-like-the-leap-frog-method">
+   27.4. The speed advantage of multi-step methds like the leap-frog method
+  </a>
  </li>
 </ul>
 
@@ -777,69 +780,165 @@
         
               <div>
                 
-  <div class="section" id="solving-nonlinear-systems-of-equations-by-generalizations-of-newton-s-method-a-brief-introduction">
-<h1><span class="section-number">1. </span>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction<a class="headerlink" href="#solving-nonlinear-systems-of-equations-by-generalizations-of-newton-s-method-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
-<p><strong>Version of April 13, 2021</strong></p>
+  <div class="section" id="initial-value-problems-for-odes-part-7-introduction-to-multistep-methods">
+<h1><span class="section-number">27. </span>Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods<a class="headerlink" href="#initial-value-problems-for-odes-part-7-introduction-to-multistep-methods" title="Permalink to this headline">¶</a></h1>
 <p><strong>References:</strong></p>
 <ul class="simple">
-<li><p>Section 2.7 <em>Nonlinear Systems of Equations</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a>;
-in particular Sub-section 2.7.1 <em>Multivariate Newton’s Method</em>.</p></li>
-<li><p>Chapter 10 <em>Numerical Solution of Nonlinear Systems of Equations</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>;
-in particular Sections 10.1 and 10.2.</p></li>
+<li><p>Section 6.7 <em>Multistep Methods</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 5.6 <em>Multistep Methods</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
 </ul>
-<div class="section" id="background">
-<h2><span class="section-number">1.1. </span>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<p>A system of simultaneous nonlinear equations</p>
+<div class="section" id="introduction">
+<h2><span class="section-number">27.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When approximating derivatives we saw that there is a distinct advantage in accuracy to using th centered difference approximation</p>
 <div class="math notranslate nohighlight">
 \[
-F(x) = 0, \; F:\mathbb{R}^n \to \mathbb{R}^n
+\frac{df}{dt}(t) \approx \delta_h f(t) := \frac{f(t+h) - f(t-h)}{2h}
 \]</div>
-<p>can be solved by a variant of Newton’s method.</p>
-<p><strong>Aside on notation:</strong>
-For the sake of emphasise analogies between results for vector-vslued quantities and what we have already seen for real- or compex-valued quantities, severl notiot chices are made in thes notes:</p>
-<ul class="simple">
-<li><p>Using the same notation that vectors as for real or complex numbers (no over arrows or bold face).</p></li>
-<li><p>Often denoting the derivative of function <span class="math notranslate nohighlight">\(f\)</span> as <span class="math notranslate nohighlight">\(Df\)</span> rather than <span class="math notranslate nohighlight">\(f'\)</span>, and higher derivatives as <span class="math notranslate nohighlight">\(D^p f\)</span> rather than <span class="math notranslate nohighlight">\(f^{(p)}\)</span>. Partial derivatives of <span class="math notranslate nohighlight">\(f(x, y, \dots)\)</span> are <span class="math notranslate nohighlight">\(D_x f\)</span>, <span class="math notranslate nohighlight">\(D_y f\)</span>, etc., and for vector arguments <span class="math notranslate nohighlight">\(x = (x_1, \dots , x_j, \dots x_n)\)</span>, they are <span class="math notranslate nohighlight">\(D_{x_1} f, \dots , D_{x_j} f , \dots , D_{x_n} f\)</span>, or more concisely,
-<span class="math notranslate nohighlight">\(D_1 f \dots , D_j f , \dots ,D_n f\)</span>.
-(This also fits better with Python code notation — even for partial derivatives.)</p></li>
-<li><p>Subscripts will mostly be reserved for components of vectors, labelling the terms of a sequence with superscripts, <span class="math notranslate nohighlight">\(x^{(k)}\)</span> and such.</p></li>
-<li><p>Explicit division is avoided.</p></li>
-</ul>
-<p>However, I use capital letters for vector-valued functions, for analogy to the use of capital letter for matrices.</p>
-<p>Rewriting Newton’s method according to this new style,
-$<span class="math notranslate nohighlight">\(x^{(k+1)} = x^{(k)} - \frac{f(x^{(k)})}{Df(x^{(k)})}\)</span>$</p>
-<p>or to avoid explicit division and introducing the useful increment <span class="math notranslate nohighlight">\(\delta^{(k)} := x^{(k+1)} - x^{(k)}\)</span>,</p>
+<p>(with error <span class="math notranslate nohighlight">\(O(h^2)\)</span>) over the forward difference approximation</p>
 <div class="math notranslate nohighlight">
-\[Df(x^{(k)}) (\delta^{(k)}) = f(x^{(k)}), \quad x^{(k+1)} = x^{(k)} + \delta^{(k)}.\]</div>
+\[
+\frac{df}{dt}(t) \approx \Delta_h f(t) := \frac{f(t+h) - f(t)}{h}
+\]</div>
+<p>(which has error <span class="math notranslate nohighlight">\(O(h)\)</span>).</p>
+<p>However Euler’s method used the latter, and all ODE methods seen so far avoid using values at “previous” times like <span class="math notranslate nohighlight">\(t-h\)</span>.
+There is a reason for this, as using data from previous times introduces some complications, but sometimes those are worth overcoming, so let us look into this.</p>
 </div>
-<div class="section" id="newton-s-method-iteration-formula-for-systems">
-<h2><span class="section-number">1.2. </span>Newton’s method iteration formula for systems<a class="headerlink" href="#newton-s-method-iteration-formula-for-systems" title="Permalink to this headline">¶</a></h2>
-<p>For vector valued functions, we will see in a while that an analogous result is true:</p>
+<div class="section" id="example-1-the-leap-frog-method">
+<h2><span class="section-number">27.2. </span>Example 1: The Leap-frog method<a class="headerlink" href="#example-1-the-leap-frog-method" title="Permalink to this headline">¶</a></h2>
+<p>Inserting the above centered difference approximation of the derivative into the ODE <span class="math notranslate nohighlight">\(du/dt = f(t, u)\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[\frac{u(t+h) - u(t-h)}{h} \approx f(t, u(t))\]</div>
+<p>which leads to the <em>leap-frog method</em></p>
+<div class="math notranslate nohighlight">
+\[\frac{U_{i+1} - U_{i-1}}{2h} = f(t_i, U_i)\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[U_{i+1} = U_{i-1} + 2 h f(t_i, U_i)\]</div>
+<p>This is the first example of a multistep method:</p>
+<p><strong>Definition</strong>:
+A <em>multistep method</em> for numerical solution of an ODE IVP <span class="math notranslate nohighlight">\(du/dt = f(t, u)\)</span> is one of the form</p>
+<div class="math notranslate nohighlight">
+\[U_{i+1} = \phi(U_i, \dots U_{i-s+1}, h), \quad s &gt; 1 \]</div>
+<p>so that the new approximate value of <span class="math notranslate nohighlight">\(u(t)\)</span> depends on approxiamt value at multiple previous times.</p>
+<p>More specifically, this is called an <span class="math notranslate nohighlight">\(s\)</span>-step method; this jargon is consistent with all methods seen in earlier sections being called <em>one-step methods</em>; for example,
+Euler’s method can be written as</p>
 <div class="math notranslate nohighlight">
 \[
-(D \textbf{F}(x^{(k)}) ({\delta}^{(k)}) = \textbf{F}(x^{(k)}),
-\quad x^{(k+1)} = x^{(k)} + \delta^{(k)}
+U_{i+1} = \phi_E(U_i, h) := U_i + h f(t_i, U_i)
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(DF(x)\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> matrix of all the partial derivatives
-<span class="math notranslate nohighlight">\((D_{x_j} F_i)(x)\)</span> or <span class="math notranslate nohighlight">\((D_j F_i)(x)\)</span>, where <span class="math notranslate nohighlight">\(x = (x_1, x_2, \dots, x_n).\)</span></p>
-<div class="section" id="justification-linearization-for-function-of-several-variables">
-<h3><span class="section-number">1.2.1. </span>Justification: linearization for function of several variables<a class="headerlink" href="#justification-linearization-for-function-of-several-variables" title="Permalink to this headline">¶</a></h3>
-<p>To justify the above result, we need at least a case of Taylor’s Theorem for functions of several variables, for both
-<span class="math notranslate nohighlight">\(f:\mathbb{R}^n \to \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(F:\mathbb{R}^n \to \mathbb{R}^n\)</span>; just for linear approximations.
-This material from multi-variable calculus will be reviewed when we need it.</p>
-<p><strong>Warning:</strong> although mathematically this can be written with matrix inverses as</p>
+<p>and the explicit midpoint method can be written as the one-liner</p>
 <div class="math notranslate nohighlight">
 \[
-\textbf{X}^{(k+1)} = \textbf{X}^{(k)} - (D \textbf{F}(\textbf{X}^{(k)})^{-1}(\textbf{F}(\textbf{X}^{(k)})
+U_{i+1} = \phi_{EMP}(U_i, h) := U_i + h f(t_i+h/2, U_i + h f(t_i, U_i)/2) h
 \]</div>
-<p>evaluation of the inverse is in general about three times slower than solving the linear system, so is best avoided.
-(We will soon see a “compromise”; the LU factorization of a matrix.)</p>
-<p>Even avoiding matrix inversion, this involves repeatedly solving systems of <span class="math notranslate nohighlight">\(n\)</span> simultaneous linear equations in <span class="math notranslate nohighlight">\(n\)</span> unknowns, <span class="math notranslate nohighlight">\(A x = b\)</span>, where the matrix <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(D\textbf{F}(x^{(k)})\)</span>, and that will be seen to involve about <span class="math notranslate nohighlight">\(n^3/3\)</span> arithmetic operations.</p>
-<p>It also requires computing the new values of these <span class="math notranslate nohighlight">\(n^2\)</span> partial derivatives at each iteration, also potentially with a cost proportional to <span class="math notranslate nohighlight">\(n^3\)</span>.</p>
-<p>When <span class="math notranslate nohighlight">\(n\)</span> is large, as is common with differential equations problems, this factor of <span class="math notranslate nohighlight">\(n^3\)</span> indicates a potentially very large cost per iteration, so various modifications have been developed to reduce the computational cost of each iteration (with the trade-off being that more iterations are typically needed): so-called <em>quasi-Newton methods.</em></p>
+<p>The leap-frog methd already illustrates two of the complications that arise with multistep methods:</p>
+<ul class="simple">
+<li><p>The initial data <span class="math notranslate nohighlight">\(u(a) = u_0\)</span> gives <span class="math notranslate nohighlight">\(U_0\)</span>, but then the above formula gives <span class="math notranslate nohighlight">\(U_1\)</span> in terms of <span class="math notranslate nohighlight">\(U_0\)</span> and the non-existent value <span class="math notranslate nohighlight">\(U_{-1}\)</span>; a different method is needed to get <span class="math notranslate nohighlight">\(U_1\)</span>.
+More generally, with an <span class="math notranslate nohighlight">\(s\)</span>-step methods, one needs to compute the first <span class="math notranslate nohighlight">\(s-1\)</span> steps, up to <span class="math notranslate nohighlight">\(U_{s-1}\)</span>, by some other method.</p></li>
+<li><p>Leap-frog needs a constant ste size <span class="math notranslate nohighlight">\(h\)</span>; the strategy of error estimation and error control using variable step size is still possible with some multistep methods, but that is distinctly more complicated than we have seen with one-step methods, and will not be addressed on these notes.</p></li>
+</ul>
+<p>Fortunately many differential equations can be handled wwell by choosing a suitable fixed step size <span class="math notranslate nohighlight">\(h\)</span>.
+Thus, in these notes, we work only with equal step sizes, so that our times are <span class="math notranslate nohighlight">\(t_i = a + i h\)</span> and we aim for approximations
+<span class="math notranslate nohighlight">\(U_i \approx u(a + ih)\)</span>.</p>
+</div>
+<div class="section" id="second-order-accuracy-of-the-leap-frog-method">
+<h2><span class="section-number">27.3. </span>Second order accuracy of the leap-frog method<a class="headerlink" href="#second-order-accuracy-of-the-leap-frog-method" title="Permalink to this headline">¶</a></h2>
+<p>Using the fact that the centered difference approximation is second order accurate,
+one can verify that</p>
+<div class="math notranslate nohighlight">
+\[\frac{u(t_{i+1}) - u(t_{i-1})}{2h} - f(t, u(t_i)) = O(h^2)\]</div>
+<p>(Alternatively one can get this by inserting quadratic Taylor polynomials centered at <span class="math notranslate nohighlight">\(t_i\)</span>, and their error terms.)</p>
+<p>The definition of local trunctation error needs to be extended slightly:
+it is the error <span class="math notranslate nohighlight">\(U_{i+1} - u(t_{i+1})\)</span> when one starts with exact values for all previous steps;
+that is, assuming <span class="math notranslate nohighlight">\(U_j = u(t_j)\)</span> for all <span class="math notranslate nohighlight">\(j\leq i\)</span>.</p>
+<p>The above results then shows that the local truncation error in each step is <span class="math notranslate nohighlight">\(U_{i+1} - u(t_{i+1}) = O(h^3)\)</span>,
+so that the “local truncation error per unit time” is</p>
+<p>$<span class="math notranslate nohighlight">\(\frac{U_{i+1} - u(t_{i+1})}{h} = O(h^2)\)</span>$.</p>
+<p>A theorem in the section on <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html"><span class="doc std std-doc">Global Error Bounds for One Step Methods</span></a>
+says that when a one-step methods has local truncation error per unit time of <span class="math notranslate nohighlight">\(O(h^p)\)</span> it also has global truncation error of the same order.
+The situation is a bit more complicated with multi-step methods, but loosely <em>if</em> the errors in a multistep method has local truncation <span class="math notranslate nohighlight">\(O(h^p)\)</span> and it converges (i.e. the global error goes to zero at <span class="math notranslate nohighlight">\(h \to 0\)</span>) then it does so at the expected rate of <span class="math notranslate nohighlight">\(O(h^p)\)</span>.</p>
+<p>So in particular, when the leap-frog method converges it is second order accurate, just like the centered difference approximation of <span class="math notranslate nohighlight">\(du/dt\)</span> that it is built on.</p>
+</div>
+<div class="section" id="the-speed-advantage-of-multi-step-methds-like-the-leap-frog-method">
+<h2><span class="section-number">27.4. </span>The speed advantage of multi-step methds like the leap-frog method<a class="headerlink" href="#the-speed-advantage-of-multi-step-methds-like-the-leap-frog-method" title="Permalink to this headline">¶</a></h2>
+<p>This second order accuracy illustrate a major potential advantage of multi-step methods;
+whereas any one-step Runge-Kutta method that is second order accurate (such as the explicit trppezoidor explicit midpoint methods) require at least two evaluations of <span class="math notranslate nohighlight">\(f(t, u)\)</span> for each time step, the leap-frog methods requires only one.</p>
+<p>More generally, for every <span class="math notranslate nohighlight">\(s\)</span>, there are <span class="math notranslate nohighlight">\(s\)</span>-step methods with errors <span class="math notranslate nohighlight">\(O(h^s)\)</span> that require only one evaluation of <span class="math notranslate nohighlight">\(f(t, u)\)</span> per time step — for example, the Adams-Bashforth methods, as seen at</p>
+<ul class="simple">
+<li><p>https://en.wikipedia.org/wiki/Linear_multistep_method#Adams-Bashforth_methods</p></li>
+<li><p>https://en.m.wikiversity.org/wiki/Adams-Bashforth_and_Adams-Moulton_methods</p></li>
+<li><p><a class="reference external" href="../references.html#Sauer">Sauer</a> Section 6.7.1  and 6.7.2</p></li>
+<li><p><a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>, Section 5.6</p></li>
+</ul>
+<p>In comparison, any <em>explicit</em> one-step method order <span class="math notranslate nohighlight">\(p\)</span> require at least <span class="math notranslate nohighlight">\(p\)</span> evaluations of <span class="math notranslate nohighlight">\(f(t, u)\)</span> per time step.
+(See the <a class="reference internal" href="ODE-IVP-6-implicit-methods-intro.html"><span class="doc std std-doc">Introduction to Implicit Methods</span></a> for the distinction between explicit and implicit methods, but as seen there, the alternative of implicit methids generally require even more evaluations per time step.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># Shortcuts for some favorite commands:</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">show</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leap_frog</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">U_0</span><span class="p">,</span> <span class="n">U_1</span><span class="p">,</span> <span class="n">nSteps</span><span class="p">):</span>
+    <span class="n">nUnknowns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">U_0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">nSteps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nSteps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nUnknowns</span><span class="p">])</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">U_0</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">U_1</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">nSteps</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nSteps</span><span class="p">):</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">step</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">step</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demo with the (undamped) mass-spring system</span>
+
+<span class="k">def</span> <span class="nf">f_mass_spring</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">U_0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">periods</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">periods</span>
+<span class="c1">#nSteps = 1000  # Very Good?!</span>
+<span class="n">nSteps</span> <span class="o">=</span> <span class="mi">400</span>  <span class="c1"># Good?</span>
+<span class="c1">#nSteps = 40  # OK</span>
+
+<span class="c1"># We need U_1, for now, get it with the Runge-Kutta method;</span>
+<span class="c1"># this is overkill for accuracy, but since only one step is needed, the cost is negligible.</span>
+<span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">RungeKutta_system</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">nSteps</span>
+<span class="p">(</span><span class="n">t_1step</span><span class="p">,</span> <span class="n">U_1step</span><span class="p">)</span> <span class="o">=</span> <span class="n">RungeKutta_system</span><span class="p">(</span><span class="n">f_mass_spring</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">U_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">U_1</span> <span class="o">=</span> <span class="n">U_1step</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">leap_frog</span><span class="p">(</span><span class="n">f_mass_spring</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">U_0</span><span class="p">,</span> <span class="n">U_1</span><span class="p">,</span> <span class="n">nSteps</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#print(f&quot;t={t}&quot;)</span>
+<span class="c1">#print(f&quot;y={y}&quot;)</span>
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ODE-IVP-7-multi-step-methods-intro_10_0.png" src="../_images/ODE-IVP-7-multi-step-methods-intro_10_0.png" />
+</div>
+</div>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
-</div>
 </div>
 </div>
 
@@ -871,8 +970,8 @@ This material from multi-variable calculus will be reviewed when we need it.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../future_topics.html" title="previous page"><span class="section-number">34. </span>Some Future Topics</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html" title="next page"><span class="section-number">2. </span>Simultaneous Linear Equations, Part 7: Faster Methods for Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> for Tridiagonal and Banded matrices, and Strict Diagonal Dominance</a>
+    <a class='left-prev' id="prev-link" href="ODE-IVP-6-implicit-methods-intro.html" title="previous page"><span class="section-number">26. </span>Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations</a>
+    <a class='right-next' id="next-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" title="next page"><span class="section-number">28. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

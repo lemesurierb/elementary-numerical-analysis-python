@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9. Code Files, Modules, and an Integrated Development Environment &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Recursion (vs iteration)" href="recursion.html" />
-    <link rel="prev" title="8. Iteration with while" href="iteration-with-while.html" />
+    <link rel="next" title="27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods" href="ODE-IVP-7-multi-step-methods-intro.html" />
+    <link rel="prev" title="25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes" href="ODE-IVP-5-error-control-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,59 +121,59 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/root-finding-by-interval-halving-python.html">
+  <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/fixed-point-iteration-python.html">
+  <a class="reference internal" href="fixed-point-iteration-python.html">
    2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/newtons-method-python.html">
+  <a class="reference internal" href="newtons-method-python.html">
    3. Newton’s Method for Solving Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/taylors-theorem.html">
+  <a class="reference internal" href="taylors-theorem.html">
    4. Taylor’s Theorem and the Accuracy of Linearization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/error-measures-convergence-rates.html">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
    5. Measures of Error and Order of Convergence
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/newtons-method-convergence-rate.html">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
    6. The Convergence Rate of Newton’s Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/root-finding-without-derivatives-python.html">
+  <a class="reference internal" href="root-finding-without-derivatives-python.html">
    7. Root-finding Without Derivatives
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-1-row-reduction-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
    8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/machine-numbers-rounding-error-and-error-propagation-python.html">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-python.html">
    9. Machine Numbers, Rounding Error and Error Propagation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-2-pivoting-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
    10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-3-lu-factorization-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
    11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -185,7 +185,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-4-plu-factorization-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
    12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -194,107 +194,107 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/polynomial-collocation%2Bapproximation-python.html">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html">
    13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/polynomial-collocation-error-formulas-python.html">
+  <a class="reference internal" href="polynomial-collocation-error-formulas-python.html">
    14. Error Formulas for Polynomial Collocation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/derivatives-and-the-method-of-undetermined-coefficents.html">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
    15. Approximating Derivatives by the Method of Undetermined Coefficients
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/richardson-extrapolation.html">
+  <a class="reference internal" href="richardson-extrapolation.html">
    16. Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/definite-integrals-1-building-blocks-python.html">
+  <a class="reference internal" href="definite-integrals-1-building-blocks-python.html">
    17. Definite Integrals, Part 1: The Building Blocks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/definite-integrals-2-composite-rules.html">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
    18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/definite-integrals-3-simpson-richardson.html">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
    19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/definite-integrals-4-romberg-integration.html">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
    20. Definite Integrals, Part 4: Romberg Integration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-1-basics-and-Euler-python.html">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
    21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-2-Runge-Kutta-python.html">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
    22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-3-error-results-one-step-methods.html">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
    23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-4-system-higher-order-equations.html">
+  <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
    24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-5-error-control-python.html">
+  <a class="reference internal" href="ODE-IVP-5-error-control-python.html">
    25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-6-implicit-methods-intro.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-7-multi-step-methods-intro.html">
+  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
    27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
    28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-6-iterative-methods.html">
+  <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
    29. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/minimization-1D.html">
+  <a class="reference internal" href="minimization-1D.html">
    30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/eigenproblems.html">
+  <a class="reference internal" href="eigenproblems.html">
    31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/least-squares-fitting-python.html">
+  <a class="reference internal" href="least-squares-fitting-python.html">
    32. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/least-squares-fitting-appendix-geometrical-approach.html">
+  <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
    33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
@@ -311,12 +311,12 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/newtons-method-for-systems-introduction.html">
+  <a class="reference internal" href="newtons-method-for-systems-introduction.html">
    1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
+  <a class="reference internal" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
    2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -332,47 +332,47 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/root-finding-by-interval-halving-exercises-python.html">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
    Exercises on the Bisection Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/fixed-point-iteration-exercises.html">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
    Exercises on Fixed Point Iteration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/error-measures-convergence-rates-exercises.html">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
    Exercises on Error Measures and Convergence
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/newtons-method-exercises.html">
+  <a class="reference internal" href="newtons-method-exercises.html">
    Exercises on Newton’s Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/root-finding-without-derivatives-exercises.html">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
    Exercises on Root-finding Without Derivatives
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/machine-numbers-rounding-error-and-error-propagation-exercises.html">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
    Exercises on Machine Numbers, Rounding Error and Error Propagation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/simultaneous-linear-equations-exercises.html">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
    Exercises on Solving Simultaneous Linear Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
    Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/ODE-IVP-exercises.html">
+  <a class="reference internal" href="ODE-IVP-exercises.html">
    Exercises on Initial Value Problems for Ordinary Differential Equations
   </a>
  </li>
@@ -384,32 +384,32 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/assignment1.html">
+  <a class="reference internal" href="assignment1.html">
    MATH 375 Assignment 1
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/assignment2.html">
+  <a class="reference internal" href="assignment2.html">
    MATH 375 Assignment 2
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/assignment3.html">
+  <a class="reference internal" href="assignment3.html">
    MATH 375 Assignment 3
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/root_finding.html">
+  <a class="reference internal" href="root_finding.html">
    Module root_finding
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/assignment4.html">
+  <a class="reference internal" href="assignment4.html">
    MATH 375 Assignment 4
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/assignment5.html">
+  <a class="reference internal" href="assignment5.html">
    MATH 375 Assignment 5
   </a>
  </li>
@@ -473,32 +473,32 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html">
+  <a class="reference internal" href="project-possibilities.html">
    Some Final Project Possibilites
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#minimizing-functions-of-one-and-several-variables">
+  <a class="reference internal" href="project-possibilities.html#minimizing-functions-of-one-and-several-variables">
    Minimizing Functions of One and Several Variables
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#root-finding-by-repeated-inverse-quadratic-approximation-with-bracketing">
+  <a class="reference internal" href="project-possibilities.html#root-finding-by-repeated-inverse-quadratic-approximation-with-bracketing">
    Root-finding by Repeated Inverse Quadratic Approximation with Bracketing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#a-more-reliable-secant-method">
+  <a class="reference internal" href="project-possibilities.html#a-more-reliable-secant-method">
    A More Reliable Secant Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#computing-eigenvalues-and-eigenvectors">
+  <a class="reference internal" href="project-possibilities.html#computing-eigenvalues-and-eigenvectors">
    Computing Eigenvalues and Eigenvectors
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#iterative-methods-for-solving-simultaneous-linear-equations-ax-b">
+  <a class="reference internal" href="project-possibilities.html#iterative-methods-for-solving-simultaneous-linear-equations-ax-b">
    Iterative Methods for Solving Simultaneous Linear Equations,
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -506,22 +506,22 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#solving-simultaneous-nonlinear-equations">
+  <a class="reference internal" href="project-possibilities.html#solving-simultaneous-nonlinear-equations">
    Solving Simultaneous Nonlinear Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#fitting-smooth-piecewise-cubic-functions-to-data">
+  <a class="reference internal" href="project-possibilities.html#fitting-smooth-piecewise-cubic-functions-to-data">
    Fitting Smooth Piecewise Cubic Functions to Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#least-squares-fitting-to-data-and-functions">
+  <a class="reference internal" href="project-possibilities.html#least-squares-fitting-to-data-and-functions">
    Least-Squares Fitting to Data and Functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/project-possibilities.html#boundary-value-problems-for-differential-equations">
+  <a class="reference internal" href="project-possibilities.html#boundary-value-problems-for-differential-equations">
    Boundary Value Problems for Differential Equations
   </a>
  </li>
@@ -531,9 +531,9 @@
   Python and Jupyter Notebook Review (with Numpy and Matplotlib)
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
    1. Introduction to
    <em>
     Python Preview
@@ -541,32 +541,32 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="getting-python-software-for-scientific-computing.html">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
    2. Getting Python Software for Scientific Computing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="suggestions-on-python-and-notebook-usage.html">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
    3. Suggestions and Notes on Python and Jupyter Notebook Usage
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python-variables-lists-tuples-numpy-arrays.html">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
    4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="functions.html">
+  <a class="reference internal" href="../python_tutorial/functions.html">
    5. Defining and Using Python Functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="decisions-with-if-else-elif.html">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
    6. Decision Making With if, else, and elif
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="iteration-with-for.html">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
    7. Iteration with
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -576,7 +576,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="iteration-with-while.html">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
    8. Iteration with
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -585,53 +585,53 @@
    </code>
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
    9. Code Files, Modules, and an Integrated Development Environment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="recursion.html">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
    10. Recursion (vs iteration)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="graphing-with-matplotlib.html">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
    11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="array-operations-and-linear-algebra.html">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
    12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="scipy-tools-for-linear-algebra.html">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
    13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="summation-and-integration.html">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
    14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="random-numbers-and-simulation.html">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
    15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="formatted-output-and-some-text-string-manipulation.html">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
    16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="classes-objects-attributes-methods.html">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
    17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="exception-handling.html">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
    18. Exceptions and Exception Handling
   </a>
  </li>
@@ -643,7 +643,7 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/numerical_methods_module.html">
+  <a class="reference internal" href="numerical_methods_module.html">
    Notebook for generating the module
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -653,12 +653,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
    Linear algebra algorithms using 0-based indexing and semi-open intervals
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks/sample-project-newtons-method-python-draft.html">
+  <a class="reference internal" href="sample-project-newtons-method-python-draft.html">
    Numerical Analysis Sample Project on Newtons’s Method
   </a>
  </li>
@@ -702,7 +702,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python_tutorial/code-files-modules-IDEs.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-6-implicit-methods-intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -727,7 +727,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/python_tutorial/code-files-modules-IDEs.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-6-implicit-methods-intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -751,35 +751,8 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   9.1. Introduction
+   26.1. Introduction
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#integrated-development-environments-spyder-et-al">
-   9.2. Integrated Development Environments: Spyder et al
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-a-testing-and-demonstrations-in-a-python-code-file">
-     9.2.1. Exercise A. testing and demonstrations in a Python code file
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-b-using-code-from-a-python-code-file-with-command-import">
-     9.2.2. Exercise B. using code from a Python code file with command
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       import
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-c-start-building-a-module-of-functions-you-create-in-this-course">
-     9.2.3. Exercise C. Start building a module of functions you create in this course.
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -792,75 +765,28 @@
         
               <div>
                 
-  <div class="section" id="code-files-modules-and-an-integrated-development-environment">
-<h1><span class="section-number">9. </span>Code Files, Modules, and an Integrated Development Environment<a class="headerlink" href="#code-files-modules-and-an-integrated-development-environment" title="Permalink to this headline">¶</a></h1>
-<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
-<hr class="docutils" />
+  <div class="section" id="initial-value-problems-for-odes-part-6-introduction-to-implicit-methods-and-stiff-equations">
+<h1><span class="section-number">26. </span>Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations<a class="headerlink" href="#initial-value-problems-for-odes-part-6-introduction-to-implicit-methods-and-stiff-equations" title="Permalink to this headline">¶</a></h1>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 6.6 <em>Implicit Methods and Stiff Equations</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 5.11 <em>Stiff Equations</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># Shortcuts for some favorite commands:</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">legend</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="introduction">
-<h2><span class="section-number">9.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>So far, we have worked on each topic within a single Jupyter notebook.</p>
-<p>However, in some stuations it is better to put some Python code into a separate file, sometimes called a <em>module</em>, and then either execute that code directly, or access it from a notebook or from another code file.
-We have already used a few modules like <code class="docutils literal notranslate"><span class="pre">math</span></code> in a way that illustrates one advantage: gathering Python functions and variables that can then be reused by variouys notebooks without reproducing the same code in each one.</p>
-<p>That will be useful when you have functions that you wish to use repeatedly within different tasks and from different notebooks or different Python code files; for example if you build a collection of Python functions for common linear algebra calculations.</p>
-</div>
-<div class="section" id="integrated-development-environments-spyder-et-al">
-<h2><span class="section-number">9.2. </span>Integrated Development Environments: Spyder et al<a class="headerlink" href="#integrated-development-environments-spyder-et-al" title="Permalink to this headline">¶</a></h2>
-<p>To work with files of Python code and create moduels fo ue from witin notebooks, it is convenient to use a software tool that supports creating and editing such files and then running the code: a so-called <em>Integrated Development Environment</em>, or “IDE”.</p>
-<p>For that task, these notes describe the use of <a class="reference external" href="https://www.spyder-ide.org/">Spyder</a>, [from “Scientic PYthon Development enviRonment] which is included in Anaconda and can be opened from the Anaconda Navigator.
-However there are several other widely used alternatives, such as the fairly rudimentary <a class="reference external" href="https://realpython.com/python-idle/">IDLE</a>
-and the more advanced <a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm</a>
-One reon for peferring Spyder over IDLE is that Spyder integrates the “Scientific Python” packages Numpy, Matlpotlib and Scipy that we will be using.</p>
-<p><a name=Exercise-A></a></p>
-<div class="section" id="exercise-a-testing-and-demonstrations-in-a-python-code-file">
-<h3><span class="section-number">9.2.1. </span>Exercise A. testing and demonstrations in a Python code file<a class="headerlink" href="#exercise-a-testing-and-demonstrations-in-a-python-code-file" title="Permalink to this headline">¶</a></h3>
-<p>To start learning the use of the Spyder IDE, we will reproduce Exercise A of the section on <a class="reference internal" href="functions.html"><span class="doc std std-doc">functions</span></a>.</p>
-<ol>
-<li><p>Open Spyder (from Anaconda-Navigator).</p></li>
-<li><p>In Spyder, create a new file, using menu “File”, item “New File …”.</p></li>
-<li><p>Save this file into the folder numerical-methods” (or whatver you naemd it) for this course, using the name “exercise_4a.py”.</p></li>
-<li><p>Sypder puts some stuff in the newlt created “emplty” file, in particular a “triple quoted comment” near the top.
-Edi this commeny to include a <strong>title</strong>, <strong>your name</strong>, the <strong>date</strong> and some <strong>decription</strong>, and maybe some contact information.
-Mine would look something like:<br />
-<code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;</span>&#160; <span class="pre">For</span>&#160; <span class="pre">Exercise</span> <span class="pre">A</span>&#160; <span class="pre">&#64;author:</span> <span class="pre">Brenton</span> <span class="pre">LeMesurier</span> <span class="pre">&lt;lemesurierb&#64;cofc.edu&gt;</span>&#160; <span class="pre">Last</span> <span class="pre">revised</span> <span class="pre">January</span> <span class="pre">0,</span> <span class="pre">1970</span>&#160; <span class="pre">&quot;&quot;&quot;</span></code></p>
-<p>This special triple quoting notation is used for introductory comments and documention for a file, as well as for functions; we will see one nice use of this soon, with the function <code class="docutils literal notranslate"><span class="pre">help</span></code>.</p>
-</li>
-<li><p>Immediately after these openign comments, copy in any <code class="docutils literal notranslate"><span class="pre">import</span></code> statements needed by the function <code class="docutils literal notranslate"><span class="pre">solve_quadratic</span></code> in Exercise 3A.</p></li>
-</ol>
-<p><strong>Note:</strong> It is good practice for all imports to be near the top of a code file or notebook, straight after any introductory text.</p>
-<ol class="simple">
-<li><p>Copy the code for the function <code class="docutils literal notranslate"><span class="pre">solve_quadratic</span></code> developed in Exercise 3A into this file, below the <code class="docutils literal notranslate"><span class="pre">import</span></code> sttemwnt (if any).</p></li>
-<li><p>Then copy in the code for the test cases after the function definition.</p></li>
-<li><p>Run the code in the folder, using the “Run” button atop Spyder (it looks like a triangular “Play” icon).</p></li>
-</ol>
-<p><strong>Aside:</strong> For more substantial Python code development, it can be better to first develop the code in a file like this, using Spyder (or another IDE), and then copy the working code into a notebook for presentation; that allows you to make use of more powerful testing and debugging tools.</p>
-<p>On the other hand, there is a potential drawback with putting the function definition and test cases in one Python file: if an error (“exception”) occurs for any test case, the rest of the file is not executed.
-For now, avoid this by having at most one such exceptional case, and putting it last.</p>
-<p>We will later learn several better ways of handling this sort of situation — one seen already is the above approach of testing from separate cells in a notebook.</p>
-<p><a name=Exercise-B></a></p>
-</div>
-<div class="section" id="exercise-b-using-code-from-a-python-code-file-with-command-import">
-<h3><span class="section-number">9.2.2. </span>Exercise B. using code from a Python code file with command <code class="docutils literal notranslate"><span class="pre">import</span></code><a class="headerlink" href="#exercise-b-using-code-from-a-python-code-file-with-command-import" title="Permalink to this headline">¶</a></h3>
-<p>Functions (and variables) defined in a code file can be used from a notebook or from another code file by importing: effectively we have created a <em>module</em> <code class="docutils literal notranslate"><span class="pre">exercise_A</span></code>, and can access the function <code class="docutils literal notranslate"><span class="pre">solve_quadratic</span></code> defined there from a notebook by using the command
-<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">exercise_A</span> <span class="pre">import</span> <span class="pre">solve_quadratic</span></code></p>
-<p>Note that the base-name of the file is now being used as a variable name — that is why code file names should follow the same naming rules as variable names.</p>
-<p>To experiment a bit more with defining and using your own modules:</p>
-<ol class="simple">
-<li><p>Create a notebook <code class="docutils literal notranslate"><span class="pre">modules.ipynb</span></code> — you can cut and paste from this notebook, but leave out irrelevant stuff: copy mainly the headings and the statements of exercises.</p></li>
-<li><p>Make a copy of the file <code class="docutils literal notranslate"><span class="pre">exercise_A.py</span></code> named <code class="docutils literal notranslate"><span class="pre">functions.py</span></code>.</p></li>
-<li><p>In that file <code class="docutils literal notranslate"><span class="pre">functions_exercise.py</span></code>, remove the test cases for Exercise A, and add the definition of function <code class="docutils literal notranslate"><span class="pre">Df_CD_approximation</span></code> that was created in Exercise A of the section <a class="reference internal" href="functions.html"><span class="doc std std-doc">Functions</span></a>.
-So now this new file defines a module <code class="docutils literal notranslate"><span class="pre">functions</span></code> which just defines these functions, not running any test cases using them or producing any output when run.</p></li>
-<li><p>In notebook <code class="docutils literal notranslate"><span class="pre">modules.ipynb</span></code>, import these two functions, and below the <code class="docutils literal notranslate"><span class="pre">import</span></code> command,
-copy in the test case cells used in section <a class="reference internal" href="functions.html"><span class="doc std std-doc">Functions</span></a> for both Exercises A and B.</p></li>
-<li><p>Run the noteboook.</p></li>
-</ol>
-<p>This combination of notebook with importing from a module can give a notebook presentation that is more concise and less cluttered; this will be a distict advantage at times later in the course where the collection of function definitions is far longer.</p>
-<p><a name=Exercise-C></a></p>
-</div>
-<div class="section" id="exercise-c-start-building-a-module-of-functions-you-create-in-this-course">
-<h3><span class="section-number">9.2.3. </span>Exercise C. Start building a module of functions you create in this course.<a class="headerlink" href="#exercise-c-start-building-a-module-of-functions-you-create-in-this-course" title="Permalink to this headline">¶</a></h3>
-<p>Make a copy of the module file <code class="docutils literal notranslate"><span class="pre">modules.py</span></code> with a name like <code class="docutils literal notranslate"><span class="pre">numerical_methods.py</span></code>.</p>
-<p>As the course progresses, you will create some more useful functions, such as one for solving equations using Newton’s method: gather those in this module <code class="docutils literal notranslate"><span class="pre">numerical_methods</span></code>.</p>
-</div>
+<h2><span class="section-number">26.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
 </div>
 
@@ -877,7 +803,7 @@ copy in the test case cells used in section <a class="reference internal" href="
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./python_tutorial"
+            path: "./notebooks"
         },
         predefinedOutput: true
     }
@@ -892,8 +818,8 @@ copy in the test case cells used in section <a class="reference internal" href="
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="iteration-with-while.html" title="previous page"><span class="section-number">8. </span>Iteration with <code class="docutils literal notranslate"><span class="pre">while</span></code></a>
-    <a class='right-next' id="next-link" href="recursion.html" title="next page"><span class="section-number">10. </span>Recursion (vs iteration)</a>
+    <a class='left-prev' id="prev-link" href="ODE-IVP-5-error-control-python.html" title="previous page"><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</a>
+    <a class='right-next' id="next-link" href="ODE-IVP-7-multi-step-methods-intro.html" title="next page"><span class="section-number">27. </span>Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

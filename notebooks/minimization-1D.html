@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond" href="eigenproblems.html" />
-    <link rel="prev" title="27. Simultaneous Linear Equations, Part 6: Iterative Methods" href="simultaneous-linear-equations-6-iterative-methods.html" />
+    <link rel="next" title="31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond" href="eigenproblems.html" />
+    <link rel="prev" title="29. Simultaneous Linear Equations, Part 6: Iterative Methods" href="simultaneous-linear-equations-6-iterative-methods.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -259,38 +259,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-6-implicit-methods-intro.html">
+   26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
+   27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   27. Simultaneous Linear Equations, Part 6: Iterative Methods
+   29. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   30. Least-squares Fitting to Data
+   32. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   32. Some Future Topics
+   34. Some Future Topics
   </a>
  </li>
 </ul>
@@ -741,12 +751,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   28.1. Introduction
+   30.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum">
-   28.2. Step 1: finding a smaller interval within
+   30.2. Step 1: finding a smaller interval within
    <span class="math notranslate nohighlight">
     \([a, b]\)
    </span>
@@ -755,12 +765,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge">
-   28.3. Step 2: choosing the internal points so that the method is guaranteed to converge
+   30.3. Step 2: choosing the internal points so that the method is guaranteed to converge
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible">
-   28.4. Step 3: choosing the internal points so that the method converges as fast as possible
+   30.4. Step 3: choosing the internal points so that the method converges as fast as possible
   </a>
  </li>
 </ul>
@@ -775,7 +785,7 @@
               <div>
                 
   <div class="section" id="finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-a-brief-introduction">
-<h1><span class="section-number">28. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction<a class="headerlink" href="#finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">30. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction<a class="headerlink" href="#finding-the-minimum-of-a-function-of-one-variable-without-using-derivatives-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
 <p><strong>Version of April 13, 2021</strong>, adding a reference for the next refinement of the strategy, the <a class="reference external" href="https://en.wikipedia.org/wiki/Golden-section_search">Golden Section Search</a>.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -784,7 +794,7 @@ in particular sub-section 13.1.1 <em>Golden Section Search</em>.</p></li>
 <li><p>Section 11.1, <em>One-Variable Case</em> in Chapter 11 <em>Optimization</em> of <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a>.</p></li>
 </ul>
 <div class="section" id="introduction">
-<h2><span class="section-number">28.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">30.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The goal of this section is to find the minimum of a function <span class="math notranslate nohighlight">\(f(x)\)</span> and more specifically to find its location: the argument <span class="math notranslate nohighlight">\(p\)</span> such that <span class="math notranslate nohighlight">\(f(p) \leq f(x)\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> in the domain of <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <p>Several features are similar to what we have seen with zero-finding:</p>
 <ul class="simple">
@@ -807,7 +817,7 @@ The function is decreasing near <span class="math notranslate nohighlight">\(a\)
 <p>So we assume from now on that the function is <em>monomodal</em> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>.</p>
 </div>
 <div class="section" id="step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum">
-<h2><span class="section-number">28.2. </span>Step 1: finding a smaller interval within <span class="math notranslate nohighlight">\([a, b]\)</span> that contains the minimum<a class="headerlink" href="#step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">30.2. </span>Step 1: finding a smaller interval within <span class="math notranslate nohighlight">\([a, b]\)</span> that contains the minimum<a class="headerlink" href="#step-1-finding-a-smaller-interval-within-a-b-that-contains-the-minimum" title="Permalink to this headline">¶</a></h2>
 <p>As claimed above, three points are not enough: even if for <span class="math notranslate nohighlight">\(a &lt; c &lt; b\)</span> we have <span class="math notranslate nohighlight">\(f(a) &gt; f(c)\)</span> and <span class="math notranslate nohighlight">\(f(c) &lt; f(b)\)</span>,
 the minimum could be either to the left or the right of <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <p>So instead, choose two internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>, <span class="math notranslate nohighlight">\(a &lt; c &lt; d &lt; b\)</span>.</p>
@@ -829,7 +839,7 @@ othewise, repaeat from step (1).</p></li>
 </ol>
 </div>
 <div class="section" id="step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge">
-<h2><span class="section-number">28.3. </span>Step 2: choosing the internal points so that the method is guaranteed to converge<a class="headerlink" href="#step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">30.3. </span>Step 2: choosing the internal points so that the method is guaranteed to converge<a class="headerlink" href="#step-2-choosing-the-internal-points-so-that-the-method-is-guaranteed-to-converge" title="Permalink to this headline">¶</a></h2>
 <p>There are a couple of details that need to be resolved:</p>
 <p>(A) Deciding how to choose the internal points <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(d\)</span>.</p>
 <p>(B) Verifying that the interval does indeed shrink to arbitrarily small length after enough iterations, so that the algorithm succeeds.</p>
@@ -841,7 +851,7 @@ othewise, repaeat from step (1).</p></li>
 <p>Then the new interval is <span class="math notranslate nohighlight">\(2/3\)</span> as long as the previous one, and the errors shrink by a factor of <span class="math notranslate nohighlight">\((2/3)^k\)</span> after <span class="math notranslate nohighlight">\(k\)</span> steps, eventually getting as small as one wishes.</p>
 </div>
 <div class="section" id="step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible">
-<h2><span class="section-number">28.4. </span>Step 3: choosing the internal points so that the method converges as fast as possible<a class="headerlink" href="#step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">30.4. </span>Step 3: choosing the internal points so that the method converges as fast as possible<a class="headerlink" href="#step-3-choosing-the-internal-points-so-that-the-method-converges-as-fast-as-possible" title="Permalink to this headline">¶</a></h2>
 <p>Coming soon: this leads to the <a class="reference external" href="https://en.wikipedia.org/wiki/Golden-section_search">Golden Section Search</a>  …</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
@@ -876,8 +886,8 @@ othewise, repaeat from step (1).</p></li>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-6-iterative-methods.html" title="previous page"><span class="section-number">27. </span>Simultaneous Linear Equations, Part 6: Iterative Methods</a>
-    <a class='right-next' id="next-link" href="eigenproblems.html" title="next page"><span class="section-number">29. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond</a>
+    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-6-iterative-methods.html" title="previous page"><span class="section-number">29. </span>Simultaneous Linear Equations, Part 6: Iterative Methods</a>
+    <a class='right-next' id="next-link" href="eigenproblems.html" title="next page"><span class="section-number">31. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

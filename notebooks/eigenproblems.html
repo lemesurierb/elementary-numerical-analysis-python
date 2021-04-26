@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="30. Least-squares Fitting to Data" href="least-squares-fitting-python.html" />
-    <link rel="prev" title="28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction" href="minimization-1D.html" />
+    <link rel="next" title="32. Least-squares Fitting to Data" href="least-squares-fitting-python.html" />
+    <link rel="prev" title="30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction" href="minimization-1D.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -259,38 +259,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-6-implicit-methods-intro.html">
+   26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
+   27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   27. Simultaneous Linear Equations, Part 6: Iterative Methods
+   29. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   30. Least-squares Fitting to Data
+   32. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   32. Some Future Topics
+   34. Some Future Topics
   </a>
  </li>
 </ul>
@@ -741,63 +751,63 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-power-method">
-   29.1. The Power Method
+   31.1. The Power Method
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-basic-algorithm-for-the-power-method">
-   29.2. A basic algorithm for the Power Method
+   31.2. A basic algorithm for the Power Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
-     29.2.1. Exercise 1
+     31.2.1. Exercise 1
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#refinement-deciding-the-iteration-count">
-     29.2.2. Refinement: deciding the iteration count
+     31.2.2. Refinement: deciding the iteration count
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-2">
-     29.2.3. Exercise 2
+     31.2.3. Exercise 2
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-inverse-power-method">
-   29.3. The Inverse Power Method
+   31.3. The Inverse Power Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#basic-algorithm-for-the-inverse-power-method">
-     29.3.1. Basic algorithm for the Inverse Power Method
+     31.3.1. Basic algorithm for the Inverse Power Method
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-3">
-     29.3.2. Exercise 3
+     31.3.2. Exercise 3
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#getting-other-eigenvalues-with-the-shifted-inverse-power-method">
-   29.4. Getting other eigenvalues with the Shifted Inverse Power Method
+   31.4. Getting other eigenvalues with the Shifted Inverse Power Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-4">
-     29.4.1. Exercise 4
+     31.4.1. Exercise 4
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc">
-   29.5. Further topics: getting all the eigenvalues with the QR Method, etc.
+   31.5. Further topics: getting all the eigenvalues with the QR Method, etc.
   </a>
  </li>
 </ul>
@@ -812,7 +822,7 @@
               <div>
                 
   <div class="section" id="computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond">
-<h1><span class="section-number">29. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond<a class="headerlink" href="#computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">31. </span>Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond<a class="headerlink" href="#computing-eigenvalues-and-eigenvectors-the-power-method-and-a-bit-beyond" title="Permalink to this headline">¶</a></h1>
 <p><strong>Version of Friday April 16, 2021</strong>, making a few corrections after class and adding a reference for the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Gershgorin_circle_theorem">Gershgorin circle theorem</a>.</p>
 <p><strong>References:</strong></p>
@@ -846,7 +856,7 @@ Here, these eigenvalues will be enumerated in decreasing order of magnitude:</p>
 <p>Generically, all the magnitudes are different, which makes things works more easily,
 so that will sometimes be assumed while developing the intuition of the method.</p>
 <div class="section" id="the-power-method">
-<h2><span class="section-number">29.1. </span>The Power Method<a class="headerlink" href="#the-power-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">31.1. </span>The Power Method<a class="headerlink" href="#the-power-method" title="Permalink to this headline">¶</a></h2>
 <p>The basic tool is the <em>Power Method</em>, which will usually <em>but not always</em> succeed in computing the eigenvalue of largest magnitude, <span class="math notranslate nohighlight">\(\lambda_1\)</span>, and <strong>a</strong> corresponding eigenvector <span class="math notranslate nohighlight">\(\vec{v}_1\)</span>.
 Its success mainly involves assuming there being a unique largest eigenvalue: <span class="math notranslate nohighlight">\(\lambda_1 &gt; \lambda_i\)</span> for <span class="math notranslate nohighlight">\(i&gt;1\)</span>.</p>
 <p>In its simplest form, one starts with a unit-length vector <span class="math notranslate nohighlight">\(\vec{x}^{\,0}\)</span>,
@@ -861,7 +871,7 @@ by successive multiplications, and rescales at each stage to the unit vectors
 <p><strong>Note:</strong> Here and below, I use <span class="math notranslate nohighlight">\(\langle \vec{a}, \vec{b}\rangle\)</span> to denote the inner product (a.k.a. <em>dot product</em>) of two vectors; with Numpy arrays this is given by <code class="docutils literal notranslate"><span class="pre">a.dot(b)</span></code>.</p>
 </div>
 <div class="section" id="a-basic-algorithm-for-the-power-method">
-<h2><span class="section-number">29.2. </span>A basic algorithm for the Power Method<a class="headerlink" href="#a-basic-algorithm-for-the-power-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">31.2. </span>A basic algorithm for the Power Method<a class="headerlink" href="#a-basic-algorithm-for-the-power-method" title="Permalink to this headline">¶</a></h2>
 <p><em>Choose</em> initial vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span>, maybe with a random number generator.</p>
 <p>Normalize to <span class="math notranslate nohighlight">\(\vec{x}^{\,0} = \vec{y}^{\,0}/\|\vec{y}^{\,0}\|\)</span>.</p>
 <p>for <span class="math notranslate nohighlight">\(k\)</span> from 0 to <span class="math notranslate nohighlight">\(k_{max}\)</span>
@@ -875,7 +885,7 @@ by successive multiplications, and rescales at each stage to the unit vectors
 end for</p>
 <p>The final values of <span class="math notranslate nohighlight">\(r^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> approximate <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> respectively.</p>
 <div class="section" id="exercise-1">
-<h3><span class="section-number">29.2.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">31.2.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
 <p>Implement this algorithm and test it on the real, symmetric matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -952,7 +962,7 @@ lambda_2=4.000074490251736, 	 v_2=[0.00997347934918302, -0.0025248484075827684, 
 </div>
 </div>
 <div class="section" id="refinement-deciding-the-iteration-count">
-<h3><span class="section-number">29.2.2. </span>Refinement: deciding the iteration count<a class="headerlink" href="#refinement-deciding-the-iteration-count" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">31.2.2. </span>Refinement: deciding the iteration count<a class="headerlink" href="#refinement-deciding-the-iteration-count" title="Permalink to this headline">¶</a></h3>
 <p>Some details are omitted above; above all, how to decide the number of iterations.</p>
 <p>One approach is to use the fact that an eigenvector-eigenvalue pair satisfies
 <span class="math notranslate nohighlight">\(A \vec{v} - \lambda \vec{v} = 0\)</span>, so the “residual norm”</p>
@@ -969,12 +979,12 @@ lambda_2=4.000074490251736, 	 v_2=[0.00997347934918302, -0.0025248484075827684, 
 <p>I generally recommend this <code class="docutils literal notranslate"><span class="pre">for-if-break</span></code> form for implementing iterative methods, because it makes avoidance of infinite loops simpler, and avoids the common <code class="docutils literal notranslate"><span class="pre">while</span></code> loop issue that you do not yet have an error estimate when the loop starts.</p>
 </div>
 <div class="section" id="exercise-2">
-<h3><span class="section-number">29.2.3. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">31.2.3. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
 <p>Modify your code from Exercise 1 to implement this accuracy control.</p>
 </div>
 </div>
 <div class="section" id="the-inverse-power-method">
-<h2><span class="section-number">29.3. </span>The Inverse Power Method<a class="headerlink" href="#the-inverse-power-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">31.3. </span>The Inverse Power Method<a class="headerlink" href="#the-inverse-power-method" title="Permalink to this headline">¶</a></h2>
 <p>The next step is to note that if <span class="math notranslate nohighlight">\(A\)</span> is nonsingular, its inverse <span class="math notranslate nohighlight">\(B = A^{-1}\)</span> has the same eigenvectors, but with eigenvalues <span class="math notranslate nohighlight">\(\mu_i = 1/\lambda_i\)</span>.</p>
 <p>Thus we can apply the power method to <span class="math notranslate nohighlight">\(B\)</span> in order to compute its largest eigenvalue, which is <span class="math notranslate nohighlight">\(\mu_n = 1/\lambda_n\)</span>, along with the corresponding eigenvector <span class="math notranslate nohighlight">\(\vec{v}_n\)</span>.</p>
 <p>The main change to the above is that</p>
@@ -986,7 +996,7 @@ Instead, express the above as the sysem of equations.</p>
 \[A \vec{y}^{\,k+1} = \vec{x}_{k}.\]</div>
 <p>Here is an important case where the LU factorization method can speed things up greatly: a single LU factorization is needed, after which for each <span class="math notranslate nohighlight">\(k\)</span> one only has to do the far quicker forward and backward substitution steps: <span class="math notranslate nohighlight">\(O(n^2)\)</span> cost for each iteration instead of <span class="math notranslate nohighlight">\(O(n^3/3)\)</span>.</p>
 <div class="section" id="basic-algorithm-for-the-inverse-power-method">
-<h3><span class="section-number">29.3.1. </span>Basic algorithm for the Inverse Power Method<a class="headerlink" href="#basic-algorithm-for-the-inverse-power-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">31.3.1. </span>Basic algorithm for the Inverse Power Method<a class="headerlink" href="#basic-algorithm-for-the-inverse-power-method" title="Permalink to this headline">¶</a></h3>
 <p><em>Choose</em> initial vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span>, maybe with a random number generator.</p>
 <p>Normalize to <span class="math notranslate nohighlight">\(\vec{x}^{\,0} = \vec{y}^{\,0}/\|\vec{y}^{\,0}\|\)</span>.</p>
 <p>Compute an LU factorization <span class="math notranslate nohighlight">\(L U = A\)</span>.</p>
@@ -1004,13 +1014,13 @@ end for</p>
 <p>(If all goes well) the final values of <span class="math notranslate nohighlight">\(r^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}^{\,k}\)</span> approximate <span class="math notranslate nohighlight">\(\lambda_n\)</span> and <span class="math notranslate nohighlight">\(\vec{v}_n\)</span> respectively.</p>
 </div>
 <div class="section" id="exercise-3">
-<h3><span class="section-number">29.3.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">31.3.2. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
 <p>Implement this basic algorithm (with a fixed iteration count, as in Example 1),
 and then create a second version that imposes an accuracy target (as in Example 2).</p>
 </div>
 </div>
 <div class="section" id="getting-other-eigenvalues-with-the-shifted-inverse-power-method">
-<h2><span class="section-number">29.4. </span>Getting other eigenvalues with the Shifted Inverse Power Method<a class="headerlink" href="#getting-other-eigenvalues-with-the-shifted-inverse-power-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">31.4. </span>Getting other eigenvalues with the Shifted Inverse Power Method<a class="headerlink" href="#getting-other-eigenvalues-with-the-shifted-inverse-power-method" title="Permalink to this headline">¶</a></h2>
 <p>The inverse power method computes the eigenvalue closest to 0; by <em>shifting</em>, we can compute the eigenvalue closest to any chosen value <span class="math notranslate nohighlight">\(s\)</span>.
 Then by searching various values of <span class="math notranslate nohighlight">\(s\)</span>, we can hope to find all the eigenvectors.
 As a variant, once we have <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_n\)</span>, we can search nearby for other large or small eigenvalues: often the few largest and/or the few smallest are most important.</p>
@@ -1022,14 +1032,14 @@ As a variant, once we have <span class="math notranslate nohighlight">\(\lambda_
 <p>Thus, applying the inverse power method to <span class="math notranslate nohighlight">\(A - s I\)</span> computes its largest eigenvalue <span class="math notranslate nohighlight">\(\gamma\)</span>,
 and then <span class="math notranslate nohighlight">\(\lambda = 1/(\gamma + s)\)</span> is the eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> closest to <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <div class="section" id="exercise-4">
-<h3><span class="section-number">29.4.1. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">31.4.1. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h3>
 <p>As above, implement this, probably sarting with a fixed iteration count version.</p>
 <p>For the test case above, some plausible initial choices for the shifts are each if the entries on the main diagonal,
 and as above, testing with <span class="math notranslate nohighlight">\(A_s\)</span></p>
 </div>
 </div>
 <div class="section" id="further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc">
-<h2><span class="section-number">29.5. </span>Further topics: getting all the eigenvalues with the QR Method, etc.<a class="headerlink" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">31.5. </span>Further topics: getting all the eigenvalues with the QR Method, etc.<a class="headerlink" href="#further-topics-getting-all-the-eigenvalues-with-the-qr-method-etc" title="Permalink to this headline">¶</a></h2>
 <p>The above methods are not ideal when many or all of the eigenvalues of a matrix are wanted; then a variety of more advanced methods have been developed, starting with the QR (factorization) Method.</p>
 <p>We will not address the details of that method in this course, but one way to think about it for a symmetric matrix is that:</p>
 <ul class="simple">
@@ -1072,8 +1082,8 @@ This uses a variant of the <a class="reference external" href="https://en.wikipe
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="minimization-1D.html" title="previous page"><span class="section-number">28. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</a>
-    <a class='right-next' id="next-link" href="least-squares-fitting-python.html" title="next page"><span class="section-number">30. </span>Least-squares Fitting to Data</a>
+    <a class='left-prev' id="prev-link" href="minimization-1D.html" title="previous page"><span class="section-number">30. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</a>
+    <a class='right-next' id="next-link" href="least-squares-fitting-python.html" title="next page"><span class="section-number">32. </span>Least-squares Fitting to Data</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

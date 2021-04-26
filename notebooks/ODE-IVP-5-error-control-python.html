@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc." href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" />
+    <link rel="next" title="26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations" href="ODE-IVP-6-implicit-methods-intro.html" />
     <link rel="prev" title="24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs" href="ODE-IVP-4-system-higher-order-equations.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -259,38 +259,48 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-6-implicit-methods-intro.html">
+   26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
+   27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   27. Simultaneous Linear Equations, Part 6: Iterative Methods
+   29. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   30. Least-squares Fitting to Data
+   32. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   32. Some Future Topics
+   34. Some Future Topics
   </a>
  </li>
 </ul>
@@ -1079,6 +1089,13 @@ du/dt &amp;= K(\cos(t) - u) - \sin(t)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">grid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mf">3.0</span>
@@ -1096,25 +1113,6 @@ du/dt &amp;= K(\cos(t) - u) - \sin(t)
 <span class="c1"># This gives the &quot;wall clock&quot; time in seconds since a reference moment, called &quot;the epoch&quot;.</span>
 <span class="c1"># (For macOS and UNIX, the epoch is the beginning of 1970.)</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To read more about the function time.time, run this cell (in the notebook version of this page).</span>
-<span class="n">help</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function time in module time:
-
-time(...)
-    time() -&gt; floating point number
-    
-    Return the current time in seconds since the Epoch.
-    Fractions of a second may be present if the system clock provides them.
 </pre></div>
 </div>
 </div>
@@ -1528,7 +1526,7 @@ Other options include <code class="docutils literal notranslate"><span class="pr
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="ODE-IVP-4-system-higher-order-equations.html" title="previous page"><span class="section-number">24. </span>Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" title="next page"><span class="section-number">26. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</a>
+    <a class='right-next' id="next-link" href="ODE-IVP-6-implicit-methods-intro.html" title="next page"><span class="section-number">26. </span>Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
