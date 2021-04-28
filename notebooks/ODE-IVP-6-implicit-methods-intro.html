@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods" href="ODE-IVP-7-multi-step-methods-intro.html" />
-    <link rel="prev" title="25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes" href="ODE-IVP-5-error-control-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,7 +119,7 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
@@ -258,49 +256,44 @@
    25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
-   27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
+   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   29. Simultaneous Linear Equations, Part 6: Iterative Methods
+   28. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   32. Least-squares Fitting to Data
+   31. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   34. Some Future Topics
+   33. Some Future Topics
   </a>
  </li>
 </ul>
@@ -411,6 +404,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="assignment5.html">
    MATH 375 Assignment 5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment6.html">
+   MATH 375 Assignment 6: Least Squares Fitting
   </a>
  </li>
 </ul>
@@ -751,7 +749,7 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   26.1. Introduction
+   Introduction
   </a>
  </li>
 </ul>
@@ -766,7 +764,7 @@
               <div>
                 
   <div class="section" id="initial-value-problems-for-odes-part-6-introduction-to-implicit-methods-and-stiff-equations">
-<h1><span class="section-number">26. </span>Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations<a class="headerlink" href="#initial-value-problems-for-odes-part-6-introduction-to-implicit-methods-and-stiff-equations" title="Permalink to this headline">¶</a></h1>
+<h1>Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations<a class="headerlink" href="#initial-value-problems-for-odes-part-6-introduction-to-implicit-methods-and-stiff-equations" title="Permalink to this headline">¶</a></h1>
 <p><strong>References:</strong></p>
 <ul class="simple">
 <li><p>Section 6.6 <em>Implicit Methods and Stiff Equations</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
@@ -784,7 +782,8 @@
 </div>
 </div>
 <div class="section" id="introduction">
-<h2><span class="section-number">26.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon …</p>
 <hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
@@ -818,8 +817,6 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ODE-IVP-5-error-control-python.html" title="previous page"><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</a>
-    <a class='right-next' id="next-link" href="ODE-IVP-7-multi-step-methods-intro.html" title="next page"><span class="section-number">27. </span>Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

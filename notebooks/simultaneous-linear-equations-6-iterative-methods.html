@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>29. Simultaneous Linear Equations, Part 6: Iterative Methods &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>28. Simultaneous Linear Equations, Part 6: Iterative Methods &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction" href="minimization-1D.html" />
-    <link rel="prev" title="28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc." href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" />
+    <link rel="next" title="29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction" href="minimization-1D.html" />
+    <link rel="prev" title="27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc." href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -259,48 +259,43 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-6-implicit-methods-intro.html">
-   26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
-   27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
+   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   29. Simultaneous Linear Equations, Part 6: Iterative Methods
+   28. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   32. Least-squares Fitting to Data
+   31. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   34. Some Future Topics
+   33. Some Future Topics
   </a>
  </li>
 </ul>
@@ -411,6 +406,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="assignment5.html">
    MATH 375 Assignment 5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment6.html">
+   MATH 375 Assignment 6: Least Squares Fitting
   </a>
  </li>
 </ul>
@@ -751,48 +751,48 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   29.1. Introduction
+   28.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-jacobi-method">
-   29.2. The Jacobi Method
+   28.2. The Jacobi Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1-implement-and-test-the-jacobi-method">
-     29.2.1. Exercise 1: Implement and test the Jacobi method
+     28.2.1. Exercise 1: Implement and test the Jacobi method
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-underlying-strategy">
-   29.3. The underlying strategy
+   28.3. The underlying strategy
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#what-does-this-say-about-the-jacobi-method">
-     29.3.1. What does this say about the Jacobi method?
+     28.3.1. What does this say about the Jacobi method?
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-gauss-seidel-method">
-   29.4. The Gauss-Seidel Method
+   28.4. The Gauss-Seidel Method
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-2-implement-and-test-the-gauss-seidel-method-and-compare-to-jacobi">
-     29.4.1. Exercise 2: Implement and test the Gauss-Seidel method, and compare to Jacobi
+     28.4.1. Exercise 2: Implement and test the Gauss-Seidel method, and compare to Jacobi
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-family-of-test-cases-arising-from-boundary-value-problems-for-differential-equations">
-   29.5. A family of test cases, arising from boundary value problems for differential equations
+   28.5. A family of test cases, arising from boundary value problems for differential equations
   </a>
  </li>
 </ul>
@@ -807,7 +807,7 @@
               <div>
                 
   <div class="section" id="simultaneous-linear-equations-part-6-iterative-methods">
-<h1><span class="section-number">29. </span>Simultaneous Linear Equations, Part 6: Iterative Methods<a class="headerlink" href="#simultaneous-linear-equations-part-6-iterative-methods" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">28. </span>Simultaneous Linear Equations, Part 6: Iterative Methods<a class="headerlink" href="#simultaneous-linear-equations-part-6-iterative-methods" title="Permalink to this headline">¶</a></h1>
 <p><strong>Revised on Wednesaday April 14, 2021</strong> after class; just making a few corrections like fixing typos.</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -818,7 +818,7 @@ Sections 7.1 to 7.3.</p></li>
 <li><p>Section 8.4 in <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
 <div class="section" id="introduction">
-<h2><span class="section-number">29.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">28.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This topic is a huge area, with lots of ongoing research; this section just explores the first few methods in the field:</p>
 <ol class="simple">
 <li><p>The Jacobi Method.</p></li>
@@ -834,7 +834,7 @@ This is beyond the scope of this course; I mention it because in the realm of so
 </ol>
 </div>
 <div class="section" id="the-jacobi-method">
-<h2><span class="section-number">29.2. </span>The Jacobi Method<a class="headerlink" href="#the-jacobi-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">28.2. </span>The Jacobi Method<a class="headerlink" href="#the-jacobi-method" title="Permalink to this headline">¶</a></h2>
 <p>The basis of the Jacobi method for solving <span class="math notranslate nohighlight">\(Ax = b\)</span>
 is splitting <span class="math notranslate nohighlight">\(A\)</span> as <span class="math notranslate nohighlight">\(D + R\)</span> where <span class="math notranslate nohighlight">\(D\)</span> is the diagonal of <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -878,7 +878,7 @@ in the fixed point form</p>
 <p>but — as is often the case — it will be better to avoid matrix inverses by instead solving this easy system.
 This “inverse avoidance” becomes far more important when we get to the Gauss-Seidel method!</p>
 <div class="section" id="exercise-1-implement-and-test-the-jacobi-method">
-<h3><span class="section-number">29.2.1. </span>Exercise 1: Implement and test the Jacobi method<a class="headerlink" href="#exercise-1-implement-and-test-the-jacobi-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">28.2.1. </span>Exercise 1: Implement and test the Jacobi method<a class="headerlink" href="#exercise-1-implement-and-test-the-jacobi-method" title="Permalink to this headline">¶</a></h3>
 <p>Write and test Python functions for this.</p>
 <p>A) As usual start with a most basic version that does a fixed number of iterations</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x = jacobi_basic(A, b, n)
@@ -893,7 +893,7 @@ To be cautious initially, try <span class="math notranslate nohighlight">\(n=2, 
 </div>
 </div>
 <div class="section" id="the-underlying-strategy">
-<h2><span class="section-number">29.3. </span>The underlying strategy<a class="headerlink" href="#the-underlying-strategy" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">28.3. </span>The underlying strategy<a class="headerlink" href="#the-underlying-strategy" title="Permalink to this headline">¶</a></h2>
 <p>To analyse the Jacobi method — answering questions like for which matrices it works, and how quickly it converges — and also to improve on it, it helps to described a key strategy underlying it, which is this:
 approximate the matrix <span class="math notranslate nohighlight">\(A\)</span> by another one <span class="math notranslate nohighlight">\(E\)</span> one that is easier to solve with, chosen so that the discrepacy <span class="math notranslate nohighlight">\(R = A-E\)</span> is small enough. Thus, repeatedly solving the new easier equations <span class="math notranslate nohighlight">\(Ex^{(k)} = b^{(k)}\)</span> plays a similar role to repeatedly solving tangent line approximations in Newton’s method.</p>
 <p>Of course to be of any use, <span class="math notranslate nohighlight">\(E\)</span> must be somewhat close to <span class="math notranslate nohighlight">\(A\)</span>; the remainder <span class="math notranslate nohighlight">\(R\)</span> must be small enough.
@@ -938,7 +938,7 @@ For <span class="math notranslate nohighlight">\(g(x) = c - S x\)</span>,</p>
 <p>so with <span class="math notranslate nohighlight">\(C &lt; 1\)</span>, it is a contraction.</p>
 <p>(The omitted more “technical” detail is to find a suitable bounded domain <span class="math notranslate nohighlight">\(D\)</span> that all the iterates x^{(k)} stay inside it.)</p>
 <div class="section" id="what-does-this-say-about-the-jacobi-method">
-<h3><span class="section-number">29.3.1. </span>What does this say about the Jacobi method?<a class="headerlink" href="#what-does-this-say-about-the-jacobi-method" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">28.3.1. </span>What does this say about the Jacobi method?<a class="headerlink" href="#what-does-this-say-about-the-jacobi-method" title="Permalink to this headline">¶</a></h3>
 <p>For the Jacobi method, <span class="math notranslate nohighlight">\(E = D\)</span> so <span class="math notranslate nohighlight">\(E^{-1}\)</span> is the diagonal matrix with elements <span class="math notranslate nohighlight">\(1/a_{i,i}\)</span> on the main diagonal, zero elsewhere.
 The product <span class="math notranslate nohighlight">\(E^{-1}A\)</span> then multiplies each row <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> by <span class="math notranslate nohighlight">\(1/a_{i,i}\)</span>, giving</p>
 <div class="math notranslate nohighlight">
@@ -1012,7 +1012,7 @@ this can be a useful way to verify in advance that a system of equation has a un
 </div>
 </div>
 <div class="section" id="the-gauss-seidel-method">
-<h2><span class="section-number">29.4. </span>The Gauss-Seidel Method<a class="headerlink" href="#the-gauss-seidel-method" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">28.4. </span>The Gauss-Seidel Method<a class="headerlink" href="#the-gauss-seidel-method" title="Permalink to this headline">¶</a></h2>
 <p>To recap, two key ingredients for a splitting <span class="math notranslate nohighlight">\(A = E + R\)</span> to be useful are that</p>
 <ul class="simple">
 <li><p>the matrix <span class="math notranslate nohighlight">\(E\)</span> is “easy” to solve with, and</p></li>
@@ -1092,7 +1092,7 @@ The Gauss-Seidel method converges if <span class="math notranslate nohighlight">
 <span class="math notranslate nohighlight">\(C = C_J = \| D^{-1} (L+U) \|\)</span> for the Jacobi method.</p>
 <p>Sometimes this reduces the number of iterations enough to outweigh the extra computational effort involved in each iteration and make this faster overall than the Jacobi method — but not always.</p>
 <div class="section" id="exercise-2-implement-and-test-the-gauss-seidel-method-and-compare-to-jacobi">
-<h3><span class="section-number">29.4.1. </span>Exercise 2: Implement and test the Gauss-Seidel method, and compare to Jacobi<a class="headerlink" href="#exercise-2-implement-and-test-the-gauss-seidel-method-and-compare-to-jacobi" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">28.4.1. </span>Exercise 2: Implement and test the Gauss-Seidel method, and compare to Jacobi<a class="headerlink" href="#exercise-2-implement-and-test-the-gauss-seidel-method-and-compare-to-jacobi" title="Permalink to this headline">¶</a></h3>
 <p>Do the two versions as above and use the same test cases.</p>
 <p>Then compare the speed/cost of the two methods:
 one way to do this is by using Python’s “stop watch”, function <code class="docutils literal notranslate"><span class="pre">time.time</span></code>: see the description of
@@ -1100,7 +1100,7 @@ one way to do this is by using Python’s “stop watch”, function <code class
 </div>
 </div>
 <div class="section" id="a-family-of-test-cases-arising-from-boundary-value-problems-for-differential-equations">
-<h2><span class="section-number">29.5. </span>A family of test cases, arising from boundary value problems for differential equations<a class="headerlink" href="#a-family-of-test-cases-arising-from-boundary-value-problems-for-differential-equations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">28.5. </span>A family of test cases, arising from boundary value problems for differential equations<a class="headerlink" href="#a-family-of-test-cases-arising-from-boundary-value-problems-for-differential-equations" title="Permalink to this headline">¶</a></h2>
 <p>The <em>tri-diagonal</em> matrices <span class="math notranslate nohighlight">\(T\)</span> of the form</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
@@ -1152,8 +1152,8 @@ u(a) = u(b) &amp;= 0
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" title="previous page"><span class="section-number">28. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</a>
-    <a class='right-next' id="next-link" href="minimization-1D.html" title="next page"><span class="section-number">30. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</a>
+    <a class='left-prev' id="prev-link" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html" title="previous page"><span class="section-number">27. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</a>
+    <a class='right-next' id="next-link" href="minimization-1D.html" title="next page"><span class="section-number">29. </span>Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

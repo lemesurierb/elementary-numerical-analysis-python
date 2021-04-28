@@ -5,46 +5,46 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>33. Some Future Topics &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>MATH 375 Assignment 6: Least Squares Fitting &#8212; Elementary Numerical Analysis (with Python)</title>
     
-  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     
       
   <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
   <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -53,11 +53,11 @@
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction" href="notebooks/newtons-method-for-systems-introduction.html" />
-    <link rel="prev" title="32. Least-squares Fitting to Data: Appendix on The Geometrical Approach" href="notebooks/least-squares-fitting-appendix-geometrical-approach.html" />
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../project-on-numerical-calculus/introduction.html" />
+    <link rel="prev" title="MATH 375 Assignment 5" href="assignment5.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -74,22 +74,22 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
+<a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="_static/UNC_BearMascot.png" class="logo" alt="logo">
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
   
 </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
+  <a class="reference internal" href="../preface.html">
    Elementary Numerical Analysis with Python
   </a>
  </li>
@@ -101,17 +101,17 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
+  <a class="reference internal" href="../introduction.html">
    Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="references.html">
+  <a class="reference internal" href="../references.html">
    References
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="plans-for-expansion-improvement.html">
+  <a class="reference internal" href="../plans-for-expansion-improvement.html">
    Full Disclosure: Things I Plan to do to Expand and Improve This Book
   </a>
  </li>
@@ -121,59 +121,59 @@
   Numerical Analysis
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/root-finding-by-interval-halving-python.html">
+  <a class="reference internal" href="root-finding-by-interval-halving-python.html">
    1. Root Finding by Interval Halving (Bisection)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/fixed-point-iteration-python.html">
+  <a class="reference internal" href="fixed-point-iteration-python.html">
    2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/newtons-method-python.html">
+  <a class="reference internal" href="newtons-method-python.html">
    3. Newton’s Method for Solving Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/taylors-theorem.html">
+  <a class="reference internal" href="taylors-theorem.html">
    4. Taylor’s Theorem and the Accuracy of Linearization
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/error-measures-convergence-rates.html">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
    5. Measures of Error and Order of Convergence
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/newtons-method-convergence-rate.html">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
    6. The Convergence Rate of Newton’s Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/root-finding-without-derivatives-python.html">
+  <a class="reference internal" href="root-finding-without-derivatives-python.html">
    7. Root-finding Without Derivatives
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-1-row-reduction-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
    8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/machine-numbers-rounding-error-and-error-propagation-python.html">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-python.html">
    9. Machine Numbers, Rounding Error and Error Propagation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-2-pivoting-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
    10. Simultaneous Linear Equations, Part 2: Partial Pivoting
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-3-lu-factorization-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
    11. Simultaneous Linear Equations, Part 3: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -185,7 +185,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-4-plu-factorization-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
    12. Simultaneous Linear Equations, Part 4: Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -194,107 +194,107 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/polynomial-collocation%2Bapproximation-python.html">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html">
    13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/polynomial-collocation-error-formulas-python.html">
+  <a class="reference internal" href="polynomial-collocation-error-formulas-python.html">
    14. Error Formulas for Polynomial Collocation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/derivatives-and-the-method-of-undetermined-coefficents.html">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
    15. Approximating Derivatives by the Method of Undetermined Coefficients
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/richardson-extrapolation.html">
+  <a class="reference internal" href="richardson-extrapolation.html">
    16. Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/definite-integrals-1-building-blocks-python.html">
+  <a class="reference internal" href="definite-integrals-1-building-blocks-python.html">
    17. Definite Integrals, Part 1: The Building Blocks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/definite-integrals-2-composite-rules.html">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
    18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/definite-integrals-3-simpson-richardson.html">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
    19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/definite-integrals-4-romberg-integration.html">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
    20. Definite Integrals, Part 4: Romberg Integration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-1-basics-and-Euler-python.html">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
    21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-2-Runge-Kutta-python.html">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
    22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-3-error-results-one-step-methods.html">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
    23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-4-system-higher-order-equations.html">
+  <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
    24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-5-error-control-python.html">
+  <a class="reference internal" href="ODE-IVP-5-error-control-python.html">
    25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-7-multi-step-methods-intro.html">
+  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
    26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
    27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-6-iterative-methods.html">
+  <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
    28. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/minimization-1D.html">
+  <a class="reference internal" href="minimization-1D.html">
    29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/eigenproblems.html">
+  <a class="reference internal" href="eigenproblems.html">
    30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/least-squares-fitting-python.html">
+  <a class="reference internal" href="least-squares-fitting-python.html">
    31. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/least-squares-fitting-appendix-geometrical-approach.html">
+  <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
    32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
    33. Some Future Topics
   </a>
  </li>
@@ -306,12 +306,12 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/newtons-method-for-systems-introduction.html">
+  <a class="reference internal" href="newtons-method-for-systems-introduction.html">
    1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
+  <a class="reference internal" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
    2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -327,47 +327,47 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/root-finding-by-interval-halving-exercises-python.html">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
    Exercises on the Bisection Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/fixed-point-iteration-exercises.html">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
    Exercises on Fixed Point Iteration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/error-measures-convergence-rates-exercises.html">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
    Exercises on Error Measures and Convergence
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/newtons-method-exercises.html">
+  <a class="reference internal" href="newtons-method-exercises.html">
    Exercises on Newton’s Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/root-finding-without-derivatives-exercises.html">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
    Exercises on Root-finding Without Derivatives
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/machine-numbers-rounding-error-and-error-propagation-exercises.html">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
    Exercises on Machine Numbers, Rounding Error and Error Propagation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-exercises.html">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
    Exercises on Solving Simultaneous Linear Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
    Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-exercises.html">
+  <a class="reference internal" href="ODE-IVP-exercises.html">
    Exercises on Initial Value Problems for Ordinary Differential Equations
   </a>
  </li>
@@ -377,39 +377,39 @@
   Assignments
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/assignment1.html">
+  <a class="reference internal" href="assignment1.html">
    MATH 375 Assignment 1
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/assignment2.html">
+  <a class="reference internal" href="assignment2.html">
    MATH 375 Assignment 2
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/assignment3.html">
+  <a class="reference internal" href="assignment3.html">
    MATH 375 Assignment 3
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/root_finding.html">
+  <a class="reference internal" href="root_finding.html">
    Module root_finding
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/assignment4.html">
+  <a class="reference internal" href="assignment4.html">
    MATH 375 Assignment 4
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/assignment5.html">
+  <a class="reference internal" href="assignment5.html">
    MATH 375 Assignment 5
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/assignment6.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    MATH 375 Assignment 6: Least Squares Fitting
   </a>
  </li>
@@ -421,47 +421,47 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/introduction.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/introduction.html">
    Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
    Centered Difference Approximation of the Derivative
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
    Improving on the Centered Difference Approximation with Richardson Extrapolation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/task-3-composite-trapezoid-rule.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-3-composite-trapezoid-rule.html">
    The Composite Trapezoid Rule (and Composite Midpoint Rule)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/task-4-recursive-trapezoid-rule.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-4-recursive-trapezoid-rule.html">
    The Recursive Trapezoid Rule, with error control
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html">
    The Modified Trapezoid Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/task-7-romberg-method.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-7-romberg-method.html">
    The Romberg Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/test-cases-differentiation.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
    Test Cases for Differentiation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="project-on-numerical-calculus/test-cases-integration.html">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
    Test Cases for Integration
   </a>
  </li>
@@ -473,32 +473,32 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html">
+  <a class="reference internal" href="project-possibilities.html">
    Some Final Project Possibilites
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#minimizing-functions-of-one-and-several-variables">
+  <a class="reference internal" href="project-possibilities.html#minimizing-functions-of-one-and-several-variables">
    Minimizing Functions of One and Several Variables
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#root-finding-by-repeated-inverse-quadratic-approximation-with-bracketing">
+  <a class="reference internal" href="project-possibilities.html#root-finding-by-repeated-inverse-quadratic-approximation-with-bracketing">
    Root-finding by Repeated Inverse Quadratic Approximation with Bracketing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#a-more-reliable-secant-method">
+  <a class="reference internal" href="project-possibilities.html#a-more-reliable-secant-method">
    A More Reliable Secant Method
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#computing-eigenvalues-and-eigenvectors">
+  <a class="reference internal" href="project-possibilities.html#computing-eigenvalues-and-eigenvectors">
    Computing Eigenvalues and Eigenvectors
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#iterative-methods-for-solving-simultaneous-linear-equations-ax-b">
+  <a class="reference internal" href="project-possibilities.html#iterative-methods-for-solving-simultaneous-linear-equations-ax-b">
    Iterative Methods for Solving Simultaneous Linear Equations,
    <span class="math notranslate nohighlight">
     \(Ax = b\)
@@ -506,22 +506,22 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#solving-simultaneous-nonlinear-equations">
+  <a class="reference internal" href="project-possibilities.html#solving-simultaneous-nonlinear-equations">
    Solving Simultaneous Nonlinear Equations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#fitting-smooth-piecewise-cubic-functions-to-data">
+  <a class="reference internal" href="project-possibilities.html#fitting-smooth-piecewise-cubic-functions-to-data">
    Fitting Smooth Piecewise Cubic Functions to Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#least-squares-fitting-to-data-and-functions">
+  <a class="reference internal" href="project-possibilities.html#least-squares-fitting-to-data-and-functions">
    Least-Squares Fitting to Data and Functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/project-possibilities.html#boundary-value-problems-for-differential-equations">
+  <a class="reference internal" href="project-possibilities.html#boundary-value-problems-for-differential-equations">
    Boundary Value Problems for Differential Equations
   </a>
  </li>
@@ -533,7 +533,7 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/introduction.html">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
    1. Introduction to
    <em>
     Python Preview
@@ -541,32 +541,32 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/getting-python-software-for-scientific-computing.html">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
    2. Getting Python Software for Scientific Computing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/suggestions-on-python-and-notebook-usage.html">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
    3. Suggestions and Notes on Python and Jupyter Notebook Usage
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
    4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/functions.html">
+  <a class="reference internal" href="../python_tutorial/functions.html">
    5. Defining and Using Python Functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/decisions-with-if-else-elif.html">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
    6. Decision Making With if, else, and elif
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/iteration-with-for.html">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
    7. Iteration with
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -576,7 +576,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/iteration-with-while.html">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
    8. Iteration with
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -586,52 +586,52 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/code-files-modules-IDEs.html">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
    9. Code Files, Modules, and an Integrated Development Environment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/recursion.html">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
    10. Recursion (vs iteration)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/graphing-with-matplotlib.html">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
    11. Plotting Graphs with Matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/array-operations-and-linear-algebra.html">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
    12. Numpy Array Operations and Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/scipy-tools-for-linear-algebra.html">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
    13. Package Scipy and More Tools for Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/summation-and-integration.html">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
    14. Summation and Integration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/random-numbers-and-simulation.html">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
    15. Random Numbers, Histograms, and a Simulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/formatted-output-and-some-text-string-manipulation.html">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
    16. Formatted Output and Some Text String Manipulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/classes-objects-attributes-methods.html">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
    17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="python_tutorial/exception-handling.html">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
    18. Exceptions and Exception Handling
   </a>
  </li>
@@ -643,7 +643,7 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/numerical_methods_module.html">
+  <a class="reference internal" href="numerical_methods_module.html">
    Notebook for generating the module
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -653,12 +653,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
    Linear algebra algorithms using 0-based indexing and semi-open intervals
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/sample-project-newtons-method-python-draft.html">
+  <a class="reference internal" href="sample-project-newtons-method-python-draft.html">
    Numerical Analysis Sample Project on Newtons’s Method
   </a>
  </li>
@@ -702,7 +702,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/future_topics.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/assignment6.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -727,10 +727,10 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/future_topics.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/assignment6.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
-                    src="_static/images/logo_binder.svg"
+                    src="../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
         
         
@@ -751,15 +751,93 @@
         
               <div>
                 
-  <div class="section" id="some-future-topics">
-<h1><span class="section-number">33. </span>Some Future Topics<a class="headerlink" href="#some-future-topics" title="Permalink to this headline">¶</a></h1>
-<p>If time allows and interest dictates (alternatively as some possible final project topics), I could add introductory notes on some of:</p>
-<ul class="simple">
-<li><p>Stiffness in ODEs and implicit methods for dealing with it.</p></li>
-<li><p>Solving systems of nonlinear equations.</p></li>
-<li><p>Solving boundary value problems for ODEs.</p></li>
-<li><p>Multi-step methods for solving ODE IVPs.</p></li>
-</ul>
+  <div class="section" id="math-375-assignment-6-least-squares-fitting">
+<h1>MATH 375 Assignment 6: Least Squares Fitting<a class="headerlink" href="#math-375-assignment-6-least-squares-fitting" title="Permalink to this headline">¶</a></h1>
+<p><strong>Brenton LeMesurier, April 28 2021</strong></p>
+<p><strong>Due by Monday May 3</strong></p>
+<p>For the following data, find:</p>
+<ol class="simple">
+<li><p>A linear least squares fit</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{(Blood Pressure)} \approx P_0  + P_1 \text{(Weight)}.
+\]</div>
+<ol class="simple">
+<li><p>A power law fit</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{(Blood Pressure)} \approx P \text{(Weight)}^a.
+\]</div>
+<p>Illustrate your results with graphs, and compare how the two methods perform.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Species</p></th>
+<th class="head"><p>Blood Pressure (mm Hg)</p></th>
+<th class="head"><p>Weight (g)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cow</p></td>
+<td><p>157</p></td>
+<td><p>800000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cat</p></td>
+<td><p>129</p></td>
+<td><p>2000</p></td>
+</tr>
+<tr class="row-even"><td><p>Dog</p></td>
+<td><p>120</p></td>
+<td><p>5000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Duck</p></td>
+<td><p>162</p></td>
+<td><p>2000</p></td>
+</tr>
+<tr class="row-even"><td><p>Frog</p></td>
+<td><p>24</p></td>
+<td><p>50</p></td>
+</tr>
+<tr class="row-odd"><td><p>Giraffe</p></td>
+<td><p>300</p></td>
+<td><p>900000</p></td>
+</tr>
+<tr class="row-even"><td><p>Goat</p></td>
+<td><p>98</p></td>
+<td><p>30000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Guinea Pig</p></td>
+<td><p>60</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>Human</p></td>
+<td><p>120</p></td>
+<td><p>90000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Monkey</p></td>
+<td><p>140</p></td>
+<td><p>5000</p></td>
+</tr>
+<tr class="row-even"><td><p>Pig</p></td>
+<td><p>128</p></td>
+<td><p>150000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Snake</p></td>
+<td><p>55</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>Turkey</p></td>
+<td><p>193</p></td>
+<td><p>15000</p></td>
+</tr>
+</tbody>
+</table>
+<p>A small bonus for illustrating with graphs.</p>
+<p>This can be done using Python or by hand (that is, with pencil, paper, hand and-caculator).
+Eiher way, describe the systems of linear equations that are to be solved to get the coefficients, <span class="math notranslate nohighlight">\(P_0\)</span>, <span class="math notranslate nohighlight">\(P_1\)</span>, <span class="math notranslate nohighlight">\(P\)</span>, and <span class="math notranslate nohighlight">\(a\)</span>.</p>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -775,7 +853,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./."
+            path: "./notebooks"
         },
         predefinedOutput: true
     }
@@ -790,8 +868,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="notebooks/least-squares-fitting-appendix-geometrical-approach.html" title="previous page"><span class="section-number">32. </span>Least-squares Fitting to Data: Appendix on The Geometrical Approach</a>
-    <a class='right-next' id="next-link" href="notebooks/newtons-method-for-systems-introduction.html" title="next page"><span class="section-number">1. </span>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction</a>
+    <a class='left-prev' id="prev-link" href="assignment5.html" title="previous page">MATH 375 Assignment 5</a>
+    <a class='right-next' id="next-link" href="../project-on-numerical-calculus/introduction.html" title="next page">Introduction</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
@@ -811,7 +889,7 @@
     </div>
 
     
-  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
 
 
     

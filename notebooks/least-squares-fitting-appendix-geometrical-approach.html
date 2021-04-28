@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>33. Least-squares Fitting to Data: Appendix on The Geometrical Approach &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>32. Least-squares Fitting to Data: Appendix on The Geometrical Approach &#8212; Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="34. Some Future Topics" href="../future_topics.html" />
-    <link rel="prev" title="32. Least-squares Fitting to Data" href="least-squares-fitting-python.html" />
+    <link rel="next" title="33. Some Future Topics" href="../future_topics.html" />
+    <link rel="prev" title="31. Least-squares Fitting to Data" href="least-squares-fitting-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -259,48 +259,43 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-6-implicit-methods-intro.html">
-   26. Initial Value Problems for ODEs, Part 6: Introduction to Implicit Methods and Stiff Equations
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
-   27. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
+   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   28. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   29. Simultaneous Linear Equations, Part 6: Iterative Methods
+   28. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   30. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   31. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   32. Least-squares Fitting to Data
+   31. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   33. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   34. Some Future Topics
+   33. Some Future Topics
   </a>
  </li>
 </ul>
@@ -411,6 +406,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="assignment5.html">
    MATH 375 Assignment 5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment6.html">
+   MATH 375 Assignment 6: Least Squares Fitting
   </a>
  </li>
 </ul>
@@ -751,17 +751,17 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   33.1. Introduction
+   32.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-least-squares-minimizing-rms-error-using-calculus">
-   33.2. Linear least squares: minimizing RMS error using calculus
+   32.2. Linear least squares: minimizing RMS error using calculus
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-least-squares-minimizing-rms-error-by-minimizing-euclidean-distance-with-geometry">
-   33.3. Linear least squares: minimizing RMS error by minimizing “Euclidean” distance with geometry
+   32.3. Linear least squares: minimizing RMS error by minimizing “Euclidean” distance with geometry
   </a>
  </li>
 </ul>
@@ -776,7 +776,7 @@
               <div>
                 
   <div class="section" id="least-squares-fitting-to-data-appendix-on-the-geometrical-approach">
-<h1><span class="section-number">33. </span>Least-squares Fitting to Data: Appendix on The Geometrical Approach<a class="headerlink" href="#least-squares-fitting-to-data-appendix-on-the-geometrical-approach" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">32. </span>Least-squares Fitting to Data: Appendix on The Geometrical Approach<a class="headerlink" href="#least-squares-fitting-to-data-appendix-on-the-geometrical-approach" title="Permalink to this headline">¶</a></h1>
 <p><strong>April 19, 2021</strong>, after class</p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -784,7 +784,7 @@
 <li><p>Section 8.1 <em>Discrete Least Squares Approximation</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>.</p></li>
 </ul>
 <div class="section" id="introduction">
-<h2><span class="section-number">33.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">32.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>We have seen that one common and important approach to approximating data</p>
 <div class="math notranslate nohighlight">
 \[(x_i, y_i),\; 1 \leq i \leq N\]</div>
@@ -797,7 +797,7 @@ Equivalently, we will avoid the square root and just minimize the sum of the squ
 \[E(c_0, c_1, \dots, c_n) = \sum_{i=1}^N e_i^2\]</div>
 </div>
 <div class="section" id="linear-least-squares-minimizing-rms-error-using-calculus">
-<h2><span class="section-number">33.2. </span>Linear least squares: minimizing RMS error using calculus<a class="headerlink" href="#linear-least-squares-minimizing-rms-error-using-calculus" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">32.2. </span>Linear least squares: minimizing RMS error using calculus<a class="headerlink" href="#linear-least-squares-minimizing-rms-error-using-calculus" title="Permalink to this headline">¶</a></h2>
 <p>One way to derive the needed formulas is by seeking the critical point og th abev function via teh <span class="math notranslate nohighlight">\(n+1\)</span> equations</p>
 <div class="math notranslate nohighlight">
 \[
@@ -807,7 +807,7 @@ Equivalently, we will avoid the square root and just minimize the sum of the squ
 <p>However, there is another “geometrical” approach, that is also relevant as an introduction to strategies also used for other minimization problems, for example with application to the numerical solutions of boundary value problems for differential equations.</p>
 </div>
 <div class="section" id="linear-least-squares-minimizing-rms-error-by-minimizing-euclidean-distance-with-geometry">
-<h2><span class="section-number">33.3. </span>Linear least squares: minimizing RMS error by minimizing “Euclidean” distance with geometry<a class="headerlink" href="#linear-least-squares-minimizing-rms-error-by-minimizing-euclidean-distance-with-geometry" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">32.3. </span>Linear least squares: minimizing RMS error by minimizing “Euclidean” distance with geometry<a class="headerlink" href="#linear-least-squares-minimizing-rms-error-by-minimizing-euclidean-distance-with-geometry" title="Permalink to this headline">¶</a></h2>
 <p>For approximation by a polynomial <span class="math notranslate nohighlight">\(y = p(x)= c_0 + \cdots c_n x^n\)</span>,
 we can think of the data <span class="math notranslate nohighlight">\(y_i, 1 \leq i \leq N\)</span> as giving a point in <span class="math notranslate nohighlight">\(N\)</span>-dimensional space <span class="math notranslate nohighlight">\(\mathbb(R)^N\)</span>,
 and the approximations as giving another point with coordinates <span class="math notranslate nohighlight">\(\tilde{y}_i := p(x_i)\)</span>.</p>
@@ -909,8 +909,8 @@ A^T y = p = \left[ p_0, p_1, \dots,  p_n \right]^T,
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="least-squares-fitting-python.html" title="previous page"><span class="section-number">32. </span>Least-squares Fitting to Data</a>
-    <a class='right-next' id="next-link" href="../future_topics.html" title="next page"><span class="section-number">34. </span>Some Future Topics</a>
+    <a class='left-prev' id="prev-link" href="least-squares-fitting-python.html" title="previous page"><span class="section-number">31. </span>Least-squares Fitting to Data</a>
+    <a class='right-next' id="next-link" href="../future_topics.html" title="next page"><span class="section-number">33. </span>Some Future Topics</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
