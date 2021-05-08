@@ -855,6 +855,11 @@
                 
   <div class="section" id="initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes">
 <h1><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes<a class="headerlink" href="#initial-value-problems-for-ordinary-differential-equations-part-5-error-control-and-variable-step-sizes" title="Permalink to this headline">¶</a></h1>
+<p><strong>Correction on May 5:</strong>
+In the explicit trapezoid method error control algorithm, it is</p>
+<div class="math notranslate nohighlight">
+\[K_3 = h f(t + h/2, U + (K_1 + K_2)/4)\]</div>
+<p>(final denominator <span class="math notranslate nohighlight">\(4\)</span>, not <span class="math notranslate nohighlight">\(2\)</span>.)</p>
 <p><strong>Corrections on April 21:</strong>
 Missing factors of <span class="math notranslate nohighlight">\(h\)</span> inserted to <span class="math notranslate nohighlight">\(K_2\)</span> and <span class="math notranslate nohighlight">\(K_3\)</span>.</p>
 <p><strong>Revisions on April 17, 2021:</strong></p>
@@ -1261,7 +1266,8 @@ omitting the step size adjustment for now, the main ingredients are:</p>
 <p><span class="math notranslate nohighlight">\(K_1 = h f(t, U)\)</span></p>
 <p><span class="math notranslate nohighlight">\(K_2 = h f(t + h, U + K_1)\)</span></p>
 <p>(So far, as for the explicit trapezoid method)</p>
-<p><span class="math notranslate nohighlight">\(K_3 = h f(t + h/2, U + (K_1 + K_2)/2)\)</span></p>
+<p><span class="math notranslate nohighlight">\(K_3 = h f(t + h/2, U + (K_1 + K_2)/4)\)</span></p>
+<p><strong>May 5:</strong> not <span class="math notranslate nohighlight">\(... + (K_1 + K_2)/2\)</span></p>
 <p>(a midpoint approximation, using the above)</p>
 <p><span class="math notranslate nohighlight">\(\delta_2 = (K_1 + K_2)/2\)</span></p>
 <p>(The order 2 increment as for the explicit trapezoid method)</p>
