@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elementary Numerical Analysis with Python &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Elementary Numerical Analysis with Python &#8212; MATH 375. Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -25,8 +25,8 @@
     href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -40,6 +40,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -78,7 +79,7 @@
   <img src="_static/UNC_BearMascot.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  <h1 class="site-logo" id="site-title">MATH 375. Elementary Numerical Analysis (with Python)</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -258,60 +259,60 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/ODE-IVP-7-multi-step-methods-intro.html">
-   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/simultaneous-linear-equations-6-iterative-methods.html">
-   28. Simultaneous Linear Equations, Part 6: Iterative Methods
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/minimization-1D.html">
-   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/eigenproblems.html">
-   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/least-squares-fitting-python.html">
-   31. Least-squares Fitting to Data
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/least-squares-fitting-appendix-geometrical-approach.html">
-   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="future_topics.html">
-   33. Some Future Topics
+   32. Some Planned Future Topics
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Preliminary Versions of Some Possible Future Sections
+  Preliminary Versions and Brief Introductions to Other Topics
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/newtons-method-for-systems-introduction.html">
-   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
+  <a class="reference internal" href="notebooks/ODE-IVP-6-multi-step-methods-intro.html">
+   1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
-   2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
+  <a class="reference internal" href="notebooks/newtons-method-for-systems-intro.html">
+   2. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-prelim.html">
+   3. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -768,6 +769,7 @@
                 
   <div class="section" id="elementary-numerical-analysis-with-python">
 <h1>Elementary Numerical Analysis with Python<a class="headerlink" href="#elementary-numerical-analysis-with-python" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of May 26, 2021</strong></p>
 <p><strong>Brenton LeMesurier</strong></p>
 <p>University of Northern Colorado, Greeley, Colorado in Spring 2021,
 <a class="reference external" href="mailto:brenton&#46;lemesurier&#37;&#52;&#48;unco&#46;edu">brenton<span>&#46;</span>lemesurier<span>&#64;</span>unco<span>&#46;</span>edu</a>;
@@ -776,70 +778,27 @@ More permanent address: The College of Charleston, Charleston, South Carolina,
 <a class="reference external" href="mailto:lemesurierb&#37;&#52;&#48;cofc&#46;edu">lemesurierb<span>&#64;</span>cofc<span>&#46;</span>edu</a></p>
 <p>Best viewed on github at
 <a class="reference external" href="https://lemesurierb.github.io/elementary-numerical-analysis-python/">https://lemesurierb.github.io/elementary-numerical-analysis-python/</a></p>
-<p><strong>Last Revised on Monday April 26, 2021</strong></p>
-<hr class="docutils" />
 <p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
 <hr class="docutils" />
-<p>Some recent updates (most recent first):</p>
-<ul class="simple">
-<li><p>Added <a class="reference internal" href="notebooks/ODE-IVP-7-multi-step-methods-intro.html"><span class="doc">Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods</span></a></p></li>
-<li><p>Corrected
-<a class="reference internal" href="notebooks/ODE-IVP-5-error-control-python.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</span></a>
-and
-<a class="reference internal" href="notebooks/assignment5.html"><span class="doc">MATH 375 Assignment 5</span></a>
-adding factors of <span class="math notranslate nohighlight">\(h\)</span> that were missing from the formulas for <span class="math notranslate nohighlight">\(K_2\)</span> and <span class="math notranslate nohighlight">\(K_3\)</span> (<span class="math notranslate nohighlight">\(K_1\)</span> always had them correctly.)</p></li>
-<li><p>Added an appendix
-<a class="reference internal" href="notebooks/least-squares-fitting-appendix-geometrical-approach.html"><span class="doc">Least-squares Fitting to Data: Appendix on The Geometrical Approach</span></a> to
-<a class="reference internal" href="notebooks/least-squares-fitting-python.html"><span class="doc">Least-squares Fitting to Data</span></a></p></li>
-<li><p>Revised section <a class="reference internal" href="notebooks/ODE-IVP-5-error-control-python.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</span></a>,</p>
-<ul>
-<li><p>adding example Python code for error control in Euler’s method, and</p></li>
-<li><p>improving the description of the error control process.</p></li>
-</ul>
-</li>
-<li><p>Revised section <a class="reference internal" href="notebooks/eigenproblems.html"><span class="doc">Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond</span></a></p></li>
-<li><p>Revised section <a class="reference internal" href="notebooks/simultaneous-linear-equations-6-iterative-methods.html"><span class="doc">Simultaneous Linear Equations, Part 6: Iterative Methods</span></a>
-on Aprl 14 after class; just making a few corrections like fixing typos.</p></li>
-<li><p>Added a preliminary section on <a class="reference internal" href="notebooks/least-squares-fitting-python.html"><span class="doc">Least-squares Fitting to Data</span></a>,
-yet another of the ones to introduce topics relevant to possible final projects.</p></li>
-<li><p>Added a preliminary section
-<a class="reference internal" href="notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html"><span class="doc">Simultaneous Linear Equations, Part 7: Faster Methods for Solving Ax = b for Tridiagonal and Banded matrices, and Strict Diagonal Dominance</span></a></p></li>
-<li><p>Added a preliminary section <a class="reference internal" href="notebooks/newtons-method-for-systems-introduction.html"><span class="doc">Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction</span></a>,
-another of the ones to introduce topics relevant to possible final projects.</p></li>
-<li><p>Added section <a class="reference internal" href="notebooks/eigenproblems.html"><span class="doc">Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond</span></a>,
-the third of the ones to introduce topics relevant to possible final projects.</p></li>
-<li><p>Added section <a class="reference internal" href="notebooks/simultaneous-linear-equations-6-iterative-methods.html"><span class="doc">Simultaneous Linear Equations, Part 6: Iterative Methods</span></a>,
-the second of the ones to introduce topics relevant to possible final projects.</p></li>
-<li><p>Corrected some typos and other errors in <a class="reference internal" href="notebooks/minimization-1D.html"><span class="doc">Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</span></a></p></li>
-<li><p>Added section <a class="reference internal" href="notebooks/minimization-1D.html"><span class="doc">Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction</span></a>,
-the first of several that I will add to introduce topics that some of you have chosen for your final projects.</p></li>
-<li><p>Updated section <a class="reference internal" href="notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html"><span class="doc">Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</span></a>,
-adding examples of computing matrix norms and condition numbers, and of how ill-conditioned matrices (ones with large condition number) can lead to errors far larger than the residual norm indicates.</p></li>
-<li><p>Updated section <a class="reference internal" href="notebooks/ODE-IVP-5-error-control-python.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</span></a>,
-adding notes on how to measure the time take to execute a specified piece of code,
-and how to specify error tolerances in the ODE IVP solving software in the package SciPy.</p></li>
-<li><p>Added <a class="reference internal" href="notebooks/assignment5.html"><span class="doc">MATH 375 Assignment 5</span></a> and <a class="reference internal" href="notebooks/ODE-IVP-exercises.html"><span class="doc">Exercises on Initial Value Problems for Ordinary Differential Equations</span></a></p></li>
-<li><p>Updated section <a class="reference internal" href="notebooks/ODE-IVP-5-error-control-python.html"><span class="doc">Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</span></a>,
-adding notes on higher order error control methods, including the fourth order accurate Runge-Kutta-Fehlberg Method,
-and an example of ODE IVP solving software in the package SciPy.</p></li>
-<li><p>Updated section <a class="reference internal" href="notebooks/simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html"><span class="doc">Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.</span></a>,
-adding notes on the Numpy functions for computing matrix norms and condition numbers.</p></li>
-<li><p>Added a section briefly describing <a class="reference internal" href="notebooks/project-possibilities.html"><span class="doc">Some Final Project Possibilites</span></a></p></li>
-<li><p>Updated section <a class="reference internal" href="notebooks/definite-integrals-4-romberg-integration.html"><span class="doc">Definite Integrals, Part 4: Romberg Integration</span></a>, adding a note on error estimates (relevant to the project on numerical calculus) and a few other additional explanations.</p></li>
-<li><p>Added a section briefly describing <a class="reference internal" href="notebooks/project-possibilities.html"><span class="doc">Some Final Project Possibilites</span></a></p></li>
-<li><p>Updated section <a class="reference internal" href="notebooks/definite-integrals-4-romberg-integration.html"><span class="doc">Definite Integrals, Part 4: Romberg Integration</span></a>, adding a note on error estimates (relevant to the project on numerical calculus) and a few other additional explanations.</p></li>
-</ul>
-<p>This <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a> is for the course <em>Elementary Numerical Analysis</em> at the University of Northern Colorado (“UNCo”) in Spring 2021.
-It also contains some background material on programming in Python with the packages Numpy and Matplotlib; these are excerpts from the Jupyter book <em>Python for Scientific Computing</em> by the same author.</p>
+<p>This <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a> was originally written for the course <em>Elementary Numerical Analysis</em> (MATH 375) at the University of Northern Colorado (“UNCo”) in Spring 2021.
+It also contains a tutorial on programming in Python with the packages Numpy and Matplotlib; this is exerpted from the Jupyter book <em>Python for Scientific Computing</em> by the same author.</p>
 <p>The material is based in part on Jupyter notebooks and other materials for the courses MATH 245, MATH 246, MATH 445 and MATH 545 at the College of Charleston, South Carolina.</p>
+<p><strong>Future Plans:</strong> I am working on an evolution of this to cover further topics, and with some more advanced material on analysis of methods, to make it suitable for courses up to introductory graduate level; the working title is <em>Introduction to Numerical Methods and Their Analysis (with Python)</em>,
+with proposed online home
+<a class="reference external" href="https://lemesurierb.github.io/introduction-numerical-methods-analysis-python/">https://lemesurierb.github.io/introduction-numerical-methods-analysis-python/</a></p>
+<p>I am also working on an edition that presents examples using the
+<a class="reference external" href="https://julialang.org/">Julia programming language</a>;
+this should appear some day at
+<a class="reference external" href="https://lemesurierb.github.io/introduction-numerical-methods-analysis-julia">https://lemesurierb.github.io/introduction-numerical-methods-analysis-julia/</a></p>
 <div class="section" id="some-references-for-further-reading">
 <h2>Some References for Further Reading<a class="headerlink" href="#some-references-for-further-reading" title="Permalink to this headline">¶</a></h2>
 <p>(As in the section <a class="reference internal" href="references.html"><span class="doc std std-doc">References</span></a>)</p>
 <ul class="simple">
-<li><p><a name="Sauer">[Sauer]</a> <em>Numerical Analysis</em> by Timothy Sauer, 2nd or 3rd edition.</p></li>
-<li><p><a name="Burden-Faires">[Burden&amp;Faires]</a> <em>Numerical Analysis</em> by Richard L. Burden and J. Douglas Faires, 9th edition.</p></li>
-<li><p><a name="Chenney-Kincaid">[Chenney&amp;Kincaid]</a> <em>Numerical Mathematics and Computing</em> by Ward Chenney and David Kincaid.</p></li>
-<li><p><a name="SciPy-Lecture-Notes"><a class="reference external" href="https://scipy-lectures.org/">SciPy Lecture Notes</a></a>; a free reference mainly on the SciPy package, but also with some general information on using Python for scientific computing. It is available both as a web-site or downloadable as PDF or HTML — for off-line access, I prefer the HTML version rather than the PDF.</p></li>
+<li><p>[Sauer] <em>Numerical Analysis</em> by Timothy Sauer, 2nd or 3rd edition.</p></li>
+<li><p>[Burden&amp;Faires] <em>Numerical Analysis</em> by Richard L. Burden and J. Douglas Faires, 9th edition.</p></li>
+<li><p>[Chenney&amp;Kincaid] <em>Numerical Mathematics and Computing</em> by Ward Chenney and David Kincaid.</p></li>
+<li><p>[SciPy Lecture Notes] online at https://scipy-lectures.org/;
+a free reference mainly on the SciPy package, but also with some general information on using Python for scientific computing. It is available both as a web-site or downloadable as PDF or HTML — for off-line access, I prefer the HTML version rather than the PDF.</p></li>
 </ul>
 <p>These will often be cited by [nickname in brackets].</p>
 <div class="toctree-wrapper compound">

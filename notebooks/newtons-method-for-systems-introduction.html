@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction &#8212; MATH 375. Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -25,8 +25,8 @@
     href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,6 +40,7 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -56,8 +57,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving \(Ax = b\) for Tridiagonal and Banded matrices, and Strict Diagonal Dominance" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html" />
-    <link rel="prev" title="33. Some Future Topics" href="../future_topics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -79,7 +78,7 @@
   <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  <h1 class="site-logo" id="site-title">MATH 375. Elementary Numerical Analysis (with Python)</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -259,64 +258,50 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
-   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   28. Simultaneous Linear Equations, Part 6: Iterative Methods
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   31. Least-squares Fitting to Data
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   33. Some Future Topics
+   32. Some Future Topics
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Preliminary Versions of Some Possible Future Sections
+  Preliminary Versions and Brief Introductions to Other Topics
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
-  </a>
- </li>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
-   2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
-   <span class="math notranslate nohighlight">
-    \(Ax = b\)
-   </span>
-   for Tridiagonal and Banded matrices, and Strict Diagonal Dominance
+  <a class="reference internal" href="ODE-IVP-6-multi-step-methods-intro.html">
+   1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods
   </a>
  </li>
 </ul>
@@ -751,17 +736,17 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#background">
-   1.1. Background
+   Background
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#newton-s-method-iteration-formula-for-systems">
-   1.2. Newton’s method iteration formula for systems
+   Newton’s method iteration formula for systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#justification-linearization-for-function-of-several-variables">
-     1.2.1. Justification: linearization for function of several variables
+     Justification: linearization for function of several variables
     </a>
    </li>
   </ul>
@@ -778,7 +763,7 @@
               <div>
                 
   <div class="section" id="solving-nonlinear-systems-of-equations-by-generalizations-of-newton-s-method-a-brief-introduction">
-<h1><span class="section-number">1. </span>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction<a class="headerlink" href="#solving-nonlinear-systems-of-equations-by-generalizations-of-newton-s-method-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
+<h1>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction<a class="headerlink" href="#solving-nonlinear-systems-of-equations-by-generalizations-of-newton-s-method-a-brief-introduction" title="Permalink to this headline">¶</a></h1>
 <p><strong>Version of April 13, 2021</strong></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -788,7 +773,7 @@ in particular Sub-section 2.7.1 <em>Multivariate Newton’s Method</em>.</p></li
 in particular Sections 10.1 and 10.2.</p></li>
 </ul>
 <div class="section" id="background">
-<h2><span class="section-number">1.1. </span>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>A system of simultaneous nonlinear equations</p>
 <div class="math notranslate nohighlight">
 \[
@@ -813,7 +798,7 @@ $<span class="math notranslate nohighlight">\(x^{(k+1)} = x^{(k)} - \frac{f(x^{(
 \[Df(x^{(k)}) (\delta^{(k)}) = f(x^{(k)}), \quad x^{(k+1)} = x^{(k)} + \delta^{(k)}.\]</div>
 </div>
 <div class="section" id="newton-s-method-iteration-formula-for-systems">
-<h2><span class="section-number">1.2. </span>Newton’s method iteration formula for systems<a class="headerlink" href="#newton-s-method-iteration-formula-for-systems" title="Permalink to this headline">¶</a></h2>
+<h2>Newton’s method iteration formula for systems<a class="headerlink" href="#newton-s-method-iteration-formula-for-systems" title="Permalink to this headline">¶</a></h2>
 <p>For vector valued functions, we will see in a while that an analogous result is true:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -823,7 +808,7 @@ $<span class="math notranslate nohighlight">\(x^{(k+1)} = x^{(k)} - \frac{f(x^{(
 <p>where <span class="math notranslate nohighlight">\(DF(x)\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> matrix of all the partial derivatives
 <span class="math notranslate nohighlight">\((D_{x_j} F_i)(x)\)</span> or <span class="math notranslate nohighlight">\((D_j F_i)(x)\)</span>, where <span class="math notranslate nohighlight">\(x = (x_1, x_2, \dots, x_n).\)</span></p>
 <div class="section" id="justification-linearization-for-function-of-several-variables">
-<h3><span class="section-number">1.2.1. </span>Justification: linearization for function of several variables<a class="headerlink" href="#justification-linearization-for-function-of-several-variables" title="Permalink to this headline">¶</a></h3>
+<h3>Justification: linearization for function of several variables<a class="headerlink" href="#justification-linearization-for-function-of-several-variables" title="Permalink to this headline">¶</a></h3>
 <p>To justify the above result, we need at least a case of Taylor’s Theorem for functions of several variables, for both
 <span class="math notranslate nohighlight">\(f:\mathbb{R}^n \to \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(F:\mathbb{R}^n \to \mathbb{R}^n\)</span>; just for linear approximations.
 This material from multi-variable calculus will be reviewed when we need it.</p>
@@ -871,8 +856,6 @@ This material from multi-variable calculus will be reviewed when we need it.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../future_topics.html" title="previous page"><span class="section-number">33. </span>Some Future Topics</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html" title="next page"><span class="section-number">2. </span>Simultaneous Linear Equations, Part 7: Faster Methods for Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> for Tridiagonal and Banded matrices, and Strict Diagonal Dominance</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

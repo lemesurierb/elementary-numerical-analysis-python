@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods &#8212; MATH 375. Elementary Numerical Analysis (with Python)</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction" href="newtons-method-for-systems-intro.html" />
+    <link rel="prev" title="32. Some Planned Future Topics" href="../future_topics.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">MATH 375. Elementary Numerical Analysis (with Python)</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface.html">
+   Elementary Numerical Analysis with Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Frontmatter
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../plans-for-expansion-improvement.html">
+   Full Disclosure: Things I Plan to do to Expand and Improve This Book
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Numerical Analysis
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-python.html">
+   1. Root Finding by Interval Halving (Bisection)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-python.html">
+   2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-python.html">
+   3. Newton’s Method for Solving Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="taylors-theorem.html">
+   4. Taylor’s Theorem and the Accuracy of Linearization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
+   5. Measures of Error and Order of Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
+   6. The Convergence Rate of Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-python.html">
+   7. Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-python.html">
+   9. Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
+   11. Simultaneous Linear Equations, Part 3: Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   with LU factorization,
+   <span class="math notranslate nohighlight">
+    \(A = L U\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
+   12. Simultaneous Linear Equations, Part 4: Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   With Both Pivoting and LU factorization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html">
+   13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation-error-formulas-python.html">
+   14. Error Formulas for Polynomial Collocation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
+   15. Approximating Derivatives by the Method of Undetermined Coefficients
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="richardson-extrapolation.html">
+   16. Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-1-building-blocks-python.html">
+   17. Definite Integrals, Part 1: The Building Blocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
+   18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
+   19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
+   20. Definite Integrals, Part 4: Romberg Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-5-error-control-python.html">
+   25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="minimization-1D.html">
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigenproblems.html">
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="least-squares-fitting-python.html">
+   30. Least-squares Fitting to Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   32. Some Planned Future Topics
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Preliminary Versions and Brief Introductions to Other Topics
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-for-systems-intro.html">
+   2. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-prelim.html">
+   3. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   for Tridiagonal and Banded matrices, and Strict Diagonal Dominance
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
+   Exercises on the Bisection Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
+   Exercises on Fixed Point Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
+   Exercises on Error Measures and Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
+   Exercises on Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
+   Exercises on Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
+   Exercises on Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
+   Exercises on Solving Simultaneous Linear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+   Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-exercises.html">
+   Exercises on Initial Value Problems for Ordinary Differential Equations
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment1.html">
+   MATH 375 Assignment 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment2.html">
+   MATH 375 Assignment 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment3.html">
+   MATH 375 Assignment 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root_finding.html">
+   Module root_finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment4.html">
+   MATH 375 Assignment 4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment5.html">
+   MATH 375 Assignment 5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment6.html">
+   MATH 375 Assignment 6: Least Squares Fitting
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
+   Improving on the Centered Difference Approximation with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-3-composite-trapezoid-rule.html">
+   The Composite Trapezoid Rule (and Composite Midpoint Rule)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-7-romberg-method.html">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Some Final Project Possibilities
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html">
+   Some Final Project Possibilites
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#minimizing-functions-of-one-and-several-variables">
+   Minimizing Functions of One and Several Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#root-finding-by-repeated-inverse-quadratic-approximation-with-bracketing">
+   Root-finding by Repeated Inverse Quadratic Approximation with Bracketing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#a-more-reliable-secant-method">
+   A More Reliable Secant Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#computing-eigenvalues-and-eigenvectors">
+   Computing Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#iterative-methods-for-solving-simultaneous-linear-equations-ax-b">
+   Iterative Methods for Solving Simultaneous Linear Equations,
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#solving-simultaneous-nonlinear-equations">
+   Solving Simultaneous Nonlinear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#fitting-smooth-piecewise-cubic-functions-to-data">
+   Fitting Smooth Piecewise Cubic Functions to Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#least-squares-fitting-to-data-and-functions">
+   Least-Squares Fitting to Data and Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#boundary-value-problems-for-differential-equations">
+   Boundary Value Problems for Differential Equations
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Python and Jupyter Notebook Review (with Numpy and Matplotlib)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
+   1. Introduction to
+   <em>
+    Python Preview
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
+   2. Getting Python Software for Scientific Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
+   3. Suggestions and Notes on Python and Jupyter Notebook Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
+   4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/functions.html">
+   5. Defining and Using Python Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
+   6. Decision Making With if, else, and elif
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
+   7. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
+   8. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
+   9. Code Files, Modules, and an Integrated Development Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
+   11. Plotting Graphs with Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
+   12. Numpy Array Operations and Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
+   13. Package Scipy and More Tools for Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
+   14. Summation and Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
+   15. Random Numbers, Histograms, and a Simulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
+   16. Formatted Output and Some Text String Manipulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
+   18. Exceptions and Exception Handling
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_methods_module.html">
+   Notebook for generating the module
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numerical_methods_module
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+   Linear algebra algorithms using 0-based indexing and semi-open intervals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sample-project-newtons-method-python-draft.html">
+   Numerical Analysis Sample Project on Newtons’s Method
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/ODE-IVP-6-multi-step-methods-intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/ODE-IVP-6-multi-step-methods-intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   1.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1-the-leap-frog-method">
+   1.2. Example 1: The Leap-frog method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-order-accuracy-of-the-leap-frog-method">
+   1.3. Second order accuracy of the leap-frog method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-speed-advantage-of-multi-step-methds-like-the-leap-frog-method">
+   1.4. The speed advantage of multi-step methds like the leap-frog method
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="initial-value-problems-for-odes-part-6-a-very-brief-introduction-to-multistep-methods">
+<h1><span class="section-number">1. </span>Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods<a class="headerlink" href="#initial-value-problems-for-odes-part-6-a-very-brief-introduction-to-multistep-methods" title="Permalink to this headline">¶</a></h1>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p>Section 6.7 <em>Multistep Methods</em> of <a class="reference external" href="../references.html#Sauer">Sauer</a></p></li>
+<li><p>Section 5.6 <em>Multistep Methods</em> of <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a></p></li>
+</ul>
+<div class="section" id="introduction">
+<h2><span class="section-number">1.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When approximating derivatives we saw that there is a distinct advantage in accuracy to using the centered difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\frac{df}{dt}(t) \approx \delta_h f(t) := \frac{f(t+h) - f(t-h)}{2h}\]</div>
+<p>(with error <span class="math notranslate nohighlight">\(O(h^2)\)</span>) over the forward difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\frac{df}{dt}(t) \approx \Delta_h f(t) := \frac{f(t+h) - f(t)}{h}\]</div>
+<p>(which has error <span class="math notranslate nohighlight">\(O(h)\)</span>).</p>
+<p>However Euler’s method used the latter, and all ODE methods seen so far avoid using values at “previous” times like <span class="math notranslate nohighlight">\(t-h\)</span>.
+There is a reason for this, as using data from previous times introduces some complications, but sometimes those are worth overcoming, so let us look into this.</p>
+</div>
+<div class="section" id="example-1-the-leap-frog-method">
+<h2><span class="section-number">1.2. </span>Example 1: The Leap-frog method<a class="headerlink" href="#example-1-the-leap-frog-method" title="Permalink to this headline">¶</a></h2>
+<p>Inserting the above centered difference approximation of the derivative into the ODE <span class="math notranslate nohighlight">\(du/dt = f(t, u)\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[\frac{u(t+h) - u(t-h)}{h} \approx f(t, u(t))\]</div>
+<p>which leads to the <em>leap-frog method</em></p>
+<div class="math notranslate nohighlight">
+\[\frac{U_{i+1} - U_{i-1}}{2h} = f(t_i, U_i)\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[U_{i+1} = U_{i-1} + 2 h f(t_i, U_i)\]</div>
+<p>This is the first example of a multistep method:</p>
+<p><strong>Definition</strong>:
+A <em>multistep method</em> for numerical solution of an ODE IVP <span class="math notranslate nohighlight">\(du/dt = f(t, u)\)</span> is one of the form</p>
+<div class="math notranslate nohighlight">
+\[U_{i+1} = \phi(U_i, \dots U_{i-s+1}, h), \quad s &gt; 1 \]</div>
+<p>so that the new approximate value of <span class="math notranslate nohighlight">\(u(t)\)</span> depends on approxiamt value at multiple previous times.</p>
+<p>More specifically, this is called an <span class="math notranslate nohighlight">\(s\)</span>-step method; this jargon is consistent with all methods seen in earlier sections being called <em>one-step methods</em>; for example,
+Euler’s method can be written as</p>
+<div class="math notranslate nohighlight">
+\[U_{i+1} = \phi_E(U_i, h) := U_i + h f(t_i, U_i)\]</div>
+<p>and the explicit midpoint method can be written as the one-liner</p>
+<div class="math notranslate nohighlight">
+\[U_{i+1} = \phi_{EMP}(U_i, h) := U_i + h f(t_i+h/2, U_i + h f(t_i, U_i)/2) h\]</div>
+<p>The leap-frog method already illustrates two of the complications that arise with multistep methods:</p>
+<ul class="simple">
+<li><p>The initial data <span class="math notranslate nohighlight">\(u(a) = u_0\)</span> gives <span class="math notranslate nohighlight">\(U_0\)</span>, but then the above formula gives <span class="math notranslate nohighlight">\(U_1\)</span> in terms of <span class="math notranslate nohighlight">\(U_0\)</span> and the non-existent value <span class="math notranslate nohighlight">\(U_{-1}\)</span>; a different method is needed to get <span class="math notranslate nohighlight">\(U_1\)</span>.
+More generally, with an <span class="math notranslate nohighlight">\(s\)</span>-step methods, one needs to compute the first <span class="math notranslate nohighlight">\(s-1\)</span> steps, up to <span class="math notranslate nohighlight">\(U_{s-1}\)</span>, by some other method.</p></li>
+<li><p>Leap-frog needs a constant step size <span class="math notranslate nohighlight">\(h\)</span>; the strategy of error estimation and error control using variable step size is still possible with some multistep methods, but that is distinctly more complicated than we have seen with one-step methods, and is not addressed in these notes.</p></li>
+</ul>
+<p>Fortunately many differential equations can be handled wwell by choosing a suitable fixed step size <span class="math notranslate nohighlight">\(h\)</span>.
+Thus, in these notes, we work only with equal step sizes, so that our times are <span class="math notranslate nohighlight">\(t_i = a + i h\)</span> and we aim for approximations
+<span class="math notranslate nohighlight">\(U_i \approx u(a + ih)\)</span>.</p>
+</div>
+<div class="section" id="second-order-accuracy-of-the-leap-frog-method">
+<h2><span class="section-number">1.3. </span>Second order accuracy of the leap-frog method<a class="headerlink" href="#second-order-accuracy-of-the-leap-frog-method" title="Permalink to this headline">¶</a></h2>
+<p>Using the fact that the centered difference approximation is second order accurate,
+one can verify that</p>
+<div class="math notranslate nohighlight">
+\[\frac{u(t_{i+1}) - u(t_{i-1})}{2h} - f(t, u(t_i)) = O(h^2)\]</div>
+<p>(Alternatively one can get this by inserting quadratic Taylor polynomials centered at <span class="math notranslate nohighlight">\(t_i\)</span>, and their error terms.)</p>
+<p>The definition of local trunctation error needs to be extended slightly:
+it is the error <span class="math notranslate nohighlight">\(U_{i+1} - u(t_{i+1})\)</span> when one starts with exact values for all previous steps;
+that is, assuming <span class="math notranslate nohighlight">\(U_j = u(t_j)\)</span> for all <span class="math notranslate nohighlight">\(j\leq i\)</span>.</p>
+<p>The above results then shows that the local truncation error in each step is <span class="math notranslate nohighlight">\(U_{i+1} - u(t_{i+1}) = O(h^3)\)</span>,
+so that the “local truncation error per unit time” is</p>
+<p>$<span class="math notranslate nohighlight">\(\frac{U_{i+1} - u(t_{i+1})}{h} = O(h^2)\)</span>$.</p>
+<p>A theorem in the section on <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html"><span class="doc std std-doc">Global Error Bounds for One Step Methods</span></a>
+says that when a one-step methods has local truncation error per unit time of <span class="math notranslate nohighlight">\(O(h^p)\)</span> it also has global truncation error of the same order.
+The situation is a bit more complicated with multi-step methods, but loosely <em>if</em> the errors in a multistep method has local truncation <span class="math notranslate nohighlight">\(O(h^p)\)</span> and it converges (i.e. the global error goes to zero at <span class="math notranslate nohighlight">\(h \to 0\)</span>) then it does so at the expected rate of <span class="math notranslate nohighlight">\(O(h^p)\)</span>.
+But multi-step methode can fail to converge, even if the local truncation error is of high order!
+This is dealt with via the concept of <em>stability</em>; not considered here, but addressed in both references above and a topic for future expansion of these notes.</p>
+<p>So in particular, when the leap-frog method converges it is second order accurate, just like the centered difference approximation of <span class="math notranslate nohighlight">\(du/dt\)</span> that it is built upon.</p>
+</div>
+<div class="section" id="the-speed-advantage-of-multi-step-methds-like-the-leap-frog-method">
+<h2><span class="section-number">1.4. </span>The speed advantage of multi-step methds like the leap-frog method<a class="headerlink" href="#the-speed-advantage-of-multi-step-methds-like-the-leap-frog-method" title="Permalink to this headline">¶</a></h2>
+<p>This second order accuracy illustrate a major potential advantage of multi-step methods:
+whereas any one-step Runge-Kutta method that is second order accurate (such as the explicit trapezoid or explicit midpoint methods) require at least two evaluations of <span class="math notranslate nohighlight">\(f(t, u)\)</span> for each time step, the leap-frog methods requires only one.</p>
+<p>More generally, for every <span class="math notranslate nohighlight">\(s\)</span>, there are <span class="math notranslate nohighlight">\(s\)</span>-step methods with errors <span class="math notranslate nohighlight">\(O(h^s)\)</span> that require only one evaluation of <span class="math notranslate nohighlight">\(f(t, u)\)</span> per time step — for example, the Adams-Bashforth methods, as seen at</p>
+<ul class="simple">
+<li><p>https://en.wikipedia.org/wiki/Linear_multistep_method#Adams-Bashforth_methods</p></li>
+<li><p>https://en.m.wikiversity.org/wiki/Adams-Bashforth_and_Adams-Moulton_methods</p></li>
+<li><p><a class="reference external" href="../references.html#Sauer">Sauer</a> Section 6.7.1  and 6.7.2</p></li>
+<li><p><a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>, Section 5.6</p></li>
+</ul>
+<p>In comparison, any <em>explicit</em> one-step method order <span class="math notranslate nohighlight">\(p\)</span> require at least <span class="math notranslate nohighlight">\(p\)</span> evaluations of <span class="math notranslate nohighlight">\(f(t, u)\)</span> per time step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># Shortcuts for some favorite commands:</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">show</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leap_frog</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">U_0</span><span class="p">,</span> <span class="n">U_1</span><span class="p">,</span> <span class="n">nSteps</span><span class="p">):</span>
+    <span class="n">nUnknowns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">U_0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">nSteps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">nSteps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nUnknowns</span><span class="p">])</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">U_0</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">U_1</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">nSteps</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nSteps</span><span class="p">):</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">step</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">step</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demo with the (undamped) mass-spring system</span>
+
+<span class="k">def</span> <span class="nf">f_mass_spring</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">U_0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">periods</span> <span class="o">=</span><span class="mi">32</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">periods</span>
+<span class="c1">#nSteps = 1000  # Very Good?!</span>
+<span class="n">nSteps</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">periods</span>  <span class="c1"># Good?</span>
+<span class="c1">#nSteps = 20  # OK</span>
+
+<span class="c1"># We need U_1, for now, get it with the Runge-Kutta method;</span>
+<span class="c1"># this is overkill for accuracy, but since only one step is needed, the cost is negligible.</span>
+<span class="kn">from</span> <span class="nn">numerical_methods_module</span> <span class="kn">import</span> <span class="n">RungeKutta_system</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">nSteps</span>
+<span class="p">(</span><span class="n">t_1step</span><span class="p">,</span> <span class="n">U_1step</span><span class="p">)</span> <span class="o">=</span> <span class="n">RungeKutta_system</span><span class="p">(</span><span class="n">f_mass_spring</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">U_0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">U_1</span> <span class="o">=</span> <span class="n">U_1step</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">leap_frog</span><span class="p">(</span><span class="n">f_mass_spring</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">U_0</span><span class="p">,</span> <span class="n">U_1</span><span class="p">,</span> <span class="n">nSteps</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#print(f&quot;t={t}&quot;)</span>
+<span class="c1">#print(f&quot;y={y}&quot;)</span>
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ODE-IVP-6-multi-step-methods-intro_10_0.png" src="../_images/ODE-IVP-6-multi-step-methods-intro_10_0.png" />
+</div>
+</div>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../future_topics.html" title="previous page"><span class="section-number">32. </span>Some Planned Future Topics</a>
+    <a class='right-next' id="next-link" href="newtons-method-for-systems-intro.html" title="next page"><span class="section-number">2. </span>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Brenton LeMesurier, College of Charleston and University of Northern Colorado<br/>
+        
+            &copy; Copyright 2020–2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

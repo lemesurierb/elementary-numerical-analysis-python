@@ -1,0 +1,1141 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. Simultaneous Linear Equations, Part 7: Faster Methods for Solving \(Ax = b\) for Tridiagonal and Banded matrices, and Strict Diagonal Dominance &#8212; MATH 375. Elementary Numerical Analysis (with Python)</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercises on the Bisection Method" href="root-finding-by-interval-halving-exercises-python.html" />
+    <link rel="prev" title="2. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction" href="newtons-method-for-systems-intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">MATH 375. Elementary Numerical Analysis (with Python)</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface.html">
+   Elementary Numerical Analysis with Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Frontmatter
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../plans-for-expansion-improvement.html">
+   Full Disclosure: Things I Plan to do to Expand and Improve This Book
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Numerical Analysis
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-python.html">
+   1. Root Finding by Interval Halving (Bisection)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-python.html">
+   2. Solving Equations by Fixed Point Iteration (of Contraction Mappings)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-python.html">
+   3. Newton’s Method for Solving Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="taylors-theorem.html">
+   4. Taylor’s Theorem and the Accuracy of Linearization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates.html">
+   5. Measures of Error and Order of Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-convergence-rate.html">
+   6. The Convergence Rate of Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-python.html">
+   7. Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-1-row-reduction-python.html">
+   8. Simultaneous Linear Equations, Part 1: Row Reduction/Gaussian Elimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-python.html">
+   9. Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-2-pivoting-python.html">
+   10. Simultaneous Linear Equations, Part 2: Partial Pivoting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-3-lu-factorization-python.html">
+   11. Simultaneous Linear Equations, Part 3: Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   with LU factorization,
+   <span class="math notranslate nohighlight">
+    \(A = L U\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-4-plu-factorization-python.html">
+   12. Simultaneous Linear Equations, Part 4: Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   With Both Pivoting and LU factorization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation%2Bapproximation-python.html">
+   13. Polynomial Collocation (Interpolation/Extrapolation) and Approximation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="polynomial-collocation-error-formulas-python.html">
+   14. Error Formulas for Polynomial Collocation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents.html">
+   15. Approximating Derivatives by the Method of Undetermined Coefficients
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="richardson-extrapolation.html">
+   16. Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-1-building-blocks-python.html">
+   17. Definite Integrals, Part 1: The Building Blocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-2-composite-rules.html">
+   18. Definite Integrals, Part 2: The Composite Trapezoid and Midpoint Rules
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-3-simpson-richardson.html">
+   19. Definite Integrals, Part 3: The (Composite) Simpson’s Rule and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="definite-integrals-4-romberg-integration.html">
+   20. Definite Integrals, Part 4: Romberg Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-1-basics-and-Euler-python.html">
+   21. Initial Value Problems for Ordinary Differential Equations, Part 1: Basic Concepts and Euler’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-2-Runge-Kutta-python.html">
+   22. Initial Value Problems for ODEs, Part 2: Runge-Kutta Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-3-error-results-one-step-methods.html">
+   23. Initial Value Problems for Ordinary Differential Equations, Part 3: Global Error Bounds for One Step Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-4-system-higher-order-equations.html">
+   24. Initial Value Problems for Ordinary Differential Equations, Part 4: Systems of ODEs and Higher Order ODEs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-5-error-control-python.html">
+   25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
+   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="minimization-1D.html">
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigenproblems.html">
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="least-squares-fitting-python.html">
+   30. Least-squares Fitting to Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../future_topics.html">
+   32. Some Planned Future Topics
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Preliminary Versions and Brief Introductions to Other Topics
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-6-multi-step-methods-intro.html">
+   1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-for-systems-intro.html">
+   2. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+   for Tridiagonal and Banded matrices, and Strict Diagonal Dominance
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-by-interval-halving-exercises-python.html">
+   Exercises on the Bisection Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fixed-point-iteration-exercises.html">
+   Exercises on Fixed Point Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="error-measures-convergence-rates-exercises.html">
+   Exercises on Error Measures and Convergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="newtons-method-exercises.html">
+   Exercises on Newton’s Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root-finding-without-derivatives-exercises.html">
+   Exercises on Root-finding Without Derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-numbers-rounding-error-and-error-propagation-exercises.html">
+   Exercises on Machine Numbers, Rounding Error and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-exercises.html">
+   Exercises on Solving Simultaneous Linear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="derivatives-and-the-method-of-undetermined-coefficents-exercises.html">
+   Exercises on Approximating Derivatives, the Method of Undetermined Coefficients and Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ODE-IVP-exercises.html">
+   Exercises on Initial Value Problems for Ordinary Differential Equations
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment1.html">
+   MATH 375 Assignment 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment2.html">
+   MATH 375 Assignment 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment3.html">
+   MATH 375 Assignment 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="root_finding.html">
+   Module root_finding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment4.html">
+   MATH 375 Assignment 4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment5.html">
+   MATH 375 Assignment 5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignment6.html">
+   MATH 375 Assignment 6: Least Squares Fitting
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Project on Numerical Calculus
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html">
+   Centered Difference Approximation of the Derivative
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-1-and-2-centered-difference-derivative-approximation-and-richardson.html#improving-on-the-centered-difference-approximation-with-richardson-extrapolation">
+   Improving on the Centered Difference Approximation with Richardson Extrapolation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-3-composite-trapezoid-rule.html">
+   The Composite Trapezoid Rule (and Composite Midpoint Rule)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-4-recursive-trapezoid-rule.html">
+   The Recursive Trapezoid Rule, with error control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-5-and-6-modified-trapezoid-method.html">
+   The Modified Trapezoid Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/task-7-romberg-method.html">
+   The Romberg Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-differentiation.html">
+   Test Cases for Differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-on-numerical-calculus/test-cases-integration.html">
+   Test Cases for Integration
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Some Final Project Possibilities
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html">
+   Some Final Project Possibilites
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#minimizing-functions-of-one-and-several-variables">
+   Minimizing Functions of One and Several Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#root-finding-by-repeated-inverse-quadratic-approximation-with-bracketing">
+   Root-finding by Repeated Inverse Quadratic Approximation with Bracketing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#a-more-reliable-secant-method">
+   A More Reliable Secant Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#computing-eigenvalues-and-eigenvectors">
+   Computing Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#iterative-methods-for-solving-simultaneous-linear-equations-ax-b">
+   Iterative Methods for Solving Simultaneous Linear Equations,
+   <span class="math notranslate nohighlight">
+    \(Ax = b\)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#solving-simultaneous-nonlinear-equations">
+   Solving Simultaneous Nonlinear Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#fitting-smooth-piecewise-cubic-functions-to-data">
+   Fitting Smooth Piecewise Cubic Functions to Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#least-squares-fitting-to-data-and-functions">
+   Least-Squares Fitting to Data and Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project-possibilities.html#boundary-value-problems-for-differential-equations">
+   Boundary Value Problems for Differential Equations
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Python and Jupyter Notebook Review (with Numpy and Matplotlib)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/introduction.html">
+   1. Introduction to
+   <em>
+    Python Preview
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/getting-python-software-for-scientific-computing.html">
+   2. Getting Python Software for Scientific Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/suggestions-on-python-and-notebook-usage.html">
+   3. Suggestions and Notes on Python and Jupyter Notebook Usage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/python-variables-lists-tuples-numpy-arrays.html">
+   4. Python Variables, Including Lists and Tuples, and Arrays from Package Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/functions.html">
+   5. Defining and Using Python Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/decisions-with-if-else-elif.html">
+   6. Decision Making With if, else, and elif
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-for.html">
+   7. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/iteration-with-while.html">
+   8. Iteration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/code-files-modules-IDEs.html">
+   9. Code Files, Modules, and an Integrated Development Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/recursion.html">
+   10. Recursion (vs iteration)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/graphing-with-matplotlib.html">
+   11. Plotting Graphs with Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/array-operations-and-linear-algebra.html">
+   12. Numpy Array Operations and Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/scipy-tools-for-linear-algebra.html">
+   13. Package Scipy and More Tools for Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/summation-and-integration.html">
+   14. Summation and Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/random-numbers-and-simulation.html">
+   15. Random Numbers, Histograms, and a Simulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/formatted-output-and-some-text-string-manipulation.html">
+   16. Formatted Output and Some Text String Manipulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/classes-objects-attributes-methods.html">
+   17. Classes, Objects, Attributes, Methods: Very Basic Object-Oriented Programming in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python_tutorial/exception-handling.html">
+   18. Exceptions and Exception Handling
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendices
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_methods_module.html">
+   Notebook for generating the module
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numerical_methods_module
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear-algebra-with-0-based-indexing-and-semiopen-intervals.html">
+   Linear algebra algorithms using 0-based indexing and semi-open intervals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sample-project-newtons-method-python-draft.html">
+   Numerical Analysis Sample Project on Newtons’s Method
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-prelim.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks/simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-prelim.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tridiagonal-systems">
+   3.1. Tridiagonal systems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithms">
+   3.2. Algorithms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lu-factorization">
+     3.2.1. LU factorization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forward-substitution">
+     3.2.2. Forward substitution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backward-substitution">
+     3.2.3. Backward substitution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalizing-to-banded-matrices">
+   3.3. Generalizing to Banded Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization">
+     3.3.1. Recap: the general Doolittle algorithm for computing an LU factorization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eliminating-redundant-calculation-in-the-above">
+     3.3.2. Eliminating redundant calculation in the above
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithm-for-lu-factorization-of-a-banded-matrix">
+   3.4. Algorithm for LU factorization of a banded matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-common-symmetrical-case-p-q">
+   3.5. The common symmetrical case,
+   <span class="math notranslate nohighlight">
+    \(p=q\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices">
+   3.6. When is it safe to do without pivoting: Strict Diagonal Dominant Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-crout-version-of-lu-factorization">
+   3.7. The Crout version of LU factorization
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="simultaneous-linear-equations-part-7-faster-methods-for-solving-ax-b-for-tridiagonal-and-banded-matrices-and-strict-diagonal-dominance">
+<h1><span class="section-number">3. </span>Simultaneous Linear Equations, Part 7: Faster Methods for Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> for Tridiagonal and Banded matrices, and Strict Diagonal Dominance<a class="headerlink" href="#simultaneous-linear-equations-part-7-faster-methods-for-solving-ax-b-for-tridiagonal-and-banded-matrices-and-strict-diagonal-dominance" title="Permalink to this headline">¶</a></h1>
+<p><strong>Version of April 13, 2021</strong></p>
+<p><strong>Reference:</strong></p>
+<p>Section 6.6 <em>Special Types of Matrices</em> in <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>,
+the sub-sections on <em>Band Matrices</em> and <em>Tridiagonal Matrices</em>.</p>
+<div class="section" id="tridiagonal-systems">
+<h2><span class="section-number">3.1. </span>Tridiagonal systems<a class="headerlink" href="#tridiagonal-systems" title="Permalink to this headline">¶</a></h2>
+<p>Differential equations often lead to the need to solve systems of equations <span class="math notranslate nohighlight">\(T x = b\)</span> where the matrix <span class="math notranslate nohighlight">\(T\)</span> is <strong>tri-diagonal</strong>: the only non-zero elements are on the main diagonal and the diagonals adjacent to it on either side, so that <span class="math notranslate nohighlight">\(T_{i,j} = 0\)</span> if <span class="math notranslate nohighlight">\(|i - j| &gt; 1\)</span>.
+That is, the system looks like:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T x =
+\left[\begin{array}{cc} d_1 &amp; u_1\\l_1 &amp; d_2 &amp; u_2 &amp;\\&amp; l_2 &amp; d_3 &amp; u_3\\&amp;&amp; \ddots &amp; \ddots &amp; \ddots\\&amp;&amp;&amp; l_{n-2} &amp; d_{n-1} &amp; u_{n-1}\\&amp;&amp;&amp;&amp; l_{n-1} &amp; d_{n}\end{array}\right]
+\left[\begin{array}{c}x_1\\x_2\\\vdots\\x_n \end{array}\right]
+= \left[\begin{array}{c}b_1\\b_2\\\vdots\\b_n\end{array}\right]
+\end{split}\]</div>
+<p>with all “missing” entries being zeros.
+The notation used here suggests one efficient way to store such a matrix: as three 1D arrays <span class="math notranslate nohighlight">\(d\)</span>, <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<p>(Such equations also arise in cubic spline interpolation.)</p>
+<p>It can be verified that LU factorization preserves all the non-zero values, so that the Doolittle algorithm — if it succeeds without any division by zero — gives <span class="math notranslate nohighlight">\(T = L U\)</span> with the form
+$<span class="math notranslate nohighlight">\(
+L = \left[\begin{array}{cc}
+1\\
+L_1 &amp; 1 \\
+&amp; L_2 &amp; 1 \\
+&amp;&amp; \ddots &amp; \ddots \\
+&amp;&amp;&amp; L_{n-2} &amp; 1 \\
+&amp;&amp;&amp;&amp; L_{n-1} &amp; 1
+\end{array}\right],
+\;
+U = \left[\begin{array}{cc}
+D_1 &amp; u_1\\
+&amp; D_2 &amp; u_2 \\
+&amp;&amp; D_3 &amp; u_3\\
+&amp;&amp;&amp; \ddots &amp; \ddots \\
+&amp;&amp;&amp;&amp; D_{n-1} &amp; u_{n-1} \\
+&amp;&amp;&amp;&amp;&amp; D_n
+\end{array}\right]
+\)</span><span class="math notranslate nohighlight">\(
+Note that the first non-zero element in each column is unchanged, as with a full matrix, but now it means that the upper diagonal elements \)</span>u_i$ are unchanged.</p>
+<p>Again, one way to describe and store this information is with just the two new 1D arrays <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(D\)</span>, along with the unchanged array <span class="math notranslate nohighlight">\(u\)</span>.</p>
+</div>
+<div class="section" id="algorithms">
+<h2><span class="section-number">3.2. </span>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lu-factorization">
+<h3><span class="section-number">3.2.1. </span>LU factorization<a class="headerlink" href="#lu-factorization" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(D_1 = d_1\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad L_{i-1} = l_{i-1}/D_{i-1}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad D_{i} = d_{i} - L_{i-1} u_{i-1}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+</div>
+<div class="section" id="forward-substitution">
+<h3><span class="section-number">3.2.2. </span>Forward substitution<a class="headerlink" href="#forward-substitution" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(c_1 = b_1\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad c_{i} = b_{i} - L_{i-1} c_{i-1}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+</div>
+<div class="section" id="backward-substitution">
+<h3><span class="section-number">3.2.3. </span>Backward substitution<a class="headerlink" href="#backward-substitution" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(x_n = c_n/D_n\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">n-1</span> <span class="pre">down</span> <span class="pre">to</span> <span class="pre">1</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad x_{i} = (c_{i} - u_{i} x_{i+1})/D_i\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+</div>
+</div>
+<div class="section" id="generalizing-to-banded-matrices">
+<h2><span class="section-number">3.3. </span>Generalizing to Banded Matrices<a class="headerlink" href="#generalizing-to-banded-matrices" title="Permalink to this headline">¶</a></h2>
+<p>As we have seen, approximating derivatives to higher order of accuracy and approximating derivatives of order greater than two requires more than three nodes, but the locations needed are all close to the ones where the derivative is being approximated.
+For example, the simplest symmetric approximation of the fourth derivative <span class="math notranslate nohighlight">\(D^4 f(x)\)</span> used values from <span class="math notranslate nohighlight">\(f(x-2h)\)</span> to <span class="math notranslate nohighlight">\(f(x+2h)\)</span>.
+Then row <span class="math notranslate nohighlight">\(i\)</span> of the corresponding matrix has all its non-zero elements at locations <span class="math notranslate nohighlight">\((i,i-2)\)</span> to <span class="math notranslate nohighlight">\((i, i+2)\)</span>: the non-zero elements lie in the narrow “band” where <span class="math notranslate nohighlight">\(|i - j| \leq 2\)</span>, and thus on five “central” diagonals.</p>
+<p>This is a <strong>penta-digonal matrix</strong>, and an example of the larger class of <strong>banded matrices</strong>: ones in which all the non-zero elements have indices <span class="math notranslate nohighlight">\( -p \leq j - i \leq q\)</span> for <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> smaller than <span class="math notranslate nohighlight">\(n\)</span> — usually far smaller; <span class="math notranslate nohighlight">\(p = q = 2\)</span> for a penta-digonal matrix.</p>
+<div class="section" id="recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization">
+<h3><span class="section-number">3.3.1. </span>Recap: the general Doolittle algorithm for computing an LU factorization<a class="headerlink" href="#recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization" title="Permalink to this headline">¶</a></h3>
+<p><em>The top row is unchanged:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(u_{1,j} = a_{1,j}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<em>The left column requires no sums:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(l_{i,1} = a_{i,1}/u_{1,1}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<br>
+<em>The main loop:</em>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">k</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(u_{k,j} = a_{k,j} - \sum_{s=1}^{k-1} l_{k,s}u_{s,j}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">k+1</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(l_{i,k} = \left( a_{i,k} - \sum_{s=1}^{k-1} l_{i,s}u_{s,k} \right)/u_{k,k}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+</div>
+<div class="section" id="eliminating-redundant-calculation-in-the-above">
+<h3><span class="section-number">3.3.2. </span>Eliminating redundant calculation in the above<a class="headerlink" href="#eliminating-redundant-calculation-in-the-above" title="Permalink to this headline">¶</a></h3>
+<p>With a banded matrix, many of the entries at right are zero, particularly in the two sums, which is where most of the operations are.
+Thus we can rewrite, exploiting the fact that all elements with indices <span class="math notranslate nohighlight">\(j-i &lt; -p\)</span> or <span class="math notranslate nohighlight">\(j-i &gt; q\)</span> are zero.
+To start with, the top diagonal is not modified, as already noted for the tridiagonal case: <span class="math notranslate nohighlight">\(u_{k,k+q} = a_{k,k+q}\)</span> for <span class="math notranslate nohighlight">\(1 \leq k \leq n-q\)</span>.</p>
+</div>
+</div>
+<div class="section" id="algorithm-for-lu-factorization-of-a-banded-matrix">
+<h2><span class="section-number">3.4. </span>Algorithm for LU factorization of a banded matrix<a class="headerlink" href="#algorithm-for-lu-factorization-of-a-banded-matrix" title="Permalink to this headline">¶</a></h2>
+<p><em>The top row is unchanged:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">1+q</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(u_{1,j} = a_{1,j}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<em>The top non-zero diagonal is unchanged:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">n</span> <span class="pre">-</span> <span class="pre">q</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(u_{k,k+q} = a_{k,k+q}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<em>The left column requires no sums:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">1+p</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(l_{i,1} = a_{i,1}/u_{1,1}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<em>The main loop:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">k</span> <span class="pre">to</span> <span class="pre">min(n,</span> <span class="pre">k+q-1)</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(u_{k,j} = a_{k,j} - \displaystyle\sum_{s=max(1, k-p, j-q)}^{k-1} l_{k,s}u_{s,j}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">k+1</span> <span class="pre">to</span> <span class="pre">min(n,k+p-1)</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(l_{i,k} = \left( a_{i,k} - \displaystyle\sum_{s=max(1,i-p,k-q)}^{k-1} l_{i,s}u_{s,k} \right)/u_{k,k}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+</div>
+<div class="section" id="the-common-symmetrical-case-p-q">
+<h2><span class="section-number">3.5. </span>The common symmetrical case, <span class="math notranslate nohighlight">\(p=q\)</span><a class="headerlink" href="#the-common-symmetrical-case-p-q" title="Permalink to this headline">¶</a></h2>
+<p>It is common for a banded matrix to have equal band-width on either side, <span class="math notranslate nohighlight">\(p=q\)</span>, as with tridiagonal and pentadiagonal matrices.
+Then the algorithm is somewhat simpler:</p>
+<p><em>The top row is unchanged:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">1+p</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(u_{1,j} = a_{1,j}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br><em>The top non-zero diagonal is unchanged:</em><br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">n</span> <span class="pre">-</span> <span class="pre">p</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(u_{k,k+p} = a_{k,k+p}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<em>The left column requires no sums:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">1+p</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <span class="math notranslate nohighlight">\(l_{i,1} = a_{i,1}/u_{1,1}\)</span>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<br>
+<em>The main loop:</em>
+<br>
+<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">k</span> <span class="pre">to</span> <span class="pre">min(n,</span> <span class="pre">k+p-1)</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(u_{k,j} = a_{k,j} - \displaystyle\sum_{s=max(1, j-p)}^{k-1} l_{k,s}u_{s,j}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">k+1</span> <span class="pre">to</span> <span class="pre">min(n,k+p)</span></code>
+<br>
+<span class="math notranslate nohighlight">\(\quad\quad\)</span> <span class="math notranslate nohighlight">\(l_{i,k} = \left( a_{i,k} - \displaystyle\sum_{s=max(1,i-p)}^{k-1} l_{i,s}u_{s,k} \right)/u_{k,k}\)</span>
+<br>
+<span class="math notranslate nohighlight">\(\quad\)</span> <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code>
+<br>
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
+</div>
+<div class="section" id="when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices">
+<h2><span class="section-number">3.6. </span>When is it safe to do without pivoting: Strict Diagonal Dominant Matrices<a class="headerlink" href="#when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices" title="Permalink to this headline">¶</a></h2>
+<p>These algorithms for banded matrices do no pivoting, and that is highly desirable, because pivoting creates non-zero elements outside the “band” and so can force one back to the general algorithm.
+Fortunately one characteristic of such systems makes the safe, and it is quite common for  systems that come from approximation of second derivatives.</p>
+<p><strong>Definition</strong>
+A <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is <em>strictly diagonally dominant</em> [SDD] if for every row <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(1 \leq i \leq n\)</span>,
+$<span class="math notranslate nohighlight">\(
+|a_{i,i}| &gt; \sum_{1 \leq j \leq n, j \neq i} |a_{i,j}|
+\)</span>$</p>
+<p>That is each diagonal element is greater in magnitude that the sum of the magnitudes of all other entries in the same row.</p>
+<p><em>Note:</em> If the corresponding non-strict in equality holds, the matrix is called <em>diagonally dominant</em>.</p>
+<p><strong>Theorem 1.</strong>
+<em>For any strictly diagonally dominant tridiagonal matrix <span class="math notranslate nohighlight">\(A\)</span>, each of the intermediate matrices <span class="math notranslate nohighlight">\(A^{(k)}\)</span> given by the naive Gaussan elimination algorithm is also strictly diagonally dominant, and so the final upper triangular matrix <span class="math notranslate nohighlight">\(U\)</span> is.
+In particular, all the diagonal elements <span class="math notranslate nohighlight">\(a_{i,i}^{(k)}\)</span> and <span class="math notranslate nohighlight">\(u_{i,i}\)</span> are non-zero, so no division by zero occurs in any of these algorithms, including the backward substitution solving for <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(Ux = c\)</span>.</em></p>
+<p>As a consequence the Doolittle factorization also has <span class="math notranslate nohighlight">\(u_{i,i} \neq 0\)</span> and those are the only values ever divided by in either the Doolittle algorithm or in forward and backward substutition, so one never encounters division by zero.</p>
+<p>This says more: at each stage, the pivot element <span class="math notranslate nohighlight">\(a_{i,i}^{(k)}\)</span> has a larger absolute value than all other elements on its row: although this does not guarantee that it is larger than any candidate pivot elements below it in the column, it does indicate that one is probably at a safe distance from very small denominators and loss of significance.</p>
+</div>
+<div class="section" id="the-crout-version-of-lu-factorization">
+<h2><span class="section-number">3.7. </span>The Crout version of LU factorization<a class="headerlink" href="#the-crout-version-of-lu-factorization" title="Permalink to this headline">¶</a></h2>
+<p>There is a generalization and improvement, but it requires a twist (actualy, a reflection):</p>
+<p><strong>Theorem 2.</strong>
+<em>If the transpose <span class="math notranslate nohighlight">\(A^T\)</span> is SDD, so is each intermediate matrix <span class="math notranslate nohighlight">\(A^{(k)}\)</span> in naive Gaussian elimination and thus the Doolittle factorization succeeds with <span class="math notranslate nohighlight">\(U\)</span>, also SDD.</em></p>
+<p>However, we want to use this for the more natural case of <span class="math notranslate nohighlight">\(A\)</span> itself being SDD.
+Here is one way to proceeed.</p>
+<p>Let <span class="math notranslate nohighlight">\(B = A^T\)</span>, so that <span class="math notranslate nohighlight">\(B^T = A\)</span> is SDD and thus there is a Doolittle LU factorization <span class="math notranslate nohighlight">\(B = L_B U_B\)</span>.</p>
+<p>Then <span class="math notranslate nohighlight">\(A = (L_B U_B)^T = (U_B)^T (L_B)^T\)</span>.
+Note that <span class="math notranslate nohighlight">\(L := (U_B)^T\)</span> is lower triangular and <span class="math notranslate nohighlight">\(U = (L_B)^T\)</span> is unit upper triangular,
+so that this given an LU factorization <span class="math notranslate nohighlight">\(A = L U\)</span>, differing from the Doolittle one in having the ones on the upper diagonal.</p>
+<p>This is the <strong>Crout decomposition</strong>, and the Doolittle algorithm can be easily “flipped” to compute this, and the forward and backward subsitution algorithms are also easily adapted.</p>
+<p><strong>Theorem 3.</strong>
+<em>If <span class="math notranslate nohighlight">\(A\)</span> is SDD, it has a Crout decomposition <span class="math notranslate nohighlight">\(A = L U\)</span>: <span class="math notranslate nohighlight">\(L\)</span> lower triangular, <span class="math notranslate nohighlight">\(U\)</span> unit upper triangular.</em></p>
+<p>Note also that <span class="math notranslate nohighlight">\(L\)</span> is the transpose of the SDD matrix <span class="math notranslate nohighlight">\(U_B\)</span>, so it is <strong>strictly diagonally dominant by column</strong>: each diagonal element <span class="math notranslate nohighlight">\(l_{i,i}\)</span> has magnitude greater than the sum of the magnitudes of all element below it in the same column:</p>
+<div class="math notranslate nohighlight">
+\[ |l_{i,i}| &gt; \sum_{j&gt;i} |l_{j,i}| \]</div>
+<p>These reassuringly big diagonal elements <span class="math notranslate nohighlight">\(l_{i,i}\)</span> are the only values divided by in forward substitution, and indeed also in the Crout algorithm: in the mirror-image world of the Crout algorithm, these are the pivot elements.</p>
+<hr class="docutils" />
+<p>This work is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="newtons-method-for-systems-intro.html" title="previous page"><span class="section-number">2. </span>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction</a>
+    <a class='right-next' id="next-link" href="root-finding-by-interval-halving-exercises-python.html" title="next page">Exercises on the Bisection Method</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Brenton LeMesurier, College of Charleston and University of Northern Colorado<br/>
+        
+            &copy; Copyright 2020–2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

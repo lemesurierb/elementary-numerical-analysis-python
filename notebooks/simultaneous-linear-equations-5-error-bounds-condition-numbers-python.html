@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc. &#8212; MATH 375. Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -25,8 +25,8 @@
     href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,6 +40,7 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -56,8 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="28. Simultaneous Linear Equations, Part 6: Iterative Methods" href="simultaneous-linear-equations-6-iterative-methods.html" />
-    <link rel="prev" title="26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods" href="ODE-IVP-7-multi-step-methods-intro.html" />
+    <link rel="next" title="27. Simultaneous Linear Equations, Part 6: Iterative Methods" href="simultaneous-linear-equations-6-iterative-methods.html" />
+    <link rel="prev" title="25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes" href="ODE-IVP-5-error-control-python.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -79,7 +80,7 @@
   <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  <h1 class="site-logo" id="site-title">MATH 375. Elementary Numerical Analysis (with Python)</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -258,61 +259,61 @@
    25. Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
-   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   28. Simultaneous Linear Equations, Part 6: Iterative Methods
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   31. Least-squares Fitting to Data
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   33. Some Future Topics
+   32. Some Planned Future Topics
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Preliminary Versions of Some Possible Future Sections
+  Preliminary Versions and Brief Introductions to Other Topics
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="newtons-method-for-systems-introduction.html">
-   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
+  <a class="reference internal" href="ODE-IVP-6-multi-step-methods-intro.html">
+   1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-preliminary.html">
-   2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
+  <a class="reference internal" href="newtons-method-for-systems-intro.html">
+   2. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simultaneous-linear-equations-7-tridiagonal-banded-and-SDD-matrices-prelim.html">
+   3. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
    <span class="math notranslate nohighlight">
     \(Ax = b\)
    </span>
@@ -751,22 +752,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#residuals-backward-errors-forward-errors-and-condition-numbers">
-   27.1. Residuals, backward errors, forward errors, and condition numbers
+   26.1. Residuals, backward errors, forward errors, and condition numbers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matrix-norms-induced-by-vector-norms">
-   27.2. Matrix norms induced by vector norms
+   26.2. Matrix norms induced by vector norms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#properties-of-induced-matrix-norms">
-   27.3. Properties of (induced) matrix norms
+   26.3. Properties of (induced) matrix norms
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#python-note-numpy-linalg-norm">
-     27.3.1. Python Note:
+     26.3.1. Python Note:
      <code class="docutils literal notranslate">
       <span class="pre">
        numpy.linalg.norm
@@ -778,12 +779,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relative-error-bound-and-condition-number">
-   27.4. Relative error bound and condition number
+   26.4. Relative error bound and condition number
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-     27.4.1. Aside: estimating
+     26.4.1. Aside: estimating
      <span class="math notranslate nohighlight">
       \(\|A^{-1}\|_\infty\)
      </span>
@@ -799,12 +800,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#well-conditioned-and-ill-conditioned-problems-and-matrices">
-   27.5. Well-conditioned and ill-conditioned problems and matrices
+   26.5. Well-conditioned and ill-conditioned problems and matrices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#an-important-example-the-hilbert-matrices">
-   27.6. An important example: the Hilbert matrices
+   26.6. An important example: the Hilbert matrices
   </a>
  </li>
 </ul>
@@ -819,7 +820,7 @@
               <div>
                 
   <div class="section" id="simultaneous-linear-equations-part-5-error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc">
-<h1><span class="section-number">27. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.<a class="headerlink" href="#simultaneous-linear-equations-part-5-error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">26. </span>Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.<a class="headerlink" href="#simultaneous-linear-equations-part-5-error-bounds-for-linear-algebra-condition-numbers-matrix-norms-etc" title="Permalink to this headline">¶</a></h1>
 <p><strong>Version of April 13, 2021</strong></p>
 <p><strong>References:</strong></p>
 <ul class="simple">
@@ -828,7 +829,7 @@
 <li><p>Section 8.4 in <a class="reference external" href="../references.html#Chenney-Kincaid">Chenney&amp;Kincaid</a></p></li>
 </ul>
 <div class="section" id="residuals-backward-errors-forward-errors-and-condition-numbers">
-<h2><span class="section-number">27.1. </span>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.1. </span>Residuals, backward errors, forward errors, and condition numbers<a class="headerlink" href="#residuals-backward-errors-forward-errors-and-condition-numbers" title="Permalink to this headline">¶</a></h2>
 <p>For an approximation <span class="math notranslate nohighlight">\(x_a\)</span> of the solution <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(A x = b\)</span>, the <em>residual</em> <span class="math notranslate nohighlight">\(r = A x_a - b\)</span> measures error as <em>backward error</em>, often measured by a single number, the <em>residual norm</em> <span class="math notranslate nohighlight">\(\| A x_a - b \|\)</span>.
 Any norm could be used, but the maximum norm is usualt preferred, for reasons that we will see soon.</p>
 <p>The corresponding (dimensionless) measure of relative error is defined as</p>
@@ -841,7 +842,7 @@ Any norm could be used, but the maximum norm is usualt preferred, for reasons th
 <p><a name="matrix-norms"></a></p>
 </div>
 <div class="section" id="matrix-norms-induced-by-vector-norms">
-<h2><span class="section-number">27.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.2. </span>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
 <p>Given any vector norm <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> — such as the maximum (“infinity”) norm <span class="math notranslate nohighlight">\(\| \cdot \|_\infty\)</span> or the Euclidean norm (length) <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> — the correponding <em>induced matrix norm</em> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -858,7 +859,7 @@ for any <span class="math notranslate nohighlight">\(m\times n\)</span> matrix,<
 This allows us to consider vectors as being just matrices with a single column, which we will often do from now on.</p>
 </div>
 <div class="section" id="properties-of-induced-matrix-norms">
-<h2><span class="section-number">27.3. </span>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.3. </span>Properties of (induced) matrix norms<a class="headerlink" href="#properties-of-induced-matrix-norms" title="Permalink to this headline">¶</a></h2>
 <p>These induced matrix norms have many properties in common with Euclidean length and other vector norms, but there can also be products, and then one has to be careful.</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\|A\| \geq 0\)</span> (positivity)</p></li>
@@ -875,14 +876,14 @@ Indeed one can have <span class="math notranslate nohighlight">\(A B = 0\)</span
 <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm">Frobenius norm</a>.
 Then the above properties are often used to <em>define</em> what it is to be a matrix form, much as the the first four define what it is to be a vector norm.</p>
 <div class="section" id="python-note-numpy-linalg-norm">
-<h3><span class="section-number">27.3.1. </span>Python Note: <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code><a class="headerlink" href="#python-note-numpy-linalg-norm" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.3.1. </span>Python Note: <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code><a class="headerlink" href="#python-note-numpy-linalg-norm" title="Permalink to this headline">¶</a></h3>
 <p>Python package Numpy provides the function <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code> for evaluating matrix norms.
 The default usage <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm(A)</span></code> computes <span class="math notranslate nohighlight">\(\| A \|_2\)</span>, which one can also specify explicitly with <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm(A,</span> <span class="pre">2)</span></code>;
 to get the maximum norm <span class="math notranslate nohighlight">\(\| A \|_\infty\)</span>, one uses <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm(A,</span> <span class="pre">numpy.inf)</span></code>.</p>
 </div>
 </div>
 <div class="section" id="relative-error-bound-and-condition-number">
-<h2><span class="section-number">27.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.4. </span>Relative error bound and condition number<a class="headerlink" href="#relative-error-bound-and-condition-number" title="Permalink to this headline">¶</a></h2>
 <p>It can be proven that, for any choice of norm,</p>
 <div class="math notranslate nohighlight">
 \[\text{Rel}(x_a) = \frac{\|x - x_a\|}{\| x \|} \leq \|A\|\|A^{-1}\| \frac{\|r\|}{\|b\|},\]</div>
@@ -902,7 +903,7 @@ From this, an upper bound on the absolute error can be computed if needed.</p>
 <br>
 At the other extreme, the identity matrix <span class="math notranslate nohighlight">\(I\)</span> has norm 1 and condition number 1 (using any norm), and this is the best possible because in general <span class="math notranslate nohighlight">\(\kappa(A) \geq 1\)</span>. (This follows from property 5, sub-multiplicativity.)</p>
 <div class="section" id="aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond">
-<h3><span class="section-number">27.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.4.1. </span>Aside: estimating <span class="math notranslate nohighlight">\(\|A^{-1}\|_\infty\)</span> and thence the condition number, and  <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code><a class="headerlink" href="#aside-estimating-a-1-infty-and-thence-the-condition-number-and-numpy-linalg-cond" title="Permalink to this headline">¶</a></h3>
 <p>In Python, good approximations of condition numbers are given by the function <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond</span></code>.
 <br>
 As with <code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code>, the default <code class="docutils literal notranslate"><span class="pre">numpy.linalg.cond(A)</span></code> gives <span class="math notranslate nohighlight">\(\kappa_2(A)\)</span>, based on the Euclidian length <span class="math notranslate nohighlight">\(\| \cdot \|_2\)</span> for vectors;
@@ -920,7 +921,7 @@ Then</p>
 </div>
 </div>
 <div class="section" id="well-conditioned-and-ill-conditioned-problems-and-matrices">
-<h2><span class="section-number">27.5. </span>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.5. </span>Well-conditioned and ill-conditioned problems and matrices<a class="headerlink" href="#well-conditioned-and-ill-conditioned-problems-and-matrices" title="Permalink to this headline">¶</a></h2>
 <p>Condition numbers, giving upper limit on the ratio of forward error to backward error,
 measure the amplification of errors, and have counterparts in other contexts.
 For example, with an approximation <span class="math notranslate nohighlight">\(r_a\)</span> of a root <span class="math notranslate nohighlight">\(r\)</span> of the equation <span class="math notranslate nohighlight">\(f(x) = 0\)</span>, the ratio of forward error to backward error is bounded by
@@ -936,7 +937,7 @@ This is of course vague, but might typically mean that <span class="math notrans
 An ill-conditioned problem might still be well-posed, but just requiring careful and precise solution methods.</p>
 </div>
 <div class="section" id="an-important-example-the-hilbert-matrices">
-<h2><span class="section-number">27.6. </span>An important example: the Hilbert matrices<a class="headerlink" href="#an-important-example-the-hilbert-matrices" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">26.6. </span>An important example: the Hilbert matrices<a class="headerlink" href="#an-important-example-the-hilbert-matrices" title="Permalink to this headline">¶</a></h2>
 <p>The <span class="math notranslate nohighlight">\(n \times n\)</span> Hilbert matrix <span class="math notranslate nohighlight">\(H_n\)</span> has elements</p>
 <div class="math notranslate nohighlight">
 \[H_{i, j} = \frac{1}{i+j-1}\]</div>
@@ -1252,8 +1253,8 @@ and typically quite a bit less.</p></li>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ODE-IVP-7-multi-step-methods-intro.html" title="previous page"><span class="section-number">26. </span>Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods</a>
-    <a class='right-next' id="next-link" href="simultaneous-linear-equations-6-iterative-methods.html" title="next page"><span class="section-number">28. </span>Simultaneous Linear Equations, Part 6: Iterative Methods</a>
+    <a class='left-prev' id="prev-link" href="ODE-IVP-5-error-control-python.html" title="previous page"><span class="section-number">25. </span>Initial Value Problems for Ordinary Differential Equations, Part 5: Error Control and Variable Step Sizes</a>
+    <a class='right-next' id="next-link" href="simultaneous-linear-equations-6-iterative-methods.html" title="next page"><span class="section-number">27. </span>Simultaneous Linear Equations, Part 6: Iterative Methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

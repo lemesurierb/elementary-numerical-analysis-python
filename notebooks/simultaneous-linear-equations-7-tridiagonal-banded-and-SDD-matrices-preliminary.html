@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving \(Ax = b\) for Tridiagonal and Banded matrices, and Strict Diagonal Dominance &#8212; Elementary Numerical Analysis (with Python)</title>
+    <title>Simultaneous Linear Equations, Part 7: Faster Methods for Solving \(Ax = b\) for Tridiagonal and Banded matrices, and Strict Diagonal Dominance &#8212; MATH 375. Elementary Numerical Analysis (with Python)</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -25,8 +25,8 @@
     href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,6 +40,7 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -56,8 +57,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises on the Bisection Method" href="root-finding-by-interval-halving-exercises-python.html" />
-    <link rel="prev" title="1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction" href="newtons-method-for-systems-introduction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -79,7 +78,7 @@
   <img src="../_static/UNC_BearMascot.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Elementary Numerical Analysis (with Python)</h1>
+  <h1 class="site-logo" id="site-title">MATH 375. Elementary Numerical Analysis (with Python)</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -259,64 +258,50 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ODE-IVP-7-multi-step-methods-intro.html">
-   26. Initial Value Problems for ODEs, Part 7: Introduction to Multistep Methods
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-5-error-bounds-condition-numbers-python.html">
-   27. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
+   26. Simultaneous Linear Equations, Part 5: Error bounds for linear algebra, condition numbers, matrix norms, etc.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simultaneous-linear-equations-6-iterative-methods.html">
-   28. Simultaneous Linear Equations, Part 6: Iterative Methods
+   27. Simultaneous Linear Equations, Part 6: Iterative Methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="minimization-1D.html">
-   29. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
+   28. Finding the Minimum of a Function of One Variable Without Using Derivatives — A Brief Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigenproblems.html">
-   30. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
+   29. Computing Eigenvalues and Eigenvectors: the Power Method, and a bit beyond
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-python.html">
-   31. Least-squares Fitting to Data
+   30. Least-squares Fitting to Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="least-squares-fitting-appendix-geometrical-approach.html">
-   32. Least-squares Fitting to Data: Appendix on The Geometrical Approach
+   31. Least-squares Fitting to Data: Appendix on The Geometrical Approach
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../future_topics.html">
-   33. Some Future Topics
+   32. Some Future Topics
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Preliminary Versions of Some Possible Future Sections
+  Preliminary Versions and Brief Introductions to Other Topics
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="newtons-method-for-systems-introduction.html">
-   1. Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Simultaneous Linear Equations, Part 7: Faster Methods for Solving
-   <span class="math notranslate nohighlight">
-    \(Ax = b\)
-   </span>
-   for Tridiagonal and Banded matrices, and Strict Diagonal Dominance
+  <a class="reference internal" href="ODE-IVP-6-multi-step-methods-intro.html">
+   1. Initial Value Problems for ODEs, Part 6: A Very Brief Introduction to Multistep Methods
   </a>
  </li>
 </ul>
@@ -751,56 +736,56 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tridiagonal-systems">
-   2.1. Tridiagonal systems
+   Tridiagonal systems
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#algorithms">
-   2.2. Algorithms
+   Algorithms
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lu-factorization">
-     2.2.1. LU factorization
+     LU factorization
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#forward-substitution">
-     2.2.2. Forward substitution
+     Forward substitution
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#backward-substitution">
-     2.2.3. Backward substitution
+     Backward substitution
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generalizing-to-banded-matrices">
-   2.3. Generalizing to Banded Matrices
+   Generalizing to Banded Matrices
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization">
-     2.3.1. Recap: the general Doolittle algorithm for computing an LU factorization
+     Recap: the general Doolittle algorithm for computing an LU factorization
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#eliminating-redundant-calculation-in-the-above">
-     2.3.2. Eliminating redundant calculation in the above
+     Eliminating redundant calculation in the above
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#algorithm-for-lu-factorization-of-a-banded-matrix">
-   2.4. Algorithm for LU factorization of a banded matrix
+   Algorithm for LU factorization of a banded matrix
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-common-symmetrical-case-p-q">
-   2.5. The common symmetrical case,
+   The common symmetrical case,
    <span class="math notranslate nohighlight">
     \(p=q\)
    </span>
@@ -808,12 +793,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices">
-   2.6. When is it safe to do without pivoting: Strict Diagonal Dominant Matrices
+   When is it safe to do without pivoting: Strict Diagonal Dominant Matrices
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-crout-version-of-lu-factorization">
-   2.7. The Crout version of LU factorization
+   The Crout version of LU factorization
   </a>
  </li>
 </ul>
@@ -828,13 +813,13 @@
               <div>
                 
   <div class="section" id="simultaneous-linear-equations-part-7-faster-methods-for-solving-ax-b-for-tridiagonal-and-banded-matrices-and-strict-diagonal-dominance">
-<h1><span class="section-number">2. </span>Simultaneous Linear Equations, Part 7: Faster Methods for Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> for Tridiagonal and Banded matrices, and Strict Diagonal Dominance<a class="headerlink" href="#simultaneous-linear-equations-part-7-faster-methods-for-solving-ax-b-for-tridiagonal-and-banded-matrices-and-strict-diagonal-dominance" title="Permalink to this headline">¶</a></h1>
+<h1>Simultaneous Linear Equations, Part 7: Faster Methods for Solving <span class="math notranslate nohighlight">\(Ax = b\)</span> for Tridiagonal and Banded matrices, and Strict Diagonal Dominance<a class="headerlink" href="#simultaneous-linear-equations-part-7-faster-methods-for-solving-ax-b-for-tridiagonal-and-banded-matrices-and-strict-diagonal-dominance" title="Permalink to this headline">¶</a></h1>
 <p><strong>Version of April 13, 2021</strong></p>
 <p><strong>Reference:</strong></p>
 <p>Section 6.6 <em>Special Types of Matrices</em> in <a class="reference external" href="../references.html#Burden-Faires">Burden&amp;Faires</a>,
 the sub-sections on <em>Band Matrices</em> and <em>Tridiagonal Matrices</em>.</p>
 <div class="section" id="tridiagonal-systems">
-<h2><span class="section-number">2.1. </span>Tridiagonal systems<a class="headerlink" href="#tridiagonal-systems" title="Permalink to this headline">¶</a></h2>
+<h2>Tridiagonal systems<a class="headerlink" href="#tridiagonal-systems" title="Permalink to this headline">¶</a></h2>
 <p>Differential equations often lead to the need to solve systems of equations <span class="math notranslate nohighlight">\(T x = b\)</span> where the matrix <span class="math notranslate nohighlight">\(T\)</span> is <strong>tri-diagonal</strong>: the only non-zero elements are on the main diagonal and the diagonals adjacent to it on either side, so that <span class="math notranslate nohighlight">\(T_{i,j} = 0\)</span> if <span class="math notranslate nohighlight">\(|i - j| &gt; 1\)</span>.
 That is, the system looks like:</p>
 <div class="math notranslate nohighlight">
@@ -871,9 +856,9 @@ Note that the first non-zero element in each column is unchanged, as with a full
 <p>Again, one way to describe and store this information is with just the two new 1D arrays <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(D\)</span>, along with the unchanged array <span class="math notranslate nohighlight">\(u\)</span>.</p>
 </div>
 <div class="section" id="algorithms">
-<h2><span class="section-number">2.2. </span>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="lu-factorization">
-<h3><span class="section-number">2.2.1. </span>LU factorization<a class="headerlink" href="#lu-factorization" title="Permalink to this headline">¶</a></h3>
+<h3>LU factorization<a class="headerlink" href="#lu-factorization" title="Permalink to this headline">¶</a></h3>
 <p><span class="math notranslate nohighlight">\(D_1 = d_1\)</span>
 <br>
 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
@@ -885,7 +870,7 @@ Note that the first non-zero element in each column is unchanged, as with a full
 <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
 </div>
 <div class="section" id="forward-substitution">
-<h3><span class="section-number">2.2.2. </span>Forward substitution<a class="headerlink" href="#forward-substitution" title="Permalink to this headline">¶</a></h3>
+<h3>Forward substitution<a class="headerlink" href="#forward-substitution" title="Permalink to this headline">¶</a></h3>
 <p><span class="math notranslate nohighlight">\(c_1 = b_1\)</span>
 <br>
 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">2</span> <span class="pre">to</span> <span class="pre">n</span></code>
@@ -895,7 +880,7 @@ Note that the first non-zero element in each column is unchanged, as with a full
 <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
 </div>
 <div class="section" id="backward-substitution">
-<h3><span class="section-number">2.2.3. </span>Backward substitution<a class="headerlink" href="#backward-substitution" title="Permalink to this headline">¶</a></h3>
+<h3>Backward substitution<a class="headerlink" href="#backward-substitution" title="Permalink to this headline">¶</a></h3>
 <p><span class="math notranslate nohighlight">\(x_n = c_n/D_n\)</span>
 <br>
 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">from</span> <span class="pre">n-1</span> <span class="pre">down</span> <span class="pre">to</span> <span class="pre">1</span></code>
@@ -906,13 +891,13 @@ Note that the first non-zero element in each column is unchanged, as with a full
 </div>
 </div>
 <div class="section" id="generalizing-to-banded-matrices">
-<h2><span class="section-number">2.3. </span>Generalizing to Banded Matrices<a class="headerlink" href="#generalizing-to-banded-matrices" title="Permalink to this headline">¶</a></h2>
+<h2>Generalizing to Banded Matrices<a class="headerlink" href="#generalizing-to-banded-matrices" title="Permalink to this headline">¶</a></h2>
 <p>As we have seen, approximating derivatives to higher order of accuracy and approximating derivatives of order greater than two requires more than three nodes, but the locations needed are all close to the ones where the derivative is being approximated.
 For example, the simplest symmetric approximation of the fourth derivative <span class="math notranslate nohighlight">\(D^4 f(x)\)</span> used values from <span class="math notranslate nohighlight">\(f(x-2h)\)</span> to <span class="math notranslate nohighlight">\(f(x+2h)\)</span>.
 Then row <span class="math notranslate nohighlight">\(i\)</span> of the corresponding matrix has all its non-zero elements at locations <span class="math notranslate nohighlight">\((i,i-2)\)</span> to <span class="math notranslate nohighlight">\((i, i+2)\)</span>: the non-zero elements lie in the narrow “band” where <span class="math notranslate nohighlight">\(|i - j| \leq 2\)</span>, and thus on five “central” diagonals.</p>
 <p>This is a <strong>penta-digonal matrix</strong>, and an example of the larger class of <strong>banded matrices</strong>: ones in which all the non-zero elements have indices <span class="math notranslate nohighlight">\( -p \leq j - i \leq q\)</span> for <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> smaller than <span class="math notranslate nohighlight">\(n\)</span> — usually far smaller; <span class="math notranslate nohighlight">\(p = q = 2\)</span> for a penta-digonal matrix.</p>
 <div class="section" id="recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization">
-<h3><span class="section-number">2.3.1. </span>Recap: the general Doolittle algorithm for computing an LU factorization<a class="headerlink" href="#recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization" title="Permalink to this headline">¶</a></h3>
+<h3>Recap: the general Doolittle algorithm for computing an LU factorization<a class="headerlink" href="#recap-the-general-doolittle-algorithm-for-computing-an-lu-factorization" title="Permalink to this headline">¶</a></h3>
 <p><em>The top row is unchanged:</em>
 <br>
 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">n</span></code>
@@ -948,14 +933,14 @@ Then row <span class="math notranslate nohighlight">\(i\)</span> of the correspo
 <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
 </div>
 <div class="section" id="eliminating-redundant-calculation-in-the-above">
-<h3><span class="section-number">2.3.2. </span>Eliminating redundant calculation in the above<a class="headerlink" href="#eliminating-redundant-calculation-in-the-above" title="Permalink to this headline">¶</a></h3>
+<h3>Eliminating redundant calculation in the above<a class="headerlink" href="#eliminating-redundant-calculation-in-the-above" title="Permalink to this headline">¶</a></h3>
 <p>With a banded matrix, many of the entries at right are zero, particularly in the two sums, which is where most of the operations are.
 Thus we can rewrite, exploiting the fact that all elements with indices <span class="math notranslate nohighlight">\(j-i &lt; -p\)</span> or <span class="math notranslate nohighlight">\(j-i &gt; q\)</span> are zero.
 To start with, the top diagonal is not modified, as already noted for the tridiagonal case: <span class="math notranslate nohighlight">\(u_{k,k+q} = a_{k,k+q}\)</span> for <span class="math notranslate nohighlight">\(1 \leq k \leq n-q\)</span>.</p>
 </div>
 </div>
 <div class="section" id="algorithm-for-lu-factorization-of-a-banded-matrix">
-<h2><span class="section-number">2.4. </span>Algorithm for LU factorization of a banded matrix<a class="headerlink" href="#algorithm-for-lu-factorization-of-a-banded-matrix" title="Permalink to this headline">¶</a></h2>
+<h2>Algorithm for LU factorization of a banded matrix<a class="headerlink" href="#algorithm-for-lu-factorization-of-a-banded-matrix" title="Permalink to this headline">¶</a></h2>
 <p><em>The top row is unchanged:</em>
 <br>
 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">j</span> <span class="pre">from</span> <span class="pre">1</span> <span class="pre">to</span> <span class="pre">1+q</span></code>
@@ -999,7 +984,7 @@ To start with, the top diagonal is not modified, as already noted for the tridia
 <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
 </div>
 <div class="section" id="the-common-symmetrical-case-p-q">
-<h2><span class="section-number">2.5. </span>The common symmetrical case, <span class="math notranslate nohighlight">\(p=q\)</span><a class="headerlink" href="#the-common-symmetrical-case-p-q" title="Permalink to this headline">¶</a></h2>
+<h2>The common symmetrical case, <span class="math notranslate nohighlight">\(p=q\)</span><a class="headerlink" href="#the-common-symmetrical-case-p-q" title="Permalink to this headline">¶</a></h2>
 <p>It is common for a banded matrix to have equal band-width on either side, <span class="math notranslate nohighlight">\(p=q\)</span>, as with tridiagonal and pentadiagonal matrices.
 Then the algorithm is somewhat simpler:</p>
 <p><em>The top row is unchanged:</em>
@@ -1044,7 +1029,7 @@ Then the algorithm is somewhat simpler:</p>
 <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">for</span></code></p>
 </div>
 <div class="section" id="when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices">
-<h2><span class="section-number">2.6. </span>When is it safe to do without pivoting: Strict Diagonal Dominant Matrices<a class="headerlink" href="#when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices" title="Permalink to this headline">¶</a></h2>
+<h2>When is it safe to do without pivoting: Strict Diagonal Dominant Matrices<a class="headerlink" href="#when-is-it-safe-to-do-without-pivoting-strict-diagonal-dominant-matrices" title="Permalink to this headline">¶</a></h2>
 <p>These algorithms for banded matrices do no pivoting, and that is highly desirable, because pivoting creates non-zero elements outside the “band” and so can force one back to the general algorithm.
 Fortunately one characteristic of such systems makes the safe, and it is quite common for  systems that come from approximation of second derivatives.</p>
 <p><strong>Definition</strong>
@@ -1061,7 +1046,7 @@ In particular, all the diagonal elements <span class="math notranslate nohighlig
 <p>This says more: at each stage, the pivot element <span class="math notranslate nohighlight">\(a_{i,i}^{(k)}\)</span> has a larger absolute value than all other elements on its row: although this does not guarantee that it is larger than any candidate pivot elements below it in the column, it does indicate that one is probably at a safe distance from very small denominators and loss of significance.</p>
 </div>
 <div class="section" id="the-crout-version-of-lu-factorization">
-<h2><span class="section-number">2.7. </span>The Crout version of LU factorization<a class="headerlink" href="#the-crout-version-of-lu-factorization" title="Permalink to this headline">¶</a></h2>
+<h2>The Crout version of LU factorization<a class="headerlink" href="#the-crout-version-of-lu-factorization" title="Permalink to this headline">¶</a></h2>
 <p>There is a generalization and improvement, but it requires a twist (actualy, a reflection):</p>
 <p><strong>Theorem 2.</strong>
 <em>If the transpose <span class="math notranslate nohighlight">\(A^T\)</span> is SDD, so is each intermediate matrix <span class="math notranslate nohighlight">\(A^{(k)}\)</span> in naive Gaussian elimination and thus the Doolittle factorization succeeds with <span class="math notranslate nohighlight">\(U\)</span>, also SDD.</em></p>
@@ -1111,8 +1096,6 @@ so that this given an LU factorization <span class="math notranslate nohighlight
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="newtons-method-for-systems-introduction.html" title="previous page"><span class="section-number">1. </span>Solving Nonlinear Systems of Equations by generalizations of Newton’s Method — a Brief Introduction</a>
-    <a class='right-next' id="next-link" href="root-finding-by-interval-halving-exercises-python.html" title="next page">Exercises on the Bisection Method</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
